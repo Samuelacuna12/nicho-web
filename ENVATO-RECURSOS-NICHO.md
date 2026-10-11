@@ -1,87 +1,90 @@
-# Biblioteca Envato — NICHO AI web corporativa
+# NICHO AI — LISTA DEFINITIVA DE RECURSOS ENVATO PARA LA WEB
 
-Documento de selección a 11 de octubre de 2026. **No son archivos descargados**; son recursos encontrados en la integración oficial Envato. Prioridades: **A** = descargar primero; **B** = después de revisar la maqueta; **R** = referencias y plantillas opcionales, no descargar automáticamente.
+Selección curada **solo para la web corporativa de NICHO AI**. No hay recursos de otros clientes ni sistemas. Fecha: 11 de octubre de 2026.
 
-**Drive:** https://drive.google.com/drive/folders/18Y8ujQAJ7W529GYfOCuDRMwLSZktcPhw
+**Carpeta:** https://drive.google.com/drive/folders/18Y8ujQAJ7W529GYfOCuDRMwLSZktcPhw
 
-**Atención a permisos:** la carpeta aparece compartida como “cualquiera con enlace: editor”. Restringir el acceso antes de incluir contenido licenciado o material empresarial.
+**Alcance:** web corporativa multipágina con estética premium minimalista inspirada en la calidad de presentación de Apple; sistemas a medida, agentes IA, automatizaciones, procesos comerciales y desarrollo web.
 
-**Licenciamiento:** registrar cada recurso bajo “NICHO AI — Web Corporativa” en Envato. Mantener archivos originales y certificados de licencia en Drive privado. No subir zips o recursos originales de Envato a este repositorio público. Las pantallas reales de Invicto OPS, Luminari y RestoOps deben reemplazar los paneles conceptuales antes de publicar.
+**Instrucciones:** descarga paquetes originales desde Envato y súbelos a Drive, preferiblemente con nombre original. Elige o crea licencia para este uso específico. No subas recursos fuente a GitHub público. Las plantillas HTML/Figma se utilizarán para estudiar interacciones y estructuras, no para copiar un sitio terminado. Los modelos 3D quedan sujetos a evaluación de tamaño/formato. Las tipografías se incorporarán solo conforme a sus licencias web.
 
-## Primera fase (15 recursos)
+## 01 · Tipografías
 
-| Categoría | Recurso en Envato | Para qué lo necesitamos |
-|---|---|---|
-| Tipografía | [JUST Sans — Clean Modern Minimal Geometric Typeface](https://elements.envato.com/just-sans-clean-modern-minimal-geometric-typeface-ZW4QBZ9) | Titulares, navegación y cuerpo; revisar WOFF/WOFF2 y acentos |
-| Tipografía | [Exensa Grotesk — Sans Serif Typeface & Web Fonts](https://elements.envato.com/exensa-grotesk-sans-serif-typeface-web-fonts-HS7V5D) | Alternativa para el sistema tipográfico y contraste de marca |
-| Video / Hero | [Rotating Chrome Geometry Abstract Loop on Black Background 4K](https://elements.envato.com/rotating-chrome-geometry-abstract-loop-on-black-ba-FEL6D48) | Prueba de hero o sección narrativa premium |
-| Video / Hero | [Abstract Black and Silver Geometric Structure](https://elements.envato.com/abstract-black-and-silver-geometric-structure-D6KX5AE) | Sección de sistemas con dirección monocromática |
-| Video / Hero | [Black and White abstract gradient seamless loop background](https://elements.envato.com/black-and-white-abstract-gradient-seamless-loop-ba-HCTURLG) | Fondo de descanso visual; autoplay silencioso solo si aporta |
-| Video / Hero | [Minimal white grid surface morphing on black background](https://elements.envato.com/minimal-white-grid-surface-morphing-on-black-backg-ZJGNSX5) | Sección de conexiones y automatizaciones |
-| Video / Contexto | [Hands of Unrecognisable Male Software Engineer Coding on Laptop at Nighttime](https://elements.envato.com/hands-of-unrecognisable-male-software-engineer-cod-UNCSS6U) | Desarrollo web/software, escena real sin fingir equipo |
-| Video / Contexto | [Collaborative team meeting in modern office discussing project documents in slow motion](https://elements.envato.com/collaborative-team-meeting-in-modern-office-discus-49N6CU8) | Metodología y colaboración genérica, no presentarla como equipo NICHO |
-| Iconografía | [4440 Minimal Bold and Thin Line Icons](https://elements.envato.com/4440-minimal-bold-and-thin-line-icons-MYSUL3) | Familia coherente para servicios/funciones; extraer solo lo necesario |
-| Gráficos | [Chrome 3D Abstract Shapes](https://elements.envato.com/chrome-3d-abstract-shapes-XTYXWP7) | Detalles editoriales y separadores; uso selectivo |
-| Texturas | [Silver Foil Paper Textures](https://elements.envato.com/silver-foil-paper-textures-27BHGZY) | Capas visuales discretas; optimizar a WebP/AVIF |
-| UI kit | [ConnectiZ — Customer Relationship Management Figma](https://elements.envato.com/connectiz-customer-relationship-management-figma-ZHHRCK8) | Referencia para CRM y narrativa de flujo comercial |
-| UI kit | [Inventory Management Admin Dashboard](https://elements.envato.com/inventory-management-admin-dashboard-GPLRE3J) | Referencia visual para módulos Invicto OPS |
-| UI kit | [DashDine Restaurant POS and Operations Dashboard](https://elements.envato.com/dashdine-restaurant-pos-and-operations-dashboard-H65QAN7) | Referencia conceptual para RestoOps |
-| UI kit | [NyxFlow Dark Mode SaaS Admin Dashboard UI Kit](https://elements.envato.com/nyxflow-dark-mode-saas-admin-dashboard-ui-kit-XN9HVP5) | Sistema de superficies y jerarquía para demos |
+| Recurso para descargar | Uso exclusivo en NICHO |
+|---|---|
+| [JUST Sans — Minimal Geometric Typeface](https://elements.envato.com/just-sans-clean-modern-minimal-geometric-typeface-ZW4QBZ9) | Fuente principal candidata para titulares y navegación |
+| [Exensa Grotesk — Web Fonts](https://elements.envato.com/exensa-grotesk-sans-serif-typeface-web-fonts-HS7V5D) | Alternativa editorial para comparar y elegir el sistema tipográfico final |
+| [Neuvor Extended](https://elements.envato.com/neuvor-extended-XBLK2KY) | Fuente display puntual para grandes números y titulares especiales |
 
-## Segunda fase (22 recursos)
+## 02 · Videos de la web
 
-| Categoría | Recurso en Envato | Para qué lo necesitamos |
-|---|---|---|
-| Tipografía | [Neuvor Extended](https://elements.envato.com/neuvor-extended-XBLK2KY) | Acentos de display; no usar en párrafos |
-| Tipografía | [Rota Pro — Modern Grotesk Sans](https://elements.envato.com/rota-pro-modern-grotesk-sans-UGBLF8M) | Alternativa neutra; elegir entre esta y Exensa |
-| Video / Hero | [Rotation Abstract Glass Form Loop](https://elements.envato.com/rotation-abstract-glass-form-loop-YSKM548) | Exploración de efectos tipo cristal y profundidad |
-| Video / Hero | [Abstract black oil sphere object, seamless loop](https://elements.envato.com/abstract-black-oil-sphere-object-seamless-loop-KGS6T66) | Transición y dirección arte en secciones oscuras |
-| Video / Contexto | [Modern Architectural Design Featuring Glass and Steel Structures at Sunrise](https://elements.envato.com/modern-architectural-design-featuring-glass-and-st-NJN75KE) | Recurso editorial transitorio |
-| Video / Contexto | [Network of connections against black background](https://elements.envato.com/network-of-connections-against-black-background-9UQEQZ9) | Conexiones y procesos; usar con mucha moderación |
-| Video / Contexto | [Dark dashboard template with analytics and data sections](https://elements.envato.com/dark-dashboard-template-with-analytics-and-data-se-2TMGCR7) | Solo moodboard visual, jamás como captura real de NICHO |
-| Iconografía | [Technology Outline Icons](https://elements.envato.com/technology-outline-icons-HJWCUQR) | Alternativa a evaluar; no mezclar estilos sin criterio |
-| Gráficos | [Abstract Wave Line Background Collection](https://elements.envato.com/abstract-wave-line-background-collection-HG3FWVE) | Fondos y variantes de campañas |
-| Gráficos | [Abstract Chrome 3D Illustration Pack](https://elements.envato.com/abstract-chrome-3d-illustration-pack-V7JU2BA) | Variantes cromadas si el paquete principal no basta |
-| UI kit | [Sale Analytic Dashboard UI Kit](https://elements.envato.com/sale-analytic-dashboard-ui-kit-7VYD3KF) | Alternativa para visualizar estadísticas con claridad |
-| UI kit | [Lead — Customer Management Dashboard](https://elements.envato.com/lead-customer-management-dashboard-WEA4CY4) | Referencia para pipelines y seguimiento de leads |
-| 3D | [Abstract metal torus with a reflective surface](https://elements.envato.com/abstract-metal-torus-with-a-reflective-surface-WD7DMF3) | Posible elemento hero; validar formato del modelo |
-| 3D | [Glossy striped orb](https://elements.envato.com/glossy-striped-orb-CQ2PLSM) | Modelo GLB encontrado; evaluar peso y materiales |
-| 3D | [Silver Complex Object](https://elements.envato.com/silver-complex-object-XP9LQLF) | Alternativa a integrar solo si no sobrecarga la página |
-| Foto | [Grayscale shot of a minimalistic modern building under the sunlight](https://elements.envato.com/grayscale-shot-of-a-minimalistic-modern-building-u-RK4A438) | Imagen editorial blanco y negro |
-| Foto | [A Greyscale Vertical Picture Of A Building Corner With Shadows](https://elements.envato.com/a-greyscale-vertical-picture-of-a-building-corner--39TSPCL) | Fotografía minimalista para páginas internas |
-| Foto | [Minimalist abstract city scape walls concrete](https://elements.envato.com/minimalist-abstract-city-scape-walls-concrete-3UVZUA2) | Exploración de textura arquitectónica |
-| Audio / Video | [Ambient Calm Minimal](https://elements.envato.com/ambient-calm-minimal-8LQHET4) | Solo para showreels o casos audiovisuales, no música autoplay |
-| Audio / Video | [Minimal Corporate Technology](https://elements.envato.com/minimal-corporate-technology-C39FJ7E) | Alternativa para video promocional |
-| Audio / Video | [Cinematic Transition Whoosh](https://elements.envato.com/cinematic-transition-whoosh-W3Q6E2T) | Efectos sutiles de video, no sonido obligatorio en web |
-| Audio / Video | [UI Button Switch Slide Click Soft Swipe Smoth Organic 01](https://elements.envato.com/ui-button-switch-slide-click-soft-swipe-smoth-orga-ZQQ9MEV) | Solo en demos opt-in, no en navegación por defecto |
+| Recurso para descargar | Uso exclusivo en NICHO |
+|---|---|
+| [Rotating Chrome Geometry — 4K Loop](https://elements.envato.com/rotating-chrome-geometry-abstract-loop-on-black-ba-FEL6D48) | Hero cinematográfico y portada de la web |
+| [Abstract Black and Silver Geometric Structure](https://elements.envato.com/abstract-black-and-silver-geometric-structure-D6KX5AE) | Transición hacia servicios y sistemas a medida |
+| [Abstract Liquid Motion Black and Silver Fluid Art](https://elements.envato.com/abstract-liquid-motion-black-and-silver-fluid-art-4N5E47P) | Detalle visual premium para bloques de IA |
+| [Minimal White Grid Surface Morphing](https://elements.envato.com/minimal-white-grid-surface-morphing-on-black-backg-ZJGNSX5) | Visual de automatizaciones y conexiones entre procesos |
+| [Black and White Abstract Gradient Loop](https://elements.envato.com/black-and-white-abstract-gradient-seamless-loop-ba-HCTURLG) | Fondo editorial suave para una sección interna |
+| [Rotation Abstract Glass Form Loop](https://elements.envato.com/rotation-abstract-glass-form-loop-YSKM548) | Visual de cristal y profundidad para un bloque narrativo |
+| [Abstract Metallic Sculpture with Curves](https://elements.envato.com/abstract-metallic-sculpture-with-curves-4WPVKCF) | Sección de innovación y diseño de sistemas |
+| [Hands of Software Engineer Coding on Laptop](https://elements.envato.com/hands-of-unrecognisable-male-software-engineer-cod-UNCSS6U) | Contexto audiovisual para desarrollo web y software; no representar como personal real |
+| [Collaborative Team Meeting in Modern Office](https://elements.envato.com/collaborative-team-meeting-in-modern-office-discus-49N6CU8) | Contexto audiovisual de metodología; no representar como personal real |
 
-## Solo referencias / opcionales (7 recursos)
+## 03 · Fotografías
 
-| Categoría | Recurso en Envato | Para qué lo necesitamos |
-|---|---|---|
-| HTML / Referencia | [Tank — Creative Portfolio HTML Website Template](https://elements.envato.com/tank-creative-portfolio-html-website-template-72KHNL2) | Estudiar estructura editorial/interacciones; NO instalar el sitio completo |
-| HTML / Referencia | [Quanto Creative Agency & Portfolio HTML Template](https://elements.envato.com/quanto-creative-agency-portfolio-html-template-D9EYVAK) | Estudiar cambios de ritmo, tipografía y páginas de casos |
-| HTML / Referencia | [Aurex — Creative Agency & Portfolio HTML Template](https://elements.envato.com/aurex-creative-agency-portfolio-html-template-VN33ZE4) | Referencia alternativa de composiciones multipágina |
-| Figma / Referencia | [Minimal Creative Agency Websites](https://elements.envato.com/minimal-creative-agency-websites-YHF52N3) | Analizar proporciones y jerarquía; no copiar |
-| Video template / Referencia | [Minimalistic Kinetic Text Animation Premiere Pro](https://elements.envato.com/minimalistic-kinetic-text-animation-premiere-pro-7LZTVAJ) | Solo si existe flujo externo compatible con Premiere; el efecto web se programará |
-| Video template / Referencia | [Clean Minimal Logo Reveal](https://elements.envato.com/clean-minimal-logo-reveal-VVA2B89) | Solo para un video de marca si se dispone del editor compatible |
-| Video template / Referencia | [Minimalistic product promo](https://elements.envato.com/minimalistic-product-promo-47W97SE) | Opcional para showreel; verificar aplicación compatible |
+| Recurso para descargar | Uso exclusivo en NICHO |
+|---|---|
+| [Grayscale Modern Building Under Sunlight](https://elements.envato.com/grayscale-shot-of-a-minimalistic-modern-building-u-RK4A438) | Imagen editorial de innovación y estructura |
+| [Futuristic Exhibition Hall with Dark Walls](https://elements.envato.com/futuristic-exhibition-hall-with-tiled-dark-walls-2M4CJUB) | Fotografía arquitectónica para pausas visuales |
+| [UI/UX Designer Working on App Wireframes](https://elements.envato.com/uiux-designer-working-late-on-app-development-wire-AAG3U52) | Contexto de procesos de diseño; no presentar como imagen de nuestro equipo |
 
-## Material propio a subir también al Drive
+## 04 · Gráficos, iconos y texturas
 
-- Logo actual en SVG / PNG transparente, colores y tipografías oficiales si existen.
-- Capturas autorizadas reales de Invicto OPS (módulos, ventas, pedidos, operaciones); borrar/ocultar teléfonos, datos personales, cifras confidenciales.
-- Capturas autorizadas reales de Luminari (CRM, cotizaciones, dashboards y flujo de proyectos).
-- Capturas autorizadas reales de RestoOps (menú, recetas, costeo, comandas, ventas).
-- Foto/ilustración aprobada del personaje Príncipe (mascota oficial), si se usará en la nueva web.
-- Videos propios, logos de clientes con permiso, testimonios verificables o resultados documentados (opcional).
+| Recurso para descargar | Uso exclusivo en NICHO |
+|---|---|
+| [4440 Minimal Bold and Thin Line Icons](https://elements.envato.com/4440-minimal-bold-and-thin-line-icons-MYSUL3) | Iconografía coherente para todas las páginas |
+| [Chrome 3D Abstract Shapes](https://elements.envato.com/chrome-3d-abstract-shapes-XTYXWP7) | Elementos 3D editoriales y transiciones |
+| [Silver Foil Paper Textures](https://elements.envato.com/silver-foil-paper-textures-27BHGZY) | Textura fina de lujo para superficies visuales |
+| [Abstract Wave Line Background Collection](https://elements.envato.com/abstract-wave-line-background-collection-HG3FWVE) | Fondos lineales en secciones de automatización |
 
-## Entrega y optimización
+## 05 · Modelos 3D
 
-- Subir los ZIP / medios originales a la carpeta de Drive indicada, no a GitHub público.
-- Preferir MP4/H.264 o MOV originales; exportaremos MP4/WebM según la página y una imagen poster.
-- Comprobar licencias y soportes web de tipografías; priorizar WOFF2 y compatibilidad con caracteres españoles.
-- Comprobar GLB/GLTF, peso y derechos de uso antes de cualquier escena 3D.
-- Los videos de web se reproducirán silenciados, sin audio automático, y con poster y reducción de movimiento.
-- Efectos de audio, música y plantillas PR/AE no son necesarios para el lanzamiento web; se reservan para videos promocionales.
-- Esta lista ofrece opciones y no obliga a descargar todas: tras revisar las vistas previas escogeremos solo los recursos que aportan al resultado.
+| Recurso para descargar | Uso exclusivo en NICHO |
+|---|---|
+| [Abstract Metal Torus with Reflective Surface](https://elements.envato.com/abstract-metal-torus-with-a-reflective-surface-WD7DMF3) | Experimentar con objeto tridimensional; validar formato y peso del archivo |
+| [Glossy Striped Orb](https://elements.envato.com/glossy-striped-orb-CQ2PLSM) | Alternativa 3D para escena web; variante GLB observada en búsqueda |
+
+## 06 · Mockups para nuestras propias interfaces
+
+| Recurso para descargar | Uso exclusivo en NICHO |
+|---|---|
+| [Chrome Browser Window — Website Mockup](https://elements.envato.com/chrome-browser-window-website-mockup-9XQK4R) | Enmarcar capturas reales de interfaces desarrolladas por NICHO |
+| [High Quality Clean Laptop Mockup](https://elements.envato.com/high-quality-clean-laptop-mockup-KMUUNZH) | Presentación premium de webs y aplicaciones |
+| [Minimal Screen Mockup](https://elements.envato.com/minimal-screen-mockup-6E8629Z) | Segunda perspectiva editorial para mostrar software |
+
+## 07 · HTML, Figma y diseño de interacción
+
+| Recurso para descargar | Uso exclusivo en NICHO |
+|---|---|
+| [Tank — Creative Portfolio HTML Website Template](https://elements.envato.com/tank-creative-portfolio-html-website-template-72KHNL2) | Estudiar transiciones, case studies y ritmo editorial |
+| [Quanto — Creative Agency & Portfolio HTML](https://elements.envato.com/quanto-creative-agency-portfolio-html-template-D9EYVAK) | Estudiar estructura multipágina y efectos al desplazarse |
+| [Inc — Minimal Creative Agency HTML Template](https://elements.envato.com/inc-minimal-creative-agency-html-template-NB9LZMF) | Analizar la simplicidad y jerarquía de layouts |
+| [Zyrex — Premium Agency Figma Template](https://elements.envato.com/zyrex-premium-agency-figma-template-33DQFR3) | Revisar composición, navegación y sistema de componentes |
+| [Minimal Creative Agency Websites](https://elements.envato.com/minimal-creative-agency-websites-YHF52N3) | Estudiar variantes de diseño editorial y retículas |
+
+## Material propio adicional (no se descarga de Envato)
+
+- Logo vectorial y manual de identidad NICHO, si existe.
+- Archivos de la mascota Príncipe si se decide integrarla.
+- Capturas, pantallas o grabaciones **propias y autorizadas** que demuestren tipos de soluciones desarrolladas por NICHO; ocultar datos personales y confidenciales.
+- Fotos de equipo reales, testimonios y cifras comprobadas si están disponibles.
+
+## Qué NO descargar para esta web
+
+- Proyectos Premiere Pro (.prproj) y After Effects (.aep) o paquetes de openers: no puedo editarlos en esas aplicaciones desde este chat y no son necesarios para HTML.
+- Audio de fondo para reproducción automática: afecta la experiencia y no lo implementaremos.
+- UI kits para sectores ajenos, dashboards de stock usados como falsas pruebas de trabajo, ni themes completos para publicar sin personalizar.
+
+## Uso y despliegue
+
+Convertiremos los videos elegidos a formatos comprimidos para web con poster y accesibilidad, con opción de reducir movimiento. La versión final mostrará claridad, velocidad de carga, UX y navegación real en móvil. **La selección proviene de los resultados del catálogo de Envato, pero la adecuación técnica definitiva requiere revisar los archivos descargados.**
