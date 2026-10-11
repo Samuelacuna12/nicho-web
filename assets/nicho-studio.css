@@ -165,3 +165,46 @@ body:not(:has(.nd-home)) .footer-cta{background:#080908}
 .nd-end-links{margin-top:100px;flex-direction:column;gap:20px;font-size:12px}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.nd-reveal{opacity:1;transform:none;transition:none}.nd-orbit svg,.nd-end-symbol,.nd-marquee-track,.nd-signal-ring{animation:none!important}.nd-stage-art{transform:none!important}}
+
+/* NICHO / Studio choreography: crisp geometry, slow metallic light, no floating SaaS cards */
+.nd-header:after{content:"";height:1px;width:100%;position:absolute;bottom:-1px;left:0;background:linear-gradient(90deg,transparent,#d2d9d1 48%,transparent);opacity:.23;pointer-events:none}
+.nd-header:not(.nd-scrolled) .nd-logo{transition:letter-spacing .7s}.nd-logo:hover{letter-spacing:-.075em}
+.nd-header .nd-nav-links a{position:relative}
+.nd-header .nd-nav-links a:after{content:"";position:absolute;left:0;right:100%;bottom:-6px;height:1px;background:currentColor;transition:right .38s cubic-bezier(.2,.7,.2,1)}
+.nd-header .nd-nav-links a:hover:after{right:0}
+body:has(.case-detail-hero:not(.dark-theme)) .nd-header:not(.nd-scrolled):not(.nd-menu-open){color:#131c15}
+.nd-stage:before{content:"";position:absolute;inset:0;pointer-events:none;z-index:2;background:linear-gradient(transparent 96%,rgba(255,255,255,.065) 100%);background-size:100% 5px;opacity:.11}
+.nd-hero-word h1{animation:nd-metal-light 8s ease-in-out infinite alternate;background-size:240% 100%;background-position:0% 50%}
+@keyframes nd-metal-light{to{background-position:100% 50%}}
+.nd-stage .nd-hero-word h1{animation-duration:13s}
+.nd-hero-word{animation:nd-title-rise 1.35s cubic-bezier(.17,.77,.13,1) both}
+.nd-hero-foot{animation:nd-title-rise 1.3s .25s cubic-bezier(.17,.77,.13,1) both}
+.nd-eyeline{animation:nd-title-rise 1s .15s ease both}
+@keyframes nd-title-rise{from{opacity:0;transform:translate3d(0,65px,0);filter:blur(9px)}to{opacity:1;transform:none;filter:blur(0)}}
+.nd-stage-art img{animation:nd-sculpt-shift 16s ease-in-out infinite alternate;transform-origin:63% 46%}
+@keyframes nd-sculpt-shift{from{transform:scale(1.02) rotate(-3deg)}to{transform:scale(1.14) rotate(5deg)}}
+.nd-film>img{transform:scale(var(--nd-film-zoom,1.08));transition:transform .12s linear}
+.nd-hero-foot strong{background:linear-gradient(90deg,#9aafa0,#fff,#9aafa0);background-size:240% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:nd-metal-light 10s linear infinite alternate}
+.nd-index-section .nd-service-index a:hover strong{letter-spacing:-.052em;transition:letter-spacing .35s}
+.nd-topline{position:relative}
+.nd-topline:before{content:"";position:absolute;top:-20px;left:0;width:10px;height:2px;background:#ee3a49}
+.nd-gallery .nd-topline:before,.nd-manifest .nd-topline:before,.nd-index-section .nd-topline:before{background:#ee3a49}
+body:has(.nd-header) .contact-panel,body:has(.nd-header) .service,body:has(.nd-header) .tile,body:has(.nd-header) .feature-box,body:has(.nd-header) .case,body:has(.nd-header) .btn{border-radius:0!important}
+.nd-header .nd-nav-contact:hover span{transform:translate(5px,-5px);transition:transform .25s}
+.nd-stage .nd-orbit{background:#f7f7f5}
+.nd-stage .nd-orbit:hover{box-shadow:0 0 0 1px #0fa64b inset}
+.nd-hero-foot p,.nd-gallery-heading h2,.nd-method h2{max-width:100%}
+.nd-motion-progress{position:fixed;z-index:950;left:0;top:0;width:100%;height:2px;transform-origin:left center;transform:scaleX(0);background:#ee3a49;pointer-events:none}
+.nd-motion-in{opacity:0;transform:translateY(40px);filter:blur(6px);transition:opacity .9s ease,transform 1.1s cubic-bezier(.2,.75,.2,1),filter 1s ease}
+.nd-motion-in.nd-motion-visible{opacity:1;transform:none;filter:none}
+.nd-page-curtain{position:fixed;z-index:900;inset:0;background:#0a0c0a;pointer-events:none;transform:scaleY(0);transform-origin:bottom;transition:transform .35s cubic-bezier(.7,0,.15,1)}
+.nd-page-curtain.nd-closed{transform:scaleY(1);pointer-events:all}
+@media(hover:hover) and (pointer:fine){
+.nd-hero-foot,.nd-stage-art{will-change:transform}
+}
+@media(prefers-reduced-motion:reduce){
+.nd-stage-art img,.nd-hero-foot strong,.nd-hero-word h1,.nd-hero-word,.nd-hero-foot,.nd-eyeline{animation:none!important}
+.nd-motion-in{opacity:1!important;transform:none!important;filter:none!important}
+.nd-page-curtain{transition:none!important}
+.nd-film>img{transform:none!important}
+}
