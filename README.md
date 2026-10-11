@@ -1,33 +1,26 @@
-# NICHO AI — Web corporativa multipágina
-Versión de desarrollo avanzada de NICHO AI, diseñada con una dirección editorial cinematográfica: software a medida, agentes de inteligencia artificial, automatización de procesos comerciales y desarrollo web.
+# Nicho Agencia Digital — Web corporativa
 
-## Qué incluye
-- 15 páginas indexables preparadas para el dominio oficial; versión 404 excluida de indexación.
-- Portada cinematográfica con recursos gráficos optimizados de Envato y animaciones accesibles.
-- Servicios dedicados: software, CRM personalizado, agentes IA, automatizaciones, WhatsApp API y desarrollo web.
-- Apartado de recursos con tres guías informativas originales y enlazadas.
-- SEO técnico: `sitemap.xml`, `robots.txt`, URL canónica, metadatos, Open Graph y JSON-LD.
-- Navegación responsive, enlaces internos comprobados y agenda externa existente.
+Sitio corporativo premium de **Nicho Agencia Digital**, con estética cinematográfica monocromática, sistemas personalizados, agentes de inteligencia artificial, automatización de ventas, desarrollo web y portafolio.
 
-## Vista previa
-GitHub Pages puede publicarse desde `Settings → Pages → Deploy from a branch → main → root`.
-La URL de staging **prevista** sería `https://samuelacuna12.github.io/nicho-web/`, pero no afirmamos que esté activa. El código de staging agrega `noindex` durante renderizado para reducir duplicación de contenido, mientras las canonicals apuntan al dominio final.
+## Identidad
+- Marca: Nicho Agencia Digital · alias visual `nicho.`.
+- Ubicación: Carrera 29 #39-39, barrio La Aurora, oficina 01, Bucaramanga, Santander, Colombia.
+- WhatsApp: +57 302 828 9997.
+- Email: nicho.agenciadigital@gmail.com.
+- Cobertura: LATAM y global, énfasis Bucaramanga y Colombia.
+- Precios: no públicos.
 
-## Dominio definitivo
-Dominio canónico preparado: `https://nichoagenciadigital.com`.
+## Arquitectura
+- HTML/CSS/JS estático (sin compilación obligatoria).
+- 18 páginas con sitemap SEO, `robots.txt`, canonicals, metadatos, Open Graph y guías.
+- Portafolio de sistemas y agentes (se indica si un proyecto sigue en desarrollo).
+- Diseño responsive, animaciones y recursos optimizados.
+- No almacenar llaves de API, datos de clientes ni los ZIP originales de Envato en repositorio público.
 
-**No se han modificado los DNS, el hosting, la web anterior ni Google Search Console.** Antes de migrar deben confirmarse accesos, redirecciones 301 para URLs antiguas, y datos de contacto.
+## Producción (recomendación)
+- **Código:** GitHub (`Samuelacuna12/nicho-web`).
+- **Hosting:** Cloudflare Pages, conectado a GitHub; GitHub Pages tiene restricciones para hospedar negocios comerciales gratis.
+- **Dominio:** registrado en Hostinger, `nichoagenciadigital.com`, la migración DNS NO se ha realizado.
+- **Estado:** preparación de código. Dominio principal, correo, Cloudflare y Search Console aún requieren pasos manuales/autorizados.
 
-## Auditoría de código
-- 15 páginas con un H1 y canonical única.
-- Metadatos y JSON-LD parseables.
-- 0 enlaces internos rotos detectados en la comprobación del repositorio.
-- Estos resultados no sustituyen Lighthouse, verificaciones de dispositivos ni Search Console en el dominio final.
-
-## Documentación
-- [SEO-LANZAMIENTO.md](SEO-LANZAMIENTO.md): verificación, migración y acciones de SEO.
-- [ENVATO-RECURSOS-NICHO.md](ENVATO-RECURSOS-NICHO.md): selección original de recursos licenciados.
-- [SEO-PLAN-90-DIAS.md](SEO-PLAN-90-DIAS.md): estrategia editorial y medición.
-
-## Limitaciones
-No inventar direcciones, teléfonos, clientes, testimonios, resultados ni integraciones realizadas. Mantener archivos fuente originales y licencias Envato en Drive, no en el repositorio público. Las imágenes web optimizadas se reservan para este proyecto y están sujetas a la licencia correspondiente.
+Consulta [HOSTING-Y-DOMINIO.md](HOSTING-Y-DOMINIO.md) para desplegar y [SEO-LANZAMIENTO.md](SEO-LANZAMIENTO.md) para SEO técnico.
