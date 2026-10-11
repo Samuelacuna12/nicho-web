@@ -1,0 +1,85 @@
+/* NICHO EXPERIENCE / NOV 2026 - interactive business storytelling */
+.xl-inner{width:min(calc(100% - 104px),1420px);margin-inline:auto}
+.xl-utility{display:flex;justify-content:space-between;gap:28px;font-size:11px;font-weight:550;letter-spacing:.14em;line-height:1.6}
+.xl-proof{background:#070907;color:#f5f6f4;padding:135px 0 180px;position:relative;overflow:hidden}
+.xl-proof:before{content:"";position:absolute;width:950px;height:950px;border-radius:50%;background:radial-gradient(circle,rgba(144,184,146,.11),transparent 65%);top:25%;left:-25%;pointer-events:none}
+.xl-proof-intro{position:relative;display:flex;justify-content:space-between;align-items:end;gap:80px;margin:130px 0 105px}
+.xl-eyebrow{font-size:12px;letter-spacing:.13em;color:#a8b7ac}
+.xl-proof-intro h2{font-size:clamp(70px,8.3vw,142px);font-weight:330;letter-spacing:-.083em;line-height:.98;margin:28px 0 0}
+.xl-proof-intro h2 i{font-style:normal;color:#afb9ae}
+.xl-proof-intro>p{max-width:350px;color:#b7c2b9;font-size:18px;line-height:1.72;margin:0}
+.xl-demo{border:1px solid #737f75;position:relative}
+.xl-demo-top{display:flex;justify-content:space-between;align-items:center;gap:20px;border-bottom:1px solid #59665c;padding:17px 25px;font-size:10px;letter-spacing:.12em;color:#e1e9df}
+.xl-live-dot{display:inline-block;width:7px;height:7px;background:#c9e0b4;border-radius:50%;box-shadow:0 0 18px #bbebaa;margin-right:9px}
+.xl-demo-main{display:grid;grid-template-columns:34% 66%;min-height:630px}
+.xl-demo-menu{border-right:1px solid #59665c;padding:45px 35px;display:flex;flex-direction:column}
+.xl-demo-title{font-size:25px;letter-spacing:-.06em;font-weight:480;line-height:.95;margin-bottom:80px}
+.xl-demo-title sup{font-size:9px;letter-spacing:0;margin-left:6px}
+.xl-stage-button{display:grid;grid-template-columns:25px 1fr 22px;gap:13px;width:100%;align-items:start;text-align:left;padding:24px 4px;background:transparent;border:0;border-top:1px solid #3a473e;color:#8e9a91;transition:color .25s,padding .25s}
+.xl-stage-button:last-of-type{border-bottom:1px solid #3a473e}
+.xl-stage-button:hover,.xl-stage-button.active{color:#fff;padding-left:12px}
+.xl-stage-button>span:first-child{font-size:11px;color:#a2b5a5;padding-top:4px}
+.xl-stage-button>span:nth-child(2){font-size:22px;letter-spacing:-.04em;font-weight:400}
+.xl-stage-button small{display:block;font-size:12px;font-weight:350;letter-spacing:0;margin-top:10px;color:#899a8d}
+.xl-stage-button b{font-size:22px;font-weight:350}
+.xl-demo-side-note{margin-top:auto;padding-top:50px;color:#718575;line-height:1.8;font-size:9px;letter-spacing:.12em}
+.xl-demo-screen{background:#f5f6f2;color:#0e1510;padding:37px 48px 28px;position:relative;overflow:hidden;display:flex;flex-direction:column}
+.xl-demo-screen-head{display:flex;justify-content:space-between;gap:25px;font-size:11px;letter-spacing:.13em;font-weight:510;position:relative;z-index:2}
+.xl-status{color:#527f59}
+.xl-demo-ambient{position:absolute;right:-100px;top:-90px;width:510px;height:510px;border-radius:50%;display:grid;place-items:center;opacity:.14}
+.xl-demo-ambient span{position:absolute;width:90%;height:90%;border:1px solid #283b2b;border-radius:50%}
+.xl-demo-ambient span:nth-child(2){width:70%;height:70%}.xl-demo-ambient span:nth-child(3){width:50%;height:50%}.xl-demo-ambient span:nth-child(4){width:30%;height:30%;background:#384d3c}
+.xl-demo-conversation{display:flex;flex-direction:column;align-items:start;gap:14px;max-width:610px;position:relative;z-index:2;margin-top:105px}
+.xl-speaker{font-size:11px;letter-spacing:.15em;color:#738376}
+.xl-speaker-ai{margin-top:28px;color:#45784a}
+.xl-demo-conversation p{font-size:clamp(26px,3vw,45px);letter-spacing:-.055em;line-height:1.16;font-weight:380;margin:0}
+.xl-demo-system{display:grid;grid-template-columns:1fr 1fr;gap:18px;position:relative;z-index:2;margin-top:auto;padding-top:60px}
+.xl-demo-system-item{border-top:1px solid #aebaae;padding-top:16px;display:grid;grid-template-columns:1fr 26px;gap:6px}
+.xl-demo-system-item span{grid-column:1/-1;font-size:10px;letter-spacing:.13em;color:#778a79}
+.xl-demo-system-item strong{font-size:20px;font-weight:440;letter-spacing:-.035em}
+.xl-demo-system-item b{font-size:24px;font-weight:340}
+.xl-demo-screen-footer{display:flex;justify-content:space-between;gap:20px;font-size:9px;color:#819080;letter-spacing:.09em;margin-top:28px;position:relative;z-index:2}
+.xl-demo-bottom{display:flex;align-items:center;justify-content:space-between;gap:22px;padding:21px 25px;font-size:10px;letter-spacing:.1em}
+.xl-demo-bottom button{border:0;background:none;color:white;cursor:pointer;font-size:12px;letter-spacing:.08em;padding:11px}
+.xl-demo-bottom button span{font-size:18px;padding-left:18px}
+.xl-demo-bottom a{border-bottom:1px solid currentColor;padding:11px 0}
+.xl-swap{animation:xl-swap .45s ease both}
+@keyframes xl-swap{from{opacity:.24;transform:translateY(12px)}to{opacity:1;transform:none}}
+.xl-marquee-band{background:#eb3e4d;color:#fff;padding:22px 0;overflow:hidden}
+.xl-marquee-text{display:flex;white-space:nowrap;gap:0;width:max-content;animation:xl-belt 38s linear infinite}
+.xl-marquee-text span{font-size:clamp(46px,7vw,100px);font-weight:360;letter-spacing:-.073em;line-height:1.13}
+@keyframes xl-belt{to{transform:translateX(-50%)}}
+.xl-capability{background:#fff;color:#0a0e0a;padding:150px 0 175px}
+.xl-cap-head{display:flex;justify-content:space-between;gap:55px;align-items:end;margin:115px 0}
+.xl-cap-head h2{font-size:clamp(75px,8vw,132px);font-weight:330;letter-spacing:-.081em;line-height:.98;margin:0}
+.xl-cap-head h2 i{font-style:normal;color:#989f98}
+.xl-cap-head p{max-width:320px;font-size:19px;line-height:1.58;margin:0}
+.xl-cap-rows{border-top:1px solid #141814}
+.xl-cap-rows>a{display:grid;grid-template-columns:65px 1fr 45px;gap:25px;align-items:start;border-bottom:1px solid #c7d0c7;padding:40px 8px 35px 0;transition:padding-left .3s,background .3s}
+.xl-cap-rows>a:hover{padding-left:18px;background:#f3f5f1}
+.xl-cap-rows>a>span{font-size:12px;color:#6f7b72;padding-top:12px}
+.xl-cap-rows h3{font-size:clamp(34px,5.4vw,83px);font-weight:360;letter-spacing:-.067em;line-height:1.03;margin:0 0 11px}
+.xl-cap-rows p{font-size:16px;color:#637166;line-height:1.6;margin:0}
+.xl-cap-rows b{font-size:28px;font-weight:360;text-align:right;transition:transform .3s}
+.xl-cap-rows>a:hover b{transform:translate(4px,-4px)}
+.xl-enter{opacity:0;transform:translateY(40px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
+.xl-in-view{opacity:1;transform:none}
+@media(max-width:1150px){.xl-demo-main{grid-template-columns:38% 62%}.xl-demo-menu{padding:36px 20px}.xl-demo-screen{padding:31px}.xl-stage-button>span:nth-child(2){font-size:19px}}
+@media(max-width:780px){
+.xl-inner{width:calc(100% - 42px)}.xl-proof,.xl-capability{padding:85px 0 100px}
+.xl-utility{font-size:9px}.xl-utility span:last-child{max-width:50%;text-align:right}
+.xl-proof-intro,.xl-cap-head{flex-direction:column;align-items:start;gap:25px;margin:75px 0 65px}
+.xl-proof-intro h2,.xl-cap-head h2{font-size:clamp(57px,11vw,90px)}.xl-proof-intro>p,.xl-cap-head p{font-size:16px}
+.xl-demo-main{grid-template-columns:1fr}.xl-demo-top{font-size:8px;gap:12px;padding:16px}.xl-demo-top>span:nth-child(2){display:none}
+.xl-demo-menu{padding:24px 17px 0;border-right:none;border-bottom:1px solid #4e5b50}
+.xl-demo-title{font-size:19px;margin-bottom:24px}
+.xl-stage-button{grid-template-columns:23px 1fr 17px;padding:16px 4px}.xl-stage-button>span:nth-child(2){font-size:19px}
+.xl-demo-side-note{display:none}.xl-demo-screen{padding:26px 18px;min-height:535px}
+.xl-demo-conversation{margin-top:75px}.xl-demo-conversation p{font-size:clamp(25px,6.8vw,38px)}.xl-demo-screen-footer{font-size:8px}
+.xl-demo-system{gap:12px;padding-top:40px}.xl-demo-system-item strong{font-size:16px}
+.xl-demo-bottom{flex-wrap:wrap;padding:15px;font-size:9px}.xl-demo-bottom>span{width:100%}
+.xl-marquee-band{padding:15px 0}.xl-marquee-text span{font-size:50px}
+.xl-cap-rows>a{grid-template-columns:28px 1fr 22px;gap:10px;padding:30px 2px}
+.xl-cap-rows h3{font-size:clamp(32px,7vw,49px)}.xl-cap-rows p{font-size:14px}.xl-cap-rows b{font-size:22px}
+}
+@media(prefers-reduced-motion:reduce){.xl-enter{opacity:1;transform:none;transition:none}.xl-marquee-text{animation:none}.xl-swap{animation:none}}
