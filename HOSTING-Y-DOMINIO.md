@@ -1,30 +1,20 @@
-# Nicho Agencia Digital — Publicar en GitHub Pages con dominio de Hostinger
+# NICHO Agencia Digital — Conectar Hostinger DNS con GitHub Pages
 
-**Decisión del proyecto:** probar **GitHub Pages** para la web informativa, el portafolio y captación por enlaces a WhatsApp, email y agendamiento. No habrá cobros ni funcionalidades de backend alojadas en Pages.
+**Sitio**: https://nichoagenciadigital.com  
+**GitHub repo**: https://github.com/Samuelacuna12/nicho-web  
+**Publicación**: `main` / `/(root)`  
+**GitHub Pages CNAME**: confirmado, contiene `nichoagenciadigital.com`.
 
-> Nota de uso: GitHub declara que Pages no está pensado para alojar gratuitamente negocios online, sitios que facilitan principalmente transacciones comerciales o SaaS. Una web informativa sin pagos tiene un uso técnicamente distinto, pero no garantiza aprobación respecto a todas las restricciones de GitHub. Revisar la política y, si resulta necesario, mantener GitHub como repositorio y migrar solo el hosting.
+## 0 — Seguridad antes de cambiar DNS
+1. Haz una captura o exportación de **TODOS los registros actuales** de tu zona DNS en Hostinger.
+2. Haz copia de la web antigua y conserva sus URL importantes. Cambiar el A del dominio hace que el sitio anterior deje de servirse por ese nombre.
+3. Conserva **MX, TXT (SPF, DKIM, DMARC, verificaciones), NS, SRV, CAA y otros subdominios**. No toques los nameservers.
+4. Comprueba si Hostinger es el **proveedor DNS activo**. Si usas nameservers de otro proveedor, el DNS efectivo se cambia allí.
+5. No elimines los registros actuales hasta identificar los conflictos: generalmente A/AAAA de `@`, y A/AAAA/CNAME de `www`.
 
-## 1. Publicar primero una vista de prueba
-1. Abre: https://github.com/Samuelacuna12/nicho-web/settings/pages.
-2. En Build and deployment: **Source: Deploy from a branch**.
-3. Selecciona rama `main` y carpeta `/(root)`. Guarda.
-4. Verifica el dominio temporal previsto `https://samuelacuna12.github.io/nicho-web/`. No asumir que ya está activo.
+## 1 — Registros para GitHub Pages
 
-## 2. Antes de conectar el dominio
-- Realiza copia del sitio antiguo en Hostinger.
-- Exporta o documenta todos los DNS actuales. Asegura MX, TXT, SPF, DKIM, DMARC y otros subdominios para no afectar el correo y servicios.
-- Recopila URLs indexadas del sitio antiguo y define redirecciones 301. **GitHub Pages por sí solo no facilita reglas de redirección HTTP 301 personalizadas**: habrá que mantener un mecanismo de redirects en Hostinger o usar un proxy externo si existen URL antiguas.
-- Si corresponde, verifica propiedad del dominio en GitHub para evitar riesgos de asignación.
-
-## 3. Configurar dominio personalizado en GitHub primero
-1. En Settings → Pages → Custom domain, ingresa `nichoagenciadigital.com` y pulsa Save.
-2. GitHub agregará/actualizará el archivo `CNAME` cuando se use publicación desde la rama.
-3. Solo después prepara registros DNS en Hostinger.
-
-## 4. DNS Hostinger para dominio raíz
-Crea o actualiza **cuatro registros A** para el host `@`, con los siguientes valores:
-
-| Tipo | Host | Apunta a |
+| Tipo | Host/Nombre | Apunta a |
 |---|---|---|
 | A | @ | 185.199.108.153 |
 | A | @ | 185.199.109.153 |
@@ -32,20 +22,48 @@ Crea o actualiza **cuatro registros A** para el host `@`, con los siguientes val
 | A | @ | 185.199.111.153 |
 | CNAME | www | samuelacuna12.github.io |
 
-Eliminar solo los registros A/AAAA/CNAME antiguos que entren en conflicto para `@` y `www`, después de respaldarlos. **No borrar MX ni TXT**, y conservar el resto de registros válidos para servicios y correos. Los records A son publicados por GitHub en su documentación oficial.
+**TTL**: deja el valor predeterminado o 3600 si es posible. Para `www` la ruta no incluye `/nicho-web`.
 
-## 5. Verificar la puesta en producción
-- Enforce HTTPS en GitHub Pages cuando esté disponible.
-- Comprobar `https://nichoagenciadigital.com` y `https://www.nichoagenciadigital.com`.
-- Comprobar menú, favicons, CSS, recursos Envato y enlace de contacto.
-- Revisar `https://nichoagenciadigital.com/robots.txt` y `/sitemap.xml`.
-- Validar indexación en Google Search Console y enviar sitemap.
-- Probar que correos y subdominios antiguos siguen funcionando.
-- Auditar cobertura de URLs antiguas y redirects. Evitar perder posicionamiento por un corte abrupto.
+### IPv6 (opcional, recomendable si gestionas registros AAAA)
+| Tipo | Host/Nombre | Apunta a |
+|---|---|---|
+| AAAA | @ | 2606:50c0:8000::153 |
+| AAAA | @ | 2606:50c0:8001::153 |
+| AAAA | @ | 2606:50c0:8002::153 |
+| AAAA | @ | 2606:50c0:8003::153 |
 
-## Fuentes oficiales
-- https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site
-- https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits
-- https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/troubleshooting-custom-domains-and-github-pages
+**Muy importante**: si existe un AAAA anterior para `@` o `www` que apunta al hosting viejo, corregirlo o quitarlo para que no envíe tráfico a un servidor distinto. GitHub admite solamente A si no quieres habilitar IPv6.
 
-**Estado:** documentación y favicon publicados en GitHub; **no** se han cambiado el DNS, el hosting real, Pages ni Search Console desde estas herramientas.
+## 2 — Pasos en Hostinger
+1. Entra en https://hpanel.hostinger.com/.
+2. Selecciona **Domains → DNS**, luego `nichoagenciadigital.com`. En algunas interfaces aparece como **Domains → Domain portfolio → Manage → DNS / Nameservers**. Si tu panel tiene hosting web, también se puede encontrar en **Websites → Advanced → DNS Zone Editor**.
+3. Revisa si la zona DNS está administrada por Hostinger y guarda captura de los registros existentes.
+4. Edita o elimina **solo** los registros conflictivos del dominio web y añade los A y el CNAME anteriores. Conserva todos los registros de correo y demás servicios.
+5. Guarda los cambios. La propagación puede tardar hasta 24 horas.
+
+## 3 — Volver a GitHub
+1. Entra en https://github.com/Samuelacuna12/nicho-web/settings/pages.
+2. El dominio personalizado ya debe figurar como `nichoagenciadigital.com`. **No hace falta volver a guardarlo**.
+3. Comprueba que `DNS Check in Progress` cambia a verificación completada.
+4. Activa **Enforce HTTPS** cuando GitHub habilite la casilla; puede tomar hasta 24 horas.
+5. Comprueba:
+   - https://nichoagenciadigital.com/
+   - https://www.nichoagenciadigital.com/ (debe redirigir al dominio sin www)
+   - https://nichoagenciadigital.com/robots.txt
+   - https://nichoagenciadigital.com/sitemap.xml
+   - https://nichoagenciadigital.com/favicon.svg
+   - Páginas internas, navegación, imágenes, WhatsApp y agenda.
+6. Confirma la recepción y envío de email si hay buzones o servicios conectados a ese dominio.
+
+## 4 — SEO después de publicación
+- Dar de alta propiedad del dominio en Google Search Console mediante TXT de verificación, sin borrar TXT previos.
+- Enviar `https://nichoagenciadigital.com/sitemap.xml`.
+- Auditar páginas del sitio anterior y configurar redirecciones **HTTP 301** donde corresponda. GitHub Pages no provee reglas HTTP 301 arbitrarias en un archivo `_redirects`: se necesita infraestructura externa si hay URLs antiguas no preservadas.
+- No verificar ranking ni indexación hasta que Google haya podido rastrear las nuevas páginas.
+
+## 5 — Fuentes oficiales
+- GitHub Pages custom domain: https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site
+- GitHub Pages limits: https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits
+- Hostinger DNS editor: https://www.hostinger.com/support/1583249-how-to-manage-dns-records-at-hostinger/
+
+**Estado:** GitHub Pages y CNAME figuran configurados. Este documento NO cambia los DNS de Hostinger. El acceso a la cuenta Hostinger y su editor DNS no está conectado a este chat.
