@@ -1,26 +1,29 @@
 # Nicho Agencia Digital — Web corporativa
 
-Sitio corporativo premium de **Nicho Agencia Digital**, con estética cinematográfica monocromática, sistemas personalizados, agentes de inteligencia artificial, automatización de ventas, desarrollo web y portafolio.
+Web informativa de **Nicho Agencia Digital**, enfocada en software empresarial a medida, agentes de IA, automatización comercial, desarrollo web, contenido y captación de clientes.
 
-## Identidad
-- Marca: Nicho Agencia Digital · alias visual `nicho.`.
+## Datos de marca
+- Identidad pública: Nicho Agencia Digital · isotipo/firma visual `nicho.`.
 - Ubicación: Carrera 29 #39-39, barrio La Aurora, oficina 01, Bucaramanga, Santander, Colombia.
 - WhatsApp: +57 302 828 9997.
-- Email: nicho.agenciadigital@gmail.com.
-- Cobertura: LATAM y global, énfasis Bucaramanga y Colombia.
-- Precios: no públicos.
+- Correo: nicho.agenciadigital@gmail.com.
+- Cobertura: Colombia y LATAM principalmente; alcance internacional.
+- Sin precios publicados.
 
-## Arquitectura
-- HTML/CSS/JS estático (sin compilación obligatoria).
-- 18 páginas con sitemap SEO, `robots.txt`, canonicals, metadatos, Open Graph y guías.
-- Portafolio de sistemas y agentes (se indica si un proyecto sigue en desarrollo).
-- Diseño responsive, animaciones y recursos optimizados.
-- No almacenar llaves de API, datos de clientes ni los ZIP originales de Envato en repositorio público.
+## Características
+- Sitio estático multipágina, HTML/CSS/JS, responsive.
+- Portafolio, contacto, guía de servicios, recursos educativos.
+- SEO con URL canónica, sitemap, robots.txt, enlaces internos y metadatos.
+- Diseño cinematográfico con recursos optimizados de Envato.
+- **Favicon actualizado:** `favicon.svg` — fondo negro, N cromada/plata y punto plateado. Las páginas enlazan al archivo en la raíz.
 
-## Producción (recomendación)
-- **Código:** GitHub (`Samuelacuna12/nicho-web`).
-- **Hosting:** Cloudflare Pages, conectado a GitHub; GitHub Pages tiene restricciones para hospedar negocios comerciales gratis.
-- **Dominio:** registrado en Hostinger, `nichoagenciadigital.com`, la migración DNS NO se ha realizado.
-- **Estado:** preparación de código. Dominio principal, correo, Cloudflare y Search Console aún requieren pasos manuales/autorizados.
+## Publicación elegida por el usuario
+- Repositorio: `Samuelacuna12/nicho-web`.
+- Alojamiento solicitado: **GitHub Pages**, siempre sujeto a sus condiciones de uso; no utilizar para pagos, captación de contraseñas o alojamiento de SaaS.
+- Dominio: `nichoagenciadigital.com`, registrado en Hostinger.
+- No se ha cambiado DNS, activado Pages ni migrado la web en producción desde esta conversación.
 
-Consulta [HOSTING-Y-DOMINIO.md](HOSTING-Y-DOMINIO.md) para desplegar y [SEO-LANZAMIENTO.md](SEO-LANZAMIENTO.md) para SEO técnico.
+Sigue los pasos en [HOSTING-Y-DOMINIO.md](HOSTING-Y-DOMINIO.md). Respalda el DNS y revisa URLs anteriores antes del cambio. GitHub Pages tiene [límites y restricciones sobre sitios comerciales](https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits).
+
+## SEO
+Revisar [SEO-LANZAMIENTO.md](SEO-LANZAMIENTO.md) y [SEO-PLAN-90-DIAS.md](SEO-PLAN-90-DIAS.md). Search Console requiere conexión/autorización.
