@@ -118,3 +118,31 @@ body:has(.nx-hero) .footer-cta{display:none}
  .nx-pagehead{min-height:570px;padding:165px 0 75px}.nx-pagehead h1{font-size:clamp(69px,11vw,91px)}
 }
 @media(prefers-reduced-motion:reduce){.nx-scroll-prompt span{animation:none}.nx-hero-sculpture{transform:none!important}.nx-enter{transition:none!important}}
+
+
+/* Editorial discipline across internal pages */
+.page-head{background:#050505;color:#fff;min-height:700px;padding-top:210px}
+.page-head:after{opacity:.18}
+.page-head h1{font-weight:370;letter-spacing:-.085em;line-height:.96}
+.page-head p{font-weight:340;color:#bfc5c0}
+.page-head .tag{font-weight:470;letter-spacing:.15em}
+.section .intro-line h2,.split h2,.reading h2,.statement{font-weight:380;letter-spacing:-.065em}
+.tile,.feature-box,.service,.contact-panel{border-radius:0;box-shadow:none}
+.tile,.service{background:#fff;border:0;border-bottom:1px solid #b8c0b9}
+.tile h3,.service h3{font-weight:420}
+.tile a,.service a{font-weight:480}
+.section{padding-top:135px;padding-bottom:135px}
+.service-focus{background:#f5f5f3}
+.feature-box{min-height:275px}
+.feature-box h3{font-weight:440}
+.step{grid-template-columns:85px 1fr 1fr}
+.step h3{font-weight:430}
+.btn,.pill,.tag,.nav-cta,.badge{border-radius:0}
+.btn{font-weight:510}
+.btn-lime{background:#fff;color:#111}
+.btn-dark{background:#0c0f0c;color:#fff}
+.footer-cta h2{font-weight:370;letter-spacing:-.075em}
+.highlight-band{background:#dedfda}
+.highlight-band h2{font-weight:400}
+.contact-panel{background:#f0f1ed;border:1px solid #dde2dc}
+@media(max-width:760px){.page-head{min-height:auto;padding:158px 0 90px}.page-head h1{font-size:clamp(56px,11vw,90px)}.section{padding:82px 0}.step{grid-template-columns:38px 1fr}.step p{grid-column:2}}
