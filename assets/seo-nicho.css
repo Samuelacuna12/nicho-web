@@ -1,0 +1,26 @@
+
+/* NICHO AI · content, guides & mobile navigation. */
+.seo-kicker{display:block;font-size:11px;font-weight:550;letter-spacing:.17em;text-transform:uppercase;color:#849188}
+.seo-hero{background:#050505;color:white;padding:190px 0 125px;min-height:650px}
+.seo-hero .seo-kicker{color:#c1c9c1}.seo-hero h1{font-size:clamp(61px,9.4vw,145px);font-weight:350;letter-spacing:-.077em;line-height:.98;margin:48px 0 27px;max-width:1150px}
+.seo-hero h1 em{font-style:normal;color:#9da69f}.seo-hero p{max-width:760px;color:#c7cfc8;font-size:clamp(18px,2vw,24px);line-height:1.58}
+.seo-button{display:inline-block;color:inherit;border-bottom:1px solid currentColor;padding:13px 0;font-size:17px;margin-top:23px}
+.seo-bridge{padding:125px 0;background:#fff}.seo-bridge h2{font-size:clamp(45px,6vw,88px);font-weight:360;letter-spacing:-.068em;line-height:1.05;max-width:1050px;margin:35px 0 45px}
+.seo-columns{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}.seo-columns h2{margin-bottom:18px}.seo-bridge p,.seo-bigcopy{font-size:18px;line-height:1.75;color:#5e6a60;max-width:820px}
+.seo-columns>div{padding-top:20px}.seo-columns>div a{display:block;font-size:14px;border-bottom:1px solid #c5cec5;padding:14px 0;max-width:360px}
+.seo-features{background:#f3f4f1;padding:115px 0}.seo-featuregrid{display:grid;grid-template-columns:1fr 1fr;margin-top:60px;border-top:1px solid #bac2b9}
+.seo-featuregrid article{padding:35px 50px 45px 0;border-bottom:1px solid #c5cec5}.seo-featuregrid article:nth-child(even){border-left:1px solid #c5cec5;padding-left:40px}
+.seo-featuregrid span{font-size:11px;color:#788278}.seo-featuregrid h2{font-size:clamp(29px,3vw,43px);font-weight:440;letter-spacing:-.055em;margin:35px 0 15px}.seo-featuregrid p{color:#667367;line-height:1.7;font-size:16px}
+.seo-faq{background:white;padding:115px 0 135px}.seo-faq h2{font-size:clamp(48px,6vw,82px);font-weight:370;letter-spacing:-.07em;margin:33px 0 65px}
+.seo-faq details{border-top:1px solid #c7cfc6;padding:28px 0;max-width:1100px}.seo-faq details:last-child{border-bottom:1px solid #c7cfc6}.seo-faq summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:20px;cursor:pointer;font-size:clamp(20px,2.4vw,30px);font-weight:420;letter-spacing:-.03em}.seo-faq summary::-webkit-details-marker{display:none}.seo-faq summary span{font-size:26px}
+.seo-faq details[open] summary span{transform:rotate(45deg)}.seo-faq details p{color:#637067;font-size:16px;line-height:1.75;max-width:850px}
+.seo-final{background:#111411;color:#fff;padding:110px 0}.seo-final h2{font-weight:350;line-height:1.06;letter-spacing:-.068em;font-size:clamp(46px,6vw,88px);max-width:950px}
+.seo-resources{background:white;padding:115px 0}.seo-resource{display:grid;grid-template-columns:60px 1fr 35px;gap:25px;border-bottom:1px solid #ccd4ca;padding:45px 0;align-items:start}.seo-resource:first-of-type{margin-top:45px;border-top:1px solid #ccd4ca}.seo-resource>span{font-size:13px;color:#657166}.seo-resource h2{font-size:clamp(32px,4vw,59px);font-weight:410;letter-spacing:-.06em;line-height:1.12;margin:0 0 18px}.seo-resource p{font-size:16px;color:#667267;line-height:1.6;max-width:750px;margin:0}
+.seo-articlehead h1{font-size:clamp(56px,8vw,118px)}.seo-back{display:block;font-size:13px;color:#ccd8cc;margin-bottom:38px}.seo-articlebody{max-width:950px;padding-top:100px;padding-bottom:115px}
+.seo-lead{font-size:clamp(24px,3vw,37px)!important;line-height:1.52!important;color:#253026!important}
+.seo-articlebody section{border-top:1px solid #ced6ce;padding:48px 0}.seo-articlebody h2{font-size:clamp(34px,4vw,58px);letter-spacing:-.06em;line-height:1.1;font-weight:420}.seo-articlebody p{font-size:18px;color:#5f6b62;line-height:1.85}
+.seo-articleend{padding:45px;background:#f2f3f0}.seo-articleend h2{margin-top:0}.seo-articleend a{border-bottom:1px solid;padding:8px 0}
+.footer-links{grid-template-columns:repeat(3,minmax(0,1fr));gap:15px 24px}.topbar .nav-links{gap:20px}
+.topbar .nav-links a:focus-visible,.topbar a:focus-visible,.seo-resource:focus-visible,.seo-faq summary:focus-visible{outline:2px solid #fff;outline-offset:3px}
+@media(max-width:1200px){.topbar .nav-links{display:none;position:absolute;top:82px;left:0;right:0;background:#101210;padding:20px 40px;flex-direction:column;align-items:stretch;gap:0;max-height:calc(100svh - 82px);overflow-y:auto}.topbar .nav-links.open{display:flex}.topbar .nav-links a{padding:12px 0;font-size:18px}.topbar .menu-toggle{display:block;margin-left:auto}}
+@media(max-width:780px){.seo-hero{min-height:560px;padding:150px 0 80px}.seo-hero h1{font-size:clamp(54px,11vw,79px)}.seo-bridge,.seo-features,.seo-faq,.seo-resources{padding:75px 0}.seo-columns,.seo-featuregrid{grid-template-columns:1fr;gap:25px}.seo-featuregrid article:nth-child(even){border-left:0;padding-left:0}.seo-featuregrid article{padding:28px 0}.seo-resource{grid-template-columns:30px 1fr 20px;gap:10px;padding:30px 0}.seo-resource h2{font-size:30px}.seo-resource p{font-size:14px}.seo-articlebody{padding-top:65px;padding-bottom:75px}.seo-articlebody p{font-size:16px}.seo-articleend{padding:25px}.footer-links{grid-template-columns:repeat(2,minmax(0,1fr))}.topbar .nav-links{top:70px;padding:20px 25px;max-height:calc(100svh - 70px)}}
