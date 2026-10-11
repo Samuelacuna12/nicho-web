@@ -146,3 +146,37 @@ body:has(.nx-hero) .footer-cta{display:none}
 .highlight-band h2{font-weight:400}
 .contact-panel{background:#f0f1ed;border:1px solid #dde2dc}
 @media(max-width:760px){.page-head{min-height:auto;padding:158px 0 90px}.page-head h1{font-size:clamp(56px,11vw,90px)}.section{padding:82px 0}.step{grid-template-columns:38px 1fr}.step p{grid-column:2}}
+
+/* Brand rules appended last: win over legacy navigation and responsive breakpoints */
+
+/* Nicho Agencia Digital: commercial identity and editorial portfolio */
+.nx-brand-contact{display:flex;flex-direction:column;gap:12px;margin-top:23px;font-size:13px}
+.nx-brand-contact a{color:#e1e6df;overflow-wrap:anywhere}.nx-brand-contact address{font-style:normal;color:#adb8ad;line-height:1.7}
+.footer-links{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px 21px}
+.topbar .nav-links{gap:22px}
+.nx-projects-teaser{background:#121512;color:#fff;padding:110px 0}
+.nx-projects-teaser h2{font-size:clamp(57px,8vw,126px);font-weight:350;line-height:1;letter-spacing:-.074em;margin:38px 0}
+.nx-projects-teaser p{font-size:20px;max-width:700px;line-height:1.65;color:#b7c4b7}
+.nx-business-contact{background:#fff;color:#0c0f0d;padding:115px 0}
+.nx-business-contact h2{font-size:clamp(44px,6vw,90px);font-weight:380;letter-spacing:-.069em;line-height:1.08;max-width:1050px;margin:40px 0}
+.nx-business-contact>div>p{font-size:18px;line-height:1.7}
+.nx-business-contact address{font-style:normal;font-size:17px;line-height:1.65}
+.nx-business-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin:65px 0}
+.nx-business-grid>*{display:flex;flex-direction:column;gap:15px;border-top:1px solid #bfc6be;padding-top:22px;overflow-wrap:anywhere}
+.nx-business-grid span{font-size:11px;letter-spacing:.14em;color:#6c786c}
+.nx-business-grid strong{font-size:clamp(19px,2vw,29px);font-weight:410;letter-spacing:-.035em}
+.nx-port-hero{background:#050505;color:#fff;padding:190px 0 110px}
+.nx-port-hero h1{font-size:clamp(62px,10vw,154px);letter-spacing:-.084em;font-weight:350;line-height:.97;margin:35px 0}
+.nx-port-hero h1 em{font-style:normal;color:#a1aba1}
+.nx-port-hero p{font-size:21px;line-height:1.65;color:#c6cbc6;max-width:850px}
+.nx-port-list{padding:120px 0;background:#fff}
+.nx-port-row{display:grid;grid-template-columns:150px 1fr 32px;gap:30px;align-items:start;padding:39px 0;border-bottom:1px solid #c3ccc3}
+.nx-port-row:first-of-type{margin-top:30px;border-top:1px solid #a7b0a6}
+.nx-port-row>span{font-size:12px;color:#788578}
+.nx-port-row h2{font-size:clamp(35px,5vw,70px);letter-spacing:-.06em;line-height:1.05;font-weight:410;margin:0 0 15px}
+.nx-port-row p{font-size:16px;color:#606c61;line-height:1.7;max-width:800px}
+.nx-port-focus{background:#f1f2ef;padding:100px 0}
+.nx-port-focus h2{font-size:clamp(45px,6.5vw,93px);letter-spacing:-.07em;line-height:1.04;font-weight:350}
+.nx-port-focus p{font-size:19px;line-height:1.75;color:#627063;max-width:700px}
+@media(max-width:1200px){.topbar .nav-links{display:none;position:absolute;top:82px;left:0;right:0;background:#0b0c0b;padding:23px 40px;flex-direction:column;align-items:stretch;gap:0;max-height:calc(100svh - 82px);overflow-y:auto}.topbar .nav-links.open{display:flex}.topbar .nav-links a{font-size:18px;padding:12px 0}.topbar .menu-toggle{display:block;margin-left:auto}}
+@media(max-width:780px){.nx-business-grid{grid-template-columns:1fr;gap:15px}.nx-port-row{grid-template-columns:1fr 26px;gap:10px}.nx-port-row>span:first-child{grid-column:1/-1}.nx-port-hero{padding:145px 0 80px}.nx-port-hero h1{font-size:clamp(55px,11vw,90px)}.nx-port-list,.nx-port-focus,.nx-business-contact,.nx-projects-teaser{padding:75px 0}.footer-links{grid-template-columns:repeat(2,minmax(0,1fr))}.topbar .nav-links{top:70px;padding:20px 25px;max-height:calc(100svh - 70px)}}
