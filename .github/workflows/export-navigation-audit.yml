@@ -1,0 +1,25 @@
+name: Auditar navegación y animación sin alterar producción
+on:
+  push:
+    branches: [fix/multipage-navigation-20261012]
+    paths: [.github/workflows/export-navigation-audit.yml]
+permissions:
+  contents: read
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Exportar fuente actual
+        run: |
+          mkdir -p /tmp/nicho-navigation-audit
+          git archive --format=tar HEAD > /tmp/nicho-navigation-audit/repository.tar
+          git rev-parse HEAD > /tmp/nicho-navigation-audit/revision.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nicho-navigation-snapshot
+          path: /tmp/nicho-navigation-audit/
+          retention-days: 1
