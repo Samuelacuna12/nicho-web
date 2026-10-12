@@ -38,6 +38,7 @@ jobs:
                   page.locator('.intro').scroll_into_view_if_needed();page.wait_for_timeout(1300)
                   page.locator('#proyectos').scroll_into_view_if_needed();page.wait_for_timeout(1900)
                   page.screenshot(path=str(out/f'projects-{width}.png'))
+                  page.evaluate('NICHO_KINETIC.select(0,true)');page.wait_for_timeout(850)
                   page.locator('#next').click();page.wait_for_timeout(950)
                   row['next_project']=page.locator('#project-title').inner_text()
                   assert row['next_project']=='RestoOps',row
@@ -54,9 +55,9 @@ jobs:
                   assert row['pause_works']
                   page.screenshot(path=str(out/f'full-{width}.png'),full_page=True)
                   report['viewports'].append(row)
-                  await_video=page.video
+                  recording=page.video
                   page.close();ctx.close()
-                  if width==1440 and await_video:await_video.save_as(str(out/'kinetic-preview.webm'))
+                  if width==1440 and recording:recording.save_as(str(out/'kinetic-preview.webm'))
               ctx=browser.new_context(viewport={'width':390,'height':844},reduced_motion='reduce')
               page=ctx.new_page();page.goto('http://127.0.0.1:8765/exploracion-kinetic.html');page.wait_for_timeout(1000)
               report['reduced_motion']=page.evaluate('!NICHO_KINETIC.motion() && ScrollTrigger.getAll().length===0')
