@@ -1,0 +1,80 @@
+name: Revisar referencia KINETIC y web publicada
+on:
+  push:
+    branches: [audit/kinetic-reference]
+    paths: [.github/workflows/kinetic-reference-audit.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Preparar navegador
+        run: |
+          python -m pip install playwright requests beautifulsoup4 pillow
+          python -m playwright install --with-deps chromium
+      - name: Leer referencia publica y comprobar movimiento real
+        run: |
+          mkdir -p /tmp/kinetic-audit
+          python - <<'PY'
+          import json, pathlib, requests, re, io, time
+          from bs4 import BeautifulSoup
+          from PIL import Image
+          from playwright.sync_api import sync_playwright
+          out=pathlib.Path('/tmp/kinetic-audit')
+          targets={'behance':'https://www.behance.net/gallery/235221521/KINETIC-SMM-STUDIO-WEBSITE','dribbble':'https://dribbble.com/shots/27238129-KINETIC-SMM-STUDIO-WEBSITE','nicho':'https://nichoagenciadigital.com/'}
+          report={}
+          with sync_playwright() as p:
+              browser=p.chromium.launch(headless=True)
+              context=browser.new_context(viewport={'width':1440,'height':1000},device_scale_factor=1)
+              for name,url in targets.items():
+                  page=context.new_page(); errors=[]
+                  page.on('pageerror',lambda e: errors.append(str(e)))
+                  try:
+                      response=page.goto(url,wait_until='domcontentloaded',timeout=50000)
+                      page.wait_for_timeout(6000)
+                      html=page.content()
+                      (out/(name+'.html')).write_text(html)
+                      data={'status':response.status if response else None,'title':page.title(),'text':page.locator('body').inner_text()[:12000],'page_errors':errors}
+                      data['media']=page.evaluate('''() => [...document.querySelectorAll('img,video,source,iframe')].map(e=>({tag:e.tagName,src:e.currentSrc||e.src||e.getAttribute('src'),srcset:e.getAttribute('srcset'),alt:e.alt,width:e.naturalWidth,height:e.naturalHeight})).filter(x=>x.src)''')
+                      if name=='nicho':
+                          data['runtime']=page.evaluate('''()=>({gsap:!!window.gsap,ScrollTrigger:!!window.ScrollTrigger,reduced:matchMedia('(prefers-reduced-motion: reduce)').matches,triggers:window.ScrollTrigger?.getAll().length,animations:document.getAnimations().length,videos:[...document.querySelectorAll('video')].map(v=>({src:v.currentSrc,paused:v.paused,time:v.currentTime})),scripts:[...document.scripts].map(s=>s.src)})''')
+                      page.screenshot(path=str(out/(name+'-top.png')))
+                      height=page.evaluate('document.documentElement.scrollHeight')
+                      for i,y in enumerate([900,1900,3200,4800,6500]):
+                          if y>=height:break
+                          page.evaluate('(y)=>window.scrollTo(0,y)',y);page.wait_for_timeout(1500)
+                          page.screenshot(path=str(out/(name+f'-section-{i+1}.png')))
+                      report[name]=data
+                      if name!='nicho':
+                          candidates=[m for m in data['media'] if m['tag']=='IMG' and (m.get('width')or 0)>500]
+                          seen=set();n=0
+                          for m in candidates:
+                              src=m['src']
+                              if src in seen or n>=18:continue
+                              seen.add(src)
+                              try:
+                                  raw=context.request.get(src,timeout=20000).body()
+                                  im=Image.open(io.BytesIO(raw)).convert('RGB')
+                                  im.thumbnail((1700,18000))
+                                  im.save(out/(name+f'-image-{n:02d}.jpg'),quality=85)
+                                  print('REFERENCE_IMAGE',name,n,src)
+                                  n+=1
+                              except Exception as e:print('IMAGE_FAIL',str(e)[:120])
+                  except Exception as e:report[name]={'error':str(e)}
+                  page.close()
+              browser.close()
+          (out/'report.json').write_text(json.dumps(report,indent=2,ensure_ascii=False))
+          for k,v in report.items(): print('SUMMARY',k,json.dumps({x:y for x,y in v.items() if x not in ('media','text')},ensure_ascii=False))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: kinetic-reference-audit
+          path: /tmp/kinetic-audit
+          retention-days: 1
