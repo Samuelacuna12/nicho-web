@@ -1,56 +1,37 @@
-# NICHO AGENCIA DIGITAL — STUDIO 2026
+# Nicho Agencia Digital — Studio / edición 04
 
-Web corporativa de **Nicho Agencia Digital**. Software a medida, agentes de inteligencia artificial, automatización comercial y desarrollo web, con enfoque de estudio tecnológico premium.
+Web estática multipágina con dirección editorial, marca tridimensional, casos de estudio y captación por WhatsApp.
 
-## Proyecto y contacto
-- Marca: Nicho Agencia Digital. Firma visual: **nicho.**
-- Dominio canónico: https://nichoagenciadigital.com
-- Oficina: Carrera 29 #39-39, barrio La Aurora, oficina 01, Bucaramanga, Santander, Colombia
-- WhatsApp: +57 302 828 9997 · https://wa.me/573028289997
-- Email: nicho.agenciadigital@gmail.com
-- Alcance: prioridad Latinoamérica, Colombia y Bucaramanga; atención internacional
-- No mostrar precios
+## Sitio
+- Marca: Nicho Agencia Digital.
+- Dominio: `https://nichoagenciadigital.com`.
+- Contacto: `nicho.agenciadigital@gmail.com` · `+57 302 828 9997`.
+- Dirección: Carrera 29 #39-39, barrio La Aurora, oficina 01, Bucaramanga, Santander, Colombia.
+- 24 rutas indexables y una página 404. No se publican precios.
 
-## Experiencia web
-- Apertura cinematográfica con fondos animados licenciados de Envato, marca cromada y animación de luz
-- Tipografía editorial de gran escala y secciones monocromáticas sin tarjetas genéricas
-- Transiciones entre páginas, barra de desplazamiento, motion on-scroll y visuales responsivos
-- Página inicial con tres proyectos destacados y vínculos a sus estudios de caso
-- Demostración interactiva **Agente IA → CRM → Automatización**; declarada como conceptual, no conectada a bases de datos
-- Portafolio con filtros accesibles
-- Seis estudios de caso amplios: Invicto OPS, RestoOps, Luminari, plataforma de seguros, agentes comerciales IA y Cuentas Carlos
-- Cada caso expone contexto, problema, solución, módulos funcionales, flujo operativo y estado del proyecto
-- Respeto a preferencias de movimiento reducido y navegación móvil con menú
+## Arquitectura
+HTML estático generado con contenido visible sin JavaScript. Una hoja de estilos compartida. GSAP/ScrollTrigger solo en la portada. La marca tiene una malla de geometría fija, render WebGL progresivo, video alternativo y póster estático. No se distribuyen tipografías.
 
-## Estructura técnica
-Sitio estático HTML/CSS/JS; para ejecución no requiere Node ni compilación.
-- `index.html`: portada y experiencia interactiva
-- `portafolio.html`: galería filtrable
-- `portafolio/*.html`: seis casos individuales
-- `assets/nicho-studio.css`, `assets/nicho-studio.js`: dirección de arte y motion generales
-- `assets/nicho-experience.css`, `assets/nicho-experience.js`: demostración interactiva y secciones nuevas
-- `assets/portfolio-experience.css`, `assets/portfolio-experience.js`: galerías, módulos, filtros y visualizaciones responsivas
-- `assets/media/`: recursos de Envato optimizados para web (no los paquetes ZIP originales)
+Los casos del portafolio usan interfaces ilustrativas y datos de demostración identificados; no representan capturas ni resultados reales de clientes.
 
-## SEO
-- Sitemap de 24 páginas: `sitemap.xml`
-- `robots.txt`, título y descripción por página, URL canónica, marcado JSON-LD
-- Contenido especializado y guías indexables
-- Datos comerciales reales y ubicación sin reseñas ni resultados inventados
-- [SEO-LANZAMIENTO.md](SEO-LANZAMIENTO.md) y [SEO-PLAN-90-DIAS.md](SEO-PLAN-90-DIAS.md)
+## Desarrollo
+Los archivos ya están listos para GitHub Pages desde `main` y `/(root)`. No requieren compilación.
+Para una prueba local: `python3 -m http.server 8000`, y abrir `http://localhost:8000`.
+Si se incluye la carpeta `source` en el repositorio, se pueden regenerar los HTML mediante:
 
-## Validaciones (2026-10-11)
-- Flujos de GitHub Pages más recientes: **éxito**.
-- Comprobadas 24 páginas en el repositorio: rutas internas sin referencias faltantes.
-- JavaScript de experiencia, estudio y portafolio: sintaxis parseable.
-- **No confundir despliegue de código exitoso con prueba completa de navegador o HTTPS**. La emisión del certificado y la prueba final del dominio deben confirmarse de forma independiente.
-- Las interfaces ilustrativas del portafolio no representan datos reales de clientes ni pantallas verificadas.
+```sh
+python3 -m pip install -r source/requirements.txt
+python3 source/build.py
+python3 tools/check_site.py .
+```
 
-## Hosting
-- GitHub Pages desde `main` / `/(root)`, dominio personalizado `nichoagenciadigital.com`.
-- DNS en Hostinger, sin necesidad de cambiar los nameservers.
-- HTTPS pendiente de verificación independiente después de la propagación DNS; seguir [HOSTING-Y-DOMINIO.md](HOSTING-Y-DOMINIO.md).
-- Respetar condiciones de uso de GitHub Pages y mantener alternativa de hosting si se requiere.
+El generador no vuelve a procesar videos ni tipografías: los recursos visuales finales están incluidos.
 
-## Material privado
-Los ZIP, proyectos originales de Envato y tipografías con licencia no se redistribuyen desde este repositorio público.
+## Analítica y formularios
+`assets/js/config.js` no tiene un identificador de Google Analytics configurado. No hay seguimiento externo por defecto. Al configurar un ID real, la interfaz solicita autorización antes de cargar la analítica.
+El formulario prepara un mensaje de WhatsApp en el navegador. No lo envía ni crea un registro en un servidor.
+
+## Verificaciones
+Se ejecutaron pruebas estáticas y 72 combinaciones de página y ancho en Chromium local. Esta evidencia no sustituye pruebas de DNS/TLS, Core Web Vitals, WebGL nativo ni Search Console en producción. La creación de esta entrega no significa que se haya publicado en GitHub.
+
+El flujo `.github/workflows/quality.yml` propone repetir la validación estática en GitHub Actions al guardar cambios; su ejecución en GitHub debe comprobarse tras publicar.

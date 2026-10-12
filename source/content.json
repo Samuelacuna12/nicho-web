@@ -1,0 +1,377 @@
+{
+  "cases": [
+    {
+      "slug": "invicto-ops",
+      "name": "INVICTO OPS",
+      "headline": "Miles de movimientos. Una sola operación.",
+      "status": "SISTEMA EN EVOLUCIÓN",
+      "intro": "Arquitectura operativa para un negocio de comercio electrónico: pedidos, inventario, logística, clientes y seguimiento comercial conectados para trabajar con mayor claridad.",
+      "problem": "Las ventas no terminan cuando entra un pedido. Entre Shopify, bodegas, inventario, guías, despachos y devoluciones, la información puede quedar repartida en demasiados lugares.",
+      "solution": "Un entorno de control donde el equipo puede consultar el recorrido del pedido, asignar responsables, analizar estados y operar inventario sin perder el contexto comercial.",
+      "features": [
+        [
+          "Pedidos y borradores",
+          "Sincronización y seguimiento de pedidos y borradores comerciales, con atención al control de duplicados."
+        ],
+        [
+          "Inventario y reservas",
+          "Consulta de productos por talla, diseños y ubicaciones; reservas, liberaciones y alertas de disponibilidad."
+        ],
+        [
+          "Logística y novedades",
+          "Despachos, guías, entregas, devoluciones, garantías e incidencias registradas para dar seguimiento."
+        ],
+        [
+          "Operación por roles",
+          "Accesos y responsabilidades diferenciadas para personas y áreas de trabajo."
+        ],
+        [
+          "Datos y tableros",
+          "Indicadores de confirmación, ventas, entregas, recaudo y estados operativos."
+        ],
+        [
+          "Asistencia con IA",
+          "Línea de trabajo para analizar prioridades, bloqueos y situaciones frecuentes con permisos definidos."
+        ]
+      ],
+      "steps": [
+        "Entrada y sincronización del pedido",
+        "Revisión de inventario y confirmación",
+        "Asignación y gestión de despacho",
+        "Seguimiento de entrega o novedad",
+        "Análisis comercial y operativo"
+      ],
+      "result": "La propuesta reúne las etapas de un pedido en un mismo recorrido operativo. No publicamos cifras de rendimiento ni métricas internas sin autorización.",
+      "tags": [
+        "Shopify",
+        "Inventario",
+        "Logística",
+        "CRM",
+        "Dashboards"
+      ]
+    },
+    {
+      "slug": "restoops",
+      "name": "RESTOOPS",
+      "headline": "De cada ingrediente a cada decisión.",
+      "status": "SISTEMA FUNCIONAL EN EVOLUCIÓN",
+      "intro": "Sistema multirrestaurante para convertir ingredientes, recetas, comandas, inventario, ventas y presupuesto en información práctica para administrar mejor la cocina y el negocio.",
+      "problem": "En un restaurante, el costo de cada receta cambia. Sin control de ingredientes, ventas y movimientos de caja, conocer la utilidad real se vuelve una tarea manual e incierta.",
+      "solution": "Un sistema para costear ingredientes y platos, registrar ventas o comandas, proyectar producción, controlar inventario y consultar resultados por restaurante y por fecha.",
+      "features": [
+        [
+          "Ingredientes",
+          "Compra, unidad de medida, costo base y normalización de cantidades para recetas."
+        ],
+        [
+          "Platos y bebidas",
+          "Recetas editables y consumo exacto de ingredientes, con empaques y costos variables."
+        ],
+        [
+          "Costeo y rentabilidad",
+          "Food cost, margen bruto, precio sugerido y cálculo de rendimiento."
+        ],
+        [
+          "Comandas y ventas",
+          "Registro de pedidos, consulta de productos vendidos y filtros por fecha."
+        ],
+        [
+          "Inventario y proyección",
+          "Descuento por ventas, simulación de demanda y necesidades de compra."
+        ],
+        [
+          "Presupuesto y caja",
+          "Ingresos, egresos, límites por categoría, saldo por medio de pago e historial."
+        ]
+      ],
+      "steps": [
+        "Registrar compras e ingredientes",
+        "Construir recetas, platos y bebidas",
+        "Recibir la venta o comanda",
+        "Descontar inventario y calcular costos",
+        "Analizar caja y rentabilidad"
+      ],
+      "result": "RestoOps incluye un historial compartido entre dispositivos mediante sincronización y una copia local de respaldo. La información de ejemplo no representa datos de sus restaurantes.",
+      "tags": [
+        "Costeo",
+        "Recetas",
+        "Inventario",
+        "Comandas",
+        "Supabase"
+      ]
+    },
+    {
+      "slug": "luminari",
+      "name": "LUMINARI",
+      "headline": "La complejidad del proyecto. Bajo control.",
+      "status": "DESARROLLO EN CURSO",
+      "intro": "Plataforma de gestión para una operación de iluminación que reúne clientes, cotizaciones, ventas, tareas y seguimiento de proyectos en un espacio propio.",
+      "problem": "La atención al cliente, las propuestas personalizadas y las ventas pueden quedar repartidas entre archivos, conversaciones y reportes sin una visión común.",
+      "solution": "Un entorno para estructurar la relación comercial desde el primer contacto hasta la cotización y el seguimiento, con indicadores y tareas que facilitan la coordinación.",
+      "features": [
+        [
+          "CRM de clientes",
+          "Ficha comercial, historial, datos de contacto y seguimiento de oportunidades."
+        ],
+        [
+          "Cotizaciones personalizadas",
+          "Generación de propuestas, ítems cotizados, valores y condiciones de cada proyecto."
+        ],
+        [
+          "Ventas y tableros",
+          "Visualización de actividad comercial, movimientos e indicadores del negocio."
+        ],
+        [
+          "Tareas y agenda",
+          "Organización de pendientes, próximos pasos y responsabilidades."
+        ],
+        [
+          "Gestión de proyectos",
+          "Estado de encargos y seguimiento de trabajos de iluminación."
+        ],
+        [
+          "Inventario y finanzas",
+          "Módulos previstos o desarrollados por etapas, vinculados a necesidades operativas."
+        ]
+      ],
+      "steps": [
+        "Registrar la oportunidad",
+        "Conocer las especificaciones del proyecto",
+        "Preparar y presentar cotización",
+        "Organizar seguimiento y tareas",
+        "Registrar venta y avances"
+      ],
+      "result": "Luminari se presenta como desarrollo en curso. Las visualizaciones de esta página son recreaciones del alcance funcional, no una certificación de módulos terminados.",
+      "tags": [
+        "CRM",
+        "Cotizaciones",
+        "Dashboard",
+        "Agenda",
+        "Proyectos"
+      ]
+    },
+    {
+      "slug": "plataforma-seguros",
+      "name": "PLATAFORMA SEGUROS",
+      "headline": "Una operación aseguradora. Más conectada.",
+      "status": "PRODUCTO EN DESARROLLO",
+      "intro": "Sistema especializado en gestión de clientes, oportunidades, cotizaciones, renovaciones, comunicaciones y reportes para equipos comerciales de seguros.",
+      "problem": "Las renovaciones, vencimientos, cotizaciones y seguimientos requieren fechas, datos y acciones coordinadas. Administrar todo de forma dispersa incrementa el riesgo de perder oportunidades.",
+      "solution": "Diseño de una plataforma sectorial para centralizar clientes, controlar etapas del CRM, organizar renovaciones y conectar comunicaciones con herramientas de cotización.",
+      "features": [
+        [
+          "Clientes y pólizas",
+          "Expedientes de clientes e información relevante para la gestión aseguradora."
+        ],
+        [
+          "Pipeline y CRM",
+          "Etapas comerciales, oportunidades y responsables de seguimiento."
+        ],
+        [
+          "Renovaciones y recordatorios",
+          "Avisos sobre vencimientos, tareas y fechas importantes."
+        ],
+        [
+          "Cotizaciones conectadas",
+          "Conexiones a APIs de proveedores donde exista compatibilidad y autorización."
+        ],
+        [
+          "Comunicaciones",
+          "Integraciones de mensajería y campañas sujetas a las políticas del canal."
+        ],
+        [
+          "Reportes y documentos",
+          "Indicadores, propuestas y cotizaciones exportables según el alcance implementado."
+        ]
+      ],
+      "steps": [
+        "Captar y registrar oportunidad",
+        "Revisar necesidades y cobertura",
+        "Preparar cotización",
+        "Dar seguimiento comercial",
+        "Gestionar renovación y continuidad"
+      ],
+      "result": "Presentamos un producto sectorial en desarrollo. Las conexiones externas y funciones avanzadas deben validarse durante cada implementación.",
+      "tags": [
+        "Seguros",
+        "CRM",
+        "Renovaciones",
+        "API",
+        "Reportes"
+      ]
+    },
+    {
+      "slug": "agentes-ia",
+      "name": "AGENTES COMERCIALES IA",
+      "headline": "Conversaciones que activan procesos.",
+      "status": "SOLUCIONES PERSONALIZADAS",
+      "intro": "Agentes conversacionales para atención, calificación, asistencia comercial, seguimiento y transferencia humana, integrados a los canales y reglas de cada marca.",
+      "problem": "Responder preguntas repetidas, identificar al prospecto correcto y mantener seguimiento consume gran parte del tiempo comercial, especialmente cuando llegan contactos por varios canales.",
+      "solution": "Flujos de IA que interpretan intención, presentan información, recogen datos relevantes, derivan a personas y conectan tareas del negocio con un CRM cuando corresponde.",
+      "features": [
+        [
+          "Atención contextual",
+          "Respuestas basadas en productos, políticas y conocimiento autorizado del negocio."
+        ],
+        [
+          "Calificación comercial",
+          "Preguntas útiles para identificar la necesidad y priorizar oportunidades."
+        ],
+        [
+          "Seguimiento y CRM",
+          "Asignación de etiquetas, etapas, tareas y registro de contexto cuando exista integración."
+        ],
+        [
+          "Canales conversacionales",
+          "WhatsApp y canales de Meta, según permisos, APIs y políticas vigentes."
+        ],
+        [
+          "Asesor humano",
+          "Escalamiento cuando se requieren excepciones, cierre o revisión personalizada."
+        ],
+        [
+          "Medición y mejora",
+          "Revisión de conversaciones, puntos de abandono y calidad de respuesta."
+        ]
+      ],
+      "steps": [
+        "Recibir conversación",
+        "Entender intención y contexto",
+        "Asesorar o calificar",
+        "Registrar y activar siguiente acción",
+        "Escalar o continuar seguimiento"
+      ],
+      "result": "Los agentes se configuran individualmente para cada negocio. No todos los despliegues incluyen las mismas integraciones o grados de autonomía.",
+      "tags": [
+        "WhatsApp",
+        "CRM",
+        "Meta",
+        "Automatizaciones",
+        "IA"
+      ]
+    },
+    {
+      "slug": "cuentas-carlos",
+      "name": "CUENTAS CARLOS",
+      "headline": "Cada entrega. Cada pago. Cada saldo.",
+      "status": "HERRAMIENTA INDEPENDIENTE",
+      "intro": "Herramienta independiente para llevar la relación de cuenta corriente con un proveedor, documentando consignaciones, mercancía, tarifas y saldos de una manera más comprensible.",
+      "problem": "Cuando los movimientos de mercancía y dinero se registran en diferentes lugares, conciliar cantidades, productos y pagos se vuelve una tarea lenta y propensa a errores.",
+      "solution": "Una interfaz para registrar entradas de mercancía con desglose, consignaciones y soportes, calculando los movimientos de la cuenta desde un historial organizado.",
+      "features": [
+        [
+          "Entregas detalladas",
+          "Registro de producto, material, tallas y cantidades recibidas."
+        ],
+        [
+          "Tarifas por referencia",
+          "Cálculos de valor según producto y características."
+        ],
+        [
+          "Consignaciones",
+          "Registro de pagos y abonos vinculados al historial."
+        ],
+        [
+          "Saldo automático",
+          "Diferencia entre valores de mercancía y consignaciones registradas."
+        ],
+        [
+          "Soportes e historial",
+          "Movimientos documentados con filtros y consulta."
+        ],
+        [
+          "Reportes",
+          "Exportación e importación según formato y capacidades del sistema."
+        ]
+      ],
+      "steps": [
+        "Registrar entrega o movimiento",
+        "Especificar referencias y cantidades",
+        "Aplicar tarifa y calcular valor",
+        "Registrar pagos o abonos",
+        "Conciliar historial y saldo"
+      ],
+      "result": "Cuentas Carlos es un proyecto separado de Invicto OPS, sin usuarios ni roles de acceso en su planteamiento actual. No se muestran saldos históricos inventados.",
+      "tags": [
+        "Proveedores",
+        "Historial",
+        "Conciliación",
+        "Soportes"
+      ]
+    }
+  ],
+  "articles": [
+    {
+      "slug": "software-a-medida-o-saas",
+      "name": "¿Software a medida o SaaS? Cómo decidir",
+      "intro": "Un sistema propio no siempre es mejor que contratar una herramienta. La decisión depende de la operación, las integraciones, el costo total y los objetivos.",
+      "description": "Compara software a medida y SaaS: costos, personalización, integraciones, seguridad y decisiones útiles para tu empresa.",
+      "sections": [
+        [
+          "Empieza por el proceso, no por el producto",
+          "El software como servicio (SaaS) suele ofrecer funciones estandarizadas y mantenimiento administrado por su proveedor. Un sistema a medida se diseña alrededor de necesidades específicas, pero necesita presupuesto de desarrollo y mantenimiento. Si una herramienta existente ya resuelve tus problemas, puede ser más conveniente integrarla que reemplazarla."
+        ],
+        [
+          "Cuándo elegir SaaS",
+          "Si los flujos de tu negocio son similares a los de otras empresas, buscas implementar rápidamente y las integraciones disponibles cubren tus necesidades, un SaaS puede ser el punto de partida más eficiente. Evalúa el costo por usuario, las limitaciones de exportación, el soporte, la seguridad y los módulos adicionales."
+        ],
+        [
+          "Cuándo crear software propio",
+          "Si repites información en varias herramientas, dependes de procesos manuales o una parte esencial de tu operación no encaja en un sistema genérico, puede justificarse un desarrollo personalizado. A veces la mejor opción es híbrida: mantener las herramientas que ya funcionan y desarrollar solo la pieza que falta."
+        ],
+        [
+          "Antes de decidir",
+          "Identifica el proceso más costoso o lento, cuántas personas lo usan, qué datos necesita y qué se debe integrar. Calcula el costo total de propiedad y diseña un alcance inicial que se pueda validar antes de invertir en todo un sistema."
+        ]
+      ]
+    },
+    {
+      "slug": "agentes-ia-ventas",
+      "name": "Agentes IA en ventas: qué hacer y qué evitar",
+      "intro": "Un agente comercial útil no es el que más mensajes envía, sino el que ayuda al equipo a atender, priorizar y registrar mejor cada oportunidad.",
+      "description": "Aprende cómo usar agentes de IA para calificar clientes, apoyar seguimiento de ventas e integrar procesos empresariales.",
+      "sections": [
+        [
+          "Atender no es lo mismo que vender",
+          "Una respuesta rápida puede ayudar, pero no garantiza una compra. El proceso requiere entender la intención del cliente, comprobar necesidades y decidir cuál debe ser el siguiente paso. Por eso los agentes se diseñan junto al proceso comercial, no como una pieza aislada."
+        ],
+        [
+          "Tres usos empresariales",
+          "Un agente puede recibir y clasificar consultas, realizar preguntas para calificar oportunidades y registrar acciones en un CRM, siempre que tenga permisos y herramientas adecuadas. También puede ayudar a programar seguimiento dentro de las condiciones de cada canal."
+        ],
+        [
+          "Límites, contexto y supervisión",
+          "Los agentes deben saber cuándo abstenerse de responder y cuándo escalar a una persona. La información sensible, las excepciones contractuales y los cambios de datos importantes requieren controles. El agente no debería recibir más permisos de los necesarios."
+        ],
+        [
+          "Cómo evaluar resultados",
+          "Conviene medir primera respuesta, registros completos, derivaciones útiles y avances de etapa; revisar conversaciones con autorización y corregir errores de forma iterativa. Un agente que no puede auditarse no está listo para procesos importantes."
+        ]
+      ]
+    },
+    {
+      "slug": "automatizacion-comercial",
+      "name": "Cómo automatizar procesos comerciales sin perder el control",
+      "intro": "Automatizar no significa enviar mensajes sin contexto. Significa llevar la información a la persona correcta y activar acciones útiles en cada etapa.",
+      "description": "Guía para automatizar procesos de ventas con CRM, seguimiento, responsables, integraciones y medición sin perder el control.",
+      "sections": [
+        [
+          "Mapea el recorrido del cliente",
+          "Revisa cómo llegan las oportunidades, quién responde, qué datos se recopilan, cómo se asignan las tareas y cuándo se cierra una venta. Muchas pérdidas ocurren en los traspasos entre equipos."
+        ],
+        [
+          "Empieza por tareas repetitivas",
+          "Registrar formularios, asignar responsables, crear recordatorios y actualizar estados son procesos frecuentes con reglas claras. Es preferible estabilizar estos flujos antes de intentar automatizar cada excepción."
+        ],
+        [
+          "Integra con criterio",
+          "Antes de sustituir sistemas revisa sus APIs y permisos. Una integración confiable necesita controlar errores, duplicados, privacidad y trazabilidad. El flujo debe seguir funcionando cuando una parte externa falle."
+        ],
+        [
+          "Mide antes y después",
+          "Define indicadores iniciales: tiempos, oportunidades sin seguimiento, errores y esfuerzo manual. Luego compara resultados reales. El éxito de la automatización se evalúa por la operación que mejora, no por el número de herramientas instaladas."
+        ]
+      ]
+    }
+  ]
+}

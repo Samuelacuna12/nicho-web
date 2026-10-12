@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /tools/
+Disallow: /qa/
 
 Sitemap: https://nichoagenciadigital.com/sitemap.xml

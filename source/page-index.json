@@ -1,0 +1,127 @@
+{
+  "index.html": {
+    "title": "Software a medida y agentes IA | Nicho Agencia Digital",
+    "description": "Creamos sistemas empresariales, agentes IA y automatizaciones a medida. Nicho Agencia Digital: desde Bucaramanga para Colombia y Latinoamérica.",
+    "kind": "WebPage"
+  },
+  "portafolio.html": {
+    "title": "Proyectos de software, sistemas e IA | Nicho Agencia Digital",
+    "description": "Portafolio de Nicho Agencia Digital: Invicto OPS, RestoOps, Luminari, agentes IA, plataforma para seguros y control de proveedores.",
+    "kind": "CollectionPage"
+  },
+  "portafolio/invicto-ops.html": {
+    "title": "Invicto OPS — Caso de estudio | Nicho Agencia Digital",
+    "description": "Arquitectura operativa para un negocio de comercio electrónico: pedidos, inventario, logística, clientes y seguimiento comercial conectados para trabajar con mayor claridad.",
+    "kind": "Case"
+  },
+  "portafolio/restoops.html": {
+    "title": "RestoOps — Caso de estudio | Nicho Agencia Digital",
+    "description": "Sistema multirrestaurante para convertir ingredientes, recetas, comandas, inventario, ventas y presupuesto en información práctica para administrar mejor la cocina y el negocio.",
+    "kind": "Case"
+  },
+  "portafolio/luminari.html": {
+    "title": "Luminari — Caso de estudio | Nicho Agencia Digital",
+    "description": "Plataforma de gestión para una operación de iluminación que reúne clientes, cotizaciones, ventas, tareas y seguimiento de proyectos en un espacio propio.",
+    "kind": "Case"
+  },
+  "portafolio/plataforma-seguros.html": {
+    "title": "Plataforma para seguros — Caso de estudio | Nicho Agencia Digital",
+    "description": "Sistema especializado en gestión de clientes, oportunidades, cotizaciones, renovaciones, comunicaciones y reportes para equipos comerciales de seguros.",
+    "kind": "Case"
+  },
+  "portafolio/agentes-ia.html": {
+    "title": "Agentes comerciales IA — Caso de estudio | Nicho Agencia Digital",
+    "description": "Agentes conversacionales para atención, calificación, asistencia comercial, seguimiento y transferencia humana, integrados a los canales y reglas de cada marca.",
+    "kind": "Case"
+  },
+  "portafolio/cuentas-carlos.html": {
+    "title": "Cuentas Carlos — Caso de estudio | Nicho Agencia Digital",
+    "description": "Herramienta independiente para llevar la relación de cuenta corriente con un proveedor, documentando consignaciones, mercancía, tarifas y saldos de una manera más comprensible.",
+    "kind": "Case"
+  },
+  "sistemas.html": {
+    "title": "Software a medida para empresas | Nicho Agencia Digital",
+    "description": "Desarrollo de software empresarial a medida: CRM, inventarios, pedidos, cotizaciones e integraciones para empresas de Colombia y Latinoamérica.",
+    "kind": "Service"
+  },
+  "agentes-ia.html": {
+    "title": "Agentes de IA para ventas y atención | Nicho Agencia Digital",
+    "description": "Agentes de inteligencia artificial para ventas, atención y seguimiento. Conectamos conversaciones con procesos, CRM y supervisión humana.",
+    "kind": "Service"
+  },
+  "automatizaciones.html": {
+    "title": "Automatización de procesos y ventas | Nicho Agencia Digital",
+    "description": "Automatización de procesos comerciales, captación, CRM, seguimiento y reportes. Conectamos las herramientas y equipos de tu empresa.",
+    "kind": "Service"
+  },
+  "desarrollo-web.html": {
+    "title": "Desarrollo web y plataformas empresariales | Nicho Agencia Digital",
+    "description": "Webs corporativas y plataformas personalizadas con diseño, accesibilidad, velocidad y SEO técnico. Desarrollo web para empresas de Latinoamérica.",
+    "kind": "Service"
+  },
+  "crm-personalizado.html": {
+    "title": "CRM personalizado para empresas | Nicho Agencia Digital",
+    "description": "CRM a medida para clientes, oportunidades, tareas y reportes. Integramos el seguimiento comercial con la operación de tu empresa.",
+    "kind": "Service"
+  },
+  "whatsapp-api-empresas.html": {
+    "title": "WhatsApp API para empresas y agentes IA | Nicho Agencia Digital",
+    "description": "Integramos WhatsApp Business Platform con agentes IA, CRM y flujos comerciales. Viabilidad, permisos y políticas se revisan antes de implementar.",
+    "kind": "Service"
+  },
+  "soluciones.html": {
+    "title": "Soluciones de software e IA para empresas | Nicho Agencia Digital",
+    "description": "Sistemas a medida, CRM, agentes IA, automatización de procesos y desarrollo web. Encuentra la solución que necesita tu empresa.",
+    "kind": "CollectionPage"
+  },
+  "metodologia.html": {
+    "title": "Método para desarrollar software a medida | Nicho Agencia Digital",
+    "description": "Diagnóstico, diseño, desarrollo, pruebas y evolución. Conoce cómo organizamos los proyectos de software, IA y automatización en Nicho.",
+    "kind": "WebPage"
+  },
+  "nosotros.html": {
+    "title": "Nicho Agencia Digital | Estudio de software e inteligencia artificial",
+    "description": "Conoce a Nicho Agencia Digital. Desarrollamos sistemas, agentes IA y automatizaciones desde Bucaramanga para empresas de Colombia y Latinoamérica.",
+    "kind": "AboutPage"
+  },
+  "bucaramanga.html": {
+    "title": "Software a medida e IA en Bucaramanga | Nicho Agencia Digital",
+    "description": "Nicho Agencia Digital en Bucaramanga: software a medida, agentes IA y automatizaciones. Carrera 29 #39-39, La Aurora, oficina 01.",
+    "kind": "WebPage"
+  },
+  "contacto.html": {
+    "title": "Contacto y proyectos | Nicho Agencia Digital",
+    "description": "Habla con Nicho Agencia Digital sobre software, agentes IA y automatizaciones. WhatsApp +57 302 828 9997. Sede en Bucaramanga.",
+    "kind": "ContactPage"
+  },
+  "recursos/software-a-medida-o-saas.html": {
+    "title": "¿Software a medida o SaaS? Cómo decidir | Nicho Agencia Digital",
+    "description": "Compara software a medida y SaaS: costos, personalización, integraciones, seguridad y decisiones útiles para tu empresa.",
+    "kind": "Article"
+  },
+  "recursos/agentes-ia-ventas.html": {
+    "title": "Agentes IA en ventas: qué hacer y qué evitar | Nicho Agencia Digital",
+    "description": "Aprende cómo usar agentes de IA para calificar clientes, apoyar seguimiento de ventas e integrar procesos empresariales.",
+    "kind": "Article"
+  },
+  "recursos/automatizacion-comercial.html": {
+    "title": "Automatización de ventas: guía práctica | Nicho Agencia Digital",
+    "description": "Guía para automatizar procesos de ventas con CRM, seguimiento, responsables, integraciones y medición sin perder el control.",
+    "kind": "Article"
+  },
+  "recursos.html": {
+    "title": "Guías de software, automatización e IA | Nicho Agencia Digital",
+    "description": "Ideas prácticas sobre software a medida, SaaS, agentes IA y procesos comerciales. Guías para tomar decisiones tecnológicas con criterio.",
+    "kind": "CollectionPage"
+  },
+  "privacidad.html": {
+    "title": "Privacidad y contacto sobre datos | Nicho Agencia Digital",
+    "description": "Información sobre canales de contacto, formulario, analítica desactivada y solicitudes de privacidad en Nicho Agencia Digital.",
+    "kind": "WebPage"
+  },
+  "404.html": {
+    "title": "Página no encontrada | Nicho Agencia Digital",
+    "description": "La página solicitada no está disponible. Explora los sistemas y soluciones de Nicho Agencia Digital.",
+    "kind": "WebPage"
+  }
+}
