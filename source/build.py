@@ -223,3 +223,8 @@ f=SITE/'404.html';s=f.read_text();s=re.sub(r'(href|src)="(?!https?:|mailto:|tel:
 (SITE/'site.webmanifest').write_text(json.dumps({'name':BRAND,'short_name':'Nicho','start_url':'/','scope':'/','display':'browser','theme_color':'#070808','background_color':'#ffffff','icons':[{'src':'/apple-touch-icon.png','sizes':'180x180','type':'image/png'},{'src':'/icon-512.png','sizes':'512x512','type':'image/png','purpose':'any'}]},ensure_ascii=False))
 (ROOT/'source/page-index.json').write_text(json.dumps(ALL,ensure_ascii=False,indent=2))
 print('Generated',len(pages),'pages; indexable',len(pages)-1)
+
+# KINETIC_PRODUCTION_HOOK
+if (SITE/'qa/exploracion-kinetic.html').is_file():
+ import runpy
+ runpy.run_path(str(ROOT/'source/promote_kinetic.py'))['apply'](SITE)

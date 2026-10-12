@@ -2,5 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /tools/
 Disallow: /qa/
+Allow: /qa/exploracion-kinetic.html
 
 Sitemap: https://nichoagenciadigital.com/sitemap.xml
