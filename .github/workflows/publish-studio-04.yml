@@ -1,0 +1,111 @@
+name: Publicar entrega NICHO Studio 04
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/publish-studio-04.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: nicho-import-studio-04
+  cancel-in-progress: false
+jobs:
+  import-release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Obtener repositorio
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Verificar revision original
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE=7719cde2d4c4452dccac9d32ba0d8072d51ca78b
+          git merge-base --is-ancestor "$BASE" HEAD
+          UNEXPECTED=$(git diff --name-only "$BASE" HEAD -- . ':!.github/workflows/publish-studio-04.yml')
+          if [ -n "$UNEXPECTED" ]; then
+            echo 'El repositorio contiene cambios posteriores a la entrega. Se requiere conciliacion.'
+            printf '%s\n' "$UNEXPECTED"
+            exit 1
+          fi
+      - name: Descargar y verificar el paquete autorizado
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import hashlib, io, pathlib, stat, time, urllib.request, zipfile
+          expected='e0aa579f24b1c313e222bd8989ce7ae235a4a3001fecef7a57e2009941c8b3cb'
+          fid='1BiHJvwhSuCf7qSsZBrCfysXyX4QbX54i'
+          urls=[f'https://drive.usercontent.google.com/download?id={fid}&export=download&confirm=t',f'https://drive.google.com/uc?export=download&id={fid}&confirm=t']
+          data=None
+          for url in urls:
+              for attempt in range(3):
+                  try:
+                      req=urllib.request.Request(url,headers={'User-Agent':'NICHO-Release-Publisher/1.0'})
+                      with urllib.request.urlopen(req,timeout=90) as response:
+                          candidate=response.read(12000000)
+                      if hashlib.sha256(candidate).hexdigest()!=expected:
+                          raise RuntimeError('La descarga no coincide con el SHA-256 de la entrega')
+                      data=candidate
+                      break
+                  except Exception as exc:
+                      print(type(exc).__name__,str(exc)[:250])
+                      time.sleep(3)
+              if data is not None:
+                  break
+          if data is None:
+              raise SystemExit('No fue posible obtener el paquete verificado; no se modifico la web')
+          archive=zipfile.ZipFile(io.BytesIO(data))
+          prefix='NICHO-Agencia-Digital-Entrega/'
+          assert archive.read(prefix+'BASE-REVISION.txt').decode().strip()=='7719cde2d4c4452dccac9d32ba0d8072d51ca78b'
+          assert archive.read(prefix+'site/CNAME').decode().strip()=='nichoagenciadigital.com'
+          destinations={}
+          for item in archive.infolist():
+              if item.is_dir():
+                  continue
+              name=pathlib.PurePosixPath(item.filename)
+              if name.is_absolute() or '..' in name.parts or stat.S_ISLNK(item.external_attr >> 16):
+                  raise SystemExit('Ruta insegura en el paquete')
+              if item.filename.startswith(prefix+'site/'):
+                  relative=item.filename[len(prefix+'site/'):]
+                  if relative.startswith('.github/'):
+                      continue
+              elif item.filename.startswith(prefix+'source/') or item.filename.startswith(prefix+'docs/'):
+                  relative=item.filename[len(prefix):]
+              else:
+                  continue
+              if pathlib.PurePosixPath(relative).suffix.lower() in ('.ttf','.otf','.woff','.woff2'):
+                  raise SystemExit('La entrega no debe redistribuir fuentes')
+              if relative in destinations:
+                  raise SystemExit('Ruta duplicada en la entrega')
+              destinations[relative]=archive.read(item)
+          assert len(destinations)==61, len(destinations)
+          root=pathlib.Path.cwd().resolve()
+          for relative,content in destinations.items():
+              target=root/relative
+              if not target.resolve().is_relative_to(root) or target.is_symlink():
+                  raise SystemExit('Destino inseguro')
+              target.parent.mkdir(parents=True,exist_ok=True)
+              target.write_bytes(content)
+          print('Entrega verificada e importada:',len(destinations),'archivos')
+          PY
+      - name: Validar paginas y SEO
+        run: |
+          python3 tools/check_site.py . --json /tmp/nicho-static-report.json
+          node --check assets/js/app.js
+          node --check assets/js/wordmark.js
+          node --check assets/js/wordmark-data.js
+      - name: Guardar la nueva version sin reescribir historial
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add --all
+          git diff --cached --stat
+          if ! git diff --cached --quiet; then
+            git commit -m 'feat: publicar entrega completa NICHO Studio 04 con 3D, portafolio y SEO validado'
+            git push origin HEAD:main
+          fi
+          git rev-parse HEAD
