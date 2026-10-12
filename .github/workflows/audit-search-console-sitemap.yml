@@ -1,0 +1,52 @@
+name: Diagnosticar acceso público al sitemap
+on:
+  push:
+    branches: [audit/search-console-sitemap-20261012]
+    paths: [.github/workflows/audit-search-console-sitemap.yml]
+permissions:
+  contents: read
+jobs:
+  public-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Comprobar DNS, HTTPS, XML y reglas de rastreo sin modificar la web
+        run: |
+          python3 - <<'PY'
+          import concurrent.futures,datetime,json,socket,urllib.request,urllib.error,urllib.robotparser,xml.etree.ElementTree as ET
+          DOMAIN='nichoagenciadigital.com'
+          urls=['https://'+DOMAIN+'/sitemap.xml','https://'+DOMAIN+'/robots.txt','https://'+DOMAIN+'/','https://www.'+DOMAIN+'/sitemap.xml']
+          def probe(url):
+              result={'url':url}
+              try:
+                  request=urllib.request.Request(url,headers={'User-Agent':'NICHO-Sitemap-Availability-Audit/1.0'})
+                  with urllib.request.urlopen(request,timeout=20) as response:
+                      data=response.read(2000000)
+                      result.update(status=response.status,final_url=response.url,headers={k:v for k,v in response.headers.items() if k.lower() in ['content-type','x-robots-tag','server','date','cache-control','age','location']},bytes=len(data))
+                      if url.endswith('/sitemap.xml'):
+                          tree=ET.fromstring(data)
+                          ns='{http://www.sitemaps.org/schemas/sitemap/0.9}'
+                          locations=[e.text for e in tree.findall(ns+'url/'+ns+'loc')]
+                          result.update(xml_valid=True,correct_namespace=tree.tag==ns+'urlset',url_count=len(locations),unique_urls=len(set(locations)),same_domain=all(u.startswith('https://'+DOMAIN+'/') for u in locations),first_url=locations[0] if locations else None)
+                      elif url.endswith('/robots.txt'):
+                          text=data.decode('utf-8');p=urllib.robotparser.RobotFileParser();p.parse(text.splitlines())
+                          result.update(body=text,sitemap_allowed_for_googlebot=p.can_fetch('Googlebot','https://'+DOMAIN+'/sitemap.xml'))
+                      else:result['is_html']=b'<html' in data.lower()
+              except Exception as exc:
+                  result['error']=str(exc)
+              return result
+          def dns(qtype):
+              result={'type':qtype}
+              try:
+                  url='https://dns.google/resolve?name='+DOMAIN+'&type='+qtype
+                  with urllib.request.urlopen(url,timeout=15) as r: data=json.load(r)
+                  result.update(status=data.get('Status'),answer=data.get('Answer',[]),authority=data.get('Authority',[]))
+              except Exception as exc:result['error']=str(exc)
+              return result
+          with concurrent.futures.ThreadPoolExecutor(max_workers=6) as ex:
+              responses=list(ex.map(probe,urls));dns_results=list(ex.map(dns,['A','AAAA','CAA','NS']))
+          report={'checked_at_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'scope':'Read-only probes from a GitHub runner, not a Google Search Console crawl','responses':responses,'public_dns':dns_results}
+          print('NICHO_PUBLIC_SITEMAP_AUDIT_START')
+          print(json.dumps(report,ensure_ascii=False,indent=2))
+          print('NICHO_PUBLIC_SITEMAP_AUDIT_END')
+          PY
