@@ -1,0 +1,175 @@
+name: Publicar KINETIC en el dominio principal
+on:
+  push:
+    branches: [main]
+    paths: ['source/promote_kinetic.py', '.github/workflows/kinetic-production.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: nicho-kinetic-production
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Obtener la revision autorizada
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Proteger cambios concurrentes y conservar las rutas
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE=9886f0a3ff3a467959514801d8f7b722259a8f6e
+          git merge-base --is-ancestor "$BASE" HEAD
+          OTHER=$(git diff --name-only "$BASE" HEAD -- . ':!source/promote_kinetic.py' ':!.github/workflows/kinetic-production.yml')
+          if [ -n "$OTHER" ]; then
+            echo 'Hay cambios posteriores que requieren conciliacion; no se publica.'
+            printf '%s\n' "$OTHER"
+            exit 1
+          fi
+          cp sitemap.xml /tmp/nicho-before-sitemap.xml
+          cp CNAME /tmp/nicho-before-CNAME
+      - name: Preparar pruebas de navegador
+        run: |
+          python3 -m pip install beautifulsoup4 playwright
+          python3 -m playwright install --with-deps chromium
+      - name: Integrar diseno KINETIC y SEO de produccion
+        run: |
+          python3 source/promote_kinetic.py .
+          python3 tools/check_site.py . --json /tmp/nicho-kinetic-static.json
+          node --check assets/js/kinetic-home.js
+          python3 - <<'PY'
+          from pathlib import Path
+          from bs4 import BeautifulSoup
+          import xml.etree.ElementTree as ET
+          before={x.text for x in ET.parse('/tmp/nicho-before-sitemap.xml').getroot().findall('{*}url/{*}loc')}
+          after={x.text for x in ET.parse('sitemap.xml').getroot().findall('{*}url/{*}loc')}
+          assert before==after and len(after)==24
+          assert Path('CNAME').read_bytes()==Path('/tmp/nicho-before-CNAME').read_bytes()
+          s=BeautifulSoup(Path('index.html').read_text(),'html.parser')
+          assert s.select_one('meta[name=robots]')['content']=='index,follow,max-image-preview:large'
+          assert s.select_one('link[rel=canonical]')['href']=='https://nichoagenciadigital.com/'
+          assert len(s.select('.project-case[href]'))==6
+          assert 'noindex,nofollow' in Path('qa/exploracion-kinetic.html').read_text()
+          print('SEO: 24 rutas conservadas, 6 enlaces de casos presentes en HTML, portada indexable.')
+          PY
+      - name: Probar movimiento, movil y acceso sin JavaScript
+        run: |
+          python3 - <<'PY'
+          import functools,json,threading
+          from pathlib import Path
+          from http.server import ThreadingHTTPServer,SimpleHTTPRequestHandler
+          from playwright.sync_api import sync_playwright
+          class Quiet(SimpleHTTPRequestHandler):
+              def log_message(self,*args): pass
+          server=ThreadingHTTPServer(('127.0.0.1',8805),functools.partial(Quiet,directory=str(Path.cwd())))
+          threading.Thread(target=server.serve_forever,daemon=True).start()
+          out=Path('/tmp/nicho-kinetic-browser');out.mkdir(exist_ok=True)
+          reports=[]
+          with sync_playwright() as p:
+              browser=p.chromium.launch(headless=True,args=['--no-sandbox'])
+              for width,height in [(1440,960),(1024,768),(390,844),(320,740)]:
+                  page=browser.new_page(viewport={'width':width,'height':height});errors=[];missing=[]
+                  page.on('pageerror',lambda e:errors.append(str(e)))
+                  page.on('response',lambda r:missing.append([r.url,r.status]) if r.status>=400 else None)
+                  page.goto('http://127.0.0.1:8805/',wait_until='networkidle');page.wait_for_timeout(1600)
+                  page.screenshot(path=str(out/f'home-{width}.png'))
+                  overflow=[]
+                  for sel in ['.hero','.intro','.projects','.process-frame','.services','.knowledge','.questions','.closing']:
+                      page.locator(sel).scroll_into_view_if_needed();page.wait_for_timeout(180)
+                      n=page.evaluate('document.documentElement.scrollWidth-innerWidth')
+                      if n>1: overflow.append([sel,n])
+                  page.locator('#proyectos').scroll_into_view_if_needed();page.wait_for_timeout(800)
+                  page.locator('#motion').click();page.wait_for_timeout(250)
+                  before=page.locator('#project-title').inner_text()
+                  page.locator('#next').click();page.wait_for_timeout(900)
+                  assert page.locator('#project-title').inner_text()!=before
+                  page.locator('.questions summary').first.click()
+                  assert page.locator('.questions details').first.get_attribute('open') is not None
+                  if width<=700:
+                      page.locator('.mobile-nav summary').click()
+                      assert page.locator('.mobile-nav').get_attribute('open') is not None
+                      page.keyboard.press('Escape')
+                      assert page.locator('.mobile-nav').get_attribute('open') is None
+                  assert page.locator('meta[name=robots]').get_attribute('content')=='index,follow,max-image-preview:large'
+                  record={'width':width,'javascript_errors':errors,'http_errors':missing,'overflow':overflow,'carousel_and_faq':True}
+                  reports.append(record)
+                  assert not errors and not missing and not overflow,record
+                  page.close()
+              for width in [390,1440]:
+                  page=browser.new_page(viewport={'width':width,'height':900},java_script_enabled=False)
+                  page.goto('http://127.0.0.1:8805/')
+                  assert page.locator('.project-case:visible').count()==6
+                  assert page.evaluate('document.documentElement.scrollWidth-innerWidth')<=1
+                  reports.append({'width':width,'javascript':False,'case_links_available':6})
+                  page.close()
+              page=browser.new_page(viewport={'width':390,'height':844},reduced_motion='reduce')
+              page.goto('http://127.0.0.1:8805/',wait_until='networkidle')
+              assert page.evaluate('window.NICHO_KINETIC.motion()') is False
+              reports.append({'reduced_motion_respected':True})
+              page.close();browser.close()
+          server.shutdown()
+          result={'results':reports,'errors':0}
+          (out/'report.json').write_text(json.dumps(result,indent=2))
+          print(json.dumps(result,indent=2))
+          PY
+      - name: Publicar exclusivamente los cambios comprobados
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          test "$(git rev-parse HEAD)" = "$(git rev-parse origin/main)"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html assets/css/kinetic-home.css assets/js/kinetic-home.js source/build.py robots.txt sitemap.xml
+          git diff --cached --stat
+          if ! git diff --cached --quiet; then
+            git commit -m 'design: KINETIC en la portada principal con SEO y rutas conservadas'
+            git push origin HEAD:main
+          fi
+          git rev-parse HEAD
+      - name: Comprobar la nueva portada publica por HTTPS
+        run: |
+          python3 - <<'PY'
+          import concurrent.futures,hashlib,json,time,urllib.request,xml.etree.ElementTree as ET
+          from pathlib import Path
+          DOMAIN='https://nichoagenciadigital.com'
+          def download(path):
+              req=urllib.request.Request(DOMAIN+path+'?release=kinetic-production-20261012',headers={'User-Agent':'Nicho-Publication-Check/1.0','Cache-Control':'no-cache'})
+              with urllib.request.urlopen(req,timeout=25) as r:
+                  assert r.status==200 and r.url.startswith('https://')
+                  return r.read()
+          expected=Path('index.html').read_bytes()
+          for attempt in range(36):
+              try:
+                  if download('/')==expected: break
+              except Exception as exc: print(type(exc).__name__,str(exc)[:140])
+              time.sleep(10)
+          else: raise SystemExit('La nueva portada aun no coincide con la entrega; despliegue no confirmado.')
+          urls=[x.text for x in ET.parse('sitemap.xml').getroot().findall('{*}url/{*}loc')]
+          paths=[u.removeprefix(DOMAIN) for u in urls]+['/assets/css/kinetic-home.css','/assets/js/kinetic-home.js','/robots.txt','/sitemap.xml']
+          def check(path):
+              raw=download(path)
+              local=Path('index.html') if path=='/' else Path(path.lstrip('/'))
+              assert hashlib.sha256(raw).digest()==hashlib.sha256(local.read_bytes()).digest(),path
+              return {'path':path,'https_verified':True,'content_matches':True}
+          with concurrent.futures.ThreadPoolExecutor(max_workers=5) as pool:results=list(pool.map(check,paths))
+          preview=download('/qa/exploracion-kinetic.html').decode()
+          assert 'noindex,nofollow' in preview
+          report={'domain':DOMAIN,'release':'nicho-kinetic-production-2026-10-12','https_checks':len(results),'errors':0,'preview_excluded':True,'checks':results}
+          Path('/tmp/nicho-kinetic-browser/live.json').write_text(json.dumps(report,indent=2))
+          print(json.dumps(report,indent=2))
+          print('KINETIC PUBLICADO EN DOMINIO PRINCIPAL. HTTPS Y SEO TECNICO COMPROBADOS.')
+          PY
+      - name: Guardar evidencia de las pruebas
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kinetic-production-verification
+          path: |
+            /tmp/nicho-kinetic-browser
+            /tmp/nicho-kinetic-static.json
+          retention-days: 7
