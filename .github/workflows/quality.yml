@@ -1,0 +1,40 @@
+name: Validar web, SEO y publicacion HTTPS
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: read
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Obtener codigo
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Verificar paginas, recursos y SEO
+        run: |
+          python3 tools/check_site.py . --json qa/static-report.json
+          node --check assets/js/app.js
+          node --check assets/js/wordmark.js
+          node --check assets/js/wordmark-data.js
+  publication:
+    if: github.event_name != 'pull_request'
+    needs: quality
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Obtener codigo esperado
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Estado del dominio GitHub Pages
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api "repos/${GITHUB_REPOSITORY}/pages" --jq '{status,cname,https_enforced,https_certificate,source,build_type}'
+      - name: Comprobar dominio, certificado y archivos publicados
+        run: python3 tools/check_live.py
