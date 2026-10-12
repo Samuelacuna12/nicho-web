@@ -223,5 +223,105 @@
     "title": "Cómo organizar renovaciones en el CRM de un corredor de seguros | Nicho Agencia Digital",
     "description": "Diseña un flujo de renovaciones con estados claros, responsables, permisos y recordatorios que se detengan cuando cambie el caso.",
     "kind": "Article"
+  },
+  "recursos/transcribir-audios-clientes-confirmar-datos.html": {
+    "title": "Cómo transcribir audios de clientes sin convertir errores en pedidos | Nicho Agencia Digital",
+    "description": "Diseña un flujo de audio a texto con revisión de nombres, cantidades y referencias antes de registrar una solicitud o ejecutar una acción.",
+    "kind": "Article"
+  },
+  "recursos/extraer-datos-documentos-ia-validacion.html": {
+    "title": "Cómo extraer datos de documentos con IA y validarlos antes de guardarlos | Nicho Agencia Digital",
+    "description": "Organiza la extracción de campos de documentos con esquema, evidencia, reglas de validación y una bandeja de revisión para datos dudosos.",
+    "kind": "Article"
+  },
+  "recursos/presupuesto-consumo-agente-ia.html": {
+    "title": "Cómo presupuestar el consumo de un agente de IA | Nicho Agencia Digital",
+    "description": "Estima el costo de un agente por tarea completada, separando modelo, herramientas, reintentos y operación antes de ampliar el volumen.",
+    "kind": "Article"
+  },
+  "recursos/prompt-injection-documentos-chatbot-empresa.html": {
+    "title": "Prompt injection: cómo proteger un chatbot que lee documentos | Nicho Agencia Digital",
+    "description": "Identifica instrucciones maliciosas dentro de archivos o páginas y diseña controles para que tu chatbot no las convierta en acciones autorizadas.",
+    "kind": "Article"
+  },
+  "recursos/whatsapp-api-estados-entrega-mensajes.html": {
+    "title": "WhatsApp API: cómo comprobar si un mensaje fue entregado | Nicho Agencia Digital",
+    "description": "Distingue solicitud aceptada, envío, entrega y lectura en WhatsApp, y organiza una revisión cuando los eventos de estado no llegan al CRM.",
+    "kind": "Article"
+  },
+  "recursos/chatbot-multilingue-pais-moneda-fechas.html": {
+    "title": "Cómo adaptar un chatbot a distintos países, monedas e idiomas | Nicho Agencia Digital",
+    "description": "Separa idioma, país, moneda y zona horaria para que tu chatbot atienda mercados distintos sin inventar precios ni interpretar fechas ambiguas.",
+    "kind": "Article"
+  },
+  "recursos/calcular-roi-automatizacion-tiempo-costos.html": {
+    "title": "Cómo calcular el ROI de una automatización con tiempo realmente ahorrado | Nicho Agencia Digital",
+    "description": "Estima el retorno de una automatización separando capacidad liberada, ahorro monetario, costos recurrentes y recuperación de la inversión.",
+    "kind": "Article"
+  },
+  "recursos/aprobaciones-compras-umbrales-vencimiento.html": {
+    "title": "Cómo automatizar aprobaciones de compras con límites y vencimiento | Nicho Agencia Digital",
+    "description": "Diseña solicitudes de compra con umbrales de monto, versiones, responsables, suplencias y una salida segura cuando nadie responde.",
+    "kind": "Article"
+  },
+  "recursos/agenda-citas-zonas-horarias-reprogramacion.html": {
+    "title": "Cómo automatizar una agenda con zonas horarias y cambios de cita | Nicho Agencia Digital",
+    "description": "Coordina reservas, reprogramaciones y cancelaciones con zonas horarias explícitas, disponibilidad real y recordatorios coherentes.",
+    "kind": "Article"
+  },
+  "recursos/notas-reunion-tareas-verificadas.html": {
+    "title": "Cómo convertir notas de reuniones en tareas sin inventar acuerdos | Nicho Agencia Digital",
+    "description": "Transforma notas y transcripciones en tareas revisables con fuente, responsable confirmado, fecha explícita y control de cambios.",
+    "kind": "Article"
+  },
+  "recursos/dashboard-crm-demoras-cohortes-antiguedad.html": {
+    "title": "Qué medir en un dashboard de CRM para detectar demoras reales | Nicho Agencia Digital",
+    "description": "Construye un tablero de CRM con primera respuesta, antigüedad por etapa, cohortes comparables y tareas que permitan actuar sobre los retrasos.",
+    "kind": "Article"
+  },
+  "recursos/onboarding-offboarding-flujos-tareas.html": {
+    "title": "Cómo organizar onboarding y offboarding con tareas verificables | Nicho Agencia Digital",
+    "description": "Coordina ingresos y salidas con responsables, dependencias, fechas autorizadas y evidencia de cierre sin incluir secretos en el tablero.",
+    "kind": "Article"
+  },
+  "recursos/portal-clientes-seguimiento-pedidos-privacidad.html": {
+    "title": "Cómo diseñar un portal de pedidos sin exponer información de otros clientes | Nicho Agencia Digital",
+    "description": "Define estados, permisos por pedido, documentos visibles y pruebas de aislamiento para un portal de seguimiento útil y seguro.",
+    "kind": "Article"
+  },
+  "recursos/diagnosticar-indexacion-web-nueva-search-console.html": {
+    "title": "Mi sitio nuevo no aparece en Google: cómo revisar su indexación | Nicho Agencia Digital",
+    "description": "Diagnostica una web recién publicada con Inspección de URLs, contenido renderizado, canonical y sitemap, sin confundir acceso con indexación.",
+    "kind": "Article"
+  },
+  "recursos/formularios-etiquetas-errores-autocompletado.html": {
+    "title": "Cómo facilitar el envío de un formulario sin pedir datos de más | Nicho Agencia Digital",
+    "description": "Revisa campos necesarios, etiquetas visibles, autocompletado y errores recuperables para que el contacto funcione desde móvil y teclado.",
+    "kind": "Article"
+  },
+  "recursos/prueba-ab-landing-regla-parada.html": {
+    "title": "Cómo diseñar una prueba A/B de landing con una decisión clara | Nicho Agencia Digital",
+    "description": "Define hipótesis, conversión confirmada, asignación y regla de parada antes de comparar dos versiones de una landing.",
+    "kind": "Article"
+  },
+  "recursos/preparar-imagenes-web-srcset-formatos.html": {
+    "title": "Cómo preparar imágenes para una web rápida sin perder información | Nicho Agencia Digital",
+    "description": "Organiza tamaños, recortes, srcset, dimensiones y formatos modernos con una revisión visual y de descarga antes de publicar.",
+    "kind": "Article"
+  },
+  "recursos/ga4-formularios-leads-confirmados-sin-pii.html": {
+    "title": "Cómo medir formularios en GA4 sin confundir clics con leads | Nicho Agencia Digital",
+    "description": "Define eventos de formulario basados en recepción confirmada, evita datos personales y comprueba duplicados antes de analizar leads en GA4.",
+    "kind": "Article"
+  },
+  "recursos/migracion-web-mapa-url-redirecciones-canonical.html": {
+    "title": "Cómo planear una migración web sin dejar páginas importantes atrás | Nicho Agencia Digital",
+    "description": "Construye un mapa de URLs, valida redirecciones y canonical, y prepara controles de lanzamiento y seguimiento para una migración web.",
+    "kind": "Article"
+  },
+  "recursos/selector-variantes-tienda-accesible-disponibilidad.html": {
+    "title": "Cómo diseñar un selector de variantes accesible y fiel al inventario | Nicho Agencia Digital",
+    "description": "Revisa teclado, nombres de variantes, disponibilidad y precio para evitar combinaciones ambiguas antes de añadir un producto al carrito.",
+    "kind": "Article"
   }
 }

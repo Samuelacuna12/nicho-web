@@ -1,5 +1,893 @@
 [
   {
+    "slug": "transcribir-audios-clientes-confirmar-datos",
+    "title": "Cómo transcribir audios de clientes sin convertir errores en pedidos",
+    "description": "Diseña un flujo de audio a texto con revisión de nombres, cantidades y referencias antes de registrar una solicitud o ejecutar una acción.",
+    "category": "IA para empresas",
+    "intro": "Una nota de voz puede contener un pedido, una corrección y una pregunta en el mismo mensaje. Convertirla a texto ayuda a organizar la atención, pero el resultado necesita un tratamiento distinto al de un dato confirmado. Esta guía propone un recorrido desde el audio recibido hasta una solicitud revisada.",
+    "sections": [
+      {
+        "heading": "Separa escuchar, interpretar y ejecutar",
+        "html": "<p>Define tres salidas independientes: transcripción, propuesta de datos y acción autorizada. La primera intenta representar las palabras; la segunda identifica producto, cantidad o fecha; la tercera modifica el sistema. Si las unes en un solo paso, una palabra mal reconocida puede terminar en un pedido incorrecto sin que nadie vea dónde ocurrió el cambio.</p><p>Conserva una referencia al audio y a su mensaje de origen según los permisos y el plazo de conservación acordados. El equipo debe poder revisar el fragmento necesario, sin distribuir toda la conversación a personas ajenas al caso.</p>"
+      },
+      {
+        "heading": "Prepara el reconocimiento con contexto limitado",
+        "html": "<p>La <a href=\"https://developers.openai.com/api/docs/guides/speech-to-text\">documentación de transcripción de OpenAI</a> permite aportar contexto y términos esperados, según el modelo. También advierte que las palabras sugeridas son pistas y que hay que evaluar si provocan términos que no se pronunciaron. Revisa las opciones del modelo elegido antes de integrar un ejemplo técnico.</p><p>Como recomendación práctica, prepara una lista corta de marcas o referencias realmente presentes en tu catálogo. No entregues una respuesta completa que el sistema pueda repetir como si la hubiera escuchado. Prueba ruido de calle, palabras regionales, pausas y cambios de idioma con material autorizado o sintético.</p>"
+      },
+      {
+        "heading": "Marca los campos que necesitan confirmación",
+        "html": "<ul><li><strong>Cantidades:</strong> separa unidades, paquetes y docenas.</li><li><strong>Referencias:</strong> contrasta el texto con identificadores del catálogo.</li><li><strong>Fechas:</strong> conserva la expresión original cuando sea ambigua.</li><li><strong>Correcciones:</strong> identifica qué dato anterior sustituye el cliente.</li><li><strong>Negaciones:</strong> comprueba frases como “no el azul, el negro”.</li></ul><p>No conviertas una puntuación del modelo en certeza comercial. Define qué campos permiten una sugerencia y cuáles exigen confirmación. Si el audio es ininteligible, pide repetir solo la parte necesaria u ofrece escribirla.</p>"
+      },
+      {
+        "heading": "Ejemplo hipotético: una cantidad corregida",
+        "html": "<p>Un cliente dice: “Mándame seis… no, mejor tres paquetes del modelo claro”. El sistema propone tres paquetes, pero todavía debe saber cuántas unidades tiene cada paquete y cuál es el modelo. El mensaje de revisión podría decir: “Entendí tres paquetes. ¿Te refieres a la referencia Clara de seis unidades por paquete?”.</p><p>Solo después de resolver esas dudas se prepara el resumen del pedido con su precio vigente. La confirmación de una transcripción no autoriza por sí sola un cobro, un cambio de dirección ni una reserva de inventario. Cada operación conserva su control correspondiente.</p>"
+      },
+      {
+        "heading": "Comprueba el flujo antes de conectarlo a ventas",
+        "html": "<ol><li>Ensaya audios con números parecidos, interrupciones y productos inexistentes.</li><li>Compara transcripción, campos extraídos y resultado final por separado.</li><li>Verifica que una corrección tardía no cree una segunda solicitud.</li><li>Comprueba que los mensajes repetidos reutilicen la referencia original.</li><li>Mide cuántos casos requieren revisión y por qué, sin ocultarlos dentro del promedio.</li></ol><p>Comienza guardando borradores para revisión humana. Amplía el alcance solo cuando puedas demostrar qué tipos de solicitud maneja bien. Para las excepciones, prepara el <a href=\"traspaso-bot-asesor-con-contexto.html\">traspaso al asesor con contexto</a>. La transcripción facilita la captura; no garantiza que se entendió la intención ni que el pedido sea correcto.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "OpenAI: transcripción de archivos",
+        "url": "https://developers.openai.com/api/docs/guides/speech-to-text"
+      }
+    ],
+    "service": "agentes-ia.html",
+    "cta": "Revisemos qué datos llegan hoy por audio y cuáles deben confirmarse antes de entrar a tu operación.",
+    "datePublished": "2026-10-12",
+    "dateLabel": "12 de octubre de 2026",
+    "sourceDateLabel": "12 de octubre de 2026"
+  },
+  {
+    "slug": "extraer-datos-documentos-ia-validacion",
+    "title": "Cómo extraer datos de documentos con IA y validarlos antes de guardarlos",
+    "description": "Organiza la extracción de campos de documentos con esquema, evidencia, reglas de validación y una bandeja de revisión para datos dudosos.",
+    "category": "IA para empresas",
+    "intro": "Copiar información de un documento a un sistema parece una tarea única, pero incluye lectura, interpretación y validación. Una integración útil permite saber de dónde salió cada dato y detener lo que no puede comprobar. El objetivo inicial puede ser un borrador confiable, sin automatizar decisiones contables o pagos.",
+    "sections": [
+      {
+        "heading": "Elige un documento y un resultado delimitado",
+        "html": "<p>Empieza con un tipo de archivo: por ejemplo, órdenes de compra de proveedores. Define los campos que el equipo necesita, su significado y cuáles pueden faltar. “Total” puede ser ambiguo si hay subtotal, impuestos y valor pendiente. Nombra cada concepto antes de pedirle a un modelo que lo extraiga.</p><p>Registra el identificador del documento, versión y estado de revisión. Una página nueva o un archivo corregido debe poder reemplazar una propuesta anterior sin borrar su historial. No mezcles documentos de empresas distintas en un mismo contexto sin un control de acceso explícito.</p>"
+      },
+      {
+        "heading": "Usa un esquema y admite información ausente",
+        "html": "<p>La <a href=\"https://developers.openai.com/api/docs/guides/structured-outputs\">guía de salidas estructuradas de OpenAI</a> describe resultados ajustados a un esquema compatible, pero advierte que todavía pueden contener errores. Cumplir una estructura no demuestra que el valor se leyó correctamente. La aplicación necesita manejar también respuestas incompletas o rechazadas.</p><p>Como diseño editorial, incluye valor propuesto, evidencia o ubicación de origen y estado de revisión. Permite un valor ausente cuando el documento no lo contiene. Inventar un número para completar un campo obligatorio es peor que llevarlo a una cola de validación.</p>"
+      },
+      {
+        "heading": "Aplica reglas que no dependan del modelo",
+        "html": "<ul><li>Verifica que las cantidades tengan unidad y formato válidos.</li><li>Comprueba que la referencia del proveedor corresponda al catálogo autorizado.</li><li>Calcula totales con reglas explícitas de redondeo, sin pedirle al modelo que decida una política.</li><li>Detecta fechas ambiguas y monedas no indicadas.</li><li>Busca documentos ya registrados usando identificadores y contexto, no solo el nombre del archivo.</li></ul><p>Una regla fallida debe mostrar qué se esperaba y qué llegó. No corrijas silenciosamente una discrepancia para conseguir que el registro pase. Conserva el dato propuesto y deja que una persona con permiso resuelva la diferencia.</p>"
+      },
+      {
+        "heading": "Ejemplo hipotético: una referencia ilegible",
+        "html": "<p>Una orden muestra dos unidades de una pieza y una referencia borrosa. El extractor reconoce el total y propone un código parecido a uno existente. El sistema encuentra dos candidatos posibles y deja la referencia pendiente. La persona revisa la imagen, elige el código correcto y registra la razón.</p><p>El sistema puede guardar un borrador con los campos claros, pero no debería crear una recepción de mercancía basándose en esa orden: una compra solicitada y un producto recibido son hechos diferentes. Tampoco una cifra extraída equivale a una autorización de pago.</p>"
+      },
+      {
+        "heading": "Mide errores por campo y por consecuencia",
+        "html": "<p>Prepara un conjunto de documentos autorizados con respuesta esperada, incluyendo escaneos inclinados, varias páginas, correcciones y formatos diferentes. Evalúa cada campo: acertado, ausente correctamente, incorrecto o no verificable. Separa además errores que impedirían operar de diferencias menores de presentación.</p><p>Antes de activar escrituras, prueba que solo los registros aprobados pasan al sistema y que un reenvío no crea duplicados. Revisa permisos de los archivos y los registros técnicos para no copiar contenido privado innecesario. Si el proyecto incluye datos existentes, complementa el proceso con la <a href=\"migrar-hojas-calculo-sistema-trazabilidad.html\">guía de migración con trazabilidad</a>.</p><p>La meta comprobable es reducir captura manual conservando revisión de excepciones. Este procedimiento organiza datos; no certifica documentos ni sustituye controles tributarios, contables o jurídicos.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "OpenAI: Structured Outputs",
+        "url": "https://developers.openai.com/api/docs/guides/structured-outputs"
+      }
+    ],
+    "service": "automatizaciones.html",
+    "cta": "Elijamos un documento y sus campos críticos para diseñar una prueba de extracción con revisión visible.",
+    "datePublished": "2026-10-12",
+    "dateLabel": "12 de octubre de 2026",
+    "sourceDateLabel": "12 de octubre de 2026"
+  },
+  {
+    "slug": "presupuesto-consumo-agente-ia",
+    "title": "Cómo presupuestar el consumo de un agente de IA",
+    "description": "Estima el costo de un agente por tarea completada, separando modelo, herramientas, reintentos y operación antes de ampliar el volumen.",
+    "category": "IA para empresas",
+    "intro": "El precio de una consulta al modelo no representa todo el costo de un agente. Una tarea puede usar varias llamadas, buscar documentos, ejecutar herramientas y terminar en revisión humana. Para presupuestar conviene medir un recorrido completo y mantener visibles los supuestos, en lugar de multiplicar una tarifa aislada por el número de mensajes.",
+    "sections": [
+      {
+        "heading": "Define una unidad que represente trabajo terminado",
+        "html": "<p>Elige una tarea concreta: responder una consulta de cobertura, clasificar una solicitud o preparar una cotización. Cuenta por separado tareas iniciadas, completadas, escaladas y fallidas. Si divides el gasto solo entre mensajes, una conversación larga puede parecer productiva aunque no resuelva nada.</p><p>Guarda una muestra representativa de casos simples y complejos. Una demostración corta sirve para probar el flujo, pero no para proyectar todo el mes. Registra versión del modelo y del proceso, porque un cambio de instrucciones o herramientas puede alterar el consumo.</p>"
+      },
+      {
+        "heading": "Construye el costo por recorrido",
+        "html": "<ul><li><strong>Modelo:</strong> consumo de entrada y salida según la tarifa vigente.</li><li><strong>Herramientas:</strong> búsquedas, almacenamiento, transcripción u otros servicios usados.</li><li><strong>Infraestructura:</strong> ejecución, bases de datos y observabilidad.</li><li><strong>Operación:</strong> mantenimiento, revisión y atención de excepciones.</li><li><strong>Repeticiones:</strong> intentos fallidos y recuperación, sin contarlos como nuevas tareas exitosas.</li></ul><p>Obtén las tarifas en la documentación y el contrato de cada proveedor al preparar el presupuesto. No combines monedas ni periodos sin indicar la conversión y la fecha empleadas. Separa gastos de implementación de gastos recurrentes.</p>"
+      },
+      {
+        "heading": "Ejemplo hipotético sin tarifas de proveedor",
+        "html": "<p>Supongamos que un piloto ficticio consume COP 120.000 entre modelo y herramientas y completa 800 tareas. Su costo técnico observado es COP 150 por tarea completada. Si además exige cinco horas de revisión, ese trabajo sigue pendiente de valorar; no desaparece del cálculo por estar fuera de la factura del proveedor.</p><p>Si otro recorrido cuesta COP 100 por tarea iniciada pero solo completa la mitad, no puedes compararlo directamente con los COP 150 por tarea completada. Iguala definición, mezcla de casos y criterio de calidad. Estos números ilustran el método; no son precios de Nicho ni una estimación para una empresa real.</p>"
+      },
+      {
+        "heading": "Optimiza sin eliminar el control de calidad",
+        "html": "<p>La <a href=\"https://developers.openai.com/api/docs/guides/cost-optimization\">guía de optimización de costos de OpenAI</a> plantea reducir solicitudes y tokens, y elegir modelos equilibrando costo y exactitud. Presenta además opciones para trabajos que toleran otras condiciones de procesamiento. La elección depende del caso y no implica que el modelo más pequeño sea suficiente.</p><p>Como procedimiento, cambia una variable cada vez y repite las pruebas de calidad. Evita mandar todo el historial cuando basta contexto relevante, pero comprueba que no se pierdan correcciones del cliente. Reutiliza resultados solo si siguen vigentes y pertenecen al mismo ámbito autorizado.</p>"
+      },
+      {
+        "heading": "Prepara límites y una salida operativa",
+        "html": "<p>Define alertas por consumo inesperado y un presupuesto por proyecto. Distingue una alerta informativa de un corte realmente implementado: recibir un correo no asegura que el gasto se detenga. Prueba en un entorno controlado cómo se comporta tu aplicación al llegar al límite elegido y qué tareas quedan pendientes.</p><p>Documenta un modo de contingencia: pausar acciones costosas, conservar solicitudes y avisar al responsable, sin afirmar al cliente que una operación terminó. Actualiza la proyección con volumen real y proporción de excepciones. Para decidir si el resultado mantiene calidad, usa una <a href=\"evaluar-agente-ia-atencion-rubrica-pruebas.html\">rúbrica de evaluación del agente</a>.</p><p>Un presupuesto útil muestra escenario base, escenario de mayor demanda y riesgos. No garantiza ahorros ni reemplaza la medición después del lanzamiento.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "OpenAI: optimización de costos",
+        "url": "https://developers.openai.com/api/docs/guides/cost-optimization"
+      }
+    ],
+    "service": "agentes-ia.html",
+    "cta": "Midamos un recorrido real de tu agente y sus excepciones antes de proyectar su costo mensual.",
+    "datePublished": "2026-10-12",
+    "dateLabel": "12 de octubre de 2026",
+    "sourceDateLabel": "12 de octubre de 2026"
+  },
+  {
+    "slug": "prompt-injection-documentos-chatbot-empresa",
+    "title": "Prompt injection: cómo proteger un chatbot que lee documentos",
+    "description": "Identifica instrucciones maliciosas dentro de archivos o páginas y diseña controles para que tu chatbot no las convierta en acciones autorizadas.",
+    "category": "IA para empresas",
+    "intro": "Un chatbot que consulta archivos puede encontrar frases que intentan cambiar su comportamiento. El problema aparece cuando trata el contenido que debía analizar como si fueran instrucciones de quien administra el sistema. La protección exige controles sobre datos y herramientas, además de un mensaje inicial bien redactado.",
+    "sections": [
+      {
+        "heading": "Reconoce dónde entra contenido no confiable",
+        "html": "<p>Haz un mapa de entradas: mensajes de usuarios, documentos, páginas web, resultados de búsqueda y texto devuelto por integraciones. Para cada fuente, distingue quién la controla y qué confianza merece. Un archivo compartido dentro de una empresa también puede contener texto copiado de otra persona.</p><p>La <a href=\"https://cheatsheetseries.owasp.org/cheatsheets/LLM_Prompt_Injection_Prevention_Cheat_Sheet.html\">guía de OWASP sobre prompt injection</a> describe ataques que mezclan instrucciones y datos, y propone defensas por capas. Sus recomendaciones incluyen separación estructurada, validaciones y permisos mínimos. Ninguna frase aislada de protección reemplaza esos controles.</p>"
+      },
+      {
+        "heading": "Separa contenido consultado de autorización",
+        "html": "<p>Como regla de diseño, una factura, una web o un correo pueden aportar información para una tarea, pero no otorgar acceso a otros archivos ni ampliar el objetivo. Conserva el origen de cada fragmento y limita las herramientas disponibles según el usuario autenticado y el proceso.</p><p>Si el documento dice que hay que enviar información a una dirección nueva, esa frase debe analizarse como contenido. La aplicación no debería convertirla automáticamente en un destinatario autorizado. Comprueba en el sistema de permisos quién pidió la acción y qué datos puede compartir.</p>"
+      },
+      {
+        "heading": "Diseña barreras fuera de la respuesta del modelo",
+        "html": "<ul><li>Valida parámetros y destinatarios antes de ejecutar herramientas.</li><li>Usa cuentas de lectura cuando el trabajo solo requiere consultar.</li><li>Limita cada consulta al conjunto de datos que corresponde al usuario.</li><li>Exige la aprobación definida por el negocio para operaciones sensibles.</li><li>Registra acciones y rechazos con la información mínima necesaria para investigar.</li></ul><p>No coloques secretos dentro de instrucciones esperando que el modelo nunca los repita. Una herramienta que no puede acceder a un dato reduce el riesgo de divulgarlo. Revisa también qué información se muestra en mensajes de error y registros técnicos.</p>"
+      },
+      {
+        "heading": "Ejemplo hipotético: un catálogo con instrucciones ajenas",
+        "html": "<p>Una empresa usa IA para resumir catálogos de proveedores. Un archivo incluye una nota que intenta hacer que el agente comparta documentos internos con un contacto externo. El comportamiento esperado es resumir el catálogo y no ejecutar ese envío.</p><p>La prueba debe comprobar algo más que una respuesta educada: ningún archivo interno fue consultado fuera del alcance, ninguna herramienta recibió el destinatario ajeno y el incidente quedó disponible para revisión. El contenido comercial válido del catálogo puede seguir siendo útil, siempre que se trate como datos.</p>"
+      },
+      {
+        "heading": "Evalúa el resultado observable y prepara contención",
+        "html": "<p>Construye pruebas en un entorno aislado con archivos sintéticos, cuentas de prueba y herramientas sin efectos reales. Incluye texto escondido en tablas, instrucciones en resultados de búsqueda y solicitudes que mezclan una tarea legítima con otra no autorizada. No pruebes enviando datos verdaderos a terceros.</p><p>Registra qué control impidió la acción, qué información intentó usar el sistema y si el usuario pudo completar su tarea normal. Ante un fallo, restringe la herramienta afectada y revisa el alcance antes de reactivar. Un filtro adicional puede ayudar, pero también necesita evaluación.</p><p>Esta guía es un punto de partida defensivo, no una certificación de seguridad. Compleméntala con una revisión de <a href=\"permisos-agentes-ia-modificar-crm.html\">permisos del agente para modificar sistemas</a> y pruebas periódicas cuando cambien fuentes o integraciones.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "OWASP: LLM Prompt Injection Prevention",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/LLM_Prompt_Injection_Prevention_Cheat_Sheet.html"
+      }
+    ],
+    "service": "agentes-ia.html",
+    "cta": "Revisemos qué fuentes consulta tu chatbot y qué acciones puede ejecutar antes de conectar información interna.",
+    "datePublished": "2026-10-12",
+    "dateLabel": "12 de octubre de 2026",
+    "sourceDateLabel": "12 de octubre de 2026"
+  },
+  {
+    "slug": "whatsapp-api-estados-entrega-mensajes",
+    "title": "WhatsApp API: cómo comprobar si un mensaje fue entregado",
+    "description": "Distingue solicitud aceptada, envío, entrega y lectura en WhatsApp, y organiza una revisión cuando los eventos de estado no llegan al CRM.",
+    "category": "WhatsApp para empresas",
+    "intro": "Que una integración termine sin error no demuestra que el destinatario recibió el mensaje. Para revisar la entrega necesitas seguir la referencia del envío y sus actualizaciones. Este procedimiento ayuda a conversar con tu proveedor y a construir un tablero que no confunda actividad técnica con atención efectiva.",
+    "sections": [
+      {
+        "heading": "Distingue el resultado técnico del resultado comercial",
+        "html": "<p>Separa la solicitud aceptada por el proveedor, el envío, la entrega y la lectura cuando el canal la informa. Después vienen otros hechos: respuesta del cliente, cita confirmada o venta registrada. Ninguno debe inferirse solamente del estado anterior.</p><p>La <a href=\"https://www.twilio.com/docs/messaging/guides/track-outbound-message-status\">documentación de Twilio</a> muestra cómo seguir cambios mediante callbacks de estado y contempla información adicional para WhatsApp. Es un ejemplo de proveedor: los nombres de campos y mecanismos exactos deben comprobarse en la integración que utiliza tu empresa.</p>"
+      },
+      {
+        "heading": "Guarda una referencia y un historial por envío",
+        "html": "<p>Como propuesta operativa, registra identificador interno, referencia del proveedor, propósito del mensaje, hora de solicitud y último evento observado. Conserva también un historial técnico acotado para distinguir una actualización tardía de un mensaje nuevo. Evita copiar el contenido completo si no hace falta para investigar.</p><p>El identificador debe permitir buscar la misma operación en el CRM y en el proveedor. Un teléfono por sí solo no alcanza cuando existen varios mensajes. Si tu plataforma no expone esos datos, pregunta por su registro de entregas antes de construir métricas que no podrás validar.</p>"
+      },
+      {
+        "heading": "Diseña una bandeja de mensajes pendientes de explicación",
+        "html": "<ul><li><strong>Sin actualización:</strong> hay solicitud registrada, pero falta evidencia posterior.</li><li><strong>Fallo informado:</strong> el proveedor devuelve un motivo que requiere interpretación.</li><li><strong>Evento no vinculado:</strong> llegó una actualización sin correspondencia interna.</li><li><strong>Estado contradictorio:</strong> la información necesita revisión antes de mostrar una conclusión.</li></ul><p>Define el plazo de revisión según el proceso y las condiciones del proveedor. No conviertas automáticamente “sin evidencia” en “no entregado”. Una falla del receptor de eventos puede dejar el tablero incompleto aunque el mensaje haya llegado.</p>"
+      },
+      {
+        "heading": "Ejemplo hipotético: una notificación pendiente",
+        "html": "<p>Una empresa registra una notificación de pedido y el flujo técnico aparece exitoso. Al revisar el identificador encuentra que no se guardó el evento posterior de entrega. El equipo contrasta el registro del proveedor y corrige la captura del estado, sin reenviar inmediatamente el mismo mensaje.</p><p>Si el proveedor confirma un fallo, se analiza el motivo y la posibilidad de un nuevo intento dentro de las reglas del canal. No se cambia el número del destinatario para forzar un envío ni se usa otro canal sin autorización. El objetivo es resolver el caso con evidencia, no elevar artificialmente el porcentaje de enviados.</p>"
+      },
+      {
+        "heading": "Prueba captura, repetición y reportes",
+        "html": "<ol><li>Envía mensajes de prueba a destinatarios autorizados.</li><li>Comprueba que las referencias se vinculan de extremo a extremo.</li><li>Simula eventos repetidos y tardíos en un entorno seguro.</li><li>Valida que una actualización antigua no borre evidencia más reciente.</li><li>Compara el tablero con una muestra del proveedor y documenta diferencias.</li></ol><p>En Twilio, la guía citada recomienda validar las firmas de callbacks con sus SDK. Otros proveedores necesitan su propio mecanismo documentado. Una URL que recibe datos no demuestra quién los envió.</p><p>Para indicadores comerciales, mantén separados entrega, respuesta y venta, como explica la <a href=\"medir-embudo-whatsapp-clic-conversacion-venta.html\">guía del embudo de WhatsApp</a>. No uses la ausencia de lectura como prueba de desinterés ni como permiso para insistir.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "Twilio: seguimiento de estados de mensajes salientes",
+        "url": "https://www.twilio.com/docs/messaging/guides/track-outbound-message-status"
+      }
+    ],
+    "service": "whatsapp-api-empresas.html",
+    "cta": "Revisemos un envío y sus eventos para saber qué puede confirmar hoy tu plataforma sobre la entrega.",
+    "datePublished": "2026-10-12",
+    "dateLabel": "12 de octubre de 2026",
+    "sourceDateLabel": "12 de octubre de 2026"
+  },
+  {
+    "slug": "chatbot-multilingue-pais-moneda-fechas",
+    "title": "Cómo adaptar un chatbot a distintos países, monedas e idiomas",
+    "description": "Separa idioma, país, moneda y zona horaria para que tu chatbot atienda mercados distintos sin inventar precios ni interpretar fechas ambiguas.",
+    "category": "IA para empresas",
+    "intro": "Un cliente puede escribir en español desde cualquier país y comprar para otra persona en una ciudad diferente. Por eso el idioma no alcanza para decidir moneda, cobertura o fecha de atención. Una configuración multirregional útil conserva esos datos por separado y pregunta únicamente lo que cambia la respuesta.",
+    "sections": [
+      {
+        "heading": "Crea campos separados para decisiones diferentes",
+        "html": "<p>Define idioma preferido, mercado comercial, lugar de entrega, moneda de la oferta y zona horaria cuando corresponda. No deduzcas todos a partir del prefijo telefónico. Un número puede conservarse después de una mudanza o representar a una empresa que opera en varios lugares.</p><p>La documentación de <a href=\"https://www.w3.org/TR/ltli/\">W3C sobre etiquetas de idioma e identificadores de configuración regional</a>, publicada como borrador de trabajo, distingue idioma y preferencias de formato. Propone representaciones neutrales para intercambiar valores y formatos locales para mostrarlos. Esa separación es útil como referencia de diseño; no determina las reglas comerciales de tu empresa.</p>"
+      },
+      {
+        "heading": "Pregunta el dato que cambia la oferta",
+        "html": "<p>Si la cobertura depende de la ciudad, pregunta por el destino del servicio. Si el precio depende del mercado, identifica primero ese mercado y consulta su lista autorizada. El dato necesario puede ser diferente del lugar donde está escribiendo la persona.</p><p>Permite corregir una preferencia sin reiniciar toda la conversación. Cuando el cliente cambie el destino, vuelve a validar cobertura y precio antes de mantener una cotización anterior. Guarda qué regla se aplicó y evita presentar una conversión estimada como un precio oficial.</p>"
+      },
+      {
+        "heading": "Haz explícitos moneda, fecha y alcance",
+        "html": "<ul><li>Usa el código de moneda cuando el símbolo pueda ser ambiguo.</li><li>En una fecha confusa, escribe el mes con palabras al confirmar.</li><li>Para una reunión, muestra fecha, hora y zona horaria acordadas.</li><li>Separa precio del producto, envío y otros conceptos aplicables.</li><li>No traduzcas identificadores, códigos de producto o nombres legales sin una regla definida.</li></ul><p>Revisa también botones, mensajes de error y confirmaciones. Traducir solo la bienvenida deja partes críticas en otro idioma. Una respuesta clara debe conservar las condiciones aprobadas, aunque adapte vocabulario y tono.</p>"
+      },
+      {
+        "heading": "Ejemplo hipotético: consulta en español, entrega en otro mercado",
+        "html": "<p>Una persona escribe desde Colombia y solicita un servicio para una sede en Chile. El chatbot confirma la ubicación de la sede antes de seleccionar la oferta. Si no existe una tarifa aprobada para ese alcance, deriva la consulta; no toma el precio colombiano y le cambia el símbolo.</p><p>Para una reunión, ofrece un horario con zona explícita y conserva el instante acordado junto a la zona relevante. Si la persona corrige el país, revisa el horario mostrado. El ejemplo no presupone que Nicho ofrezca ese servicio concreto ni define precios entre países.</p>"
+      },
+      {
+        "heading": "Construye pruebas por mercado, no solo traducciones",
+        "html": "<p>Prepara casos con idioma y país distintos, números con separadores diferentes, fechas ambiguas y cambios de destino durante la conversación. Pide a una persona competente en el idioma que revise términos comerciales y claridad; una traducción literal puede ser técnicamente correcta y poco comprensible.</p><p>Verifica además que la búsqueda recupere las reglas del mercado adecuado y que una promoción local no se convierta en condición global. La <a href=\"base-conocimiento-ia-vigencia-excepciones.html\">base de conocimiento con ámbito y vigencia</a> ayuda a mantener esas diferencias sin duplicar todo el sistema.</p><p>Empieza por los mercados que el negocio atiende realmente. Publicar más idiomas no crea cobertura, soporte o capacidad operativa por sí solo. El criterio de salida es que cada cliente reciba condiciones verificables y entienda qué está aceptando.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "W3C: Language Tags and Locale Identifiers, borrador de trabajo",
+        "url": "https://www.w3.org/TR/ltli/"
+      }
+    ],
+    "service": "agentes-ia.html",
+    "cta": "Organicemos los mercados, monedas y condiciones que tu agente puede comunicar con respaldo.",
+    "datePublished": "2026-10-12",
+    "dateLabel": "12 de octubre de 2026",
+    "sourceDateLabel": "12 de octubre de 2026"
+  },
+  {
+    "slug": "calcular-roi-automatizacion-tiempo-costos",
+    "title": "Cómo calcular el ROI de una automatización con tiempo realmente ahorrado",
+    "description": "Estima el retorno de una automatización separando capacidad liberada, ahorro monetario, costos recurrentes y recuperación de la inversión.",
+    "category": "Automatización",
+    "intro": "Una automatización puede ejecutar miles de acciones sin liberar una sola hora útil. Para evaluar su retorno necesitas comparar el trabajo humano antes y después, incluir las excepciones y distinguir capacidad disponible de dinero que efectivamente deja de salir. Este método sirve para un piloto operativo y sus revisiones posteriores.",
+    "sections": [
+      {
+        "heading": "Mide una tarea completa, no un clic",
+        "html": "<p>Elige una unidad reconocible: registrar una solicitud, preparar un reporte o clasificar un expediente. Observa una muestra que incluya casos normales y difíciles. Anota minutos de trabajo activo, volumen, errores y tiempo de corrección. La espera de una aprobación puede importar al cliente, pero no equivale automáticamente a horas laborales ahorradas.</p><p>Fija el período de comparación y conserva la medición original. Si cambian el producto, el equipo o la complejidad de las solicitudes, separa esos casos antes de atribuir toda mejora a la automatización.</p>"
+      },
+      {
+        "heading": "Resta la revisión que sigue existiendo",
+        "html": "<p>Calcula las horas liberadas como trabajo manual anterior menos revisión humana, resolución de excepciones y mantenimiento operativo adicional. Incluye los casos fallidos; excluirlos produce una imagen optimista.</p><p>La función de <a href=\"https://learn.microsoft.com/en-us/power-automate/savings\">ahorros de Power Automate</a> usa bases definidas por el usuario y ejecuciones exitosas. Ese contador depende de tus supuestos: no demuestra por sí solo que el equipo haya recuperado el tiempo registrado.</p>"
+      },
+      {
+        "heading": "Separa capacidad y ahorro de caja",
+        "html": "<p>Multiplicar horas liberadas por un costo horario permite valorar capacidad. No significa que la nómina vaya a bajar. Registra aparte reducciones verificables de horas extra, servicios externos o retrabajo pagado. Si el tiempo se dedica a atender más solicitudes, describe esa reasignación y comprueba su efecto sin contar dos veces el mismo beneficio.</p><p>No sumes ventas hipotéticas al ahorro confirmado. Una mejora comercial necesita su propia comparación, incluyendo margen, capacidad disponible y otros cambios que pudieron influir.</p>"
+      },
+      {
+        "heading": "Incluye costos iniciales y recurrentes",
+        "html": "<ul><li><strong>Iniciales:</strong> diseño, integración, limpieza de datos, pruebas y capacitación.</li><li><strong>Recurrentes:</strong> licencias, consumo, infraestructura, soporte y mantenimiento.</li><li><strong>Variables:</strong> costo por documento, mensaje o ejecución y volumen de excepciones.</li></ul><p>Para un horizonte definido, divide el beneficio acumulado menos todos los costos entre todos los costos y multiplica por cien. Indica si el beneficio es capacidad valorada o ahorro monetario. Son lecturas diferentes del mismo proyecto.</p>"
+      },
+      {
+        "heading": "Ejemplo ilustrativo con un resultado incómodo",
+        "html": "<p>Supón 600 solicitudes mensuales que antes requerían seis minutos cada una: 60 horas. Después quedan 20 horas de revisión y cinco de excepciones y mantenimiento. Se liberan 35 horas. Valoradas a 30.000 COP por hora, representan 1.050.000 COP de capacidad mensual.</p><p>Con 450.000 COP de costos recurrentes y 3.600.000 COP iniciales, el primer año tendría 12.600.000 COP de beneficio valorado y 9.000.000 COP de costo: un ROI de capacidad del 40 %. La recuperación estimada sería seis meses si esos valores se mantienen. Si no disminuye ningún desembolso, no presentes esos números como ahorro de caja.</p>"
+      },
+      {
+        "heading": "Decide con escenarios y una revisión fechada",
+        "html": "<p>Repite el cálculo con menor volumen, más excepciones y mayor consumo. Define qué resultado justificaría continuar, ajustar o detener el piloto. Revisa una muestra real al cierre del primer período y asigna a alguien la actualización de los supuestos.</p><p>El mejor caso para automatizar no siempre es el de mayor volumen. Puede ser una tarea estable, verificable y fácil de recuperar cuando falla. Para presupuestar esa recuperación, consulta la guía de <a href=\"fallos-integraciones-cola-revision.html\">fallos de integración y cola de revisión</a>.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "Microsoft Learn: Savings in Power Automate",
+        "url": "https://learn.microsoft.com/en-us/power-automate/savings"
+      }
+    ],
+    "service": "automatizaciones.html",
+    "cta": "Revisemos un proceso concreto y construyamos una estimación con volumen, revisión humana y costos comprobables.",
+    "datePublished": "2026-10-12",
+    "dateLabel": "12 de octubre de 2026",
+    "sourceDateLabel": "12 de octubre de 2026"
+  },
+  {
+    "slug": "aprobaciones-compras-umbrales-vencimiento",
+    "title": "Cómo automatizar aprobaciones de compras con límites y vencimiento",
+    "description": "Diseña solicitudes de compra con umbrales de monto, versiones, responsables, suplencias y una salida segura cuando nadie responde.",
+    "category": "Automatización",
+    "intro": "Una solicitud de compra necesita algo más que un botón de aprobar. El sistema debe saber qué versión se revisó, cuánto compromete, quién tiene autoridad y hasta cuándo vale la respuesta. Las reglas siguientes son un diseño operativo ilustrativo; cada organización debe definir sus propios límites y facultades.",
+    "sections": [
+      {
+        "heading": "Define el monto que determina la ruta",
+        "html": "<p>Acuerda si el umbral considera impuestos, envío y cargos obligatorios. Conserva la moneda original y, cuando corresponda, el valor convertido junto con la fuente y fecha de conversión. Una comparación entre monedas distintas no sirve para decidir quién aprueba.</p><p>Trata una compra relacionada como un conjunto cuando la política interna así lo establezca. Varias solicitudes pequeñas no deberían eludir una revisión prevista para el compromiso total. Las excepciones necesitan un responsable, no una regla oculta.</p>"
+      },
+      {
+        "heading": "Escribe los límites sin intervalos ambiguos",
+        "html": "<p>Un ejemplo hipotético: hasta 500.000 COP revisa coordinación; más de 500.000 y hasta 3.000.000 COP revisa dirección; por encima se requieren dirección y finanzas. Especifica si las aprobaciones superiores reemplazan o se suman a las anteriores.</p><p>Prueba exactamente 500.000, 500.001, 3.000.000 y 3.000.001. Define también el tratamiento de monto vacío, negativo, moneda desconocida y solicitante que coincide con el aprobador. Esos registros deben quedar pendientes de corrección, no entrar por la ruta más barata.</p>"
+      },
+      {
+        "heading": "Congela la versión que se está aprobando",
+        "html": "<p>Guarda referencia, proveedor, conceptos, cantidades, total, anexos y justificación en una versión identificable. La respuesta debe asociarse a esa versión. Si cambian condiciones relevantes, invalida la aprobación pendiente y solicita una nueva revisión.</p><p>El historial debe permitir reconstruir quién respondió, cuándo y sobre qué información. Una aprobación válida no equivale a pedido emitido ni a pago realizado: conserva estados separados para que la automatización no ejecute compromisos adicionales sin la autorización correspondiente.</p>"
+      },
+      {
+        "heading": "El silencio debe llevar a vencimiento",
+        "html": "<p>Define un plazo operativo, un recordatorio y una suplencia previamente autorizada. Al vencer, pasa la solicitud a revisión o devolución. Nunca conviertas la ausencia de respuesta en aprobación. Antes de aceptar una respuesta tardía, comprueba que la solicitud siga vigente y sin cambios.</p><p>Microsoft documenta un <a href=\"https://learn.microsoft.com/en-us/power-automate/modern-approvals\">patrón para aprobaciones prolongadas</a> que separa el envío de la solicitud del procesamiento de la respuesta mediante almacenamiento persistente. El plazo de negocio y la duración técnica del flujo son controles diferentes.</p>"
+      },
+      {
+        "heading": "Ejemplo: aumenta el precio mientras esperan",
+        "html": "<p>Una solicitud de 2.800.000 COP llega a dirección. Antes de responder, el proveedor actualiza la cotización a 3.200.000 COP. El sistema registra una nueva versión, retira la validez de la anterior y aplica la ruta que también requiere finanzas.</p><p>Si dirección pulsa después el enlace antiguo, la pantalla debe explicar que la versión fue reemplazada. No reutilices esa respuesta para la compra nueva. Si finanzas está ausente, utiliza la suplencia definida; si no existe, conserva el bloqueo y muestra quién debe resolverlo.</p>"
+      },
+      {
+        "heading": "Prueba el control antes de acelerar la compra",
+        "html": "<ul><li>Dos respuestas simultáneas no cambian dos veces el estado final.</li><li>Un enlace reenviado no concede autoridad al receptor.</li><li>Una solicitud cancelada rechaza nuevas aprobaciones.</li><li>La falla de una notificación no borra la solicitud.</li><li>El solicitante puede consultar el estado sin ver compras ajenas.</li></ul><p>Mide solicitudes vencidas, devoluciones por datos incompletos y tiempo por nivel. Estos indicadores ayudan a corregir formularios y suplencias antes de atribuir toda demora a los aprobadores.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "Microsoft Learn: Create and test an approval workflow",
+        "url": "https://learn.microsoft.com/en-us/power-automate/modern-approvals"
+      }
+    ],
+    "service": "automatizaciones.html",
+    "cta": "Organicemos tus reglas de compra en un flujo que conserve versiones, responsables y respuestas verificables.",
+    "datePublished": "2026-10-12",
+    "dateLabel": "12 de octubre de 2026",
+    "sourceDateLabel": "12 de octubre de 2026"
+  },
+  {
+    "slug": "agenda-citas-zonas-horarias-reprogramacion",
+    "title": "Cómo automatizar una agenda con zonas horarias y cambios de cita",
+    "description": "Coordina reservas, reprogramaciones y cancelaciones con zonas horarias explícitas, disponibilidad real y recordatorios coherentes.",
+    "category": "Automatización",
+    "intro": "Las agendas de demostraciones, asesorías comerciales y visitas técnicas suelen fallar en los cambios: alguien viaja, una cita se mueve y el recordatorio antiguo sigue saliendo. Para automatizar la coordinación necesitas una referencia única por reserva y reglas que mantengan sincronizados disponibilidad, mensajes y estado.",
+    "sections": [
+      {
+        "heading": "Guarda la zona, no solo una diferencia horaria",
+        "html": "<p>Pide la zona del lugar de atención y muestra la zona utilizada al ofrecer horarios. Para encuentros remotos, permite que la persona revise su zona antes de confirmar. Una abreviatura o un desplazamiento fijo puede ser ambiguo cuando hay cambios estacionales.</p><p>La <a href=\"https://developers.google.com/workspace/calendar/api/concepts/events-calendars\">documentación de Google Calendar</a> utiliza identificadores IANA para las zonas horarias y distingue la zona del calendario de la del evento. Conserva el instante de la cita y el contexto de zona necesario para presentarlo correctamente.</p>"
+      },
+      {
+        "heading": "Calcula disponibilidad con recursos y márgenes",
+        "html": "<p>Revisa el calendario del responsable, las salas o equipos requeridos, la duración del servicio y los márgenes entre citas. Una visita de treinta minutos puede ocupar más tiempo si requiere desplazamiento o preparación. Define también anticipación mínima y hasta qué fecha se puede reservar.</p><p>El horario visible es una oferta, no una reserva definitiva. Vuelve a comprobar disponibilidad cuando la persona confirma y resuelve dos solicitudes simultáneas con una operación que impida asignar el mismo recurso dos veces. Si ya se ocupó, ofrece opciones actualizadas.</p>"
+      },
+      {
+        "heading": "Confirma únicamente después de guardar",
+        "html": "<p>Usa estados como propuesta, retenida temporalmente, confirmada, reprogramada y cancelada. Si retienes un espacio durante el formulario, establece un vencimiento y libéralo cuando no se complete. No mantengas bloqueos indefinidos.</p><p>La confirmación debe incluir fecha, hora, zona, duración y modalidad o dirección verificadas. Envía el mensaje cuando el calendario confirme la operación. Si falla la notificación, conserva la reserva y reintenta el mensaje con la misma referencia, sin crear otra cita.</p>"
+      },
+      {
+        "heading": "Reprograma como un cambio de la misma reserva",
+        "html": "<p>Conserva el historial y vincula el horario anterior con el nuevo. Antes de liberar la cita original, comprueba que el nuevo espacio pueda asegurarse; si la herramienta no permite un cambio atómico, prepara una recuperación explícita y una revisión de conflictos.</p><p>Actualiza las invitaciones y cancela recordatorios pendientes de la versión anterior. Cada recordatorio debería verificar al enviarse que la reserva siga confirmada y que su versión coincida. Así, una cola atrasada no recuerda una reunión que ya cambió.</p>"
+      },
+      {
+        "heading": "Ejemplo: una demostración entre dos ciudades",
+        "html": "<p>Un cliente en Bogotá reserva una demostración con un equipo en Madrid. El formulario presenta el horario en ambas zonas con la fecha completa. Cuando el cliente elige otra semana, el sistema vuelve a calcular la conversión para esa fecha; no copia la diferencia usada en la primera reserva.</p><p>La nueva cita mantiene su referencia comercial. Si el cliente cancela después, se libera el espacio, se detienen los recordatorios y queda una confirmación de cancelación. El motivo puede ser opcional para no dificultar una acción que evita una ausencia.</p>"
+      },
+      {
+        "heading": "Comprueba los casos que desordenan la agenda",
+        "html": "<ul><li>Una cita atraviesa medianoche en alguna de las zonas.</li><li>La fecha coincide con un cambio estacional de hora.</li><li>Dos personas intentan reservar el mismo espacio.</li><li>Se cancela justo antes de un recordatorio.</li><li>Un responsable cambia de disponibilidad después de confirmar.</li></ul><p>Registra conflictos, reprogramaciones fallidas y recordatorios obsoletos. Además de la tasa de asistencia, estos datos muestran si la coordinación funciona. Mantén un canal de ayuda para corregir una reserva sin obligar a empezar de nuevo.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "Google Calendar: Calendars and events",
+        "url": "https://developers.google.com/workspace/calendar/api/concepts/events-calendars"
+      }
+    ],
+    "service": "automatizaciones.html",
+    "cta": "Revisemos cómo conectar disponibilidad, reservas y recordatorios para que los cambios no generen citas contradictorias.",
+    "datePublished": "2026-10-12",
+    "dateLabel": "12 de octubre de 2026",
+    "sourceDateLabel": "12 de octubre de 2026"
+  },
+  {
+    "slug": "notas-reunion-tareas-verificadas",
+    "title": "Cómo convertir notas de reuniones en tareas sin inventar acuerdos",
+    "description": "Transforma notas y transcripciones en tareas revisables con fuente, responsable confirmado, fecha explícita y control de cambios.",
+    "category": "Agentes de IA",
+    "intro": "Un resumen ordenado puede dar una falsa sensación de acuerdo. “Podríamos revisar el catálogo” no significa que alguien se comprometió a entregarlo el viernes. La automatización de reuniones resulta útil cuando separa sugerencias, decisiones y compromisos, y permite verificar cada tarea antes de incorporarla al trabajo del equipo.",
+    "sections": [
+      {
+        "heading": "Define qué cuenta como tarea",
+        "html": "<p>Establece una regla sencilla: una tarea propuesta necesita una acción concreta, un resultado observable y evidencia de que se acordó hacerla. Responsable y fecha pueden quedar pendientes; la herramienta no debe completarlos por intuición.</p><p>Clasifica por separado decisiones confirmadas, preguntas abiertas e ideas. Una frase condicional, una broma o una alternativa descartada no debe convertirse en obligación. Si la conversación contiene versiones contradictorias, presenta el conflicto para revisión en lugar de escoger la más conveniente.</p>"
+      },
+      {
+        "heading": "Conserva una fuente que el revisor pueda abrir",
+        "html": "<p>Asocia cada propuesta con el fragmento de notas o la marca temporal de la transcripción. Guarda solamente el contexto necesario y respeta los permisos originales. Un enlace accesible al organizador puede no ser accesible a todos los participantes.</p><p>Microsoft explica que el <a href=\"https://support.microsoft.com/en-us/teams/meetings/recap-in-microsoft-teams\">recapitulativo de Teams</a> utiliza la transcripción y otros datos del evento para sus funciones de IA. El resumen generado es una ayuda de lectura; verificar el compromiso requiere regresar a la evidencia de la reunión.</p>"
+      },
+      {
+        "heading": "Extrae un borrador con vacíos visibles",
+        "html": "<ul><li><strong>Acción:</strong> verbo y objeto, sin ampliar el alcance.</li><li><strong>Resultado:</strong> qué permitirá reconocer que terminó.</li><li><strong>Responsable:</strong> persona mencionada o pendiente de confirmar.</li><li><strong>Fecha:</strong> plazo explícito o sin fecha acordada.</li><li><strong>Fuente:</strong> fragmento y contexto verificables.</li><li><strong>Estado:</strong> propuesta, confirmada o descartada.</li></ul><p>Resuelve expresiones como “mañana” usando la fecha y zona de la reunión. Si “el próximo viernes” admite dos interpretaciones, pregunta. No reemplaces un dato ausente con una fecha automática que parezca parte del acuerdo.</p>"
+      },
+      {
+        "heading": "Ejemplo: separar dos frases parecidas",
+        "html": "<p>En una reunión alguien dice: “Sería bueno comparar proveedores”. Más adelante, otra persona afirma: “Yo preparo una comparación de los tres presupuestos y la llevo el martes”. La primera frase queda como idea; la segunda puede generar una tarea propuesta con su fuente.</p><p>Si el hablante no quedó identificado de forma fiable, el responsable permanece pendiente. Tampoco agregues “negociar descuentos” o “elegir proveedor”: comparar presupuestos no autoriza esas decisiones. El resultado esperado puede describirse como una comparación, sin inventar criterios que nadie aprobó.</p>"
+      },
+      {
+        "heading": "Publica después de validar y evita duplicados",
+        "html": "<p>Permite que una persona autorizada revise las propuestas y confirme los datos faltantes. Crear tareas compartidas y notificar responsables puede cambiar prioridades; define quién está facultado para hacerlo. Conserva la relación entre reunión, propuesta y tarea publicada.</p><p>Si procesas otra vez la misma transcripción, actualiza el borrador existente o muestra las diferencias. No abras otra tarea idéntica. Una corrección posterior debe quedar registrada, especialmente cuando cambia el responsable, el plazo o el resultado esperado.</p>"
+      },
+      {
+        "heading": "Evalúa con reuniones difíciles, no solo limpias",
+        "html": "<p>Prueba interrupciones, nombres similares, correcciones al final, tareas retiradas y compromisos sin fecha. Cuenta por separado tareas inventadas, compromisos omitidos y campos incorrectos. Una lista extensa no es señal de mejor calidad.</p><p>Revisa también si las personas pueden acceder a las fuentes y si se compartió información innecesaria. Para ampliar el control de calidad, usa una <a href=\"evaluar-agente-ia-atencion-rubrica-pruebas.html\">rúbrica de evaluación con casos observables</a>, adaptando sus criterios al contexto de reuniones y tareas.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "Microsoft Support: Recap in Microsoft Teams",
+        "url": "https://support.microsoft.com/en-us/teams/meetings/recap-in-microsoft-teams"
+      }
+    ],
+    "service": "agentes-ia.html",
+    "cta": "Diseñemos un recorrido desde las notas hasta tareas revisadas, con evidencia y confirmación de los campos importantes.",
+    "datePublished": "2026-10-12",
+    "dateLabel": "12 de octubre de 2026",
+    "sourceDateLabel": "12 de octubre de 2026"
+  },
+  {
+    "slug": "dashboard-crm-demoras-cohortes-antiguedad",
+    "title": "Qué medir en un dashboard de CRM para detectar demoras reales",
+    "description": "Construye un tablero de CRM con primera respuesta, antigüedad por etapa, cohortes comparables y tareas que permitan actuar sobre los retrasos.",
+    "category": "CRM",
+    "intro": "Un tablero lleno de totales puede esconder solicitudes que llevan días esperando. Para detectar demoras necesitas relojes definidos, registros aún abiertos y grupos comparables. El objetivo no es acumular gráficos: es saber dónde se atasca el trabajo, qué casos requieren atención y quién puede resolverlos.",
+    "sections": [
+      {
+        "heading": "Define cuándo empieza y termina cada reloj",
+        "html": "<p>Para primera respuesta, establece el evento inicial: llegada de la consulta al canal o creación del registro. Decide qué respuesta cuenta. Un acuse automático puede confirmar recepción sin resolver la necesidad de atención; mide ambos momentos por separado.</p><p>Indica si usas horas corridas u horas de atención. Guarda el calendario operativo aplicado y explica cómo se tratan festivos, mensajes fuera de horario y reaperturas. Cambiar estas reglas entre períodos vuelve engañosa una comparación aunque las cifras sean correctas.</p>"
+      },
+      {
+        "heading": "Muestra los casos que todavía no terminaron",
+        "html": "<p>La duración de casos cerrados no describe toda la cola. Añade cantidad de registros sin primera respuesta y edad del más antiguo, junto con una distribución por rangos. Para una etapa abierta, mide desde su entrada hasta el momento de consulta.</p><p>HubSpot distingue <a href=\"https://knowledge.hubspot.com/properties/stage-calculated-properties\">tiempo en la etapa actual, última estancia y tiempo acumulado</a>. Sus propiedades de estancias terminadas no sustituyen el reloj del caso que sigue abierto. Comprueba además que los campos necesarios estén habilitados en tu configuración.</p>"
+      },
+      {
+        "heading": "Compara cohortes con la misma oportunidad de avanzar",
+        "html": "<p>Una cohorte reúne registros por una condición común, como la semana de entrada. Compara consultas recibidas en semanas distintas al mismo número de días desde su llegada. Un grupo de ayer no ha tenido las mismas oportunidades de avanzar que uno del mes pasado.</p><p>Separa canales, tipos de solicitud o niveles de complejidad cuando cambien el trabajo requerido. Muestra siempre el tamaño del grupo. Una mejora aparente puede deberse a que llegaron consultas más sencillas, no a que el proceso se haya vuelto más rápido.</p>"
+      },
+      {
+        "heading": "Combina tendencia central y retrasos extremos",
+        "html": "<p>La mediana ayuda a describir un caso típico, mientras un percentil alto permite observar la cola lenta. Acompáñalos con el número de casos y la definición del cálculo. Evita presentar un percentil como una promesa individual de respuesta.</p><p>Añade porcentaje de registros sin responsable, sin próxima acción o con fecha vencida. Estos indicadores conectan el tiempo con un problema operativo concreto. Una lista filtrable de los casos afectados suele ser más útil que otro indicador agregado sin posibilidad de investigación.</p>"
+      },
+      {
+        "heading": "Ejemplo: la media mejora y la cola empeora",
+        "html": "<p>Supón que una semana entran 100 consultas: 90 reciben respuesta rápida y diez quedan pendientes. Un tablero calculado solo sobre las 90 respondidas puede parecer excelente. La revisión de pendientes revela que varias esperan desde hace días.</p><p>La semana siguiente entran más consultas sencillas y baja la mediana. Antes de celebrar, compara cohortes equivalentes y revisa el grupo sin respuesta. Si esas diez siguen envejeciendo, la prioridad es identificar su ruta, responsable y bloqueo, no aumentar la velocidad de los casos que ya fluían bien.</p>"
+      },
+      {
+        "heading": "Convierte cada alerta en una revisión posible",
+        "html": "<ul><li>Define el umbral según el servicio y su horario.</li><li>Muestra el registro y el evento que activaron la alerta.</li><li>Asigna un equipo capaz de actuar sobre el bloqueo.</li><li>Permite registrar una excepción con motivo y próxima revisión.</li><li>Comprueba el efecto del cambio en la cohorte siguiente.</li></ul><p>No uses el tablero aislado para calificar personas: ausencias, carga y complejidad necesitan contexto. Si aparecen casos sin dueño, revisa primero las <a href=\"repartir-leads-capacidad-ausencias-responsable.html\">reglas de reparto de leads</a> y verifica que esa asignación realmente llegue al equipo.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "HubSpot: Use stage calculated properties",
+        "url": "https://knowledge.hubspot.com/properties/stage-calculated-properties"
+      }
+    ],
+    "service": "crm-personalizado.html",
+    "cta": "Definamos los relojes y las cohortes de tu CRM para convertir los retrasos en una lista de acciones verificables.",
+    "datePublished": "2026-10-12",
+    "dateLabel": "12 de octubre de 2026",
+    "sourceDateLabel": "12 de octubre de 2026"
+  },
+  {
+    "slug": "onboarding-offboarding-flujos-tareas",
+    "title": "Cómo organizar onboarding y offboarding con tareas verificables",
+    "description": "Coordina ingresos y salidas con responsables, dependencias, fechas autorizadas y evidencia de cierre sin incluir secretos en el tablero.",
+    "category": "Automatización",
+    "intro": "Preparar un ingreso o una salida implica equipos, documentación, conocimiento y accesos. Una lista genérica no basta si cada área interpreta de forma distinta cuándo debe actuar. El flujo debe coordinar decisiones ya autorizadas, sin decidir contrataciones, condiciones laborales o desvinculaciones por cuenta propia.",
+    "sections": [
+      {
+        "heading": "Parte de un evento confirmado y una fuente responsable",
+        "html": "<p>Define quién autoriza el inicio, qué identificador corresponde a la persona y cuál es la fecha efectiva con su zona horaria. Evita disparar cambios por una mención informal en un chat o por inferencias de actividad. Una corrección de fecha debe actualizar las tareas pendientes y avisar a los responsables afectados.</p><p>Microsoft presenta los <a href=\"https://learn.microsoft.com/en-us/entra/id-governance/what-are-lifecycle-workflows\">flujos del ciclo de vida de identidades</a> como tareas con condiciones de ejecución para ingresos, cambios internos y salidas. Esa separación ayuda a distinguir el evento autorizado de las acciones necesarias para implementarlo.</p>"
+      },
+      {
+        "heading": "Dibuja dependencias antes de repartir pendientes",
+        "html": "<p>En un ingreso, identificar el rol precede a preparar el equipo y solicitar los accesos correspondientes. La capacitación puede depender de que el entorno esté listo. No marques todo como paralelo si una tarea necesita una evidencia producida por otra.</p><p>Asigna un responsable y un suplente por tarea, además de una condición de finalización. “Preparar computador” es ambiguo; “equipo inventariado, configurado y entregado con recepción confirmada” permite comprobar el resultado. Los accesos requieren su propia aprobación y verificación por personal autorizado.</p>"
+      },
+      {
+        "heading": "Separa información operativa de datos restringidos",
+        "html": "<p>El tablero compartido puede mostrar identificador, fecha, área responsable y estado. No necesita contener contraseñas, tokens, documentos personales ni razones sensibles de una salida. Mantén esos datos en los sistemas apropiados y enlaza solo lo que cada participante tenga permiso de consultar.</p><p>La tarea de acceso debe registrar solicitud, aprobación y resultado, nunca el secreto utilizado. No envíes credenciales en comentarios o notificaciones. El equipo técnico debe emplear su mecanismo autorizado de entrega y recuperación, con controles adecuados al sistema.</p>"
+      },
+      {
+        "heading": "Planifica la salida sin confundir entrega y eliminación",
+        "html": "<p>Organiza por separado transferencia de trabajo, devolución de activos, revisión de cuentas y tratamiento de archivos. La entrega de un portátil no demuestra que todos los accesos hayan terminado. Tampoco una cuenta deshabilitada demuestra que los documentos necesarios tengan nuevo responsable.</p><p>Define qué verificaciones corresponden a cada sistema y quién puede ejecutarlas. No automatices eliminaciones irreversibles dentro de una lista genérica: conservación, transferencia y borrado necesitan una decisión explícita conforme a las políticas aplicables y al contexto de la organización.</p>"
+      },
+      {
+        "heading": "Ejemplo: cambia la fecha de ingreso",
+        "html": "<p>Una persona iba a incorporarse el lunes y la fecha autorizada pasa al jueves. El flujo conserva el mismo expediente, reprograma capacitación y entrega, y señala solicitudes de acceso ya iniciadas para que el equipo responsable revise su vigencia. No crea un segundo ingreso.</p><p>Si el equipo ya fue enviado, la tarea no vuelve a “pendiente” como si nada hubiera ocurrido. Registra el estado real y crea la acción de coordinación necesaria. Los cambios de fecha requieren reconciliar lo ejecutado con lo que aún se puede modificar.</p>"
+      },
+      {
+        "heading": "Cierra con evidencia y revisa las excepciones",
+        "html": "<ul><li>Cada tarea crítica tiene resultado y responsable identificables.</li><li>Las dependencias bloqueadas muestran una causa concreta.</li><li>Las verificaciones de acceso se completan en cada sistema previsto.</li><li>Los activos y entregas tienen referencias comprobables.</li><li>Las excepciones conservan autorización y próxima revisión.</li></ul><p>Mide tareas vencidas, preparación antes del ingreso y verificaciones pendientes tras una salida. Estos indicadores sirven para mejorar la coordinación. No los conviertas en conclusiones sobre desempeño individual ni en decisiones laborales automatizadas.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "Microsoft Learn: What are lifecycle workflows?",
+        "url": "https://learn.microsoft.com/en-us/entra/id-governance/what-are-lifecycle-workflows"
+      }
+    ],
+    "service": "automatizaciones.html",
+    "cta": "Organicemos las tareas y dependencias de ingresos y salidas con responsables claros y evidencia de ejecución.",
+    "datePublished": "2026-10-12",
+    "dateLabel": "12 de octubre de 2026",
+    "sourceDateLabel": "12 de octubre de 2026"
+  },
+  {
+    "slug": "portal-clientes-seguimiento-pedidos-privacidad",
+    "title": "Cómo diseñar un portal de pedidos sin exponer información de otros clientes",
+    "description": "Define estados, permisos por pedido, documentos visibles y pruebas de aislamiento para un portal de seguimiento útil y seguro.",
+    "category": "Software a medida",
+    "intro": "Un portal de seguimiento debe responder qué pasó con un pedido y qué falta para avanzar. Mostrar una tabla interna completa puede revelar comentarios, archivos o referencias de otros clientes. Diseña primero la información que cada usuario necesita y luego el recorrido que le permite consultarla de forma autorizada.",
+    "sections": [
+      {
+        "heading": "Publica estados que el cliente pueda interpretar",
+        "html": "<p>Traduce la operación a pocos estados definidos: recibido, validando, en preparación, despachado y entregado, si corresponden a tu proceso. Para cada uno, establece qué evidencia lo activa y qué información puede publicarse. Evita mostrar “entregado” solo porque se creó una guía.</p><p>Añade última actualización y próximo paso conocido. Una estimación debe identificarse como tal y conservar su fecha de cálculo. Si falta confirmación, explica qué se está verificando sin convertir un dato incompleto en una promesa de entrega.</p>"
+      },
+      {
+        "heading": "Define quién puede consultar cada pedido",
+        "html": "<p>Un usuario puede pertenecer a una empresa con varias sedes, pero eso no significa que deba consultar todas sus compras. Diseña una matriz de roles y alcance: contacto del pedido, comprador de una sede o administrador autorizado de la cuenta.</p><p>La <a href=\"https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html\">guía de autorización de OWASP</a> recomienda denegar por defecto y validar permisos en cada solicitud. Cambiar un identificador en la dirección del portal nunca debe permitir recuperar el pedido de otro cliente.</p>"
+      },
+      {
+        "heading": "Construye una vista externa con campos explícitos",
+        "html": "<p>Selecciona los campos publicables: referencia comercial, estado confirmado, cantidades pertinentes, documentos autorizados y canal de ayuda. Mantén fuera costos internos, márgenes, notas de negociación y mensajes privados entre equipos. No dependas de ocultarlos visualmente después de enviarlos al navegador.</p><p>Separa la nota interna de la actualización destinada al cliente. Una corrección de logística puede contener nombres o referencias de otros pedidos; su publicación requiere una versión preparada para ese destinatario. Para empezar, un portal de lectura reduce el alcance y facilita verificar la información expuesta.</p>"
+      },
+      {
+        "heading": "Aplica el mismo alcance a archivos y avisos",
+        "html": "<p>Una pantalla bien protegida no basta si el comprobante adjunto tiene una dirección pública permanente. Revisa cómo se entregan archivos y qué ocurre cuando cambia la persona autorizada. Los avisos por correo deben contener lo mínimo necesario y dirigir al portal para consultar detalles.</p><p>Comprueba también búsquedas, exportaciones, historial, miniaturas y respuestas de error. En cachés compartidas, evita reutilizar respuestas privadas entre usuarios. El diseño de cada función nueva debe incluir una pregunta explícita: ¿de qué cuenta proviene este dato y quién puede recibirlo?</p>"
+      },
+      {
+        "heading": "Ejemplo: dos compradores de empresas distintas",
+        "html": "<p>Prepara datos ficticios de Empresa A y Empresa B, cada una con pedidos y documentos diferentes. Entra como comprador de A y comprueba el listado, una URL directa, una descarga y una búsqueda usando referencias de B. El sistema debe impedir el acceso sin revelar información innecesaria.</p><p>Después, cambia el comprador autorizado de un pedido de A y verifica el acceso anterior y el nuevo. Incluye sesiones ya abiertas y enlaces guardados. Estas pruebas deben formar parte de la revisión de versiones, no hacerse solo el día del lanzamiento.</p>"
+      },
+      {
+        "heading": "Mide utilidad sin sacrificar claridad",
+        "html": "<p>Observa consultas de estado resueltas, pedidos con información desactualizada y solicitudes de ayuda por datos contradictorios. Una disminución de mensajes puede ser positiva, pero también puede indicar que el cliente no encuentra cómo contactar al equipo.</p><p>Mantén un canal visible para reportar una discrepancia y vincula el caso con la referencia del pedido. Antes de ampliar el portal a pagos, cambios de dirección o cancelaciones, define nuevas autorizaciones y pruebas. La guía para <a href=\"definir-alcance-mvp-criterios-aceptacion.html\">delimitar un MVP de software</a> ayuda a escoger un primer recorrido verificable.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "OWASP: Authorization Cheat Sheet",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html"
+      }
+    ],
+    "service": "sistemas.html",
+    "cta": "Definamos qué puede ver cada cliente y construyamos un primer portal de seguimiento con permisos y estados comprobables.",
+    "datePublished": "2026-10-12",
+    "dateLabel": "12 de octubre de 2026",
+    "sourceDateLabel": "12 de octubre de 2026"
+  },
+  {
+    "slug": "diagnosticar-indexacion-web-nueva-search-console",
+    "title": "Mi sitio nuevo no aparece en Google: cómo revisar su indexación",
+    "description": "Diagnostica una web recién publicada con Inspección de URLs, contenido renderizado, canonical y sitemap, sin confundir acceso con indexación.",
+    "category": "SEO técnico",
+    "intro": "Publicar una web y verla en el navegador confirma que está disponible para ti. Para investigar por qué una página todavía no aparece en Google conviene trabajar con una URL concreta y registrar evidencias. Este recorrido propone una revisión de lanzamiento que separa problemas técnicos, descubrimiento y decisiones de indexación.",
+    "sections": [
+      {
+        "heading": "Prepara una muestra que puedas revisar",
+        "html": "<p>Elige la portada, un servicio importante y una página editorial. Copia sus direcciones completas desde la navegación pública; evita comenzar con enlaces del administrador. Anota fecha de publicación, última modificación y propósito de cada página. Incluye una URL que sabes que debe quedar fuera del buscador para comprobar que no estás eliminando restricciones útiles.</p><p>Como criterio editorial, crea una ficha por dirección con cuatro columnas: observación, evidencia, cambio propuesto y responsable. Esto permite distinguir “todavía no la encontramos” de “el servidor impide verla”. Guarda también la fecha de cada comprobación.</p>"
+      },
+      {
+        "heading": "Compara el registro de Google con la página actual",
+        "html": "<p>En <a href=\"https://support.google.com/webmasters/answer/9012289?hl=en\">Inspección de URLs</a>, el resultado inicial corresponde a la información que Google tiene de la página; la prueba en directo examina su estado actual. La segunda no confirma que la URL esté indexada ni resuelve todas las condiciones para aparecer en resultados.</p><p>Revisa la fecha del rastreo y el motivo mostrado. Si acabas de corregir un bloqueo, compara ambas vistas antes de concluir que el arreglo falló. Examina también la representación obtenida: el servicio, su explicación y sus enlaces importantes deberían ser reconocibles, no quedar reemplazados por una pantalla vacía.</p>"
+      },
+      {
+        "heading": "Clasifica el problema antes de cambiar la web",
+        "html": "<p>Organiza la revisión según el síntoma. Si el servidor falla, entrega al responsable técnico la URL y la hora. Si aparece una restricción de indexación, comprueba para qué se puso antes de retirarla. Si se eligió otra dirección como canonical, compara ambas páginas y decide cuál debe representar ese contenido.</p><ul><li>Una página retirada merece una decisión de contenido, no una solicitud automática de indexación.</li><li>Una variante duplicada puede estar correctamente representada por otra URL.</li><li>Una página comercial única necesita contenido propio y una ruta clara desde la navegación.</li></ul><p>Evita modificar a la vez plantillas, dominio y textos: perderías la posibilidad de relacionar cada corrección con su evidencia.</p>"
+      },
+      {
+        "heading": "Usa el sitemap como ayuda de descubrimiento",
+        "html": "<p>Google explica que un <a href=\"https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview\">sitemap facilita descubrir direcciones</a>, pero no garantiza su rastreo ni su indexación. Puede ser especialmente útil en una web nueva con pocos enlaces externos.</p><p>Contrasta su contenido con tu inventario de publicación. Como revisión práctica, busca direcciones del entorno de pruebas, páginas retiradas y servicios que olvidaste incluir. Comprueba además que una persona puede llegar a las páginas prioritarias desde enlaces visibles. Corregir el archivo no sustituye ordenar la navegación ni aclarar qué ofrece cada página.</p>"
+      },
+      {
+        "heading": "Ejemplo de un lanzamiento con bloqueo heredado",
+        "html": "<p>En un caso hipotético, la portada es accesible, pero una plantilla de servicios conserva una instrucción de exclusión del entorno de pruebas. El equipo verifica que esos servicios deben ser públicos, corrige la plantilla y prueba varias páginas que la utilizan. Después solicita indexación de la URL prioritaria y registra la intervención.</p><p>En cambio, la página de confirmación conserva su exclusión del buscador. Si muestra datos privados, necesita además autenticación y permisos: una instrucción de no indexar no restringe el acceso. El objetivo es publicar correctamente el contenido previsto, no conseguir que todas las direcciones aparezcan en búsquedas.</p>"
+      },
+      {
+        "heading": "Cierra la revisión con límites claros",
+        "html": "<p>Asigna una siguiente revisión y compara el estado con la ficha anterior. Si no hay un fallo técnico identificable, revisa la utilidad y diferenciación del contenido antes de insistir con cambios. Una solicitud de indexación no garantiza inclusión, y estar incluido tampoco garantiza una posición determinada. Entrega como resultado los problemas comprobados, las correcciones verificadas y las preguntas pendientes.</p><p>Si el lanzamiento reemplaza direcciones anteriores, complementa esta revisión con un <a href=\"migracion-web-mapa-url-redirecciones-canonical.html\">mapa de URLs y redirecciones</a>.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "Google Search Console: Inspección de URLs",
+        "url": "https://support.google.com/webmasters/answer/9012289?hl=en"
+      },
+      {
+        "title": "Google Search Central: información sobre sitemaps",
+        "url": "https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview"
+      }
+    ],
+    "service": "desarrollo-web.html",
+    "cta": "Revisemos qué páginas de tu lanzamiento deben aparecer en Google y qué evidencia falta para diagnosticar su estado.",
+    "datePublished": "2026-10-12",
+    "dateLabel": "12 de octubre de 2026",
+    "sourceDateLabel": "12 de octubre de 2026"
+  },
+  {
+    "slug": "formularios-etiquetas-errores-autocompletado",
+    "title": "Cómo facilitar el envío de un formulario sin pedir datos de más",
+    "description": "Revisa campos necesarios, etiquetas visibles, autocompletado y errores recuperables para que el contacto funcione desde móvil y teclado.",
+    "category": "Desarrollo web",
+    "intro": "Un formulario puede recibir muchas visitas y seguir siendo difícil de terminar. Antes de cambiar el color del botón, conviene recorrerlo como alguien que tiene una pregunta concreta, usa un teléfono y no conoce tus procesos. Esta revisión se centra en esfuerzo, claridad y recuperación de errores.",
+    "sections": [
+      {
+        "heading": "Justifica cada campo con una acción posterior",
+        "html": "<p>Escribe qué hará el equipo con cada respuesta. Si nadie puede explicar para qué necesita un dato en el primer contacto, considera retirarlo o pedirlo después. Para una consulta inicial, obligar a describir presupuesto, domicilio completo y estructura de la empresa puede introducir decisiones innecesarias.</p><p>El <a href=\"https://www.w3.org/WAI/tutorials/forms/\">tutorial de formularios de W3C</a> recomienda pedir únicamente la información necesaria para completar el proceso. Nuestro criterio práctico es revisar los campos con quien atiende las solicitudes y separar lo imprescindible para responder de lo útil para una conversación posterior.</p>"
+      },
+      {
+        "heading": "Haz que las etiquetas sobrevivan a la escritura",
+        "html": "<p>Cada control necesita una etiqueta clara y asociada. Un ejemplo dentro del campo puede ayudar, pero desaparece cuando la persona escribe. Mantén visibles nombres como “Correo para responderte” y explica restricciones reales antes del envío, no después de que alguien haya terminado.</p><p>Identifica lo obligatorio con palabras. Evita llamar “usuario” a quien solo está consultando por un servicio. En la revisión editorial, lee únicamente las etiquetas: si no permiten anticipar qué se solicita, todavía dependen demasiado del contexto visual. Agrupa preguntas relacionadas y conserva un orden que tenga sentido al recorrerlo con teclado.</p>"
+      },
+      {
+        "heading": "Permite autocompletar sin inventar información",
+        "html": "<p>La documentación de <a href=\"https://www.w3.org/WAI/WCAG22/Understanding/identify-input-purpose\">W3C sobre propósito de los campos</a> explica cómo valores apropiados de <code>autocomplete</code> ayudan a identificar datos habituales, como nombre y correo. Configura el propósito correspondiente a cada campo en vez de bloquear esta ayuda de forma general.</p><p>Prueba el comportamiento con datos ficticios guardados en un navegador de prueba. Revisa que el nombre no termine en la empresa y que el correo no se sobrescriba al cambiar de campo. No rellenes respuestas comerciales por la persona: presupuesto, consentimiento y necesidad del proyecto merecen decisiones propias.</p>"
+      },
+      {
+        "heading": "Convierte el error en una instrucción recuperable",
+        "html": "<p>Un mensaje como “Entrada inválida” obliga a adivinar. Prefiere “Revisa el correo: falta el dominio después de @” cuando ese sea realmente el problema. Conserva lo ya escrito y permite volver al campo correspondiente. Si el servidor no responde, distingue ese fallo de una respuesta incorrecta del usuario.</p><p>La guía de <a href=\"https://www.w3.org/WAI/tutorials/forms/notifications/\">notificaciones de W3C</a> recomienda identificar el campo afectado y orientar su corrección. Como prueba de aceptación, provoca tres errores distintos: dato incompleto, dato rechazado y fallo técnico. Cada uno debería ofrecer una salida comprensible y evitar borrar el resto del formulario.</p>"
+      },
+      {
+        "heading": "Ejemplo: solicitar una revisión de sitio",
+        "html": "<p>Un formulario hipotético pide nombre, correo y dirección del sitio, con un comentario opcional. El equipo decide que no necesita teléfono para responder inicialmente. Junto a la dirección aclara que quien todavía no tiene web puede dejarla vacía. Así evita que una persona invente un enlace para continuar.</p><p>Cuando la recepción se confirma, muestra qué sucedió y por qué canal continuará el contacto. No anuncia una cita reservada ni una respuesta en minutos si esos compromisos no forman parte del proceso real. El botón vuelve a estar disponible si hubo un fallo recuperable.</p>"
+      },
+      {
+        "heading": "Evalúa el recorrido completo",
+        "html": "<p>Comprueba el formulario con teclado, zoom, móvil y una conexión lenta. Pide a alguien ajeno al proyecto que lo complete con información ficticia y observa dónde necesita explicaciones. Si mides abandono, no grabes el contenido de las respuestas. Compara inicios, errores y recepciones confirmadas; una mejora de interfaz no garantiza por sí sola más contactos comerciales ni sustituye revisar la oferta.</p><p>Para revisar cómo llega la persona al formulario, recorre también la <a href=\"landing-b2b-movil-contacto.html\">landing B2B desde el móvil</a>.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "W3C WAI: formularios",
+        "url": "https://www.w3.org/WAI/tutorials/forms/"
+      },
+      {
+        "title": "W3C: identificar el propósito del campo",
+        "url": "https://www.w3.org/WAI/WCAG22/Understanding/identify-input-purpose"
+      },
+      {
+        "title": "W3C WAI: notificaciones en formularios",
+        "url": "https://www.w3.org/WAI/tutorials/forms/notifications/"
+      }
+    ],
+    "service": "desarrollo-web.html",
+    "cta": "Revisemos qué campos necesita tu equipo y dónde se interrumpe hoy el envío del formulario.",
+    "datePublished": "2026-10-12",
+    "dateLabel": "12 de octubre de 2026",
+    "sourceDateLabel": "12 de octubre de 2026"
+  },
+  {
+    "slug": "prueba-ab-landing-regla-parada",
+    "title": "Cómo diseñar una prueba A/B de landing con una decisión clara",
+    "description": "Define hipótesis, conversión confirmada, asignación y regla de parada antes de comparar dos versiones de una landing.",
+    "category": "Conversión web",
+    "intro": "Una prueba A/B sirve para decidir entre alternativas bajo condiciones definidas. Mostrar dos páginas y elegir la que ayer recibió más clics puede producir una conclusión frágil. Antes de publicar variantes, escribe qué diferencia quieres evaluar y qué evidencia justificaría conservarla.",
+    "sections": [
+      {
+        "heading": "Formula una hipótesis pequeña y comprobable",
+        "html": "<p>Por ejemplo: “Mostrar el alcance del diagnóstico antes del formulario ayudará a que las visitas pertinentes entiendan qué solicitan”. La variante modifica ese bloque; conserva oferta, campañas y funcionamiento del formulario. Es una hipótesis editorial, no una promesa de incremento.</p><p>Elige una decisión que puedas ejecutar después. Si las versiones cambian precio, diseño, formulario y público al mismo tiempo, el resultado tendrá poca utilidad para entender qué mantener. Documenta capturas y fecha de inicio para que otras personas sepan qué estuvo expuesto realmente.</p>"
+      },
+      {
+        "heading": "Define conversión y denominador antes de comenzar",
+        "html": "<p>Para captar solicitudes, una opción es contar visitantes asignados que completan un envío aceptado por el sistema, dividido entre visitantes elegibles asignados. Establece una ventana de observación y cómo tratar repeticiones. Un clic en “Enviar” no demuestra que el mensaje se recibió.</p><p>Añade indicadores de protección: errores del formulario, solicitudes duplicadas y proporción de contactos que el equipo puede atender. Si la variante atrae consultas fuera del servicio, el aumento de envíos necesita contexto. Mantén separado el resultado primario de estas comprobaciones para no elegir después la métrica más favorable.</p>"
+      },
+      {
+        "heading": "Comprueba la asignación y la medición",
+        "html": "<p>Define una unidad de asignación, distribúyela aleatoriamente entre variantes y conserva esa asignación durante la experiencia. Revisa el reparto esperado entre variantes y confirma que el mismo flujo de recepción emite la señal en ambas. Antes del lanzamiento público, realiza envíos ficticios y verifica que no aparecen como dos conversiones.</p><p>Microsoft describe en sus <a href=\"https://www.microsoft.com/en-us/research/articles/patterns-of-trustworthy-experimentation-pre-experiment-stage/\">patrones previos al experimento</a> la importancia de preparar criterios de evaluación y comprobar la calidad del sistema experimental. Para una landing pequeña, recomendamos un acta breve con responsables de tráfico, formulario y análisis, más una forma inmediata de retirar una variante rota.</p>"
+      },
+      {
+        "heading": "Escribe una regla de parada que respete el método",
+        "html": "<p>Antes de lanzar, calcula el tamaño de muestra con la tasa de referencia, el cambio mínimo que importa y los parámetros estadísticos elegidos. Fija también una duración mínima que cubra el ciclo habitual de visitas y una fecha máxima para revisar viabilidad. No existe un número universal de días o visitas para todas las páginas.</p><p>La investigación de <a href=\"https://www.microsoft.com/en-us/research/articles/patterns-of-trustworthy-experimentation-during-experiment-stage/\">Microsoft sobre experimentos en curso</a> advierte que las revisiones repetidas requieren un tratamiento estadístico adecuado. Con un diseño de horizonte fijo, no declares ganador al primer resultado favorable. Si utilizas un método secuencial, aplica sus reglas previstas, no una mezcla improvisada.</p>"
+      },
+      {
+        "heading": "Ejemplo de decisión sin ganador forzado",
+        "html": "<p>Una empresa hipotética compara un bloque de alcance breve con otro que incluye entregables y exclusiones. Su criterio principal es la solicitud recibida dentro de la ventana acordada. Antes del inicio establece que un fallo de envío detiene la exposición por seguridad operativa, pero no cuenta como victoria de la otra versión.</p><p>Al cerrar la observación, la evidencia podría ser insuficiente para distinguir las opciones. La conclusión válida sería “inconcluso”. El equipo puede conservar la versión actual y estudiar dudas de usuarios, en vez de prolongar la prueba hasta encontrar un número conveniente.</p>"
+      },
+      {
+        "heading": "Decide si experimentar es viable",
+        "html": "<p>Con poco tráfico, un cambio pequeño puede requerir una observación poco práctica. Considera primero entrevistas y pruebas de uso para detectar problemas evidentes. El informe final debe incluir alcance, incertidumbre, incidencias y decisión. Una prueba bien diseñada puede reducir dudas; no garantiza un aumento de conversiones ni explica por sí sola por qué ocurrió un efecto.</p><p>Antes de comparar variantes, verifica la <a href=\"ga4-formularios-leads-confirmados-sin-pii.html\">medición de recepciones confirmadas en GA4</a>.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "Microsoft Research: preparación de experimentos",
+        "url": "https://www.microsoft.com/en-us/research/articles/patterns-of-trustworthy-experimentation-pre-experiment-stage/"
+      },
+      {
+        "title": "Microsoft Research: revisión durante experimentos",
+        "url": "https://www.microsoft.com/en-us/research/articles/patterns-of-trustworthy-experimentation-during-experiment-stage/"
+      }
+    ],
+    "service": "desarrollo-web.html",
+    "cta": "Definamos qué decisión necesita tu landing y si el tráfico disponible permite evaluarla con una prueba útil.",
+    "datePublished": "2026-10-12",
+    "dateLabel": "12 de octubre de 2026",
+    "sourceDateLabel": "12 de octubre de 2026"
+  },
+  {
+    "slug": "preparar-imagenes-web-srcset-formatos",
+    "title": "Cómo preparar imágenes para una web rápida sin perder información",
+    "description": "Organiza tamaños, recortes, srcset, dimensiones y formatos modernos con una revisión visual y de descarga antes de publicar.",
+    "category": "Rendimiento web",
+    "intro": "Preparar una imagen para una web empieza por saber dónde se verá y qué necesita comunicar. Reducir archivos sin mirar el resultado puede borrar detalles importantes; subir el original a todas las páginas desperdicia recursos. Conviene diseñar una pequeña cadena de preparación y comprobar lo que el navegador descarga.",
+    "sections": [
+      {
+        "heading": "Parte del uso, no del archivo original",
+        "html": "<p>Separa fotografías de portada, tarjetas, detalles de producto e ilustraciones. Para cada uso, registra proporción, anchura máxima visible y elementos que no deben cortarse. Conserva el original como fuente de edición, fuera de la entrega habitual al visitante.</p><p>Como práctica editorial, acuerda un nombre legible y una persona responsable de aprobar el recorte. Una foto de equipo necesita preservar rostros; una de producto puede requerir mostrar conectores o textura. La versión más liviana deja de ser útil si oculta precisamente el detalle que ayuda a decidir.</p>"
+      },
+      {
+        "heading": "Genera tamaños que respondan al diseño",
+        "html": "<p>La guía de <a href=\"https://web.dev/learn/design/responsive-images?hl=en\">imágenes adaptables de web.dev</a> explica cómo <code>srcset</code> ofrece candidatos y <code>sizes</code> describe el espacio previsto para que el navegador elija. Las dimensiones declaradas también ayudan a reservar la proporción de la imagen.</p><p>En una tarjeta que ocupa una columna pequeña en escritorio y casi toda la pantalla en móvil, exporta candidatos para ambos contextos. No copies una lista de anchuras sin mirar la plantilla. Revisa pantallas de distinta densidad: la anchura visual y los píxeles del archivo no representan necesariamente la misma cantidad.</p>"
+      },
+      {
+        "heading": "Compara formatos con la imagen real",
+        "html": "<p><a href=\"https://web.dev/learn/performance/image-performance\">web.dev describe el uso de picture</a> para ofrecer formatos como AVIF y WebP con un archivo de respaldo. El navegador selecciona una opción compatible según las fuentes definidas. El formato, por sí solo, no decide la calidad de tu fotografía.</p><p>Exporta versiones de prueba y compáralas al tamaño de lectura. Observa bordes, letras incorporadas, degradados y zonas oscuras. Registra peso y defectos visibles, y elige según ese balance. Evita imponer el mismo ajuste de compresión a una foto de paisaje y a una captura con texto pequeño. Si la imagen contiene información textual esencial, considera presentarla también como texto de la página.</p>"
+      },
+      {
+        "heading": "Reserva espacio y ordena la carga",
+        "html": "<p>Comprueba que la caja visual tiene una proporción coherente antes de recibir el archivo. Recorre la página mientras carga: un botón que se desplaza cuando aparece una foto necesita revisión. Si móvil y escritorio usan recortes de proporción diferente, prueba ambos diseños expresamente.</p><p>La documentación de imágenes adaptables desaconseja retrasar con carga diferida una imagen visible desde el inicio. En la práctica, clasifica cada recurso por su posición real. Una galería inferior puede esperar; la fotografía principal merece otra revisión. No marques todas las imágenes como prioritarias sin medir qué compite por la descarga.</p>"
+      },
+      {
+        "heading": "Ejemplo: una ficha con fotografía de detalle",
+        "html": "<p>Una tienda hipotética muestra una lámpara en tarjetas y en una ficha ampliada. El equipo prepara un recorte general para el listado y otro que permite examinar el interruptor en la ficha. Mantiene nombres relacionados para poder actualizar ambas piezas cuando cambia el producto.</p><p>En móvil verifica que la tarjeta recibe un candidato razonable y que el detalle se distingue al abrir la ficha. Si el recorte pequeño elimina el interruptor, no aumenta su resolución sin más: cambia el encuadre. Después revisa el texto alternativo según lo que la imagen aporta en cada contexto.</p>"
+      },
+      {
+        "heading": "Verifica la entrega y deja una regla de mantenimiento",
+        "html": "<p>Usa las herramientas del navegador para observar URL, tamaño transferido y candidato elegido con caché desactivada durante la prueba. Comprueba que no faltan archivos y que la versión de respaldo funciona. Guarda una pauta para futuras cargas del equipo: usos, proporciones y revisión visual. No prometas una puntuación fija de rendimiento; fuentes, scripts, servidor y otros recursos también influyen en la experiencia.</p><p>Para interpretar el efecto sobre la experiencia, separa <a href=\"core-web-vitals-laboratorio-campo.html\">mediciones de laboratorio y datos reales de usuarios</a>.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "web.dev: imágenes adaptables",
+        "url": "https://web.dev/learn/design/responsive-images?hl=en"
+      },
+      {
+        "title": "web.dev: rendimiento de imágenes",
+        "url": "https://web.dev/learn/performance/image-performance"
+      }
+    ],
+    "service": "desarrollo-web.html",
+    "cta": "Revisemos qué imágenes descarga tu web y preparemos variantes que respeten tanto el diseño como la información que muestran.",
+    "datePublished": "2026-10-12",
+    "dateLabel": "12 de octubre de 2026",
+    "sourceDateLabel": "12 de octubre de 2026"
+  },
+  {
+    "slug": "ga4-formularios-leads-confirmados-sin-pii",
+    "title": "Cómo medir formularios en GA4 sin confundir clics con leads",
+    "description": "Define eventos de formulario basados en recepción confirmada, evita datos personales y comprueba duplicados antes de analizar leads en GA4.",
+    "category": "Analítica web",
+    "intro": "Para saber si una web genera consultas necesitas una definición de recepción y una medición que la respete. El botón puede recibir clics aunque falten campos o el servidor falle. Esta guía propone un contrato de eventos sencillo para formularios de contacto, con revisión técnica y límites explícitos.",
+    "sections": [
+      {
+        "heading": "Dibuja los estados del formulario",
+        "html": "<p>Enumera las situaciones que la aplicación conoce: formulario disponible, interacción inicial, intento de envío, error y recepción confirmada. Decide qué preguntas merece responder la analítica. No hace falta convertir cada tecla pulsada en un evento.</p><p>Como recomendación de implementación, redacta una ficha por señal con nombre, condición exacta, parámetros permitidos y responsable. “Solicitud recibida” debe describir un estado comprobable del sistema. Si el formulario solo envía correo sin verificar el resultado, documenta ese límite antes de llamar lead a cualquier interacción.</p>"
+      },
+      {
+        "heading": "Dispara generate_lead desde la confirmación adecuada",
+        "html": "<p>La <a href=\"https://developers.google.com/analytics/devguides/collection/ga4/reference/events\">referencia de eventos de GA4</a> incluye <code>generate_lead</code> para la captación inicial de leads. Vincula su envío al momento en que tu aplicación confirma la recepción prevista, no al clic del botón.</p><p>Por ejemplo, el servidor puede aceptar y registrar una solicitud, y devolver una respuesta que la interfaz reconoce. Esto no equivale a verificar que el contacto sea comercialmente válido, ni a confirmar una venta. Mantén la evaluación posterior en su proceso correspondiente. Si la petición se rechaza, muestra el error y no emitas la señal de recepción.</p>"
+      },
+      {
+        "heading": "Construye una lista cerrada de parámetros",
+        "html": "<p>Utiliza categorías controladas como identificador del formulario, tipo de servicio elegido de una lista o ubicación del módulo. Evita enviar respuestas libres. La <a href=\"https://support.google.com/analytics/answer/6366371?hl=en\">guía de Google para evitar información personal</a> advierte sobre datos identificables en campos, URL, títulos y parámetros de campaña.</p><p>Revisa también la dirección de la página de confirmación. Un correo incrustado en su URL puede escapar aunque tus parámetros personalizados estén limpios. Trabaja con datos ficticios y examina las solicitudes de red. No uses correo cifrado o transformado como atajo para evitar revisar la política aplicable. Esta revisión técnica no sustituye definir las condiciones de privacidad y consentimiento del sitio.</p>"
+      },
+      {
+        "heading": "Resuelve duplicados en el flujo",
+        "html": "<p>Prueba doble clic, reintento tras demora, actualización de la página y regreso desde el historial. Decide qué componente controla la emisión y evita que una etiqueta automática y otra personalizada representen el mismo resultado dos veces.</p><p>Como diseño práctico, la aplicación puede recordar que ya notificó la recepción de ese intento durante el flujo. No supongas que cualquier identificador añadido a un evento hará que GA4 elimine duplicados automáticamente. Documenta qué repeticiones evitas y cuáles podrían seguir ocurriendo si cambian el dispositivo o las condiciones de navegación.</p>"
+      },
+      {
+        "heading": "Ejemplo: un formulario de demostración",
+        "html": "<p>Una página hipotética ofrece solicitar una demostración. El visitante completa tres campos, pulsa enviar y recibe un error temporal. La medición registra el fallo técnico sin incluir el contenido escrito. Cuando el segundo intento obtiene una recepción válida, se emite el evento previsto con el identificador “demo_principal”.</p><p>El panel comercial puede mostrar después que esa solicitud era una prueba o un contacto fuera de alcance. Conserva esa distinción: recepción, calificación y venta responden preguntas diferentes. No presentes el primer número como ingreso ni asignes un valor económico inventado para que el informe parezca más completo.</p>"
+      },
+      {
+        "heading": "Comprueba y reconcilia antes de decidir",
+        "html": "<p>Google ofrece <a href=\"https://developers.google.com/analytics/devguides/collection/ga4/events\">Realtime y DebugView</a> para revisar eventos y parámetros. Úsalos con una matriz de pruebas y contrasta después los totales agregados con las recepciones del sistema. Bloqueadores, consentimiento y fallos de red pueden producir diferencias; GA4 no sustituye el registro operativo. Investiga desviaciones y explica la cobertura antes de comparar campañas.</p><p>Si detectas errores frecuentes, revisa las <a href=\"formularios-etiquetas-errores-autocompletado.html\">etiquetas y salidas de error del formulario</a>.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "Google Analytics: eventos recomendados",
+        "url": "https://developers.google.com/analytics/devguides/collection/ga4/reference/events"
+      },
+      {
+        "title": "Google Analytics: evitar información personal",
+        "url": "https://support.google.com/analytics/answer/6366371?hl=en"
+      },
+      {
+        "title": "Google Analytics: configurar eventos",
+        "url": "https://developers.google.com/analytics/devguides/collection/ga4/events"
+      }
+    ],
+    "service": "desarrollo-web.html",
+    "cta": "Definamos qué confirma una solicitud en tu web y auditemos los eventos antes de usarlos para decidir inversión.",
+    "datePublished": "2026-10-12",
+    "dateLabel": "12 de octubre de 2026",
+    "sourceDateLabel": "12 de octubre de 2026"
+  },
+  {
+    "slug": "migracion-web-mapa-url-redirecciones-canonical",
+    "title": "Cómo planear una migración web sin dejar páginas importantes atrás",
+    "description": "Construye un mapa de URLs, valida redirecciones y canonical, y prepara controles de lanzamiento y seguimiento para una migración web.",
+    "category": "SEO técnico",
+    "intro": "Una migración de sitio necesita conservar el sentido de cada dirección, además de estrenar diseño. Antes de mover páginas, reúne un inventario y decide qué sucederá con cada una. La meta es que visitantes, enlaces y buscadores encuentren el contenido correcto, con excepciones visibles para el equipo.",
+    "sections": [
+      {
+        "heading": "Construye el inventario desde varias fuentes",
+        "html": "<p>Reúne URLs del gestor, sitemap, navegación, analítica y páginas conocidas por el equipo comercial. Incluye recursos enlazados desde campañas y documentos. Una página con pocas visitas puede seguir siendo el destino de un presupuesto o una guía enviada a clientes.</p><p>Como plantilla de trabajo, usa estas columnas: URL anterior, propósito, destino previsto, decisión, responsable y prueba. Marca las páginas críticas para atención y ventas. No cierres el inventario únicamente porque una herramienta terminó de rastrear: pregunta qué enlaces se utilizan fuera de la navegación habitual.</p>"
+      },
+      {
+        "heading": "Decide qué se conserva, combina o retira",
+        "html": "<p>Cada dirección necesita una decisión editorial. Si el contenido se mueve, señala su equivalente. Si se combina con otra página, revisa que el nuevo destino responda realmente a la necesidad anterior. Si desaparece sin sustituto, documenta la retirada para que el equipo no improvise durante el lanzamiento.</p><p>Google advierte en su <a href=\"https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes\">guía de migraciones con cambio de URL</a> que enviar muchas direcciones antiguas a una portada irrelevante puede tratarse como un error de tipo soft 404. El criterio operativo es mantener correspondencias útiles, no esconder todas las ausencias detrás de la página inicial.</p>"
+      },
+      {
+        "heading": "Prepara redirecciones y señales coherentes",
+        "html": "<p>La guía de Google recomienda redirecciones permanentes de servidor para las URLs movidas y actualizar las señales del nuevo sitio. Mantén las redirecciones al menos un año, y considera conservarlas más tiempo para usuarios y enlaces antiguos.</p><p>Verifica que el destino final coincide con el mapa aprobado. Revisa canonical, enlaces internos y sitemap para que no sigan apuntando a la versión retirada. Evita cadenas creadas por cambios sucesivos: prueba una dirección histórica y observa a dónde termina llegando. Una canonical no reemplaza una redirección para quien abre un enlace antiguo.</p>"
+      },
+      {
+        "heading": "Ensaya el lanzamiento con casos incómodos",
+        "html": "<p>Prepara una lista de pruebas antes del cambio. Incluye una página conservada, una renombrada, dos contenidos combinados, una retirada y un archivo descargable. Verifica también las rutas con parámetros que realmente utiliza el negocio, sin asumir que cualquier parámetro merece preservarse.</p><ul><li>Comprueba respuesta y contenido del destino, no solo que la URL abra.</li><li>Busca restricciones de pruebas que podrían permanecer en producción.</li><li>Ensaya formularios, navegación y descargas en la estructura nueva.</li><li>Define quién autoriza avanzar y quién puede restaurar la versión anterior.</li></ul><p>Guarda la configuración previa y el mapa aplicado. Un plan de regreso debe considerar también las solicitudes recibidas después del cambio.</p>"
+      },
+      {
+        "heading": "Ejemplo: dos páginas de un mismo servicio",
+        "html": "<p>Una empresa hipotética reúne “Diseño de páginas” y “Sitios corporativos” en una nueva página de desarrollo web. Antes de aprobar el destino, revisa que la nueva explicación conserve alcance, entregables y formas de contacto que necesitaban ambos públicos.</p><p>Si una de las páginas anteriores ofrecía mantenimiento y la nueva no lo menciona, la combinación todavía no está resuelta. El equipo puede preservar una página específica o incorporar un apartado pertinente. Elegir el destino por semejanza del nombre habría ocultado esa diferencia.</p>"
+      },
+      {
+        "heading": "Haz seguimiento con un registro de incidencias",
+        "html": "<p>Después del lanzamiento, compara el inventario con las respuestas reales y revisa errores, consultas y páginas de entrada. Prioriza enlaces rotos que bloqueen tareas y registra cada ajuste. Espera posibles fluctuaciones de visibilidad durante el procesamiento; ninguna lista garantiza conservar posiciones. Cierra la migración técnica cuando los casos acordados funcionen, manteniendo separado el seguimiento de búsqueda que todavía requiera observación.</p><p>Para investigar una página del nuevo sitio que no aparece en búsquedas, sigue la <a href=\"diagnosticar-indexacion-web-nueva-search-console.html\">revisión de indexación de una URL concreta</a>.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "Google Search Central: migraciones con cambios de URL",
+        "url": "https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes"
+      }
+    ],
+    "service": "desarrollo-web.html",
+    "cta": "Preparemos el mapa de direcciones y las pruebas que necesitas antes de cambiar la estructura de tu sitio.",
+    "datePublished": "2026-10-12",
+    "dateLabel": "12 de octubre de 2026",
+    "sourceDateLabel": "12 de octubre de 2026"
+  },
+  {
+    "slug": "selector-variantes-tienda-accesible-disponibilidad",
+    "title": "Cómo diseñar un selector de variantes accesible y fiel al inventario",
+    "description": "Revisa teclado, nombres de variantes, disponibilidad y precio para evitar combinaciones ambiguas antes de añadir un producto al carrito.",
+    "category": "Comercio electrónico",
+    "intro": "Elegir una talla, un color o una capacidad es parte de la compra. El selector debe dejar claro qué se eligió, cuánto cuesta y si esa combinación puede añadirse al carrito. Una apariencia atractiva pierde utilidad cuando el teclado no llega a las opciones o el precio corresponde a otra variante.",
+    "sections": [
+      {
+        "heading": "Define primero las combinaciones reales",
+        "html": "<p>Construye una matriz del catálogo con opción, identificador, precio y estado de disponibilidad. Diferencia una combinación inexistente de una temporalmente agotada. Ambas pueden impedir una compra, pero la explicación y las alternativas que conviene mostrar son distintas.</p><p>Como revisión editorial, pregunta qué debería ver alguien que llega desde un enlace a una variante agotada. Evita sustituirla silenciosamente por otra talla disponible. Explica el estado y deja que la persona decida si quiere cambiar. Tampoco muestres “últimas unidades” sin una fuente que sostenga ese mensaje.</p>"
+      },
+      {
+        "heading": "Elige controles que funcionen con teclado",
+        "html": "<p>Para una selección única, considera controles nativos antes de construir componentes personalizados. Cada grupo necesita un nombre, y cada opción una etiqueta que permita distinguirla. El color visual puede acompañar palabras como “Azul oscuro”; no debería ser la única forma de reconocer la opción.</p><p>El <a href=\"https://www.w3.org/WAI/ARIA/apg/patterns/radio/\">patrón de grupos de radio de W3C</a> describe entrada y salida con Tab, selección con espacio y movimiento entre opciones con flechas. Si implementas ese patrón, comprueba también foco visible y estado seleccionado. No añadas roles ARIA esperando que creen automáticamente el comportamiento de teclado.</p>"
+      },
+      {
+        "heading": "Sincroniza precio, imagen y disponibilidad",
+        "html": "<p>La documentación de <a href=\"https://shopify.dev/docs/storefronts/themes/best-practices/accessibility\">accesibilidad de Shopify</a> indica que los cambios dinámicos de precio y disponibilidad deben comunicarse también a lectores de pantalla. Al cambiar una variante, comprueba que todas las partes de la ficha describen la misma selección.</p><p>Presenta el precio aplicable con su moneda y distingue las condiciones que aún deben calcularse. Si hay una promoción, evita mantener un precio anterior que pertenece a otra capacidad. Si necesitas consultar datos nuevos, muestra un estado de actualización y no permitas confirmar una combinación que todavía no has validado.</p>"
+      },
+      {
+        "heading": "Trata la falta de disponibilidad como un estado explicado",
+        "html": "<p>Decide cómo se informará una opción agotada sin depender únicamente de un tono gris. Si queda fuera del recorrido de teclado por estar deshabilitada, conserva una explicación accesible de su existencia y estado en el contexto del grupo. Prueba que la persona puede encontrar una alternativa sin comenzar desde cero.</p><p>La ficha y el carrito pueden consultar existencias en momentos diferentes. Como criterio de robustez, vuelve a validar al añadir y explica cualquier cambio. Un rechazo necesita conservar la selección y ofrecer una salida; no debería parecer que el botón dejó de funcionar.</p>"
+      },
+      {
+        "heading": "Ejemplo: capacidad y acabado de una mochila",
+        "html": "<p>Una tienda hipotética ofrece una mochila de dos capacidades y tres acabados. La versión pequeña en verde está agotada; la grande en ese acabado tiene otro precio. Al elegir verde, el selector mantiene visible la capacidad actual y explica su disponibilidad, en lugar de saltar automáticamente al producto más caro.</p><p>Cuando la persona cambia a la capacidad grande, la ficha actualiza precio, imagen y resumen de selección. Antes de añadir, puede leer “Grande, verde” junto al importe vigente. Si el inventario cambió durante la visita, recibe una explicación concreta y permanece en la ficha para elegir otra combinación.</p>"
+      },
+      {
+        "heading": "Prueba tareas, no solo componentes aislados",
+        "html": "<p>Recorre el flujo con teclado, lector de pantalla y móvil: escoger una variante, descubrir una agotada, cambiar de opción y revisar el carrito. Incluye nombres largos y precios distintos. Las herramientas automáticas ayudan a encontrar algunos problemas, pero no comprueban por sí solas que inventario, mensajes y decisión de compra sean coherentes. Este recorrido es una revisión práctica, no una certificación completa de accesibilidad.</p><p>Si la disponibilidad difiere entre sistemas, revisa cómo <a href=\"conciliar-inventario-tienda-sistema.html\">conciliar el inventario de la tienda con la operación</a>.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "W3C APG: patrón de grupos de radio",
+        "url": "https://www.w3.org/WAI/ARIA/apg/patterns/radio/"
+      },
+      {
+        "title": "Shopify: buenas prácticas de accesibilidad de temas",
+        "url": "https://shopify.dev/docs/storefronts/themes/best-practices/accessibility"
+      }
+    ],
+    "service": "desarrollo-web.html",
+    "cta": "Revisemos cómo se eligen tus variantes y qué ocurre cuando cambian el precio o la disponibilidad antes de llegar al carrito.",
+    "datePublished": "2026-10-12",
+    "dateLabel": "12 de octubre de 2026",
+    "sourceDateLabel": "12 de octubre de 2026"
+  },
+  {
     "slug": "traspaso-bot-asesor-con-contexto",
     "title": "Cómo pasar una conversación del bot a un asesor sin perder contexto",
     "description": "Diseña el traspaso del bot a un asesor con motivos de escalamiento, resumen verificable, responsable y una salida cuando no hay nadie disponible.",
