@@ -1,0 +1,52 @@
+name: Publicar exploracion visual KINETIC
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/publish-kinetic-preview.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: nicho-kinetic-preview
+  cancel-in-progress: false
+jobs:
+  publish-preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Importar solo la prueba visual verificada
+        run: |
+          python - <<'PY'
+          import hashlib,pathlib,re,subprocess
+          revision='b70d78155668fdb0f589c37709dfbd993378dcb1'
+          expected='bdf5090907c67659b1acf9c826e801d4fffb7607ebc5ae8d43da15d462776a20'
+          raw=subprocess.check_output(['git','show',revision+':exploracion-kinetic.html'])
+          assert hashlib.sha256(raw).hexdigest()==expected
+          before=hashlib.sha256(pathlib.Path('index.html').read_bytes()).hexdigest()
+          text=raw.decode('utf-8')
+          text=re.sub(r'\b(href|src|data-src)="(?![/#]|https?:|mailto:|tel:|data:)([^\"]+)"',lambda m:m[1]+'="/'+m[2]+'"',text)
+          text=text.replace(".href='portafolio/'", ".href='/portafolio/'")
+          target=pathlib.Path('qa/exploracion-kinetic.html')
+          target.parent.mkdir(exist_ok=True)
+          target.write_text(text,encoding='utf-8')
+          assert 'noindex,nofollow' in text
+          assert hashlib.sha256(pathlib.Path('index.html').read_bytes()).hexdigest()==before
+          print('Solo se publica:',target)
+          print('SHA256:',hashlib.sha256(target.read_bytes()).hexdigest())
+          PY
+      - name: Verificar que el sitio principal conserva sus controles SEO
+        run: python3 tools/check_site.py .
+      - name: Guardar exclusivamente la exploracion
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add qa/exploracion-kinetic.html
+          if ! git diff --cached --quiet; then
+            test "$(git diff --cached --name-only)" = 'qa/exploracion-kinetic.html'
+            git commit -m 'design: publicar prueba KINETIC separada con motion y portafolio interactivo'
+            git push origin HEAD:main
+          fi
