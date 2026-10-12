@@ -1,0 +1,60 @@
+name: Revisar portada y sitemap públicos
+on:
+  push:
+    branches: [audit/search-console-sitemap-20261012]
+    paths: [.github/workflows/audit-home-indexability.yml]
+permissions:
+  contents: read
+jobs:
+  public-review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Comprobar acceso y directivas públicas sin cambiar la web
+        run: |
+          python3 - <<'PY'
+          import concurrent.futures,datetime,html.parser,json,os,pathlib,urllib.request,urllib.robotparser,xml.etree.ElementTree as ET
+          ROOT='https://nichoagenciadigital.com'
+          class Document(html.parser.HTMLParser):
+              def __init__(self):
+                  super().__init__();self.meta={};self.canonical=[];self.h1=0;self.links=[]
+              def handle_starttag(self,tag,attrs):
+                  a=dict(attrs)
+                  if tag=='meta':self.meta[a.get('name','').lower()]=a.get('content','')
+                  if tag=='link' and 'canonical' in a.get('rel','').lower().split():self.canonical.append(a.get('href'))
+                  if tag=='h1':self.h1+=1
+                  if tag=='a' and a.get('href'):self.links.append(a['href'])
+          def fetch(url):
+              req=urllib.request.Request(url,headers={'User-Agent':'Nicho-Public-Indexability-Review/1.0'})
+              with urllib.request.urlopen(req,timeout=20) as r:
+                  data=r.read(2000000)
+                  return {'url':url,'status':r.status,'final_url':r.url,'content_type':r.headers.get('Content-Type'),'x_robots_tag':r.headers.get('X-Robots-Tag'),'bytes':len(data)},data
+          report={'checked_at_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'scope':'Public HTTP and HTML checks from GitHub, not Google Search Console index status','production_modified':False}
+          sm,xml=fetch(ROOT+'/sitemap.xml')
+          tree=ET.fromstring(xml);urls=[e.text for e in tree.findall('{*}url/{*}loc')]
+          sm.update(xml_valid=tree.tag=='{http://www.sitemaps.org/schemas/sitemap/0.9}urlset',url_count=len(urls),unique_url_count=len(set(urls)))
+          assert 0<len(urls)<100 and all(u.startswith(ROOT+'/') for u in urls)
+          rb,body=fetch(ROOT+'/robots.txt');rules=urllib.robotparser.RobotFileParser();rules.parse(body.decode().splitlines())
+          rb.update(body=body.decode(),homepage_allowed=rules.can_fetch('Googlebot',ROOT+'/'),sitemap_allowed=rules.can_fetch('Googlebot',ROOT+'/sitemap.xml'))
+          def page(url):
+              try:
+                  r,raw=fetch(url);p=Document();p.feed(raw.decode('utf-8'))
+                  r.update(robots=p.meta.get('robots'),googlebot=p.meta.get('googlebot'),canonical=p.canonical,h1_count=p.h1,html_link_count=len(p.links),allowed_by_robots=rules.can_fetch('Googlebot',url),release=p.meta.get('nicho-release'))
+                  r['noindex_detected']=any('noindex' in (x or '').lower() for x in [r['robots'],r['googlebot'],r['x_robots_tag']])
+                  return r
+              except Exception as e:return {'url':url,'error':str(e)}
+          with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:pages=list(pool.map(page,urls))
+          www,_=fetch('https://www.nichoagenciadigital.com/')
+          report.update(sitemap=sm,robots=rb,pages=pages,www=www)
+          report['problems']=[p for p in pages if p.get('status')!=200 or p.get('noindex_detected') or not p.get('allowed_by_robots') or p.get('canonical')!=[p['url']]]
+          print('NICHO_PUBLIC_REVIEW_START');print(json.dumps(report,ensure_ascii=False,indent=2));print('NICHO_PUBLIC_REVIEW_END')
+          pathlib.Path('/tmp/nicho-public-review.json').write_text(json.dumps(report,ensure_ascii=False,indent=2))
+          with open(os.environ['GITHUB_STEP_SUMMARY'],'w') as out:out.write('## Revisión pública de NICHO\n\n'+str(len(pages))+' páginas comprobadas. Problemas detectados: '+str(len(report['problems']))+'.\n\nNo es una comprobación del índice de Google ni se modificó producción.\n')
+          assert not report['problems'], 'Revisar problemas en el informe'
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nicho-public-indexability-review
+          path: /tmp/nicho-public-review.json
+          retention-days: 1
