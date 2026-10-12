@@ -1,0 +1,27 @@
+name: Leer diseños originales autorizados
+on:
+  push:
+    branches: [fix/multipage-navigation-20261012]
+    paths: [.github/workflows/source-design-snapshot.yml]
+permissions:
+  contents: read
+jobs:
+  originals:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Copiar repositorios públicos autorizados solo para revisión
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/nicho-originals
+          for NAME in Samuelacuna12.github.io restoops Luminari; do
+            git clone --quiet --depth 1 "https://github.com/Samuelacuna12/$NAME.git" "/tmp/source-$NAME"
+            git -C "/tmp/source-$NAME" rev-parse HEAD > "/tmp/nicho-originals/$NAME.revision.txt"
+            git -C "/tmp/source-$NAME" archive --format=tar HEAD > "/tmp/nicho-originals/$NAME.tar"
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nicho-original-product-sources
+          path: /tmp/nicho-originals/
+          retention-days: 1
