@@ -1,0 +1,200 @@
+name: Corregir navegación, legibilidad y diseños originales
+on:
+  push:
+    branches: [fix/multipage-navigation-20261012]
+    paths: [.github/workflows/editorial-originals-release.yml]
+permissions:
+  contents: write
+concurrency:
+  group: nicho-editorial-originals-release
+  cancel-in-progress: false
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      EXPECTED_MAIN: b48a69188d2c008eb79034ee421237f13c8c8de4
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Comprobar revisión y extraer herramientas verificadas
+        run: |
+          set -euo pipefail
+          test "$(git ls-remote origin refs/heads/main | cut -f1)" = "$EXPECTED_MAIN"
+          python3 - <<'PY'
+          import base64,gzip,hashlib,json,pathlib
+          raw=''.join(pathlib.Path(f'tools/editorial-repair/part-{i}.b64').read_text().strip() for i in range(1,4))
+          packed=base64.b64decode(raw,validate=True)
+          assert hashlib.sha256(packed).hexdigest()=='89a311484a888d692f582c9654157749c756e47d9f0cfd1bee2599e69227be30', 'Paquete alterado'
+          data=gzip.decompress(packed)
+          assert len(data)<2000000
+          files=json.loads(data)
+          allowed={'assets/css/editorial-shell.css','assets/js/editorial-shell.js','tools/capture_original_designs.py','tools/check_live.py','docs/CORRECCION-NAVEGACION-Y-FIDELIDAD.md','tools/repair_multipage.py'}
+          assert set(files)==allowed
+          for name,content in files.items():
+              p=pathlib.Path(name)
+              assert not p.is_symlink()
+              p.parent.mkdir(parents=True,exist_ok=True)
+              p.write_text(content,encoding='utf-8')
+          print('Seis archivos de código verificados mediante SHA-256.')
+          PY
+      - name: Preparar navegador y dependencias
+        run: |
+          python3 -m pip install --quiet beautifulsoup4 pillow playwright
+          python3 -m playwright install --with-deps chromium > /tmp/nicho-browser-install.log 2>&1
+      - name: Obtener los diseños originales sin consultar bases de datos
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/nicho-originals
+          while read -r name revision; do
+            git clone --quiet "https://github.com/Samuelacuna12/$name.git" "/tmp/nicho-originals/$name"
+            git -C "/tmp/nicho-originals/$name" checkout --quiet "$revision"
+            git -C "/tmp/nicho-originals/$name" rev-parse HEAD > "/tmp/nicho-originals/$name.revision.txt"
+          done <<'REVISIONS'
+          Samuelacuna12.github.io 4adaae8677a28d404a2a90d0f38f3a48955d1491
+          restoops 772a575af54bb9f4bba1c3a6fe44a6107eaee9d6
+          Luminari f0fc3520a4693808f192a52a52ba7918cff6869f
+          REVISIONS
+          python3 tools/capture_original_designs.py /tmp/nicho-originals /tmp/nicho-captures > /tmp/nicho-original-capture.log
+          python3 - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          names=['invicto-ops','luminari','restoops','plataforma-seguros','cuentas-carlos']
+          for name in names:
+              p=Path('/tmp/nicho-captures')/(name+'.webp')
+              assert p.stat().st_size>15000, name
+              assert Image.open(p).size==(1440,1000), name
+          print('Cinco interfaces originales capturadas en entornos aislados.')
+          PY
+      - name: Reparar el sitio manteniendo sus páginas y URLs
+        run: |
+          python3 tools/repair_multipage.py "$PWD" /tmp/nicho-captures /tmp/nicho-originals
+          mkdir -p qa/editorial-repair
+          python3 tools/check_site.py . --json qa/editorial-repair/static-report.json
+          node --check assets/js/editorial-shell.js
+          node --check assets/js/app.js
+      - name: Probar navegación, 24 páginas, móvil y captura fiel
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import functools,hashlib,http.server,json,pathlib,threading,xml.etree.ElementTree as ET
+          from urllib.parse import urlsplit
+          from playwright.sync_api import sync_playwright
+          root=pathlib.Path.cwd();out=root/'qa/editorial-repair'
+          server=http.server.ThreadingHTTPServer(('127.0.0.1',8765),functools.partial(http.server.SimpleHTTPRequestHandler,directory=str(root)))
+          threading.Thread(target=server.serve_forever,daemon=True).start()
+          origin='http://127.0.0.1:8765'
+          urls=[x.text for x in ET.parse(root/'sitemap.xml').getroot().findall('{*}url/{*}loc')]
+          assert len(urls)==24
+          paths=[urlsplit(x).path for x in urls]
+          results=[]
+          with sync_playwright() as p:
+              browser=p.chromium.launch(headless=True,args=['--no-sandbox'])
+              for width in [1440,961,390]:
+                  context=browser.new_context(viewport={'width':width,'height':900 if width>600 else 844},locale='es-CO')
+                  context.route('**/*',lambda route:route.continue_() if route.request.url.startswith(origin) else route.abort())
+                  page=context.new_page();errors=[]
+                  page.on('pageerror',lambda e:errors.append(str(e)))
+                  for path in paths:
+                      errors.clear()
+                      response=page.goto(origin+path,wait_until='load')
+                      page.wait_for_timeout(250)
+                      assert response.status==200,(path,response.status)
+                      assert page.locator('h1').count()==1,path
+                      assert not errors,(width,path,errors)
+                      assert not page.evaluate('document.documentElement.scrollWidth>innerWidth+1'),(width,path,'overflow')
+                      canonical=page.locator('link[rel=canonical]').get_attribute('href')
+                      assert canonical=='https://nichoagenciadigital.com'+path,(path,canonical)
+                      nav=page.locator('.n-header nav a').evaluate_all('es=>es.map(e=>e.getAttribute("href"))')
+                      assert nav and all(h.startswith('/') and '#' not in h and '?' not in h for h in nav),nav
+                      assert page.locator('.screen').count()==0,(path,'invented interface remains')
+                      if path=='/':
+                          page.screenshot(path=str(out/f'home-{width}.png'))
+                          page.locator('.n-method').scroll_into_view_if_needed();page.wait_for_timeout(350)
+                          props=page.locator('.n-process-step').evaluate_all('es=>es.map(e=>({opacity:getComputedStyle(e).opacity,transform:getComputedStyle(e).transform}))')
+                          assert len(props)==3 and all(x['opacity']=='1' and x['transform']=='none' for x in props),(width,props)
+                          page.locator('.n-method').screenshot(path=str(out/f'process-readable-{width}.png'))
+                          results.append({'path':path,'width':width,'process_text':props,'errors':errors.copy()})
+                      else:results.append({'path':path,'width':width,'errors':errors.copy()})
+                  page.goto(origin+'/',wait_until='load')
+                  if width==390:
+                      page.locator('.n-mobile summary').click()
+                      page.locator('.n-mobile a[href="/portafolio.html"]').click()
+                  else:page.locator('.n-desktop a[href="/portafolio.html"]').click()
+                  page.wait_for_url('**/portafolio.html')
+                  page.goto(origin+'/?v=kinetic#proyectos',wait_until='load')
+                  page.wait_for_url(origin+'/portafolio.html')
+                  assert '?' not in page.url and '#' not in page.url
+                  page.goto(origin+'/',wait_until='load')
+                  page.locator('[data-product-select="luminari"]').click()
+                  assert page.locator('#hero-product').get_attribute('src')=='/assets/media/projects/luminari.webp'
+                  page.wait_for_function('document.querySelector("#hero-product").complete && document.querySelector("#hero-product").naturalWidth>0')
+                  page.goto(origin+'/portafolio/invicto-ops.html',wait_until='load')
+                  page.locator('[data-capture-zoom]').first.click()
+                  assert page.locator('dialog[open]').count()==1
+                  page.keyboard.press('Escape');assert page.locator('dialog[open]').count()==0
+                  if width==1440:
+                      page.locator('.case-exhibit').scroll_into_view_if_needed()
+                      page.screenshot(path=str(out/'original-invicto-case.png'))
+                      page.goto(origin+'/portafolio.html',wait_until='load');page.locator('.project-grid').scroll_into_view_if_needed()
+                      page.screenshot(path=str(out/'original-products-portfolio.png'))
+                  context.close()
+              context=browser.new_context(java_script_enabled=False,viewport={'width':390,'height':844})
+              page=context.new_page();page.goto(origin+'/',wait_until='load')
+              assert page.locator('.n-process-step').count()==3
+              assert page.locator('a[href="/portafolio.html"]').count()>0
+              page.locator('.n-mobile summary').click();page.locator('.n-mobile a[href="/soluciones.html"]').click()
+              page.wait_for_url('**/soluciones.html')
+              context.close()
+              context=browser.new_context(reduced_motion='reduce');page=context.new_page();page.goto(origin+'/',wait_until='load')
+              assert page.locator('[data-editorial-motion]').get_attribute('aria-pressed')=='true'
+              assert all(x=='1' for x in page.locator('.n-process-step').evaluate_all('es=>es.map(e=>getComputedStyle(e).opacity)'))
+              browser.close()
+          server.shutdown()
+          (out/'browser-report.json').write_text(json.dumps({'page_viewports':len(results),'errors':0,'checks':results,'navigation':'real pages','legacy_marker_removed':True,'no_javascript':'passed','reduced_motion':'passed','original_sources':'isolated, no live database access'},ensure_ascii=False,indent=2))
+          print('72 vistas verificadas; navegación entre páginas, texto legible y capturas originales correctos.')
+          PY
+      - name: Publicar solamente cambios comprobados sin sobrescribir trabajo ajeno
+        id: publish
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git ls-remote origin refs/heads/main | cut -f1)" = "$EXPECTED_MAIN"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          export GIT_INDEX_FILE=/tmp/nicho-verified-publish-index
+          rm -f "$GIT_INDEX_FILE"
+          git read-tree "$EXPECTED_MAIN"
+          python3 - <<'PY'
+          import json,pathlib,subprocess
+          root=pathlib.Path.cwd()
+          chosen=[p for p in root.glob('*.html')]
+          chosen+=list((root/'portafolio').glob('*.html'))+list((root/'recursos').glob('*.html'))
+          chosen+=[root/p for p in ['assets/css/editorial-shell.css','assets/js/editorial-shell.js','tools/capture_original_designs.py','tools/repair_multipage.py','tools/check_live.py','docs/CORRECCION-NAVEGACION-Y-FIDELIDAD.md','docs/original-interface-provenance.json']]
+          chosen+=list((root/'assets/media/projects').glob('*.webp'))
+          for p in chosen:
+              assert p.is_file() and not p.is_symlink()
+              name=p.relative_to(root).as_posix()
+              sha=subprocess.check_output(['git','hash-object','-w','--',name],text=True).strip()
+              subprocess.run(['git','update-index','--add','--cacheinfo',f'100644,{sha},{name}'],check=True)
+          print('Archivos de la web preparados:',len(chosen))
+          PY
+          TREE=$(git write-tree)
+          COMMIT=$(printf '%s\n' 'fix: navegación multipágina, contenido legible y diseños originales fieles al producto' | git commit-tree "$TREE" -p "$EXPECTED_MAIN")
+          git push origin "$COMMIT:refs/heads/main"
+          echo "revision=$COMMIT" >> "$GITHUB_OUTPUT"
+          printf '%s\n' "$COMMIT" > qa/editorial-repair/published-revision.txt
+      - name: Verificar la versión publicada y HTTPS sin parámetros artificiales
+        env:
+          GITHUB_SHA: ${{ steps.publish.outputs.revision }}
+        run: |
+          python3 tools/check_live.py
+          cp qa/live-report.json qa/editorial-repair/live-report.json
+      - name: Guardar pruebas visuales y técnicas
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nicho-editorial-originals-verification
+          path: qa/editorial-repair/
+          retention-days: 7
