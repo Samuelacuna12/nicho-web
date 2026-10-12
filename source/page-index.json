@@ -123,5 +123,105 @@
     "title": "Página no encontrada | Nicho Agencia Digital",
     "description": "La página solicitada no está disponible. Explora los sistemas y soluciones de Nicho Agencia Digital.",
     "kind": "WebPage"
+  },
+  "recursos/definir-alcance-mvp-criterios-aceptacion.html": {
+    "title": "Cómo convertir un proceso de tu empresa en el alcance de un MVP | Nicho Agencia Digital",
+    "description": "Define un primer alcance de software con responsables, excepciones y criterios de aceptación que puedas comprobar antes de recibirlo.",
+    "kind": "Article"
+  },
+  "recursos/migrar-hojas-calculo-sistema-trazabilidad.html": {
+    "title": "Cómo migrar hojas de cálculo a un sistema sin perder trazabilidad | Nicho Agencia Digital",
+    "description": "Prepara identificadores, reglas de limpieza, pruebas de importación y un plan de corte para llevar tus hojas de cálculo a un sistema.",
+    "kind": "Article"
+  },
+  "recursos/probar-restauracion-copias-seguridad-pyme.html": {
+    "title": "Cómo probar la restauración de tus copias de seguridad en una pyme | Nicho Agencia Digital",
+    "description": "Diseña una prueba de restauración segura: qué recuperar, dónde hacerlo, cómo validar el resultado y qué documentar para repetirla.",
+    "kind": "Article"
+  },
+  "recursos/webhooks-idempotencia-pedidos-duplicados.html": {
+    "title": "Webhooks e idempotencia: cómo evitar que un evento cree pedidos duplicados | Nicho Agencia Digital",
+    "description": "Diseña webhooks con identificación, registro duradero, controles de concurrencia y pruebas para reducir pedidos y acciones duplicadas.",
+    "kind": "Article"
+  },
+  "recursos/conciliar-inventario-tienda-sistema.html": {
+    "title": "Cómo conciliar el inventario entre tu tienda y tu sistema de operación | Nicho Agencia Digital",
+    "description": "Compara productos, ubicaciones y estados de inventario con un corte definido, antes de corregir cantidades o conectar sistemas.",
+    "kind": "Article"
+  },
+  "recursos/traspaso-bot-asesor-con-contexto.html": {
+    "title": "Cómo pasar una conversación del bot a un asesor sin perder contexto | Nicho Agencia Digital",
+    "description": "Diseña el traspaso del bot a un asesor con motivos de escalamiento, resumen verificable, responsable y una salida cuando no hay nadie disponible.",
+    "kind": "Article"
+  },
+  "recursos/base-conocimiento-ia-vigencia-excepciones.html": {
+    "title": "Cómo preparar una base de conocimiento para IA con vigencia y excepciones | Nicho Agencia Digital",
+    "description": "Organiza respuestas, fuentes, fechas y excepciones para que tu agente de IA consulte información aprobada y sepa cuándo escalar una pregunta.",
+    "kind": "Article"
+  },
+  "recursos/evaluar-agente-ia-atencion-rubrica-pruebas.html": {
+    "title": "Cómo evaluar un agente de atención con pruebas y una rúbrica útil | Nicho Agencia Digital",
+    "description": "Construye pruebas para tu agente de atención: respuestas correctas, contexto, permisos, escalamiento y criterios de aprobación antes de lanzarlo.",
+    "kind": "Article"
+  },
+  "recursos/permisos-agentes-ia-modificar-crm.html": {
+    "title": "Qué permisos dar a un agente de IA que puede modificar tu CRM | Nicho Agencia Digital",
+    "description": "Define permisos, aprobaciones y registros para que un agente de IA actualice el CRM sin cambiar dueños, montos o datos fuera de su alcance.",
+    "kind": "Article"
+  },
+  "recursos/whatsapp-business-app-platform-criterios.html": {
+    "title": "WhatsApp Business App o Platform: cómo elegir según tu operación | Nicho Agencia Digital",
+    "description": "Compara WhatsApp Business App y Platform por atención, asignación, CRM, seguimiento y mantenimiento, sin decidir solo por el número de chats.",
+    "kind": "Article"
+  },
+  "recursos/plantillas-whatsapp-ventana-24-horas-consentimiento.html": {
+    "title": "Plantillas de WhatsApp, ventana de 24 horas y consentimiento: cómo organizar los envíos | Nicho Agencia Digital",
+    "description": "Organiza tus mensajes de WhatsApp con registro de consentimiento, control de la ventana de 24 horas, plantillas aprobadas y gestión de bajas.",
+    "kind": "Article"
+  },
+  "recursos/medir-embudo-whatsapp-clic-conversacion-venta.html": {
+    "title": "Cómo medir un embudo de WhatsApp desde el clic hasta la venta | Nicho Agencia Digital",
+    "description": "Separa clics, contactos, oportunidades y ventas en WhatsApp. Define eventos, atribución y denominadores para comparar resultados sin inflarlos.",
+    "kind": "Article"
+  },
+  "recursos/deduplicar-contactos-crm-sin-mezclar-personas.html": {
+    "title": "Cómo deduplicar contactos del CRM sin fusionar personas distintas | Nicho Agencia Digital",
+    "description": "Limpia duplicados del CRM con reglas de identidad, revisión de conflictos y respaldo. Evita unir personas por compartir nombre, teléfono o empresa.",
+    "kind": "Article"
+  },
+  "recursos/repartir-leads-capacidad-ausencias-responsable.html": {
+    "title": "Cómo repartir leads con reglas de capacidad, responsables y ausencias | Nicho Agencia Digital",
+    "description": "Diseña la asignación de leads con prioridad, disponibilidad, capacidad y una cola de respaldo para que ninguna consulta quede sin responsable.",
+    "kind": "Article"
+  },
+  "recursos/seguimiento-cotizaciones-estados-limites.html": {
+    "title": "Cómo dar seguimiento a cotizaciones con estados claros y límites de contacto | Nicho Agencia Digital",
+    "description": "Organiza cotizaciones con versiones, próxima acción y criterios para pausar o cerrar. Evita seguimientos repetidos y ofertas vencidas.",
+    "kind": "Article"
+  },
+  "recursos/fallos-integraciones-cola-revision.html": {
+    "title": "Qué hacer cuando falla una integración: reintentos y cola de revisión | Nicho Agencia Digital",
+    "description": "Diseña una salida para los errores de integración: clasifica fallos, controla reintentos y asigna los casos que necesitan revisión.",
+    "kind": "Article"
+  },
+  "recursos/landing-b2b-movil-contacto.html": {
+    "title": "Qué necesita una landing B2B para ayudar a decidir y contactar desde el celular | Nicho Agencia Digital",
+    "description": "Organiza tu landing B2B para explicar el servicio, resolver dudas y permitir un contacto claro desde el celular, sin promesas infladas.",
+    "kind": "Article"
+  },
+  "recursos/core-web-vitals-laboratorio-campo.html": {
+    "title": "Cómo medir Core Web Vitals sin confundir laboratorio y usuarios reales | Nicho Agencia Digital",
+    "description": "Lee LCP, INP y CLS con contexto: distingue pruebas de laboratorio, datos de campo, nivel de URL y límites de PageSpeed Insights.",
+    "kind": "Article"
+  },
+  "recursos/inventario-restaurante-unidades-recetas-merma.html": {
+    "title": "Inventario para restaurantes: conectar compras, recetas y merma | Nicho Agencia Digital",
+    "description": "Define unidades, conversiones y movimientos para relacionar compras, recetas, producción y merma en el inventario de un restaurante.",
+    "kind": "Article"
+  },
+  "recursos/crm-renovaciones-corredor-seguros.html": {
+    "title": "Cómo organizar renovaciones en el CRM de un corredor de seguros | Nicho Agencia Digital",
+    "description": "Diseña un flujo de renovaciones con estados claros, responsables, permisos y recordatorios que se detengan cuando cambie el caso.",
+    "kind": "Article"
   }
 }

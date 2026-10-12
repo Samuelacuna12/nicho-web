@@ -228,3 +228,8 @@ print('Generated',len(pages),'pages; indexable',len(pages)-1)
 if (SITE/'qa/exploracion-kinetic.html').is_file():
  import runpy
  runpy.run_path(str(ROOT/'source/promote_kinetic.py'))['apply'](SITE)
+
+# Preserve separately reviewed editorial additions after the legacy rebuild.
+if (ROOT/'source/editorial-articles.json').is_file():
+ import runpy
+ runpy.run_path(str(ROOT/'source/build_editorial.py'))['apply'](SITE)
