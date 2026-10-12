@@ -20,7 +20,7 @@ REVISION = os.environ.get('GITHUB_SHA', 'studio-04')
 
 def check(path):
     public_path = '/' if path == 'index.html' else '/' + path
-    url = DOMAIN + public_path + '?release=' + REVISION
+    url = DOMAIN + public_path + ''
     expected = hashlib.sha256((ROOT / path).read_bytes()).hexdigest()
     request = urllib.request.Request(url, headers={
         'User-Agent': 'NICHO-Deployment-Verification/1.0',
@@ -55,6 +55,8 @@ def main():
         time.sleep(12)
     locs = [x.text for x in ET.parse(ROOT / 'sitemap.xml').getroot().findall('{*}url/{*}loc')]
     paths = [urllib.parse.urlparse(url).path.lstrip('/') or 'index.html' for url in locs]
+    paths += ['assets/css/editorial-shell.css', 'assets/js/editorial-shell.js']
+    paths += [str(p.relative_to(ROOT)) for p in (ROOT/'assets/media/projects').glob('*.webp')]
     paths += ['assets/css/main.css', 'assets/js/app.js', 'assets/js/wordmark.js',
               'assets/js/wordmark-data.js', 'assets/js/config.js',
               'assets/media/nicho-wordmark-motion.mp4', 'assets/media/nicho-wordmark-poster.webp',

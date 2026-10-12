@@ -1,0 +1,37 @@
+{
+  "invicto-ops": {
+    "repository": "Samuelacuna12/Samuelacuna12.github.io",
+    "revision": "4adaae8677a28d404a2a90d0f38f3a48955d1491",
+    "image": "assets/media/projects/invicto-ops.webp",
+    "caption": "Captura de la interfaz original de Invicto OPS. Vista local aislada, sin datos operativos de clientes.",
+    "live_data_accessed": false
+  },
+  "restoops": {
+    "repository": "Samuelacuna12/restoops",
+    "revision": "772a575af54bb9f4bba1c3a6fe44a6107eaee9d6",
+    "image": "assets/media/projects/restoops.webp",
+    "caption": "Captura de la interfaz original de RestoOps. Estado vacío en una copia local, sin conexión a los restaurantes.",
+    "live_data_accessed": false
+  },
+  "luminari": {
+    "repository": "Samuelacuna12/Luminari",
+    "revision": "f0fc3520a4693808f192a52a52ba7918cff6869f",
+    "image": "assets/media/projects/luminari.webp",
+    "caption": "Captura de la interfaz original de Luminari. Modo de muestra ficticia incluido en el propio producto.",
+    "live_data_accessed": false
+  },
+  "plataforma-seguros": {
+    "repository": "Samuelacuna12/Samuelacuna12.github.io",
+    "revision": "4adaae8677a28d404a2a90d0f38f3a48955d1491",
+    "image": "assets/media/projects/plataforma-seguros.webp",
+    "caption": "Captura del prototipo original SeguroOS. Datos de demostración del propio diseño; no son resultados comerciales.",
+    "live_data_accessed": false
+  },
+  "cuentas-carlos": {
+    "repository": "Samuelacuna12/Samuelacuna12.github.io",
+    "revision": "4adaae8677a28d404a2a90d0f38f3a48955d1491",
+    "image": "assets/media/projects/cuentas-carlos.webp",
+    "caption": "Captura de la interfaz original de Cuentas Carlos. Cuenta vacía en un entorno local, sin movimientos de proveedor.",
+    "live_data_accessed": false
+  }
+}
