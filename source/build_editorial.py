@@ -16,6 +16,14 @@ import re
 ROOT = Path(__file__).resolve().parents[1]
 DOMAIN = 'https://nichoagenciadigital.com'
 BRAND = 'Nicho Agencia Digital'
+SERVICE_LABELS = {
+    'sistemas.html': 'Software a medida para empresas',
+    'agentes-ia.html': 'Agentes de IA para atención y ventas',
+    'automatizaciones.html': 'Automatización de procesos comerciales',
+    'crm-personalizado.html': 'CRM personalizado para empresas',
+    'desarrollo-web.html': 'Desarrollo web y plataformas empresariales',
+    'whatsapp-api-empresas.html': 'Integración de WhatsApp API para empresas',
+}
 START = '<!-- NICHO_EDITORIAL_CARDS_START -->'
 END = '<!-- NICHO_EDITORIAL_CARDS_END -->'
 
@@ -69,7 +77,7 @@ def render(article, template):
         f'<article class="article-body"><p class="small">Por {BRAND} · Publicado el <time datetime="{text(published)}">{text(date_label)}</time></p>'
         + ''.join(sections)
         + f'<section id="siguiente-paso"><h2>El siguiente paso</h2><p>{text(article["cta"])}</p>'
-        f'<p><a href="../{service}">Explorar la solución de Nicho</a> · <a href="../contacto.html">Conversar sobre tu proyecto ↗</a></p></section>'
+        f'<p><a href="../{service}">{text(SERVICE_LABELS[service])}</a> · <a href="../contacto.html">Conversar sobre tu proyecto ↗</a></p></section>'
         f'<section id="fuentes"><h2>Fuentes y alcance</h2><ul>{sources}</ul>'
         f'<p class="small">Fuentes consultadas el {text(article["sourceDateLabel"])}. Las recomendaciones de proceso son propuestas editoriales de Nicho; los ejemplos identificados como hipotéticos no representan resultados de clientes.</p>'
         '<p class="small">Contenido preparado con asistencia de IA y comprobaciones automáticas. No sustituye una evaluación de tu implementación ni garantiza resultados. '
