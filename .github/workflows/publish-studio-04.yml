@@ -8,7 +8,7 @@ permissions:
   contents: write
 concurrency:
   group: nicho-import-studio-04
-  cancel-in-progress: false
+  cancel-in-progress: true
 jobs:
   import-release:
     runs-on: ubuntu-latest
@@ -80,7 +80,7 @@ jobs:
               if relative in destinations:
                   raise SystemExit('Ruta duplicada en la entrega')
               destinations[relative]=archive.read(item)
-          assert len(destinations)==61, len(destinations)
+          assert len(destinations)==60, len(destinations)
           root=pathlib.Path.cwd().resolve()
           for relative,content in destinations.items():
               target=root/relative
