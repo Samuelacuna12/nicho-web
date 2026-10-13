@@ -46,12 +46,16 @@ def main():
     # Wait for GitHub Pages/CDN to publish this revision, without disabling TLS checks.
     deadline = time.monotonic() + 240
     while True:
-        home = check('index.html')
-        if 'error' not in home:
+        # Editorial-only releases do not change the homepage. Wait for the
+        # release manifest as well, otherwise new articles can be checked
+        # before Pages has deployed them and incorrectly reported as 404.
+        release_checks = [check('index.html'), check('sitemap.xml')]
+        pending = [result for result in release_checks if 'error' in result]
+        if not pending:
             break
-        print('Esperando publicacion:', json.dumps(home), flush=True)
+        print('Esperando publicacion:', json.dumps(pending), flush=True)
         if time.monotonic() >= deadline:
-            raise SystemExit('No se pudo confirmar la nueva portada por HTTPS')
+            raise SystemExit('No se pudo confirmar portada y sitemap de la entrega por HTTPS')
         time.sleep(12)
     locs = [x.text for x in ET.parse(ROOT / 'sitemap.xml').getroot().findall('{*}url/{*}loc')]
     paths = [urllib.parse.urlparse(url).path.lstrip('/') or 'index.html' for url in locs]

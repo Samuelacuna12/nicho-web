@@ -1,5 +1,813 @@
 [
   {
+    "slug": "salidas-estructuradas-ia-validacion-negocio",
+    "title": "Salidas estructuradas de IA: cómo validar los datos antes de usarlos",
+    "description": "Distingue un JSON correcto de un dato válido para tu negocio y define controles de referencias, cantidades, permisos y respuestas incompletas.",
+    "intro": "Un agente puede entregar todos los campos esperados y aun así proponer una referencia inexistente o una cantidad equivocada. Las salidas estructuradas facilitan la integración, pero el sistema necesita decidir qué valores puede aceptar. Esta guía organiza esa validación entre la respuesta del modelo y el registro definitivo.",
+    "sections": [
+      {
+        "heading": "Qué resuelve el esquema",
+        "html": "<p>Un esquema describe la forma de la respuesta: campos, tipos y opciones permitidas. Por ejemplo, una solicitud puede incluir referencia, unidades y observaciones. La documentación de OpenAI diferencia el JSON válido de la adhesión al esquema y advierte que una salida estructurada todavía puede contener errores. También contempla rechazos y entradas que no corresponden a la tarea.</p><p>Define qué significa un campo vacío. Una referencia desconocida debe poder quedar pendiente, en lugar de obligar al modelo a elegir una opción para cumplir el formato. El equipo técnico debe revisar qué partes del esquema admite la interfaz y el modelo que realmente utiliza.</p>"
+      },
+      {
+        "heading": "Organiza tres controles antes de guardar",
+        "html": "<ol><li><strong>Formato:</strong> comprueba que la respuesta terminó correctamente y que se puede interpretar según el esquema esperado.</li><li><strong>Datos:</strong> consulta si la referencia existe, si la cantidad usa la unidad correcta y si la fecha es posible para ese proceso.</li><li><strong>Acción:</strong> verifica que el usuario y el agente pueden realizar la operación sobre ese registro concreto.</li></ol><p>Conviene devolver errores específicos. “Referencia no encontrada” permite corregir el dato; “falló la IA” deja al asesor sin una siguiente acción. Conserva el identificador de la solicitud para que una corrección no cree un segundo registro independiente.</p>"
+      },
+      {
+        "heading": "Ejemplo hipotético: una solicitud de repuestos",
+        "html": "<p>Un cliente ficticio pide dos cajas de una pieza. El modelo devuelve dos unidades con una referencia válida. El formato pasa, pero la unidad comercial no coincide. El sistema consulta el catálogo, muestra que cada caja contiene varias unidades y pide confirmar la presentación antes de reservar existencias.</p><p>Otra solicitud trae una referencia retirada. No conviene sustituirla automáticamente por la más parecida. La salida puede proponer una revisión y presentar alternativas verificadas, dejando explícito que el cliente todavía no eligió una. Estos escenarios son pruebas de diseño, no resultados de clientes de Nicho.</p>"
+      },
+      {
+        "heading": "Define el tratamiento de respuestas incompletas",
+        "html": "<p>Una respuesta interrumpida, un rechazo del modelo y un dato que incumple una regla de negocio necesitan caminos diferentes. En el primer caso puede corresponder reintentar de forma limitada; en el segundo, ofrecer una ruta permitida; en el tercero, solicitar una corrección concreta. No reintentes indefinidamente la misma entrada esperando que aparezca un valor aceptable.</p><p>Antes del lanzamiento, prueba cantidades negativas, monedas ausentes, referencias similares, campos vacíos y respuestas fuera de alcance. El criterio de aceptación debe indicar qué se guarda, qué se consulta y qué queda detenido en cada caso. Cuenta los errores evitados y las revisiones necesarias, sin convertir una tasa de formato correcto en una promesa de exactitud comercial.</p>"
+      },
+      {
+        "heading": "Cómo encaja con tu operación",
+        "html": "<p>Si los datos proceden de archivos, revisa también la guía para <a href=\"extraer-datos-documentos-ia-validacion.html\">extraer y comprobar datos de documentos</a>. Para operaciones que cambian información, define los <a href=\"permisos-agentes-ia-modificar-crm.html\">permisos del agente en el CRM</a>. Cada control debe tener un responsable y una respuesta comprensible para el asesor.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "OpenAI: salidas estructuradas",
+        "url": "https://developers.openai.com/api/docs/guides/structured-outputs"
+      }
+    ],
+    "datePublished": "2026-10-13",
+    "dateLabel": "13 de octubre de 2026",
+    "sourceDateLabel": "13 de octubre de 2026",
+    "category": "IA para empresas",
+    "service": "agentes-ia.html",
+    "cta": "En Nicho podemos ayudarte a definir el contrato de datos y las validaciones necesarias entre tu agente y tus sistemas."
+  },
+  {
+    "slug": "buscar-productos-ia-referencia-exacta-catalogo",
+    "title": "Cómo buscar productos con IA sin confundir referencias parecidas",
+    "description": "Combina búsqueda por significado y coincidencia exacta para identificar productos, verificar variantes y responder con disponibilidad vigente.",
+    "intro": "Una persona describe “el repuesto pequeño de la máquina”, mientras otra escribe una referencia completa. Ambas consultas llegan al mismo catálogo, pero necesitan tratamientos distintos. Un buscador comercial útil reconoce esa diferencia y comprueba el producto antes de presentarlo como compatible o disponible.",
+    "sections": [
+      {
+        "heading": "Decide qué preguntas necesitan coincidencia exacta",
+        "html": "<p>Separa nombres comunes, características y códigos. Las descripciones cotidianas pueden beneficiarse de una búsqueda por significado. Un código de producto, en cambio, exige una comparación controlada con el identificador del catálogo. No elimines guiones, ceros o sufijos sin conocer cómo los usa el fabricante: pueden distinguir dos piezas.</p><p>La guía de recuperación de OpenAI explica que la búsqueda semántica encuentra contenido relacionado aunque comparta pocas palabras con la consulta. También permite filtros por atributos. Esa capacidad ayuda a descubrir candidatos; tu operación debe comprobar por separado su identidad y compatibilidad.</p>"
+      },
+      {
+        "heading": "Construye una respuesta con candidatos verificables",
+        "html": "<ol><li>Identifica si llegó un código o una descripción.</li><li>Busca dentro del catálogo y la categoría autorizados.</li><li>Presenta nombre, referencia y atributos que realmente diferencian las opciones.</li><li>Pide el dato que falta cuando dos candidatos siguen siendo posibles.</li><li>Consulta precio y disponibilidad en su fuente operativa antes de confirmarlos.</li></ol><p>Evita mezclar en un mismo campo la descripción estable con el saldo de inventario. Un documento indexado puede seguir describiendo bien el producto después de que se agote. La respuesta necesita mostrar la vigencia del dato que determina la compra.</p>"
+      },
+      {
+        "heading": "Ejemplo hipotético: dos adaptadores casi iguales",
+        "html": "<p>En un catálogo ficticio existen AD-120-A y AD-120-B. Comparten familia y apariencia, pero aceptan conectores diferentes. Ante “adaptador AD120”, el agente muestra ambos y pregunta por el conector del equipo. No selecciona el primero solo porque obtuvo mayor similitud.</p><p>Si el cliente confirma AD-120-A, el sistema consulta esa referencia exacta. Si está agotada, puede informar el estado y ofrecer revisar alternativas. La sustitución necesita una verificación de compatibilidad y una decisión del cliente; el texto de marketing de otro producto no basta como evidencia técnica.</p>"
+      },
+      {
+        "heading": "Prueba búsquedas difíciles y fallos de actualización",
+        "html": "<p>Prepara consultas con letras intercambiadas, códigos incompletos, nombres anteriores y medidas en distintas unidades. Incluye productos retirados y referencias que nunca existieron. El resultado esperado puede ser una pregunta o “no encontramos esa referencia”, sin necesidad de forzar una recomendación.</p><p>Evalúa por separado si el producto correcto apareció entre los candidatos y si la respuesta final lo identificó bien. Añade una prueba donde el inventario cambie después de recuperar el catálogo. El agente debe volver a consultar al momento de la operación que reserva o vende, según las reglas del sistema.</p>"
+      },
+      {
+        "heading": "Cómo encaja con tu operación",
+        "html": "<p>Complementa este diseño con una <a href=\"base-conocimiento-ia-vigencia-excepciones.html\">base de conocimiento con vigencia</a> y la <a href=\"conciliar-inventario-tienda-sistema.html\">conciliación del inventario</a>. La búsqueda ayuda a encontrar; el catálogo maestro y la operación determinan qué se puede ofrecer.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "OpenAI: recuperación y búsqueda semántica",
+        "url": "https://developers.openai.com/api/docs/guides/retrieval"
+      }
+    ],
+    "datePublished": "2026-10-13",
+    "dateLabel": "13 de octubre de 2026",
+    "sourceDateLabel": "13 de octubre de 2026",
+    "category": "IA para empresas",
+    "service": "agentes-ia.html",
+    "cta": "Podemos revisar cómo están organizadas tus referencias y diseñar un buscador que conecte las preguntas del cliente con datos verificables."
+  },
+  {
+    "slug": "memoria-chatbot-vigencia-correcciones-sesion",
+    "title": "Qué debe recordar un chatbot y cuándo debe volver a preguntar",
+    "description": "Diseña memoria conversacional con alcance, vigencia y correcciones para evitar que una preferencia antigua se convierta en una instrucción actual.",
+    "intro": "Recordar la conversación evita repetir preguntas, pero también puede arrastrar una dirección provisional o una elección que el cliente ya cambió. La memoria de un chatbot necesita reglas de uso: qué dato conserva, a quién pertenece, cuándo vence y qué sucede cuando aparece una corrección.",
+    "sections": [
+      {
+        "heading": "Distingue el contexto de la sesión y los datos confirmados",
+        "html": "<p>El contexto de una conversación puede incluir opciones exploradas, mensajes del agente y respuestas del cliente. Un perfil operativo debería contener únicamente los datos que el proceso permite guardar y reutilizar. Haber mencionado una ciudad para una cotización no establece que todos los próximos pedidos se entreguen allí.</p><p>La documentación de OpenAI describe mecanismos para conservar el estado conversacional entre interacciones. Esa persistencia técnica no define por sí sola la política de memoria del negocio. Conviene diseñar una capa que seleccione qué hechos se pueden usar en cada operación y qué confirmaciones siguen siendo necesarias.</p>"
+      },
+      {
+        "heading": "Añade alcance y vigencia a cada dato reutilizable",
+        "html": "<ul><li><strong>Origen:</strong> mensaje o registro que respalda el dato.</li><li><strong>Estado:</strong> propuesta, confirmado, corregido o vencido.</li><li><strong>Alcance:</strong> esta consulta, este pedido o un perfil autorizado.</li><li><strong>Vigencia:</strong> cuándo revisar o dejar de usarlo.</li><li><strong>Responsable:</strong> quién puede corregirlo.</li></ul><p>El plazo depende de la finalidad y de la política de datos aplicable. No hay una duración universal apropiada para toda empresa. Guarda lo necesario y evita que resúmenes de conversación reintroduzcan datos que ya se descartaron o corrigieron.</p>"
+      },
+      {
+        "heading": "Ejemplo hipotético: una entrega que cambia de lugar",
+        "html": "<p>Un cliente ficticio pide una cotización para recoger en una sede. Al día siguiente solicita entrega en otra dirección. El chatbot debe actualizar la propuesta del pedido actual y comprobar la nueva modalidad, sin convertir la primera sede en una preferencia permanente ni modificar otros pedidos abiertos.</p><p>Si la conversación vuelve semanas después, puede recuperar el número de la solicitud y preguntar si desea continuarla. Mostrar los datos esenciales para confirmar suele ser más claro que asumir que todo sigue vigente. La persona debe poder corregir un dato sin repetir la conversación completa.</p>"
+      },
+      {
+        "heading": "Comprueba separación entre clientes y recuperación de cambios",
+        "html": "<p>Asocia el contexto a una identidad verificada según el canal. No uses el nombre visible como único identificador ni juntes conversaciones porque mencionan la misma empresa. Prueba dos clientes con nombres iguales, una sesión compartida y un asesor que cambia de cuenta.</p><p>Incluye pruebas de corrección: el cliente cambia una fecha, cancela una preferencia y pide empezar una consulta independiente. Revisa también los resúmenes automáticos: deben conservar la corrección más reciente y distinguir decisiones de posibilidades. El historial técnico y la memoria reutilizable pueden necesitar tratamientos distintos de acceso y conservación.</p>"
+      },
+      {
+        "heading": "Cómo encaja con tu operación",
+        "html": "<p>La memoria puede facilitar el <a href=\"traspaso-bot-asesor-con-contexto.html\">traspaso a un asesor</a>, siempre que el resumen marque dudas y cambios. Si participan varios países, combina estas reglas con la <a href=\"chatbot-multilingue-pais-moneda-fechas.html\">confirmación de monedas, fechas e idioma</a>.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "OpenAI: estado de conversación",
+        "url": "https://developers.openai.com/api/docs/guides/conversation-state"
+      }
+    ],
+    "datePublished": "2026-10-13",
+    "dateLabel": "13 de octubre de 2026",
+    "sourceDateLabel": "13 de octubre de 2026",
+    "category": "IA para empresas",
+    "service": "agentes-ia.html",
+    "cta": "En Nicho podemos ayudarte a definir qué contexto necesita tu atención y cómo mantenerlo actualizado sin acumular información innecesaria."
+  },
+  {
+    "slug": "clasificar-mensajes-ia-categorias-revision",
+    "title": "Cómo clasificar mensajes con IA cuando hay dudas o varias solicitudes",
+    "description": "Define categorías, ejemplos y una salida de revisión para que la clasificación de mensajes no pierda solicitudes ni fuerce decisiones ambiguas.",
+    "intro": "Un mensaje puede preguntar por un producto y reportar un problema con un pedido al mismo tiempo. Si el sistema obliga a elegir una sola categoría, una parte de la solicitud puede desaparecer. La clasificación necesita reglas claras para mensajes mixtos, datos insuficientes y asuntos fuera del alcance.",
+    "sections": [
+      {
+        "heading": "Escribe categorías que el equipo pueda distinguir",
+        "html": "<p>Empieza con el trabajo que hará cada área después de recibir el mensaje. “Información”, “ventas” y “consulta” pueden solaparse demasiado. En cambio, disponibilidad de producto, estado de pedido y soporte técnico describen acciones distintas cuando tu operación realmente las separa.</p><p>Para cada categoría, documenta qué incluye, qué excluye y un ejemplo fronterizo. Pide a dos personas del equipo que clasifiquen una muestra sin consultarse. Si discrepan continuamente, aclara las reglas antes de ajustar el modelo: la ambigüedad del proceso también aparecerá en la automatización.</p>"
+      },
+      {
+        "heading": "Permite varias intenciones o una revisión explícita",
+        "html": "<p>Define si un mensaje puede abrir dos tareas relacionadas o si primero necesita una pregunta. Una solicitud de cambio acompañada de una duda de disponibilidad no debería perder una de sus partes. Mantén un identificador común para que los responsables vean que proceden de la misma conversación.</p><p>Una salida “requiere revisión” resulta útil cuando no hay información suficiente. Evita tratar un porcentaje escrito por el propio modelo como una probabilidad calibrada. Decide la automatización con resultados observados en pruebas y con el costo de cada error, especialmente cuando una clasificación activa una acción difícil de revertir.</p>"
+      },
+      {
+        "heading": "Ejemplo hipotético: compra nueva y problema anterior",
+        "html": "<p>Un comprador ficticio escribe: “Quiero otras tres unidades y la última caja llegó incompleta”. La clasificación identifica una nueva solicitud comercial y un incidente de entrega. El sistema deja ambas vinculadas, informa al responsable de atención y evita que una campaña de venta tape el reclamo.</p><p>El mensaje “lo mismo de antes” puede quedar pendiente hasta identificar el pedido. Ninguna categoría debería obligar al sistema a inventar una referencia. El objetivo de la clasificación es organizar el trabajo con los datos disponibles, manteniendo visibles los límites de lo entendido.</p>"
+      },
+      {
+        "heading": "Mide errores por categoría y por consecuencia",
+        "html": "<p>La documentación de evaluación de OpenAI recomienda pruebas específicas de la tarea, casos habituales y difíciles, y evaluación continua. Para este flujo, prepara una muestra con mensajes cortos, errores de escritura, varias solicitudes y contenido ajeno al negocio. Separa los ejemplos de ajuste de aquellos que usarás para comprobar la versión final.</p><p>Cuenta cuántas solicitudes de cada tipo detecta y cuántas asignaciones son incorrectas. Revisa especialmente los asuntos que se pierden, aunque el promedio parezca bueno. Prueba también el circuito humano: una persona debe poder corregir la etiqueta y recuperar la tarea sin dejarla duplicada o sin responsable.</p>"
+      },
+      {
+        "heading": "Cómo encaja con tu operación",
+        "html": "<p>Después de clasificar, aplica reglas explícitas para <a href=\"repartir-leads-capacidad-ausencias-responsable.html\">asignar responsables</a>. Puedes usar la guía de <a href=\"evaluar-agente-ia-atencion-rubrica-pruebas.html\">evaluación de agentes de atención</a> para ampliar las pruebas al recorrido completo.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "OpenAI: buenas prácticas de evaluación",
+        "url": "https://developers.openai.com/api/docs/guides/evaluation-best-practices"
+      }
+    ],
+    "datePublished": "2026-10-13",
+    "dateLabel": "13 de octubre de 2026",
+    "sourceDateLabel": "13 de octubre de 2026",
+    "category": "IA para empresas",
+    "service": "agentes-ia.html",
+    "cta": "Podemos ayudarte a convertir tus categorías de atención en reglas claras y pruebas que reflejen los mensajes que recibe tu equipo."
+  },
+  {
+    "slug": "whatsapp-api-botones-respuestas-vencidas",
+    "title": "WhatsApp API: cómo manejar botones y respuestas que llegan tarde",
+    "description": "Diseña opciones claras en WhatsApp API y valida la respuesta contra el estado actual para evitar pedidos basados en menús vencidos.",
+    "intro": "Los botones facilitan una elección, pero el cliente puede pulsarlos después de que una cita, una cotización o un producto haya cambiado. La integración necesita relacionar cada respuesta con el mensaje original y volver a comprobar las condiciones antes de ejecutar la acción.",
+    "sections": [
+      {
+        "heading": "Cada opción necesita significado e identidad",
+        "html": "<p>La colección oficial de Meta en Postman documenta el envío de mensajes interactivos mediante el endpoint de mensajes. La interfaz permite presentar opciones, mientras tu aplicación define qué sucede al recibir una respuesta. Revisa los tipos y restricciones vigentes para la versión que utilices antes de construir el menú.</p><p>Asigna identificadores estables a las opciones y conserva su relación con la solicitud. El texto visible puede cambiar por idioma o por claridad; no debería ser la única clave para decidir una operación. Evita identificadores que revelen datos personales o información interna sensible.</p>"
+      },
+      {
+        "heading": "Valida el estado al recibir la respuesta",
+        "html": "<ol><li>Localiza el mensaje y la solicitud a la que pertenece la opción.</li><li>Comprueba que responde el contacto esperado y que el estado permite continuar.</li><li>Revisa si la opción conserva vigencia y disponibilidad.</li><li>Ejecuta la transición autorizada una sola vez.</li><li>Devuelve una confirmación real o explica qué condición cambió.</li></ol><p>Una opción vencida puede abrir un nuevo menú o pasar a revisión. No conviene reinterpretar silenciosamente un botón antiguo como aceptación de nuevas condiciones. Si el proveedor reenvía el evento, el resultado debe seguir siendo la misma operación.</p>"
+      },
+      {
+        "heading": "Ejemplo hipotético: seleccionar un horario",
+        "html": "<p>Una empresa ficticia ofrece dos horarios por WhatsApp. El cliente elige uno cuando otra persona ya lo reservó. La aplicación vuelve a consultar la agenda y responde que ese horario dejó de estar disponible, con alternativas actualizadas. No confirma la cita a partir del menú enviado horas antes.</p><p>Si el cliente pulsa dos veces la misma opción, la integración recupera el resultado registrado. Si pulsa otra opción después de confirmar, se aplica el flujo de cambio de cita, con las verificaciones correspondientes. Así se distingue una repetición técnica de una nueva intención del cliente.</p>"
+      },
+      {
+        "heading": "Mantén una salida para quien no usa el menú",
+        "html": "<p>El cliente puede responder con texto, audio o una pregunta que no encaje en los botones. Define cómo retomar la conversación y cómo pedir ayuda humana. Los menús deben simplificar una decisión concreta, sin convertirse en un laberinto que impida explicar el problema.</p><p>Prueba respuestas tardías, eventos repetidos, opciones retiradas y mensajes de texto en medio del flujo. Verifica además las reglas de mensajería aplicables para responder o volver a contactar: la existencia de un botón anterior no concede permiso indefinido para enviar cualquier mensaje.</p>"
+      },
+      {
+        "heading": "Cómo encaja con tu operación",
+        "html": "<p>Apóyate en el diseño de <a href=\"webhooks-idempotencia-pedidos-duplicados.html\">webhooks e idempotencia</a> y en las reglas de <a href=\"plantillas-whatsapp-ventana-24-horas-consentimiento.html\">plantillas, ventana de atención y consentimiento</a>. Los botones forman parte del proceso, no reemplazan esos controles.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "Meta: envío de botones de respuesta en WhatsApp Cloud API",
+        "url": "https://www.postman.com/meta/whatsapp-business-platform/request/ne00kt6/send-reply-button"
+      }
+    ],
+    "datePublished": "2026-10-13",
+    "dateLabel": "13 de octubre de 2026",
+    "sourceDateLabel": "13 de octubre de 2026",
+    "category": "WhatsApp para empresas",
+    "service": "whatsapp-api-empresas.html",
+    "cta": "Podemos diseñar los estados y opciones de tu conversación de WhatsApp para que cada elección llegue al proceso correcto."
+  },
+  {
+    "slug": "versionar-prompts-pruebas-reversion-agente",
+    "title": "Cómo cambiar el prompt de un agente sin perder el control de la versión",
+    "description": "Organiza cambios de instrucciones con versiones, pruebas, despliegue gradual y reversión para detectar regresiones en agentes de IA.",
+    "intro": "Una frase añadida al prompt puede mejorar una respuesta y empeorar otras que ya funcionaban. Para un agente en producción, las instrucciones merecen el mismo cuidado que las reglas de una aplicación: un cambio identificable, pruebas comparables y una forma clara de volver a una versión anterior.",
+    "sections": [
+      {
+        "heading": "Guarda la configuración que produjo cada resultado",
+        "html": "<p>Registra una versión que vincule instrucciones, modelo, herramientas disponibles y reglas relevantes del proceso. Si cambias varios elementos a la vez sin conservar esa relación, será difícil entender por qué una conversación empezó a fallar.</p><p>La guía actual de ingeniería de prompts de OpenAI recomienda mantener los prompts de producción en el código de la aplicación y usar revisión, pruebas y el proceso habitual de despliegue. Para este diseño, el identificador de versión debe ser visible en los registros técnicos, sin mostrar al cliente secretos ni detalles innecesarios de la implementación.</p>"
+      },
+      {
+        "heading": "Formula el cambio como una hipótesis verificable",
+        "html": "<p>Describe el problema observado, el comportamiento esperado y qué no debe deteriorarse. Por ejemplo: “Cuando falte la unidad del producto, preguntar antes de calcular”. Esa formulación permite comparar la versión nueva con la anterior sobre las mismas entradas.</p><p>Separa las instrucciones estables de los datos variables que llegan del catálogo o del cliente. Evita pegar registros privados dentro del archivo del prompt para resolver un caso puntual. Los ejemplos de prueba pueden ser sintéticos y deben representar situaciones reales del proceso sin exponer conversaciones personales.</p>"
+      },
+      {
+        "heading": "Ejemplo hipotético: una instrucción demasiado amplia",
+        "html": "<p>Un agente ficticio responde con demasiadas preguntas. El equipo añade “resuelve siempre sin pedir aclaraciones”. La prueba nueva mejora una consulta simple, pero hace que el agente asuma cantidades y fechas en solicitudes incompletas. La versión no debería publicarse solo por la primera mejora.</p><p>Una alternativa más precisa indica qué dudas se pueden resolver con datos verificados y cuáles requieren preguntar. El conjunto de pruebas incluye respuestas completas, datos contradictorios y casos donde la acción debe quedar detenida. La revisión considera el resultado del proceso, no solo que el texto parezca fluido.</p>"
+      },
+      {
+        "heading": "Publica con observación y un regreso preparado",
+        "html": "<ol><li>Conserva la versión anterior junto con sus dependencias relevantes.</li><li>Ejecuta las pruebas definidas y revisa los fallos nuevos.</li><li>Limita el alcance inicial cuando tu infraestructura permita una salida gradual.</li><li>Observa errores operativos y revisiones humanas por versión.</li><li>Activa la reversión si aparece una regresión que incumple el criterio acordado.</li></ol><p>Volver al prompt anterior no deshace pedidos, mensajes ni otros cambios ya ejecutados. Prepara también la revisión de operaciones afectadas y evita repetir acciones durante la recuperación. Las sesiones que empezaron con una versión pueden necesitar un tratamiento explícito al cambiar a otra.</p>"
+      },
+      {
+        "heading": "Cómo encaja con tu operación",
+        "html": "<p>Usa una <a href=\"evaluar-agente-ia-atencion-rubrica-pruebas.html\">rúbrica de evaluación del agente</a> y comprueba los <a href=\"permisos-agentes-ia-modificar-crm.html\">límites de sus herramientas</a>. Una mejora de redacción debe mantener intactos los controles operativos que protegen al cliente y al equipo.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "OpenAI: ingeniería de prompts y versiones en código",
+        "url": "https://developers.openai.com/api/docs/guides/prompt-engineering"
+      }
+    ],
+    "datePublished": "2026-10-13",
+    "dateLabel": "13 de octubre de 2026",
+    "sourceDateLabel": "13 de octubre de 2026",
+    "category": "IA para empresas",
+    "service": "agentes-ia.html",
+    "cta": "En Nicho podemos ayudarte a definir una batería de pruebas y un proceso de cambios para las instrucciones de tu agente."
+  },
+  {
+    "slug": "outlook-correos-solicitudes-tickets-sin-perder-cambios",
+    "title": "Cómo convertir correos de Outlook en solicitudes con seguimiento",
+    "description": "Diseña una integración de Outlook que identifique solicitudes, conserve el vínculo con el correo y recupere cambios sin crear casos duplicados.",
+    "intro": "Un correo recibido todavía no es una tarea asignada. Para convertir una bandeja compartida en un proceso de atención, hace falta identificar qué solicita la persona, quién responde y qué información queda registrada. La integración debe seguir funcionando cuando llegan respuestas, se mueven mensajes o se interrumpe la sincronización.",
+    "sections": [
+      {
+        "heading": "Define qué correos abren una solicitud",
+        "html": "<p>Elige el buzón o las carpetas que pertenecen al proceso. Excluye boletines, respuestas automáticas y copias informativas cuando no requieren trabajo. Una regla demasiado amplia llena el tablero de ruido; una demasiado estrecha deja solicitudes reales sin responsable.</p><p>Conserva el vínculo entre correo y caso con identificadores técnicos y un enlace de consulta permitido. El asunto puede cambiar y dos personas pueden usar el mismo título. No lo uses como única identidad. Define también cuándo una respuesta actualiza un caso existente y cuándo plantea una necesidad independiente.</p>"
+      },
+      {
+        "heading": "Combina notificaciones y conciliación",
+        "html": "<p>Microsoft Graph permite recibir notificaciones de cambios en mensajes. Su documentación también ofrece consultas delta para recuperar altas, cambios y eliminaciones por carpeta. Estos mecanismos ayudan a detectar actividad y a mantener una copia operativa actualizada, con los permisos aplicables al buzón.</p><p>Como diseño de proceso, registra cada cambio recibido y compara periódicamente la información pendiente. Una notificación no debería ser la única evidencia de que todos los correos se procesaron. Si se interrumpe la integración, muestra desde cuándo la bandeja dejó de estar conciliada y quién debe revisarla.</p>"
+      },
+      {
+        "heading": "Ejemplo hipotético: un correo con dos respuestas",
+        "html": "<p>Una empresa ficticia recibe una solicitud de soporte. El sistema crea el caso y asigna responsable. El cliente añade una foto en una respuesta posterior; otro asesor contesta desde Outlook. La integración adjunta las novedades al mismo caso y evita enviar una segunda respuesta automática que contradiga al asesor.</p><p>Si un empleado mueve el correo a otra carpeta, la desaparición de la carpeta inicial no implica que el cliente haya cancelado la solicitud. La política del caso debe decidir qué significa cada cambio. Borrar o archivar un correo y cerrar una tarea son acciones diferentes que necesitan reglas explícitas.</p>"
+      },
+      {
+        "heading": "Prueba permisos, adjuntos y recuperación",
+        "html": "<ul><li>Comprueba los permisos concretos de los buzones compartidos: Microsoft indica que sus notificaciones de cambio requieren los permisos de aplicación correspondientes; los permisos delegados Mail.Read.Shared no sirven para esas suscripciones.</li><li>Procesa adjuntos solo cuando sean necesarios y estén permitidos; evita distribuirlos a todas las áreas.</li><li>Simula una interrupción y verifica que las respuestas pendientes aparecen al recuperar la sincronización.</li><li>Prueba correos repetidos, cambios de asunto y conversaciones con varias personas.</li><li>Define cómo un asesor corrige una asociación equivocada entre correo y caso.</li></ul><p>El tablero debería distinguir “correo detectado”, “solicitud registrada” y “responsable asignado”. Así el equipo puede localizar un atraso sin asumir que la recepción del mensaje equivale a atención efectiva.</p>"
+      },
+      {
+        "heading": "Cómo encaja con tu operación",
+        "html": "<p>Completa la integración con una <a href=\"fallos-integraciones-cola-revision.html\">cola de revisión para fallos</a> y reglas para <a href=\"repartir-leads-capacidad-ausencias-responsable.html\">asignar responsables según capacidad</a>.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "Microsoft: notificaciones de cambios de Outlook",
+        "url": "https://learn.microsoft.com/en-us/graph/outlook-change-notifications-overview?tabs=http"
+      },
+      {
+        "title": "Microsoft: cambios incrementales de mensajes",
+        "url": "https://learn.microsoft.com/en-us/graph/delta-query-messages"
+      }
+    ],
+    "datePublished": "2026-10-13",
+    "dateLabel": "13 de octubre de 2026",
+    "sourceDateLabel": "13 de octubre de 2026",
+    "category": "Operación y software",
+    "service": "automatizaciones.html",
+    "cta": "Podemos ayudarte a conectar el correo con tu operación y definir qué evidencia necesita cada solicitud para avanzar."
+  },
+  {
+    "slug": "ediciones-simultaneas-software-conflictos-version",
+    "title": "Cómo evitar que dos personas sobrescriban el mismo registro",
+    "description": "Diseña control de versiones y resolución de conflictos para que las ediciones simultáneas no borren cambios en pedidos, contactos o solicitudes.",
+    "intro": "Dos personas pueden abrir la misma ficha, cambiar campos distintos y guardar con pocos segundos de diferencia. Si el sistema acepta todo sin comprobar la versión, una edición antigua puede borrar información reciente. Resolver esa situación exige una regla del servidor y una interfaz que ayude a decidir.",
+    "sections": [
+      {
+        "heading": "Reconoce qué cambios pueden entrar en conflicto",
+        "html": "<p>Haz una lista de registros compartidos y operaciones frecuentes. Corregir un teléfono y añadir una nota pueden ser compatibles; cambiar el estado de un pedido cancelado exige revisar las reglas del proceso. El conflicto depende tanto de los campos como del significado de la operación.</p><p>Define qué versión leyó el usuario al abrir la ficha. Al guardar, el servidor compara esa versión con la actual dentro de la operación que escribe. Comprobar primero y escribir después sin protección deja una ventana en la que otro proceso puede modificar el mismo registro.</p>"
+      },
+      {
+        "heading": "Elige una estrategia con el equipo técnico",
+        "html": "<p>Una estrategia optimista rechaza o revisa la edición cuando la versión cambió. Los bloqueos pueden reservar acceso para determinadas operaciones, pero deben durar lo necesario. PostgreSQL documenta bloqueos de filas y advierte sobre esperas y bloqueos mutuos cuando varias transacciones compiten.</p><p>Evita mantener una transacción de base de datos abierta mientras una persona piensa frente al formulario. Para procesos largos, puede ser más apropiado guardar un borrador y volver a verificar al confirmar. La elección depende del volumen, la base de datos y las consecuencias de una colisión; requiere pruebas en la implementación real.</p>"
+      },
+      {
+        "heading": "Ejemplo hipotético: una cotización compartida",
+        "html": "<p>Una asesora ficticia cambia la dirección de entrega mientras otro asesor ajusta cantidades. Al guardar la segunda edición, el sistema detecta que su versión quedó antigua. Presenta los campos modificados y conserva ambos borradores para decidir qué valores se aplican.</p><p>Una mezcla automática de campos sería peligrosa si la dirección determina gastos de entrega o condiciones de servicio. La interfaz debe mostrar las dependencias que obligan a recalcular. El usuario puede actualizar su propuesta sin perder lo escrito, y la confirmación final vuelve a validar el conjunto.</p>"
+      },
+      {
+        "heading": "Prueba las colisiones de forma deliberada",
+        "html": "<ol><li>Abre el mismo registro en dos sesiones de prueba.</li><li>Guarda cambios en el mismo campo y luego en campos distintos.</li><li>Repite con una automatización que modifica el registro en paralelo.</li><li>Comprueba qué ocurre al perder conexión y reenviar el guardado.</li><li>Verifica que el historial permite identificar el valor final y su origen.</li></ol><p>El mensaje de conflicto debe explicar cómo continuar. “Otro usuario actualizó esta ficha; revisa los cambios” es más útil que un error técnico sin salida. Evita revelar datos que la persona no tiene permiso de ver al mostrar la comparación.</p>"
+      },
+      {
+        "heading": "Cómo encaja con tu operación",
+        "html": "<p>Este control complementa la <a href=\"webhooks-idempotencia-pedidos-duplicados.html\">idempotencia de eventos</a>: uno evita ejecutar dos veces; el otro ayuda a proteger cambios concurrentes. Ambos necesitan reglas claras en el sistema que mantiene el registro definitivo.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "PostgreSQL: bloqueos explícitos y bloqueos de filas",
+        "url": "https://www.postgresql.org/docs/17/explicit-locking.html"
+      }
+    ],
+    "datePublished": "2026-10-13",
+    "dateLabel": "13 de octubre de 2026",
+    "sourceDateLabel": "13 de octubre de 2026",
+    "category": "Operación y software",
+    "service": "sistemas.html",
+    "cta": "Podemos revisar dónde se pisan cambios en tu operación y definir un flujo de edición compartida con recuperación comprensible."
+  },
+  {
+    "slug": "exportar-csv-seguro-formulas-datos",
+    "title": "Cómo exportar CSV sin activar fórmulas ni alterar identificadores",
+    "description": "Revisa fórmulas, ceros iniciales, separadores y permisos antes de entregar exportaciones CSV que otras personas abrirán en hojas de cálculo.",
+    "intro": "Exportar una tabla parece sencillo hasta que una hoja de cálculo cambia una referencia o interpreta un texto como fórmula. Un CSV necesita un contrato claro con quien lo recibe: columnas, tipos de datos, uso previsto y controles para contenido que proviene de personas externas.",
+    "sections": [
+      {
+        "heading": "Define si el archivo será leído por personas o sistemas",
+        "html": "<p>Un archivo para importar a otro sistema puede necesitar datos literales, mientras que una hoja destinada a revisión humana debe conservar una presentación comprensible. Pregunta qué herramienta abrirá el archivo y cómo interpreta separadores, fechas y codificación.</p><p>Documenta el orden de columnas y la unidad de cada importe o cantidad. Un identificador como 00127 debe seguir siendo identificador, aunque parezca número. Evita fechas ambiguas y comprueba caracteres como tildes y eñes en la aplicación de destino, no solo en un editor de texto.</p>"
+      },
+      {
+        "heading": "Trata los textos externos como contenido no confiable",
+        "html": "<p>OWASP explica que algunas hojas de cálculo interpretan ciertas celdas como fórmulas y que envolverlas entre comillas no elimina por sí solo ese riesgo. También advierte que el comportamiento cambia según la aplicación y que algunas mitigaciones pueden perderse al guardar y volver a abrir.</p><p>Por eso conviene acordar un formato seguro para el destino y probarlo allí. Cuando la prioridad sea la revisión humana, considera un formato que permita definir explícitamente celdas de texto. Si se mantiene CSV, el equipo técnico debe aplicar y verificar la estrategia apropiada sin asumir una protección universal.</p>"
+      },
+      {
+        "heading": "Ejemplo hipotético: una lista de solicitudes",
+        "html": "<p>Una empresa ficticia exporta nombres comerciales y observaciones ingresadas por clientes. Una observación empieza con un carácter que la hoja interpreta como fórmula. El generador debe impedir que ese contenido se ejecute al abrir el archivo, manteniendo una representación legible para la revisión.</p><p>La misma exportación contiene referencias con ceros iniciales y teléfonos internacionales. La prueba comprueba que no se conviertan en cantidades ni cambien de notación. Los valores usados en la prueba son sintéticos; no hace falta copiar una base real de clientes para verificar estas condiciones.</p>"
+      },
+      {
+        "heading": "Comprueba el recorrido completo del archivo",
+        "html": "<ul><li>Genera una muestra con comas, comillas, saltos de línea y caracteres regionales.</li><li>Incluye textos que la herramienta de destino podría interpretar como fórmulas.</li><li>Abre, guarda y vuelve a abrir la muestra para comprobar el resultado.</li><li>Valida que las columnas no se desplacen y que los identificadores conserven su forma.</li><li>Limita las columnas y filas a lo que el destinatario está autorizado a recibir.</li></ul><p>Registra fecha de generación y filtros aplicados cuando ayuden a interpretar la exportación. Si el archivo queda disponible mediante un enlace, define acceso y vencimiento. Un CSV correcto en formato todavía puede revelar demasiada información si la selección de datos fue excesiva.</p>"
+      },
+      {
+        "heading": "Cómo encaja con tu operación",
+        "html": "<p>Si estas exportaciones se usan para mover datos a una aplicación, revisa la guía de <a href=\"migrar-hojas-calculo-sistema-trazabilidad.html\">migración con trazabilidad</a>. La seguridad del archivo y la consistencia del proceso de importación deben comprobarse por separado.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "OWASP: CSV Injection",
+        "url": "https://community.owasp.org/attacks/CSV_Injection"
+      }
+    ],
+    "datePublished": "2026-10-13",
+    "dateLabel": "13 de octubre de 2026",
+    "sourceDateLabel": "13 de octubre de 2026",
+    "category": "Operación y software",
+    "service": "sistemas.html",
+    "cta": "Podemos ayudarte a definir exportaciones útiles para tu equipo y verificar su comportamiento en las herramientas que realmente utiliza."
+  },
+  {
+    "slug": "registro-auditoria-operaciones-sin-secretos",
+    "title": "Qué registrar en una auditoría de software sin guardar secretos",
+    "description": "Diseña un historial de operaciones con actor, cambio, resultado e identificador de seguimiento, limitando datos sensibles y accesos innecesarios.",
+    "intro": "Cuando un pedido cambia de estado, el equipo necesita saber qué ocurrió y quién puede revisarlo. Un registro de auditoría útil reconstruye la operación sin convertirse en una copia indiscriminada de mensajes, contraseñas o datos personales. Su diseño empieza por las preguntas que debe responder.",
+    "sections": [
+      {
+        "heading": "Parte de una pregunta operativa concreta",
+        "html": "<p>Define eventos que realmente importan: cambio de estado, edición de cantidad, aprobación, exportación o intento rechazado. Para cada uno, establece qué evidencia necesita atención, soporte o administración. Una lista enorme de eventos sin propósito puede dificultar la investigación y aumentar la exposición de datos.</p><p>OWASP recomienda registrar información que permita entender cuándo, dónde, quién y qué ocurrió, y evitar secretos y datos sensibles innecesarios. La aplicación de esa guía a tu negocio debe concretarse en campos permitidos y reglas de acceso, en lugar de guardar todo el contenido de cada solicitud.</p>"
+      },
+      {
+        "heading": "Conserva el vínculo entre intento y resultado",
+        "html": "<ul><li><strong>Actor:</strong> persona o proceso que inició la operación.</li><li><strong>Objeto:</strong> identificador del registro afectado.</li><li><strong>Acción:</strong> transición o cambio solicitado.</li><li><strong>Resultado:</strong> confirmado, rechazado o pendiente de comprobación.</li><li><strong>Tiempo:</strong> fecha con zona o referencia temporal consistente.</li><li><strong>Seguimiento:</strong> identificador que conecta los pasos de la misma operación.</li></ul><p>Una solicitud enviada a una integración no demuestra que el sistema destino aplicó el cambio. Registra ambas etapas y reconcilia el resultado. Si necesitas valores anteriores y posteriores, limita los campos y protege aquellos que puedan revelar información personal.</p>"
+      },
+      {
+        "heading": "Ejemplo hipotético: un descuento que cambia",
+        "html": "<p>En un sistema ficticio, un asesor propone un descuento y un responsable lo aprueba dentro de un límite establecido. El historial enlaza propuesta, decisión y actualización del pedido. Si la actualización falla, la aprobación permanece registrada pero la operación sigue pendiente.</p><p>El registro puede conservar el identificador de la aprobación y los valores necesarios para revisar la decisión. No necesita copiar una conversación completa ni el token usado por la integración. El acceso al historial tampoco debería permitir modificar silenciosamente la evidencia de una operación.</p>"
+      },
+      {
+        "heading": "Prueba que la auditoría sirva durante un incidente",
+        "html": "<p>Elige una operación de prueba y pide a una persona autorizada reconstruirla usando solo las herramientas disponibles. Debe poder distinguir quién la inició, qué versión de los datos se usó y si el cambio terminó. Si necesita acceso directo a secretos o a toda la base de datos, revisa el diseño.</p><p>Comprueba qué sucede cuando el registro falla o se queda sin capacidad. Define alertas, conservación y acceso según la necesidad del proceso. Los datos de entrada también pueden contener saltos de línea o texto engañoso; la representación del historial debe mantener separados campos y eventos para evitar confusiones.</p>"
+      },
+      {
+        "heading": "Cómo encaja con tu operación",
+        "html": "<p>Relaciona el historial con las <a href=\"aprobaciones-compras-umbrales-vencimiento.html\">aprobaciones del proceso</a> y con la <a href=\"fallos-integraciones-cola-revision.html\">revisión de integraciones fallidas</a>. La trazabilidad debe ayudar a corregir el trabajo pendiente y proteger la información al mismo tiempo.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "OWASP: guía de registros de aplicaciones",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html"
+      }
+    ],
+    "datePublished": "2026-10-13",
+    "dateLabel": "13 de octubre de 2026",
+    "sourceDateLabel": "13 de octubre de 2026",
+    "category": "Operación y software",
+    "service": "sistemas.html",
+    "cta": "Podemos definir contigo los eventos que necesita tu operación y un historial que permita investigarlos con acceso limitado."
+  },
+  {
+    "slug": "sla-horas-habiles-pausas-vencimientos",
+    "title": "Cómo calcular tiempos de atención con horas hábiles y pausas",
+    "description": "Define cuándo empieza, se pausa y termina un compromiso de atención para que los vencimientos del CRM reflejen el horario real del servicio.",
+    "intro": "Un plazo de cuatro horas puede vencer hoy o el siguiente día de atención según el horario, las pausas y el momento en que se recibió la solicitud. Si esas reglas no están definidas, el tablero puede mostrar incumplimientos falsos o esconder demoras reales. Antes de automatizar alertas, conviene escribir cómo corre el reloj.",
+    "sections": [
+      {
+        "heading": "Separa respuesta, solución y tiempo total",
+        "html": "<p>La primera respuesta indica que alguien atendió la solicitud; la resolución representa un resultado distinto. Define los eventos exactos que detienen cada contador. Un acuse automático puede ser útil, pero no debería contarse como respuesta humana si ese es el compromiso que se quiere medir.</p><p>Mantén visible el tiempo calendario total aunque uses horas hábiles para un objetivo. Así el equipo puede detectar una solicitud que lleva varios días abierta, incluso si buena parte del periodo estuvo fuera del horario de servicio. Los dos indicadores responden preguntas diferentes.</p>"
+      },
+      {
+        "heading": "Configura calendario, zona horaria y excepciones",
+        "html": "<p>Microsoft documenta que los acuerdos de nivel de servicio pueden considerar calendarios de atención y festivos. La regla equivalente en un sistema propio necesita identificar qué calendario aplica a cada solicitud y cómo se revisa cuando cambia el horario.</p><p>No deduzcas el calendario solo por la ciudad del cliente. Puede depender del servicio contratado, del equipo que atiende o de la modalidad acordada. En operaciones de Colombia y otros países de LATAM, deja explícita la zona horaria y valida las excepciones del calendario correspondiente, sin asumir que todos los países comparten festivos.</p>"
+      },
+      {
+        "heading": "Ejemplo hipotético con una pausa visible",
+        "html": "<p>Un equipo ficticio atiende de lunes a viernes, de 9:00 a 17:00, sin festivos en el ejemplo. Recibe una solicitud el viernes a las 16:00 con objetivo de cuatro horas hábiles. Si no hay pausas, consume una hora el viernes y las tres restantes terminan el lunes a las 12:00.</p><p>Si el caso espera un dato del cliente, define si esa espera pausa el reloj y qué evidencia la inicia. La pausa debe tener motivo y responsable. No permitas que mover un caso entre estados reinicie el plazo sin una regla conocida: eso puede mejorar el indicador sin mejorar la atención.</p>"
+      },
+      {
+        "heading": "Prueba límites de horario y cambios de estado",
+        "html": "<ol><li>Recibe casos justo antes de abrir, al cerrar y fuera del horario.</li><li>Incluye un día excluido del calendario y un cambio de zona horaria.</li><li>Pausa y reanuda una solicitud varias veces.</li><li>Reabre un caso resuelto y comprueba qué contador aplica.</li><li>Verifica que alertas y tablero muestran el mismo vencimiento.</li></ol><p>Documenta si los cambios de calendario afectan casos existentes o solo nuevos. Antes de prometer tiempos al cliente, comprueba la capacidad real del equipo. Automatizar el cálculo ayuda a gestionar el compromiso, pero no crea disponibilidad de atención.</p>"
+      },
+      {
+        "heading": "Cómo encaja con tu operación",
+        "html": "<p>Combina estos contadores con un <a href=\"dashboard-crm-demoras-cohortes-antiguedad.html\">dashboard de antigüedad y demoras</a> y reglas de <a href=\"repartir-leads-capacidad-ausencias-responsable.html\">asignación con ausencias</a>. Un vencimiento debe tener alguien capaz de actuar antes de que llegue.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "Microsoft: acuerdos de nivel de servicio y calendarios",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/customer-service/use/overview-service-level-agreements"
+      }
+    ],
+    "datePublished": "2026-10-13",
+    "dateLabel": "13 de octubre de 2026",
+    "sourceDateLabel": "13 de octubre de 2026",
+    "category": "Operación y software",
+    "service": "crm-personalizado.html",
+    "cta": "Podemos ayudarte a convertir tus horarios y compromisos de atención en reglas verificables dentro del CRM."
+  },
+  {
+    "slug": "pruebas-aceptacion-usuario-software-entrega",
+    "title": "Cómo revisar una entrega de software con pruebas de usuario",
+    "description": "Prepara escenarios, datos de prueba y criterios de aprobación para comprobar si una entrega permite completar el trabajo de tu equipo.",
+    "intro": "Una demostración muestra lo que el sistema puede hacer en condiciones preparadas. Las pruebas de aceptación permiten comprobar si las personas que lo usarán completan su trabajo con las reglas, datos y excepciones acordados. La revisión resulta más útil cuando termina en evidencia concreta y decisiones claras.",
+    "sections": [
+      {
+        "heading": "Convierte procesos en escenarios completos",
+        "html": "<p>Elige recorridos que representen trabajo real: recibir una solicitud, corregir un dato, obtener una aprobación y cerrar el caso. Incluye los roles que participan y la información que cada uno puede ver. Probar botones aislados puede dejar sin revisar los pasos entre áreas.</p><p>La guía de implementación de Microsoft destaca la necesidad de una estrategia de pruebas y de comprobar la solución antes del despliegue. Puedes aplicar ese principio a software propio: acuerda qué escenarios son indispensables, qué evidencia se guardará y quién decide si un fallo impide usar la entrega.</p>"
+      },
+      {
+        "heading": "Prepara una ficha sencilla para cada prueba",
+        "html": "<ul><li>Objetivo del proceso y rol que lo ejecuta.</li><li>Condiciones iniciales y datos sintéticos necesarios.</li><li>Pasos y resultado esperado de cada transición importante.</li><li>Resultado observado, versión y fecha.</li><li>Evidencia del fallo sin datos privados innecesarios.</li><li>Decisión: aprobado, requiere corrección o requiere aclarar el alcance.</li></ul><p>Evita convertir la prueba en una lista de instrucciones tan detallada que la persona no pueda equivocarse. Algunas sesiones deben comprobar si encuentra el camino sin ayuda del desarrollador, especialmente en tareas frecuentes.</p>"
+      },
+      {
+        "heading": "Ejemplo hipotético: entregar un módulo de pedidos",
+        "html": "<p>Un equipo ficticio prueba un pedido completo y luego una corrección después de aprobarlo. El primer recorrido funciona, pero el segundo deja la cantidad anterior en el informe. La prueba registra entrada, cambio realizado y discrepancia entre pantalla e informe.</p><p>El hallazgo no se resuelve marcando solo “botón guardar funciona”. Se revisa el recorrido afectado, se corrige y se repite con la versión nueva. También conviene comprobar otro proceso que comparte la misma regla para detectar si el arreglo alteró un comportamiento que antes funcionaba.</p>"
+      },
+      {
+        "heading": "Distingue errores, mejoras y cambios de alcance",
+        "html": "<p>Un resultado contrario al criterio acordado es un fallo. Una necesidad que nunca se definió puede requerir discutir alcance. Una pantalla funcional pero confusa puede justificar una mejora de usabilidad. Clasificar el hallazgo ayuda a resolverlo sin minimizar problemas ni convertir toda sugerencia en un compromiso inmediato.</p><p>Antes de dar la entrega por aceptada, enumera los fallos abiertos y su efecto operativo. Una aceptación con pendientes necesita responsables y condiciones explícitas. Las pruebas de usuario complementan las técnicas, de seguridad y de rendimiento; no las reemplazan ni demuestran por sí solas que toda la aplicación está libre de errores.</p>"
+      },
+      {
+        "heading": "Cómo encaja con tu operación",
+        "html": "<p>Recupera los criterios definidos al <a href=\"definir-alcance-mvp-criterios-aceptacion.html\">delimitar el MVP</a> y revisa la <a href=\"migrar-hojas-calculo-sistema-trazabilidad.html\">migración de datos</a> si forma parte de la entrega. Esta guía se centra en comprobar lo construido con los usuarios que lo operarán.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "Microsoft: estrategia de pruebas antes del despliegue",
+        "url": "https://learn.microsoft.com/en-us/dynamics365/guidance/implementation-guide/testing-strategy"
+      }
+    ],
+    "datePublished": "2026-10-13",
+    "dateLabel": "13 de octubre de 2026",
+    "sourceDateLabel": "13 de octubre de 2026",
+    "category": "Operación y software",
+    "service": "sistemas.html",
+    "cta": "Podemos ayudarte a preparar escenarios de aceptación que reflejen tu operación y conviertan la revisión de una entrega en decisiones concretas."
+  },
+  {
+    "slug": "paginacion-api-sincronizacion-completa-registros",
+    "title": "Cómo comprobar que una integración leyó todos los registros de una API",
+    "description": "Controla páginas, cursores y reanudación para evitar que una sincronización se declare completa después de leer solo la primera respuesta.",
+    "intro": "Una API puede responder correctamente y entregar solo una parte de los registros. Si la integración interpreta esa respuesta como una lista completa, el tablero mostrará menos información sin un error evidente. La paginación necesita una condición de finalización y una forma segura de retomar el recorrido.",
+    "sections": [
+      {
+        "heading": "Identifica cómo continúa la API",
+        "html": "<p>Algunas interfaces entregan un enlace a la página siguiente; otras usan un cursor o un número de página. Microsoft Graph documenta la paginación mediante enlaces de continuación y recomienda utilizar el enlace devuelto para recuperar las páginas restantes.</p><p>No construyas el siguiente enlace suponiendo cómo se forma un token opaco. Mantén filtros y alcance coherentes durante el recorrido. Una respuesta vacía tampoco debería interpretarse como final sin comprobar el contrato de esa API: puede existir una continuación aunque la página actual no aporte elementos útiles al filtro local.</p>"
+      },
+      {
+        "heading": "Guarda progreso después de confirmar el procesamiento",
+        "html": "<p>Separa obtener una página, validar sus registros, escribir el resultado y guardar el punto de continuación. Si avanzas el cursor antes de confirmar el procesamiento, una interrupción puede dejar registros atrás. Si repites una página al recuperar, necesitas reconocer los registros ya aplicados.</p><p>Registra hora de inicio, alcance, páginas procesadas, fallos y condición final. El contador de elementos ayuda a investigar, pero no sustituye la señal de finalización de la API. No compares dos recuentos tomados en momentos distintos como si fueran una foto estable de datos que siguen cambiando.</p>"
+      },
+      {
+        "heading": "Ejemplo hipotético: sincronizar un catálogo",
+        "html": "<p>Una tienda ficticia recibe el catálogo en varias páginas. Después de la segunda, el proceso se interrumpe. Al volver, retoma desde el último punto confirmado o reprocesa de forma segura la página pendiente, según el diseño. El estado permanece “sincronización parcial” hasta completar el recorrido.</p><p>Si el sistema destino elimina productos que no vio en la lista, una lectura parcial sería especialmente peligrosa. La eliminación por ausencia debe esperar una comparación completa y válida, con protección frente a cambios concurrentes y reglas de negocio verificadas. Ante un fallo, conserva el inventario anterior y marca la revisión pendiente.</p>"
+      },
+      {
+        "heading": "Diseña pruebas que superen una sola página",
+        "html": "<ul><li>Usa suficientes registros sintéticos para recorrer varias páginas.</li><li>Interrumpe después de leer y antes de guardar una página.</li><li>Simula una respuesta repetida y un límite temporal del proveedor.</li><li>Incluye un registro que cambia mientras el recorrido sigue abierto.</li><li>Comprueba qué ocurre si el cursor vence o deja de ser válido.</li></ul><p>La recuperación puede necesitar reiniciar una lectura completa o usar un mecanismo incremental específico. Define ese procedimiento antes de poner la integración en producción. El panel debe mostrar hasta cuándo están conciliados los datos, de modo que el equipo conozca la antigüedad de la información que consulta.</p>"
+      },
+      {
+        "heading": "Cómo encaja con tu operación",
+        "html": "<p>Este control complementa la <a href=\"conciliar-inventario-tienda-sistema.html\">conciliación del inventario</a> y los <a href=\"fallos-integraciones-cola-revision.html\">reintentos con revisión</a>. Una respuesta correcta es solo una etapa; la sincronización termina cuando se verifica el conjunto previsto.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "Microsoft Graph: paginación de datos",
+        "url": "https://learn.microsoft.com/en-us/graph/paging"
+      }
+    ],
+    "datePublished": "2026-10-13",
+    "dateLabel": "13 de octubre de 2026",
+    "sourceDateLabel": "13 de octubre de 2026",
+    "category": "Operación y software",
+    "service": "automatizaciones.html",
+    "cta": "Podemos revisar tus integraciones para detectar lecturas parciales y definir señales de progreso, recuperación y finalización."
+  },
+  {
+    "slug": "menu-navegacion-teclado-submenus-accesibles",
+    "title": "Cómo diseñar un menú de navegación que funcione con teclado",
+    "description": "Define apertura, cierre y foco de los submenús y prueba recorridos completos sin depender del ratón para llegar a tus servicios.",
+    "intro": "Un menú puede verse ordenado y aun así esconder servicios a quien navega con teclado. El problema suele aparecer al desplegar opciones, cerrar el panel móvil o regresar al contenido. Conviene definir esas interacciones antes de elegir animaciones y comprobarlas en el sitio real, con sus textos y enlaces.",
+    "sections": [
+      {
+        "heading": "Empieza por las tareas que el menú debe resolver",
+        "html": "<p>Haz una lista breve de destinos: servicios, información de la empresa, recursos y contacto. Para cada uno, decide si necesita un enlace directo o una agrupación. Un sitio pequeño puede funcionar mejor con pocos enlaces visibles que con varios niveles desplegables.</p><p>Como proceso de diseño, proponemos dibujar primero el recorrido hacia tres tareas frecuentes. Si para encontrar un servicio hay que interpretar categorías internas de la empresa, cambia las etiquetas. Comprueba también si el mismo destino recibe nombres diferentes en el encabezado y en el pie de página: esa diferencia puede generar dudas innecesarias.</p>"
+      },
+      {
+        "heading": "Separa navegar de desplegar",
+        "html": "<p>El tutorial de W3C WAI distingue entre un elemento que solo abre un submenú y otro que también conduce a una página. Para este último caso muestra un botón de apertura separado. Asimismo, indica que el estado expandido o contraído debe comunicarse mediante el marcado correspondiente.</p><p>Aplica esa distinción a “Servicios”: el enlace puede llevar al índice, mientras un botón identificado abre sus opciones. Mantén sincronizado el estado comunicado con lo visible. No hagas depender la apertura exclusivamente de pasar el ratón. WAI también recomienda ofrecer otra ruta hacia los destinos del submenú, por ejemplo desde la página de categoría.</p>"
+      },
+      {
+        "heading": "Ejemplo hipotético: llegar a soporte sin ratón",
+        "html": "<p>Una empresa ficticia agrupa instalación y soporte bajo “Servicios”. En su primer diseño, las opciones aparecen solo al mover el puntero. Durante una prueba, una persona avanza con Tab y llega directamente a “Contacto”, sin poder elegir soporte.</p><p>El equipo conserva el enlace al índice y añade un botón para desplegar las opciones. Define qué ocurre al activar el botón, al cerrar y al seguir navegando. Después repite la tarea desde una pantalla estrecha. El criterio de aceptación es llegar a soporte y regresar sin perder la referencia de dónde está el foco.</p>"
+      },
+      {
+        "heading": "Checklist para probar el comportamiento",
+        "html": "<ul><li>Recorre todos los controles con Tab y vuelve con Mayús + Tab.</li><li>Confirma que el foco se distingue sobre cada fondo del encabezado.</li><li>Activa enlaces y botones con el teclado y verifica su función real.</li><li>Comprueba que las opciones ocultas no sigan recibiendo foco.</li><li>Prueba el cierre previsto y dónde queda el foco después.</li><li>Repite con ampliación de texto y con el menú móvil abierto.</li></ul><p>Para un panel superpuesto, documenta si se comporta como diálogo modal o como navegación desplegable. No combines reglas de ambos patrones sin probarlas. Registra cada fallo con la página, el paso exacto y el resultado esperado para que pueda reproducirse.</p>"
+      },
+      {
+        "heading": "Evalúa el recorrido después del menú",
+        "html": "<p>La prueba no termina al abrir una sección. Continúa hasta la lectura y el contacto, apoyándote en las guías de <a href=\"landing-b2b-movil-contacto.html\">landing B2B en móvil</a> y <a href=\"formularios-etiquetas-errores-autocompletado.html\">formularios con etiquetas y errores claros</a>. Una comprobación automática puede acompañar esta revisión, pero no demuestra por sí sola que la tarea completa resulte utilizable.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "W3C WAI: menús desplegables",
+        "url": "https://www.w3.org/WAI/tutorials/menus/flyout/"
+      }
+    ],
+    "datePublished": "2026-10-13",
+    "dateLabel": "13 de octubre de 2026",
+    "sourceDateLabel": "13 de octubre de 2026",
+    "category": "Desarrollo web",
+    "service": "desarrollo-web.html",
+    "cta": "Podemos revisar la navegación de tu web con tareas concretas y convertir los hallazgos en cambios verificables."
+  },
+  {
+    "slug": "vista-previa-enlaces-open-graph",
+    "title": "Cómo preparar la vista previa de tus enlaces con Open Graph",
+    "description": "Revisa título, descripción, imagen y URL de tus enlaces compartidos para que la vista previa corresponda a la página de destino.",
+    "intro": "Cuando alguien comparte una página de servicios, la primera impresión puede ser una tarjeta con un título antiguo o una imagen genérica. Revisar únicamente la página abierta no descubre ese problema. Hace falta comprobar también los metadatos que describen el enlace y el resultado que presenta el canal donde se comparte.",
+    "sections": [
+      {
+        "heading": "Define qué debe entenderse antes de abrir el enlace",
+        "html": "<p>Escribe una frase que resuma la utilidad concreta de la página. Debe coincidir con el contenido al que llegará la persona. Evita anunciar descuentos, disponibilidad o plazos que la página no respalde. Una tarjeta atractiva que conduce a otra promesa genera una expectativa difícil de corregir.</p><p>Nuestra propuesta editorial es preparar juntos el título visible, la descripción de la tarjeta y una imagen representativa. Asigna un responsable que revise los tres cuando cambie el servicio. Esta es una regla de mantenimiento del sitio, no una exigencia adicional del protocolo.</p>"
+      },
+      {
+        "heading": "Comprueba los campos del protocolo",
+        "html": "<p>Open Graph define cuatro propiedades básicas: og:title, og:type, og:image y og:url. La descripción es una propiedad opcional recomendada. El protocolo también contempla dimensiones y texto alternativo para la imagen; este último describe su contenido, no funciona como un pie de foto publicitario.</p><p>Revisa el HTML servido de una página concreta, no solo la configuración global del gestor. Comprueba que título, imagen y URL correspondan a ese destino. Si una plantilla genera varias etiquetas para el mismo campo, identifica cuál introduce cada componente antes de eliminar o reemplazar valores.</p>"
+      },
+      {
+        "heading": "Ejemplo hipotético: una guía compartida como portada",
+        "html": "<p>Una consultora ficticia publica una guía de mantenimiento. Al compartirla aparece el nombre general de la empresa y una foto de oficinas, porque todas las páginas heredan los mismos valores. El equipo asigna a la guía su título específico, una descripción de su alcance y una ilustración relacionada.</p><p>En la prueba siguiente revisa que la imagen se entienda incluso con un recorte diferente y que el texto principal no dependa de letras pequeñas dentro de ella. No usa una fotografía que sugiera un caso de éxito real. El ejemplo ilustra una revisión editorial, sin atribuir resultados comerciales a esos cambios.</p>"
+      },
+      {
+        "heading": "Checklist de publicación y comprobación",
+        "html": "<ul><li>Abre la URL definitiva sin iniciar sesión y confirma el contenido.</li><li>Revisa las propiedades Open Graph presentes en el HTML recibido.</li><li>Abre la dirección de la imagen y comprueba que entrega el archivo esperado.</li><li>Comprueba legibilidad, contexto y derechos de uso de la imagen.</li><li>Prueba la tarjeta en los canales que realmente utiliza tu equipo.</li><li>Guarda fecha, enlace y captura de cada comprobación.</li></ul><p>La implementación no garantiza que todos los canales dibujen una tarjeta idéntica. Si el resultado difiere, revisa la documentación y las herramientas de inspección del canal antes de cambiar nuevamente el sitio. Distingue lo que entrega tu servidor de lo que muestra el servicio receptor.</p>"
+      },
+      {
+        "heading": "Incluye las tarjetas en el mantenimiento",
+        "html": "<p>Al sustituir imágenes, sigue también el proceso para <a href=\"preparar-imagenes-web-srcset-formatos.html\">preparar archivos web</a>, teniendo en cuenta el uso específico de la tarjeta. Si cambias rutas, coordina la revisión con el <a href=\"migracion-web-mapa-url-redirecciones-canonical.html\">mapa de URL de la migración</a>. Mantén una pequeña muestra de enlaces importantes y vuelve a probarla después de modificar las plantillas.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "Open Graph: protocolo y metadatos",
+        "url": "https://ogp.me/"
+      }
+    ],
+    "datePublished": "2026-10-13",
+    "dateLabel": "13 de octubre de 2026",
+    "sourceDateLabel": "13 de octubre de 2026",
+    "category": "Desarrollo web",
+    "service": "desarrollo-web.html",
+    "cta": "Podemos revisar cómo se presentan tus páginas al compartirlas y ordenar sus metadatos y recursos visuales."
+  },
+  {
+    "slug": "pagina-404-util-estado-http",
+    "title": "Cómo crear una página 404 útil y comprobar su estado HTTP",
+    "description": "Combina una explicación clara y rutas de recuperación con una respuesta HTTP coherente para las páginas que ya no existen.",
+    "intro": "Un enlace equivocado no debería dejar a una persona sin opciones. Una página 404 puede explicar qué pasó y ayudar a continuar, pero también debe responder correctamente al navegador y a los rastreadores. El diseño visual y el código HTTP son dos comprobaciones distintas del mismo problema.",
+    "sections": [
+      {
+        "heading": "Explica el problema y ofrece pocas salidas útiles",
+        "html": "<p>Usa un mensaje directo: no encontramos esta página. Evita culpar al visitante o asegurar que borró algo. Después ofrece rutas reconocibles, como servicios, recursos y contacto. Un buscador puede servir si el sitio tiene suficiente contenido y su funcionamiento está probado.</p><p>Como criterio de diseño, proponemos conservar el encabezado y la identidad del sitio, y dar prioridad a continuar la tarea. Una ilustración puede acompañar la explicación, pero no debe desplazar los enlaces útiles fuera de la primera pantalla. Comprueba que la página siga siendo comprensible si esa imagen no carga.</p>"
+      },
+      {
+        "heading": "Comprueba la respuesta, no solo el mensaje",
+        "html": "<p>Google distingue el contenido visible de la respuesta HTTP. Su documentación explica que una página que devuelve 200 pero presenta un error puede clasificarse como soft 404. También indica que las URL que responden con errores 4xx, salvo 429, no se indexan y, si estaban indexadas, se retiran del índice con el tiempo. El estado 429 recibe un tratamiento distinto, relacionado con sobrecarga del servidor.</p><p>Pide al equipo técnico verificar la respuesta de una ruta inexistente en el alojamiento definitivo. Escribir “404” como encabezado no cambia automáticamente el código HTTP. Repite la comprobación al cargar directamente esa dirección, porque la navegación dentro de una aplicación puede seguir un camino distinto.</p>"
+      },
+      {
+        "heading": "Ejemplo hipotético: un folleto conserva una dirección antigua",
+        "html": "<p>Una empresa ficticia distribuyó un folleto con una página de instalación que después retiró. Si el servicio sigue existiendo en una página equivalente, el equipo evalúa dirigir esa dirección al destino correspondiente. Si ya no existe una sustitución útil, mantiene una respuesta de ausencia y ofrece explorar los servicios vigentes.</p><p>No envía todas las rutas desconocidas a la portada por comodidad. Antes clasifica el caso: enlace escrito incorrectamente, contenido trasladado o servicio eliminado. Esta clasificación propuesta ayuda a decidir qué reparación necesita cada origen, en lugar de esconder problemas diferentes detrás de una misma pantalla.</p>"
+      },
+      {
+        "heading": "Checklist para el lanzamiento",
+        "html": "<ul><li>Prueba una dirección inventada dentro del dominio.</li><li>Verifica su estado HTTP en las herramientas de red.</li><li>Prueba también una ruta antigua conocida y comprueba su tratamiento previsto.</li><li>Recorre los enlaces de recuperación con teclado y en móvil.</li><li>Confirma que imágenes, estilos y navegación funcionan desde rutas profundas.</li><li>Revisa que el mensaje no prometa recuperar contenido que ya no está disponible.</li></ul><p>Si hay distintas aplicaciones o subdirectorios, ensaya al menos una ruta de cada tipo. Anota el resultado esperado junto a la dirección probada. Así una actualización del alojamiento no puede darse por correcta solo porque la portada sigue abriendo.</p>"
+      },
+      {
+        "heading": "Corrige el origen cuando puedas",
+        "html": "<p>Una 404 útil es una salida de recuperación, no una razón para conservar enlaces rotos. Actualiza los que controlas en menús y artículos. Para cambios amplios utiliza la guía de <a href=\"migracion-web-mapa-url-redirecciones-canonical.html\">migración y redirecciones</a>. Si necesitas investigar cómo ve Google determinadas páginas, sigue el recorrido de <a href=\"diagnosticar-indexacion-web-nueva-search-console.html\">diagnóstico de indexación</a> sin asumir que toda ausencia responde al mismo motivo.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "Google: efecto de los códigos HTTP en el rastreo",
+        "url": "https://developers.google.com/crawling/docs/troubleshooting/http-status-codes"
+      }
+    ],
+    "datePublished": "2026-10-13",
+    "dateLabel": "13 de octubre de 2026",
+    "sourceDateLabel": "13 de octubre de 2026",
+    "category": "Desarrollo web",
+    "service": "desarrollo-web.html",
+    "cta": "Podemos revisar las rutas retiradas y diseñar una recuperación coherente con la estructura actual de tu sitio."
+  },
+  {
+    "slug": "web-multilingue-hreflang-versiones-reales",
+    "title": "Cómo organizar una web multilingüe con versiones útiles y hreflang",
+    "description": "Planifica traducciones, equivalencias y mantenimiento antes de añadir hreflang, sin multiplicar páginas de servicios por ciudades.",
+    "intro": "Tener una web en dos idiomas implica más que traducir el menú. La persona necesita entender el servicio, completar el contacto y recibir una respuesta coherente con lo que leyó. La estructura técnica debe reflejar versiones reales del contenido, con responsables capaces de mantenerlas al día.",
+    "sections": [
+      {
+        "heading": "Decide qué necesita una versión propia",
+        "html": "<p>Empieza por idioma, oferta y capacidad de atención. Una versión puede necesitar términos comerciales diferentes, materiales traducidos o un canal de contacto adecuado. No abras nuevas páginas únicamente porque puedas reemplazar una ciudad en el título. Pregunta qué información cambia de verdad para quien las visita.</p><p>Nuestro método propuesto consiste en un inventario por servicio: página original, idiomas disponibles, responsable y contenido pendiente. Si una traducción todavía no permite entender el alcance completo, mantenla fuera del selector hasta revisarla. Evita anunciar atención en un idioma que la operación no puede sostener.</p>"
+      },
+      {
+        "heading": "Relaciona páginas equivalentes con señales consistentes",
+        "html": "<p>Google explica que hreflang identifica versiones localizadas de un contenido. Cada versión debe indicar su propia URL y las alternativas; las direcciones deben ser completas y los vínculos entre versiones recíprocos. Google no utiliza hreflang ni el atributo lang para detectar el idioma de la página; lo determina mediante algoritmos.</p><p>Prepara una correspondencia por página, no una regla que envíe todos los cambios de idioma a la portada. Elige un método de implementación que el equipo pueda mantener y verifica el resultado publicado. Hreflang describe relaciones entre contenidos; no sustituye una traducción revisada ni garantiza posiciones en los resultados.</p>"
+      },
+      {
+        "heading": "Ejemplo hipotético: dos idiomas, una misma oferta",
+        "html": "<p>Una firma ficticia presenta mantenimiento web en español e inglés. Ambos textos describen el mismo alcance, pero el formulario en inglés conserva mensajes de error en español. El equipo incluye esos mensajes y la confirmación de envío en la revisión, además del cuerpo principal.</p><p>Decide mantener una versión por idioma porque no existen condiciones distintas por ciudad. El selector lleva de la página del servicio a su equivalente. Cuando se agrega una exclusión del mantenimiento, la tarea de publicación incluye actualizar ambas versiones y revisar que sigan describiendo la misma oferta.</p>"
+      },
+      {
+        "heading": "Checklist antes de habilitar un idioma",
+        "html": "<ul><li>Revisa títulos, navegación, contenido, imágenes con texto y formularios.</li><li>Confirma que cada URL alternativa abre la página prevista.</li><li>Comprueba que las referencias hreflang se corresponden entre versiones.</li><li>Prueba el selector desde páginas interiores, no solo desde la portada.</li><li>Verifica que el contacto y la respuesta posterior puedan atender ese idioma.</li><li>Asigna responsable y fecha de revisión a cada contenido traducido.</li></ul><p>Incluye una prueba donde falte una traducción. Decide cómo informar esa ausencia sin aparentar que existe una página equivalente. También conviene probar nombres largos en el menú: una traducción correcta puede revelar problemas de espacio que el diseño original no mostraba.</p>"
+      },
+      {
+        "heading": "Mantén un calendario compartido de cambios",
+        "html": "<p>Registra qué versión queda pendiente cuando cambian precios, condiciones o pasos de contacto. Si las rutas también cambian, coordina el trabajo con la guía de <a href=\"migracion-web-mapa-url-redirecciones-canonical.html\">migración web</a>. Para revisar las expectativas posteriores al contacto, consulta cómo <a href=\"chatbot-multilingue-pais-moneda-fechas.html\">separar idioma, país, moneda y fechas</a>. El mantenimiento editorial debe acompañar a la configuración técnica durante toda la vida del sitio.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "Google Search Central: versiones localizadas",
+        "url": "https://developers.google.com/search/docs/specialty/international/localized-versions"
+      }
+    ],
+    "datePublished": "2026-10-13",
+    "dateLabel": "13 de octubre de 2026",
+    "sourceDateLabel": "13 de octubre de 2026",
+    "category": "Desarrollo web",
+    "service": "desarrollo-web.html",
+    "cta": "Podemos ayudarte a definir qué versiones necesita tu sitio y cómo mantener sus contenidos y recorridos coordinados."
+  },
+  {
+    "slug": "busqueda-interna-cero-resultados-recuperacion",
+    "title": "Cómo diseñar una búsqueda interna que ayude cuando no hay resultados",
+    "description": "Distingue una consulta sin coincidencias de un fallo del buscador y ofrece filtros, alternativas y mensajes de estado comprensibles.",
+    "intro": "Una búsqueda interna también debe funcionar cuando no encuentra nada. Si devuelve una pantalla vacía, la persona no sabe si escribió mal, si un filtro oculta la respuesta o si el sistema falló. Diseñar esos estados permite continuar sin convertir cada consulta difícil en una solicitud de ayuda.",
+    "sections": [
+      {
+        "heading": "Define qué contenido puede encontrar el buscador",
+        "html": "<p>Enumera las fuentes incluidas: servicios, artículos, preguntas frecuentes o productos. Comunica ese alcance cerca del campo si puede confundirse con una búsqueda general. Separa el contenido público de información que requiera acceso; encontrar una coincidencia no debe otorgar permiso para verla.</p><p>Proponemos preparar un conjunto pequeño de consultas reales, sin datos personales: nombres de servicios, palabras cotidianas y expresiones ambiguas. Define el resultado esperado de cada una antes de ajustar el buscador. Esto permite evaluar si mejora la tarea, en lugar de celebrar únicamente que devuelve más enlaces.</p>"
+      },
+      {
+        "heading": "Distingue resultados, ausencia y error técnico",
+        "html": "<p>Usa mensajes diferentes para “no encontramos coincidencias” y “no pudimos completar la búsqueda”. En el primer caso muestra la consulta y los filtros activos. En el segundo conserva lo escrito y ofrece reintentar. Decir que no existe contenido cuando el servidor falló lleva a una conclusión incorrecta.</p><p>La explicación de WCAG 4.1.3 de W3C incluye mensajes como el número de resultados o la ausencia de coincidencias cuando la página se actualiza sin cambiar el foco. Estos estados deben poder comunicarse a las tecnologías de asistencia. La lista de resultados no es, por sí misma, el mensaje de estado.</p>"
+      },
+      {
+        "heading": "Ejemplo hipotético: “mantenimiento” con un filtro antiguo",
+        "html": "<p>Un visitante ficticio busca mantenimiento dentro de los artículos, pero había dejado activo el filtro “casos”. El sistema informa que no hay coincidencias en esa selección y ofrece quitar el filtro. Al hacerlo aparecen guías relacionadas, con títulos que explican su utilidad.</p><p>Otra búsqueda usa una expresión que el sitio todavía no cubre. El equipo no inventa resultados ni asegura ofrecer ese servicio. Propone explorar categorías o consultar al equipo, y registra de forma agregada la necesidad editorial. Las alternativas se presentan como sugerencias, claramente separadas de las coincidencias originales.</p>"
+      },
+      {
+        "heading": "Checklist de estados y recuperación",
+        "html": "<ul><li>Prueba una búsqueda habitual y otra sin coincidencias.</li><li>Combina consulta y filtros, y comprueba cómo se limpian.</li><li>Simula un fallo técnico y verifica que no aparezca como cero resultados.</li><li>Revisa con teclado el campo, el envío y las opciones de recuperación.</li><li>Comprueba el anuncio del estado con un lector de pantalla.</li><li>Repite con una consulta larga y otra con un error de escritura.</li></ul><p>Si se sugieren correcciones, conserva visible el texto original y permite volver a él. Para búsquedas automáticas mientras se escribe, revisa la frecuencia de actualizaciones: anunciar cada pulsación puede interrumpir la lectura. El comportamiento debe probarse con el patrón que realmente se publique.</p>"
+      },
+      {
+        "heading": "Usa las consultas para mejorar contenido y navegación",
+        "html": "<p>Revisa patrones de búsquedas sin respuesta y decide si falta contenido, una etiqueta comprensible o una conexión entre páginas. Evita guardar consultas completas indiscriminadamente, porque pueden incluir información personal. Complementa el trabajo con <a href=\"formularios-etiquetas-errores-autocompletado.html\">etiquetas y mensajes claros</a> y con un <a href=\"landing-b2b-movil-contacto.html\">recorrido móvil de contacto</a>. Una búsqueda útil debe ofrecer una siguiente acción verificable, incluso cuando la respuesta sea que no encontró coincidencias.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "W3C: mensajes de estado, WCAG 4.1.3",
+        "url": "https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html"
+      }
+    ],
+    "datePublished": "2026-10-13",
+    "dateLabel": "13 de octubre de 2026",
+    "sourceDateLabel": "13 de octubre de 2026",
+    "category": "Desarrollo web",
+    "service": "desarrollo-web.html",
+    "cta": "Podemos revisar qué buscan las personas en tu sitio y diseñar estados de búsqueda y recuperación comprensibles."
+  },
+  {
+    "slug": "video-embebido-accesibilidad-carga-web",
+    "title": "Cómo añadir vídeo a tu web sin descuidar accesibilidad y carga",
+    "description": "Planifica subtítulos, alternativas de contenido y carga del reproductor para que el vídeo ayude sin bloquear el recorrido de la página.",
+    "intro": "Un vídeo puede explicar una demostración mejor que varios párrafos, pero también puede retrasar una página o dejar información fuera del alcance de algunas personas. La decisión no termina al pegar el enlace del reproductor. Hay que revisar contenido, controles, alternativas y comportamiento de carga como una misma experiencia.",
+    "sections": [
+      {
+        "heading": "Decide qué aporta el vídeo a la tarea",
+        "html": "<p>Escribe qué pregunta responde: cómo funciona un servicio, qué incluye una entrega o qué pasos debe seguir el usuario. Publica cerca del vídeo la información imprescindible para continuar. No obligues a reproducir una pieza larga para descubrir un requisito que podría estar expresado en una frase.</p><p>Como proceso editorial, proponemos revisar el guion antes de producirlo y marcar cada dato que aparece solo en pantalla. Eso permite decidir cómo explicarlo también mediante audio o texto. La alternativa debe transmitir la información relevante, no limitarse a una descripción genérica de la escena.</p>"
+      },
+      {
+        "heading": "Prepara alternativas y controles utilizables",
+        "html": "<p>W3C WAI recomienda planificar la accesibilidad desde el inicio. Su guía contempla subtítulos que incluyan información sonora necesaria, transcripciones, descripción de información visual y reproductores accesibles. La combinación concreta depende del contenido y de las necesidades que deba cubrir.</p><p>Comprueba los nombres de los botones y el acceso con teclado a reproducción, pausa y subtítulos. Revisa manualmente nombres propios, cantidades e instrucciones en los subtítulos generados automáticamente. Un archivo presente no demuestra que su texto sea correcto ni que los controles permitan activarlo fácilmente.</p>"
+      },
+      {
+        "heading": "Ejemplo hipotético: una demostración bajo demanda",
+        "html": "<p>Una empresa ficticia muestra cómo solicitar una revisión técnica. El vídeo aparece después de la explicación del servicio y se inicia cuando la persona lo elige. Junto al reproductor hay un resumen por pasos y una transcripción revisada. Ningún requisito de la solicitud queda exclusivamente dentro de la grabación.</p><p>Durante una prueba se detecta que el puntero señala un botón sin nombrarlo. El equipo corrige la narración para identificarlo y actualiza la alternativa textual. También prueba el caso en que el reproductor externo no carga: la persona todavía puede entender el procedimiento y llegar al formulario.</p>"
+      },
+      {
+        "heading": "Checklist de carga y presentación",
+        "html": "<ul><li>Mide la página antes y después de incorporar el reproductor.</li><li>Reserva un espacio estable para evitar que el contenido se desplace.</li><li>Usa una portada representativa y comprueba su peso.</li><li>Evita iniciar reproducción con sonido sin una elección del usuario.</li><li>Revisa qué se descarga antes de pulsar reproducir.</li><li>Comprueba el funcionamiento con una conexión lenta y en móvil.</li></ul><p>web.dev describe estrategias para posponer la carga y usar una imagen de portada. También advierte que un vídeo que sea el elemento LCP no debe cargarse de forma diferida. Por eso no conviene aplicar la misma regla a un vídeo principal y a otro situado al final de una página.</p>"
+      },
+      {
+        "heading": "Mide la experiencia completa",
+        "html": "<p>La optimización debe conservar acceso a la información y a los controles. Sigue la guía de <a href=\"core-web-vitals-laboratorio-campo.html\">Core Web Vitals en laboratorio y campo</a> para interpretar las mediciones, y la de <a href=\"preparar-imagenes-web-srcset-formatos.html\">preparación de imágenes</a> para la portada. Registra navegador, dispositivo y escenario probado, y repite la revisión cuando cambie el proveedor del reproductor o se sustituya la pieza audiovisual.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "W3C WAI: audio y vídeo accesibles",
+        "url": "https://www.w3.org/WAI/media/av/"
+      },
+      {
+        "title": "web.dev: carga diferida de vídeo",
+        "url": "https://web.dev/articles/lazy-loading-video?hl=en"
+      }
+    ],
+    "datePublished": "2026-10-13",
+    "dateLabel": "13 de octubre de 2026",
+    "sourceDateLabel": "13 de octubre de 2026",
+    "category": "Desarrollo web",
+    "service": "desarrollo-web.html",
+    "cta": "Podemos revisar dónde aporta valor el vídeo y cómo integrarlo con alternativas accesibles y una carga medida."
+  },
+  {
+    "slug": "informacion-servicios-html-pdf-formato",
+    "title": "HTML o PDF: dónde publicar la información de tus servicios",
+    "description": "Elige qué información debe vivir en una página web y cuándo conviene ofrecer un PDF complementario con versión y revisión claras.",
+    "intro": "Un PDF puede resultar cómodo para enviar una propuesta o conservar una ficha, pero no siempre es el mejor punto de entrada a un servicio. Antes de convertir todo el contenido en un archivo descargable, conviene pensar cómo se consultará, cuánto cambiará y qué necesita hacer la persona después de leerlo.",
+    "sections": [
+      {
+        "heading": "Elige el formato según la tarea",
+        "html": "<p>Si alguien necesita entender el alcance, comparar opciones o contactar desde el teléfono, una página HTML permite integrar esos pasos en el mismo recorrido. Un documento complementario puede tener sentido para imprimir, archivar una versión o compartir un paquete de información fuera del sitio.</p><p>La guía de GOV.UK recomienda publicar en HTML cuando sea posible y explica dificultades de uso y accesibilidad de otros formatos. Es una referencia de publicación del gobierno británico; aquí la usamos como orientación de diseño, no como una obligación legal general para empresas colombianas.</p>"
+      },
+      {
+        "heading": "Define una fuente vigente y evita contradicciones",
+        "html": "<p>Nuestro proceso propuesto empieza con una lista de datos: descripción, alcance, exclusiones, requisitos y contacto. Decide dónde vive la versión vigente de cada uno y quién aprueba los cambios. Si existe un PDF complementario, incluye fecha o versión y un enlace a la información actual.</p><p>No mantengas dos textos editados de forma independiente sin una revisión conjunta. Cuando cambia una condición, identifica todas sus apariciones antes de publicar. Si el archivo conserva un propósito histórico, indícalo claramente en lugar de presentarlo como la oferta actual. La fecha debe ayudar a interpretar el contenido, no ser una decoración.</p>"
+      },
+      {
+        "heading": "Ejemplo hipotético: una ficha comercial que queda atrás",
+        "html": "<p>Una empresa ficticia ofrece instalación y soporte. Su página explica que el soporte se cotiza por separado, pero el PDF antiguo todavía lo muestra incluido. El equipo detecta la contradicción durante una revisión y corrige el material disponible antes de seguir distribuyéndolo.</p><p>Decide publicar el alcance completo en HTML y ofrecer una ficha resumida para descargar. El archivo identifica su versión y enlaza a la página vigente. Este diseño no recupera automáticamente las copias que otras personas ya descargaron; por eso el equipo también necesita revisar qué documentos utiliza su proceso comercial.</p>"
+      },
+      {
+        "heading": "Checklist si decides ofrecer un PDF",
+        "html": "<ul><li>Comprueba que el texto se pueda seleccionar y no sea solo una imagen.</li><li>Revisa estructura de encabezados, orden de lectura y enlaces.</li><li>Añade alternativas para imágenes que transmiten información.</li><li>Comprueba contraste y lectura al ampliar el documento.</li><li>Identifica versión, responsable y relación con la página vigente.</li><li>Prueba el archivo con herramientas de accesibilidad y revisión manual.</li></ul><p>La comprobación automática no reemplaza leer el documento en el orden en que se presenta a una tecnología de asistencia. También conviene indicar junto al enlace el formato y el tamaño del archivo, de manera que la persona pueda decidir si lo descarga con su conexión actual.</p>"
+      },
+      {
+        "heading": "Prueba la consulta y el siguiente paso",
+        "html": "<p>Pide a alguien que encuentre una exclusión del servicio y luego solicite información desde el móvil. Observa si necesita cambiar de aplicación, ampliar continuamente o buscar otra vez el contacto. Apóyate en la guía de <a href=\"landing-b2b-movil-contacto.html\">landing B2B móvil</a> y en la de <a href=\"formularios-etiquetas-errores-autocompletado.html\">formularios claros</a>. Mantén el PDF cuando cumpla una necesidad concreta, y revisa tanto el archivo como la página cuando cambie la oferta.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "GOV.UK: publicación de documentos accesibles",
+        "url": "https://www.gov.uk/guidance/publishing-accessible-documents"
+      }
+    ],
+    "datePublished": "2026-10-13",
+    "dateLabel": "13 de octubre de 2026",
+    "sourceDateLabel": "13 de octubre de 2026",
+    "category": "Desarrollo web",
+    "service": "desarrollo-web.html",
+    "cta": "Podemos ordenar la información de tus servicios y definir qué publicar en la web y qué conservar como documento complementario."
+  },
+  {
     "slug": "transcribir-audios-clientes-confirmar-datos",
     "title": "Cómo transcribir audios de clientes sin convertir errores en pedidos",
     "description": "Diseña un flujo de audio a texto con revisión de nombres, cantidades y referencias antes de registrar una solicitud o ejecutar una acción.",

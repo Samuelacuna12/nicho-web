@@ -323,5 +323,105 @@
     "title": "Cómo diseñar un selector de variantes accesible y fiel al inventario | Nicho Agencia Digital",
     "description": "Revisa teclado, nombres de variantes, disponibilidad y precio para evitar combinaciones ambiguas antes de añadir un producto al carrito.",
     "kind": "Article"
+  },
+  "recursos/salidas-estructuradas-ia-validacion-negocio.html": {
+    "title": "Salidas estructuradas de IA: cómo validar los datos antes de usarlos | Nicho Agencia Digital",
+    "description": "Distingue un JSON correcto de un dato válido para tu negocio y define controles de referencias, cantidades, permisos y respuestas incompletas.",
+    "kind": "Article"
+  },
+  "recursos/buscar-productos-ia-referencia-exacta-catalogo.html": {
+    "title": "Cómo buscar productos con IA sin confundir referencias parecidas | Nicho Agencia Digital",
+    "description": "Combina búsqueda por significado y coincidencia exacta para identificar productos, verificar variantes y responder con disponibilidad vigente.",
+    "kind": "Article"
+  },
+  "recursos/memoria-chatbot-vigencia-correcciones-sesion.html": {
+    "title": "Qué debe recordar un chatbot y cuándo debe volver a preguntar | Nicho Agencia Digital",
+    "description": "Diseña memoria conversacional con alcance, vigencia y correcciones para evitar que una preferencia antigua se convierta en una instrucción actual.",
+    "kind": "Article"
+  },
+  "recursos/clasificar-mensajes-ia-categorias-revision.html": {
+    "title": "Cómo clasificar mensajes con IA cuando hay dudas o varias solicitudes | Nicho Agencia Digital",
+    "description": "Define categorías, ejemplos y una salida de revisión para que la clasificación de mensajes no pierda solicitudes ni fuerce decisiones ambiguas.",
+    "kind": "Article"
+  },
+  "recursos/whatsapp-api-botones-respuestas-vencidas.html": {
+    "title": "WhatsApp API: cómo manejar botones y respuestas que llegan tarde | Nicho Agencia Digital",
+    "description": "Diseña opciones claras en WhatsApp API y valida la respuesta contra el estado actual para evitar pedidos basados en menús vencidos.",
+    "kind": "Article"
+  },
+  "recursos/versionar-prompts-pruebas-reversion-agente.html": {
+    "title": "Cómo cambiar el prompt de un agente sin perder el control de la versión | Nicho Agencia Digital",
+    "description": "Organiza cambios de instrucciones con versiones, pruebas, despliegue gradual y reversión para detectar regresiones en agentes de IA.",
+    "kind": "Article"
+  },
+  "recursos/outlook-correos-solicitudes-tickets-sin-perder-cambios.html": {
+    "title": "Cómo convertir correos de Outlook en solicitudes con seguimiento | Nicho Agencia Digital",
+    "description": "Diseña una integración de Outlook que identifique solicitudes, conserve el vínculo con el correo y recupere cambios sin crear casos duplicados.",
+    "kind": "Article"
+  },
+  "recursos/ediciones-simultaneas-software-conflictos-version.html": {
+    "title": "Cómo evitar que dos personas sobrescriban el mismo registro | Nicho Agencia Digital",
+    "description": "Diseña control de versiones y resolución de conflictos para que las ediciones simultáneas no borren cambios en pedidos, contactos o solicitudes.",
+    "kind": "Article"
+  },
+  "recursos/exportar-csv-seguro-formulas-datos.html": {
+    "title": "Cómo exportar CSV sin activar fórmulas ni alterar identificadores | Nicho Agencia Digital",
+    "description": "Revisa fórmulas, ceros iniciales, separadores y permisos antes de entregar exportaciones CSV que otras personas abrirán en hojas de cálculo.",
+    "kind": "Article"
+  },
+  "recursos/registro-auditoria-operaciones-sin-secretos.html": {
+    "title": "Qué registrar en una auditoría de software sin guardar secretos | Nicho Agencia Digital",
+    "description": "Diseña un historial de operaciones con actor, cambio, resultado e identificador de seguimiento, limitando datos sensibles y accesos innecesarios.",
+    "kind": "Article"
+  },
+  "recursos/sla-horas-habiles-pausas-vencimientos.html": {
+    "title": "Cómo calcular tiempos de atención con horas hábiles y pausas | Nicho Agencia Digital",
+    "description": "Define cuándo empieza, se pausa y termina un compromiso de atención para que los vencimientos del CRM reflejen el horario real del servicio.",
+    "kind": "Article"
+  },
+  "recursos/pruebas-aceptacion-usuario-software-entrega.html": {
+    "title": "Cómo revisar una entrega de software con pruebas de usuario | Nicho Agencia Digital",
+    "description": "Prepara escenarios, datos de prueba y criterios de aprobación para comprobar si una entrega permite completar el trabajo de tu equipo.",
+    "kind": "Article"
+  },
+  "recursos/paginacion-api-sincronizacion-completa-registros.html": {
+    "title": "Cómo comprobar que una integración leyó todos los registros de una API | Nicho Agencia Digital",
+    "description": "Controla páginas, cursores y reanudación para evitar que una sincronización se declare completa después de leer solo la primera respuesta.",
+    "kind": "Article"
+  },
+  "recursos/menu-navegacion-teclado-submenus-accesibles.html": {
+    "title": "Cómo diseñar un menú de navegación que funcione con teclado | Nicho Agencia Digital",
+    "description": "Define apertura, cierre y foco de los submenús y prueba recorridos completos sin depender del ratón para llegar a tus servicios.",
+    "kind": "Article"
+  },
+  "recursos/vista-previa-enlaces-open-graph.html": {
+    "title": "Cómo preparar la vista previa de tus enlaces con Open Graph | Nicho Agencia Digital",
+    "description": "Revisa título, descripción, imagen y URL de tus enlaces compartidos para que la vista previa corresponda a la página de destino.",
+    "kind": "Article"
+  },
+  "recursos/pagina-404-util-estado-http.html": {
+    "title": "Cómo crear una página 404 útil y comprobar su estado HTTP | Nicho Agencia Digital",
+    "description": "Combina una explicación clara y rutas de recuperación con una respuesta HTTP coherente para las páginas que ya no existen.",
+    "kind": "Article"
+  },
+  "recursos/web-multilingue-hreflang-versiones-reales.html": {
+    "title": "Cómo organizar una web multilingüe con versiones útiles y hreflang | Nicho Agencia Digital",
+    "description": "Planifica traducciones, equivalencias y mantenimiento antes de añadir hreflang, sin multiplicar páginas de servicios por ciudades.",
+    "kind": "Article"
+  },
+  "recursos/busqueda-interna-cero-resultados-recuperacion.html": {
+    "title": "Cómo diseñar una búsqueda interna que ayude cuando no hay resultados | Nicho Agencia Digital",
+    "description": "Distingue una consulta sin coincidencias de un fallo del buscador y ofrece filtros, alternativas y mensajes de estado comprensibles.",
+    "kind": "Article"
+  },
+  "recursos/video-embebido-accesibilidad-carga-web.html": {
+    "title": "Cómo añadir vídeo a tu web sin descuidar accesibilidad y carga | Nicho Agencia Digital",
+    "description": "Planifica subtítulos, alternativas de contenido y carga del reproductor para que el vídeo ayude sin bloquear el recorrido de la página.",
+    "kind": "Article"
+  },
+  "recursos/informacion-servicios-html-pdf-formato.html": {
+    "title": "HTML o PDF: dónde publicar la información de tus servicios | Nicho Agencia Digital",
+    "description": "Elige qué información debe vivir en una página web y cuándo conviene ofrecer un PDF complementario con versión y revisión claras.",
+    "kind": "Article"
   }
 }
