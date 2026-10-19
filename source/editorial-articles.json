@@ -1,5 +1,101 @@
 [
   {
+    "slug": "piloto-agente-ia-ventas-modo-sombra",
+    "title": "Cómo probar un agente de ventas en modo sombra antes de dejarlo responder",
+    "description": "Diseña un piloto de IA que proponga respuestas sin enviarlas: compara decisiones, mide revisión humana y define cuándo ampliar su alcance.",
+    "intro": "Una demostración acertada no basta para conectar un agente de IA a las conversaciones comerciales. Antes de dejarlo responder, puedes observar qué habría hecho sin que sus propuestas lleguen al cliente. Este modo de trabajo permite detectar errores de criterio y estimar el esfuerzo de supervisión antes de ampliar permisos. Aquí proponemos un piloto acotado para un equipo de ventas; no es una función universal ni una garantía de seguridad.",
+    "sections": [
+      {
+        "heading": "1. Elige una decisión comercial concreta",
+        "html": "<p>Empieza por una tarea pequeña: preparar una respuesta sobre disponibilidad, resumir requisitos o proponer la siguiente pregunta. Escribe qué información puede consultar, qué resultado debe producir y qué queda fuera. Por ejemplo, puede sugerir una referencia del catálogo, pero no reservar unidades, modificar precios ni confirmar fechas de entrega.</p><p>Define también la comparación. Si evalúas preparación de respuestas, compara borradores con el mismo contexto y las mismas condiciones comerciales. No enfrentes una sugerencia sin acceso al catálogo con una respuesta humana que sí tuvo esa información. La pregunta útil es si ayuda en una tarea delimitada, no si reemplaza todo el proceso.</p>"
+      },
+      {
+        "heading": "2. Separa proponer de ejecutar",
+        "html": "<p>En este método, el asesor sigue atendiendo y el sistema guarda una propuesta en un espacio de revisión. No basta con escribir «no envíes» en el prompt: el circuito de prueba debe carecer de una ruta activa para enviar mensajes o cambiar pedidos. Usa datos ficticios durante la preparación y limita los datos de producción a lo necesario y previamente autorizado.</p><p>La documentación de seguridad de OpenAI recomienda controles sobre herramientas, aprobaciones y evaluaciones, y advierte que los controles no eliminan todos los riesgos. Anthropic también recomienda probar agentes en entornos aislados y establecer condiciones de parada. Nuestra propuesta aplica esos principios a un piloto comercial; no depende de una marca de modelo.</p>"
+      },
+      {
+        "heading": "3. Diseña una ficha de comparación por caso",
+        "html": "<p>Registra un identificador de prueba, intención, versión del catálogo, propuesta, decisión del revisor y motivo de la corrección. Evita copiar conversaciones completas cuando basta un caso anonimizado o sintético. Separa cuatro resultados: utilizable, requiere edición, necesita asesor y error crítico.</p><ul><li>Utilizable: respeta fuentes, alcance y siguiente paso.</li><li>Requiere edición: la información es correcta, pero falta claridad o precisión.</li><li>Necesita asesor: hay una excepción comercial o datos insuficientes.</li><li>Error crítico: inventa un precio, promete una condición no autorizada o expone datos.</li></ul><p>Prepara casos comunes y situaciones difíciles. Incluye referencias parecidas, inventario desactualizado, mensajes contradictorios y pedidos fuera de alcance. Puedes apoyarte en la <a href=\"evaluar-agente-ia-atencion-rubrica-pruebas.html\">rúbrica de evaluación</a>; este piloto añade la comparación operativa con el trabajo cotidiano.</p>"
+      },
+      {
+        "heading": "4. Ejemplo ficticio: una consulta con stock incierto",
+        "html": "<p>Una distribuidora ficticia recibe la pregunta «¿Tienen diez unidades para mañana?». Su catálogo de prueba muestra ocho y una reposición sin confirmar. El asesor pregunta si admite entrega parcial. El agente propone confirmar las diez unidades porque encuentra una nota antigua de reposición.</p><p>El revisor clasifica la propuesta como error crítico de disponibilidad. La corrección no consiste solamente en cambiar una frase: se identifica la fuente vencida y se añade una prueba donde una nota antigua contradice el inventario vigente. El caso se repite con la nueva configuración. El resultado esperado del ejercicio es una respuesta prudente y verificable, no una venta atribuida al agente.</p>"
+      },
+      {
+        "heading": "5. Calcula ahorro revisable y evita métricas engañosas",
+        "html": "<p>Mide por separado el tiempo de preparación humana y el tiempo de revisar, corregir y completar la propuesta. Si preparar una respuesta lleva cuatro minutos y revisar el borrador tarda tres, el ahorro ilustrativo es un minuto, no cuatro. Son cifras de ejemplo, no resultados de Nicho ni una previsión para tu negocio.</p><p>Calcula la proporción utilizable dividiendo propuestas utilizables entre propuestas evaluadas. Cuenta además los casos no revisados y los errores críticos; no los ocultes dentro de un promedio. Una muestra pequeña o compuesta solo por preguntas fáciles no permite extrapolar el desempeño a todo el mes. Una respuesta sugerida tampoco equivale a una conversación atendida o una venta.</p>"
+      },
+      {
+        "heading": "6. Define la decisión de salida antes de empezar",
+        "html": "<p>Acuerda quién revisa, cuánto dura la observación y qué evidencia permite avanzar. Un error crítico debe activar revisión de causa y repetición de pruebas antes de ampliar el alcance. Si el esfuerzo de revisión supera el ahorro o faltan fuentes fiables, mantén la herramienta como apoyo o redefine la tarea.</p><p>Superar el piloto solo justifica estudiar una siguiente etapa acotada. Los permisos nuevos requieren aprobación y controles propios. Conserva una forma de volver al flujo anterior y revisa los <a href=\"permisos-agentes-ia-modificar-crm.html\">permisos del agente en el CRM</a> antes de habilitar acciones. El entregable del piloto es una decisión sustentada sobre qué automatizar, con límites y responsable, no una promesa de autonomía total.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "OpenAI: seguridad al construir agentes",
+        "url": "https://developers.openai.com/api/docs/guides/agent-builder-safety"
+      },
+      {
+        "title": "Anthropic: Building effective agents",
+        "url": "https://www.anthropic.com/engineering/building-effective-agents"
+      }
+    ],
+    "datePublished": "2026-10-19",
+    "dateLabel": "19 de octubre de 2026",
+    "sourceDateLabel": "19 de octubre de 2026",
+    "category": "Agentes de IA",
+    "service": "agentes-ia.html",
+    "cta": "Podemos delimitar un piloto de agente de ventas, sus casos de prueba y los criterios para decidir si conviene ampliar su alcance."
+  },
+  {
+    "slug": "bajas-whatsapp-sincronizar-crm-campanas",
+    "title": "Bajas en WhatsApp: cómo sincronizarlas con el CRM y las campañas",
+    "description": "Método propuesto para respetar las bajas de WhatsApp en el CRM, las campañas y los envíos pendientes, con controles y un ejemplo ficticio.",
+    "intro": "Una persona pide dejar de recibir promociones, pero sigue dentro de una campaña programada. El agente registra la solicitud en una nota y otro sistema vuelve a importar el contacto. El problema no está en entender la baja: está en conseguir que todos los puntos de envío la respeten. Esta guía propone un diseño operativo para conectar esas decisiones.",
+    "sections": [
+      {
+        "heading": "Qué exige WhatsApp y qué propone esta guía",
+        "html": "<p>La <a href=\"https://whatsappbusiness.com/policy/\">Política de mensajes de WhatsApp Business</a> exige respetar las solicitudes de interrupción recibidas dentro o fuera de WhatsApp, incluida la retirada de la persona de la lista de contactos. Sus buenas prácticas también contemplan bajas por categorías e instrucciones claras para solicitarlas.</p><p>Los controles siguientes son un método propuesto por Nicho, no una arquitectura exigida por Meta ni una garantía de cumplimiento legal. Para el contexto de autorización de mensajes, consulta la guía de <a href=\"plantillas-whatsapp-ventana-24-horas-consentimiento.html\">plantillas, ventana de atención y consentimiento</a>.</p>"
+      },
+      {
+        "heading": "1. Registrar el alcance antes de seguir enviando",
+        "html": "<p>Una solicitud como «no me manden ofertas» apunta a promociones; «no me escriban más» requiere un alcance general. Evita reducir automáticamente cualquier baja a una sola campaña. Si la intención resulta ambigua, detén los envíos proactivos afectados y deriva la interpretación a una persona, sin obligar al cliente a repetir una palabra exacta.</p><p>Propón un registro común con identificador del contacto, canal, alcance, estado, fecha efectiva, origen y referencia a la solicitud. Separa la preferencia de comunicación de la etapa comercial: una oportunidad abierta no debería anular una baja. Registra también quién modificó el estado y por qué.</p>"
+      },
+      {
+        "heading": "2. Dar prioridad al registro común",
+        "html": "<p>El CRM, la herramienta de campañas y la bandeja de agentes deben consultar una misma decisión vigente. Una etiqueta visual ayuda al equipo, pero no basta si el sistema de envíos puede ignorarla.</p><p>Define una regla explícita para las importaciones: una hoja antigua, una fusión de duplicados o una sincronización retrasada no pueden convertir una baja en permiso. Normaliza los identificadores y revisa las coincidencias dudosas. Mantén el registro mínimo de exclusión separado de las listas activas, con acceso limitado y una política de conservación revisada para tu contexto; no lo conviertas en una excusa para guardar todo el historial.</p>"
+      },
+      {
+        "heading": "3. Comprobar la preferencia justo antes del envío",
+        "html": "<p>Filtrar al crear una audiencia deja un hueco: la persona puede darse de baja después de preparar la campaña. El método propuesto añade una comprobación inmediatamente antes de entregar cada mensaje al proveedor.</p><p>Al recibir una baja, actualiza el estado y retira los mensajes pendientes que estén bajo tu control. Aplica la misma comprobación a reintentos, secuencias comerciales y envíos manuales. Si el servicio de preferencias no responde, pausa el envío afectado en lugar de asumir autorización. Un mensaje ya entregado al proveedor puede haber salido: no prometas recuperarlo. Registra el momento de cada paso para investigar posibles cruces.</p>"
+      },
+      {
+        "heading": "4. Evitar reactivaciones por señales equivocadas",
+        "html": "<p>Abrir una conversación de soporte, hacer otra compra o aparecer en una nueva importación no debería reactivar automáticamente las promociones en este diseño. Una nueva autorización debe quedar vinculada a su alcance y evidencia, y revisarse frente a la solicitud anterior.</p><p>Si alguien vuelve a escribir, distingue la respuesta que solicita de una suscripción comercial. Ante una baja general, no inventes excepciones para seguir mandando mensajes por WhatsApp. Revisa las alternativas disponibles para la atención necesaria y las preferencias del cliente, sin trasladar campañas a otro canal como forma de eludir su decisión.</p>"
+      },
+      {
+        "heading": "Ejemplo ficticio: una baja entre dos sistemas",
+        "html": "<p>Una tienda ficticia prepara una promoción. Antes de que salga, una clienta pide por correo dejar de recibir ofertas en WhatsApp. Soporte registra la baja promocional en el registro común y el CRM actualiza su estado. La herramienta de campañas retira el envío pendiente.</p><p>Después llega una importación con el contacto marcado como activo. La regla de prioridad conserva la baja. Si una copia de la audiencia todavía contiene el número, la comprobación final impide el envío. Este escenario ilustra el diseño; no describe resultados de un cliente real.</p>"
+      },
+      {
+        "heading": "Qué probar antes de activar campañas",
+        "html": "<p>Ensaya una baja desde WhatsApp y otra desde soporte, una importación antigua, una fusión de contactos y un reintento pendiente. Comprueba que cada ruta de envío consulta el estado actualizado y que el equipo puede explicar una exclusión sin exponer datos innecesarios.</p><p>En los informes, distingue mensajes excluidos por preferencia, mensajes enviados y fallos técnicos. Así podrás <a href=\"medir-embudo-whatsapp-clic-conversacion-venta.html\">medir el embudo de WhatsApp</a> sin interpretar una baja respetada como un error de entrega.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "WhatsApp Business Messaging Policy, actualizada el 23 de septiembre de 2026",
+        "url": "https://whatsappbusiness.com/policy/"
+      }
+    ],
+    "datePublished": "2026-10-19",
+    "dateLabel": "19 de octubre de 2026",
+    "sourceDateLabel": "19 de octubre de 2026",
+    "category": "WhatsApp para empresas",
+    "service": "whatsapp-api-empresas.html",
+    "cta": "Revisa con Nicho cómo conectar las preferencias de WhatsApp con tu CRM y tus campañas antes de automatizar los envíos."
+  },
+  {
     "slug": "salidas-estructuradas-ia-validacion-negocio",
     "title": "Salidas estructuradas de IA: cómo validar los datos antes de usarlos",
     "description": "Distingue un JSON correcto de un dato válido para tu negocio y define controles de referencias, cantidades, permisos y respuestas incompletas.",

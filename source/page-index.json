@@ -423,5 +423,15 @@
     "title": "HTML o PDF: dónde publicar la información de tus servicios | Nicho Agencia Digital",
     "description": "Elige qué información debe vivir en una página web y cuándo conviene ofrecer un PDF complementario con versión y revisión claras.",
     "kind": "Article"
+  },
+  "recursos/piloto-agente-ia-ventas-modo-sombra.html": {
+    "title": "Cómo probar un agente de ventas en modo sombra antes de dejarlo responder | Nicho Agencia Digital",
+    "description": "Diseña un piloto de IA que proponga respuestas sin enviarlas: compara decisiones, mide revisión humana y define cuándo ampliar su alcance.",
+    "kind": "Article"
+  },
+  "recursos/bajas-whatsapp-sincronizar-crm-campanas.html": {
+    "title": "Bajas en WhatsApp: cómo sincronizarlas con el CRM y las campañas | Nicho Agencia Digital",
+    "description": "Método propuesto para respetar las bajas de WhatsApp en el CRM, las campañas y los envíos pendientes, con controles y un ejemplo ficticio.",
+    "kind": "Article"
   }
 }
