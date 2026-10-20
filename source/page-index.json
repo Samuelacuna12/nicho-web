@@ -433,5 +433,15 @@
     "title": "Bajas en WhatsApp: cómo sincronizarlas con el CRM y las campañas | Nicho Agencia Digital",
     "description": "Método propuesto para respetar las bajas de WhatsApp en el CRM, las campañas y los envíos pendientes, con controles y un ejemplo ficticio.",
     "kind": "Article"
+  },
+  "recursos/cotizaciones-agente-ia-precio-inventario-vigencia.html": {
+    "title": "Cómo preparar cotizaciones con IA sin inventar precios ni prometer inventario | Nicho Agencia Digital",
+    "description": "Conecta el agente comercial con precios y existencias vigentes, separa cotización de reserva y define qué revisar cuando el cliente acepta.",
+    "kind": "Article"
+  },
+  "recursos/formulario-cotizacion-archivos-adjuntos-validacion.html": {
+    "title": "Cómo recibir archivos en un formulario de cotización sin perder el control | Nicho Agencia Digital",
+    "description": "Organiza adjuntos de cotizaciones con límites, validación, estados de recepción, acceso por solicitud y recuperación de cargas fallidas sin duplicados.",
+    "kind": "Article"
   }
 }

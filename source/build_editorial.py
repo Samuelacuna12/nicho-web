@@ -26,6 +26,8 @@ SERVICE_LABELS = {
 }
 START = '<!-- NICHO_EDITORIAL_CARDS_START -->'
 END = '<!-- NICHO_EDITORIAL_CARDS_END -->'
+SERVICE_START = '<!-- NICHO_SERVICE_GUIDES_START -->'
+SERVICE_END = '<!-- NICHO_SERVICE_GUIDES_END -->'
 
 
 class SafeFragment(HTMLParser):
@@ -143,6 +145,31 @@ def apply(site=ROOT):
     assert index.count(anchor) == 1, 'Resources grid changed: review before rebuilding'
     index = index.replace(anchor, anchor + START + ''.join(cards) + END)
     index_path.write_text(index, encoding='utf-8')
+    # Explicitly selected guides connect relevant services to useful detail.
+    # Keep the existing service shell and unrelated content unchanged.
+    for service in SERVICE_LABELS:
+        featured = [a for a in articles if a['service'] == service and a.get('featureOnService')]
+        if not featured:
+            continue
+        service_path = site / service
+        service_html = service_path.read_text()
+        service_html = re.sub(re.escape(SERVICE_START) + '.*?' + re.escape(SERVICE_END), '', service_html, flags=re.S)
+        assert service_html.count('</main>') == 1, 'Service shell changed: review before rebuilding'
+        guide_cards = ''.join(
+            f'<article class="article-card"><span class="eyebrow">{text(a["category"])}</span>'
+            f'<h3><a href="recursos/{text(a["slug"])}.html">{text(a["title"])}</a></h3>'
+            f'<p>{text(a["description"])}</p>'
+            f'<a class="text-link" href="recursos/{text(a["slug"])}.html">Leer guía ↗</a></article>'
+            for a in featured)
+        service_block = (
+            SERVICE_START + '<section class="section"><div class="wrap">'
+            '<h2>Guías para evaluar tu proyecto</h2>'
+            '<p>Profundiza en decisiones concretas antes de definir el alcance.</p>'
+            '<div class="articles-grid">' + guide_cards + '</div></div></section>' + SERVICE_END)
+        service_path.write_text(service_html.replace('</main>', service_block + '</main>'), encoding='utf-8')
+        service_date = max(a.get('dateModified', a['datePublished']) for a in featured)
+        service_pattern = r'(<url>\s*<loc>' + re.escape(DOMAIN + '/' + service) + r'</loc>\s*<lastmod>)([^<]+)(</lastmod>)'
+        sitemap = re.sub(service_pattern, lambda m: m[1] + max(m[2], service_date) + m[3], sitemap)
     sitemap_path.write_text(sitemap, encoding='utf-8')
     page_index_path.write_text(json.dumps(page_index, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     print(f'Rendered {len(articles)} editorial pages; retained existing resources and sitemap entries.')

@@ -1,5 +1,129 @@
 [
   {
+    "slug": "cotizaciones-agente-ia-precio-inventario-vigencia",
+    "title": "Cómo preparar cotizaciones con IA sin inventar precios ni prometer inventario",
+    "description": "Conecta el agente comercial con precios y existencias vigentes, separa cotización de reserva y define qué revisar cuando el cliente acepta.",
+    "category": "IA para ventas",
+    "intro": "Un cliente pide una cotización por WhatsApp y el agente encuentra el producto correcto. Todavía falta resolver cuánto puede ofrecer, en qué moneda, bajo qué condiciones y hasta cuándo. Si esos datos salen de un documento antiguo o de una conversación anterior, una respuesta convincente puede convertirse en una promesa imposible de cumplir. Esta guía propone un circuito de preparación y revisión para empresas que cotizan productos; las reglas concretas deben salir de su operación comercial.",
+    "sections": [
+      {
+        "heading": "1. Define qué documento puede producir el agente",
+        "html": "<p>Antes de conectar el catálogo, decide si la IA prepara un borrador interno, una estimación orientativa o una cotización que la empresa autoriza enviar. Cada salida necesita un nombre visible y un responsable. Un borrador no debería viajar por el mismo canal automático que una oferta aprobada.</p><p>Escribe también las excepciones: descuentos negociados, pedidos especiales, moneda distinta a la habitual o entregas fuera de cobertura. El agente puede recoger los requisitos y derivarlos, sin completar las condiciones por su cuenta. No uses una advertencia al pie para compensar una integración que envía información sin verificar. La validez comercial y las obligaciones de la oferta requieren revisión de la empresa según su contexto.</p>"
+      },
+      {
+        "heading": "2. Separa conversación, consulta y cálculo",
+        "html": "<p>La IA interpreta la solicitud y formula preguntas. Una herramienta consulta el sistema autorizado de precios e inventario. El software aplica las reglas de cálculo aprobadas. Finalmente, el agente explica el resultado sin alterar referencias, cantidades o condiciones. Esta división permite revisar dónde se produjo un error.</p><p>La documentación de <a href=\"https://developers.openai.com/api/docs/guides/function-calling\">llamadas a funciones de OpenAI</a> describe un flujo en el que el modelo solicita una herramienta, la aplicación la ejecuta y devuelve el resultado. Que el modelo proponga la consulta no demuestra que se haya realizado. Nuestra recomendación es exigir una respuesta verificada de la herramienta antes de redactar la cotización y bloquear el envío si falta.</p><p>Los campos monetarios deben conservar la moneda explícita. Una cifra sin moneda, un impuesto desconocido o un transporte pendiente son datos incompletos, no ceros. Si el sistema aún no conoce un cargo necesario, presenta el documento como pendiente de revisión en lugar de inventar un total definitivo.</p>"
+      },
+      {
+        "heading": "3. Crea una ficha de vigencia por cotización",
+        "html": "<p>Guarda una ficha estructurada que acompañe al documento y permita reconstruir qué se consultó. Proponemos estos campos mínimos:</p><ul><li>Identificador y versión de la cotización.</li><li>Referencia exacta, variante, cantidad y unidad de venta.</li><li>Lista comercial aplicable y moneda.</li><li>Fuente de precio e inventario, con momento de consulta.</li><li>Condiciones verificadas, condiciones pendientes y responsable.</li><li>Vencimiento de la oferta según la política aprobada.</li><li>Estado de reserva, si existe, y su propio vencimiento.</li></ul><p>No confundas el momento de consulta con la vigencia del precio. Tampoco supongas que una reserva dura lo mismo que la oferta. Define cuánto tiempo puede reutilizarse cada dato según su riesgo y frecuencia de cambio, sin imponer un plazo universal a todos los negocios. Si la fuente no responde, el estado debe quedar como no verificado.</p>"
+      },
+      {
+        "heading": "4. Distingue existencia física, disponibilidad y reserva",
+        "html": "<p>Pregunta qué saldo devuelve realmente la integración. Un almacén puede tener unidades que ya están comprometidas o apartadas por control de calidad. Como ejemplo de esta distinción, <a href=\"https://help.shopify.com/en/manual/inventory-and-locations/fundamentals/inventory-states\">Shopify documenta estados de inventario</a> diferentes para existencias físicas, disponibles, comprometidas, no disponibles y entrantes. No todos los sistemas usan esos nombres: mapea los conceptos antes de utilizarlos.</p><p>Una lectura de disponibilidad no aparta mercancía. Si el proceso requiere reserva, esa debe ser una operación separada, autorizada y confirmada por el sistema de pedidos. El mensaje solo puede afirmar que se reservó cuando exista la confirmación correspondiente. Evita mostrar al cliente notas internas o saldos de ubicaciones que no pueden atender su pedido.</p>"
+      },
+      {
+        "heading": "5. Vuelve a validar cuando cambie la decisión",
+        "html": "<p>Define qué cambios obligan a revisar la propuesta: otra cantidad, otra variante, distinto destino, vencimiento o modificación de una condición comercial. Conserva la versión anterior y crea una nueva cuando corresponda. La conversación debe dejar claro cuál está vigente y qué cambió, sin reemplazar silenciosamente el documento que recibió el cliente.</p><p>Al aceptar, el sistema debe validar las condiciones aplicables y la disponibilidad antes de confirmar el pedido. La política puede exigir respetar un precio vigente o llevar una discrepancia a revisión; no corresponde al modelo decidirlo. Si no puede atenderse lo solicitado, explica el punto pendiente y ofrece alternativas sujetas a aceptación, nunca una sustitución automática. Después conecta el resultado con el <a href=\"seguimiento-cotizaciones-estados-limites.html\">seguimiento de cotizaciones por estados</a>.</p>"
+      },
+      {
+        "heading": "6. Ejemplo hipotético: una cotización que llega a destiempo",
+        "html": "<p>Una distribuidora ficticia recibe una solicitud de cuatro válvulas de la referencia V-24. La herramienta confirma la variante y devuelve una propuesta con disponibilidad consultada, pero sin reserva. El agente prepara el documento y muestra esa condición. Las cantidades y referencias de este ejemplo son inventadas; no describen un cliente de Nicho.</p><p>Al día siguiente, el comprador acepta. Otra venta ha reducido el saldo disponible a dos unidades. El sistema conserva la solicitud original, evita confirmar cuatro unidades y deriva la diferencia al responsable. Una entrega parcial solo avanza si la empresa puede ofrecerla y el comprador la acepta. El documento anterior sigue accesible como historial, identificado como reemplazado cuando se emite una nueva versión.</p>"
+      },
+      {
+        "heading": "7. Prueba los fallos antes de habilitar el envío",
+        "html": "<p>Prepara casos con referencia ambigua, moneda ausente, precio vencido, inventario sin actualizar, herramienta que falla y aceptación de una versión anterior. Añade un caso donde dos clientes intentan confirmar las últimas unidades: comprobar disponibilidad y registrar la operación debe respetar los controles de concurrencia del sistema, no depender de dos lecturas aisladas.</p><p>Para cada prueba, fija el resultado esperado: preguntar, producir borrador, derivar o confirmar una operación autorizada. Mide cotizaciones corregidas por datos desactualizados, discrepancias al aceptar y motivos de revisión. Usa esos registros para ajustar el proceso, sin atribuir ventas adicionales a la IA por el simple hecho de generar documentos. Puedes comenzar en <a href=\"piloto-agente-ia-ventas-modo-sombra.html\">modo sombra</a> y revisar primero la <a href=\"buscar-productos-ia-referencia-exacta-catalogo.html\">identificación exacta de productos</a>.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "OpenAI: llamadas a funciones y ejecución de herramientas",
+        "url": "https://developers.openai.com/api/docs/guides/function-calling"
+      },
+      {
+        "title": "Shopify: estados de inventario",
+        "url": "https://help.shopify.com/en/manual/inventory-and-locations/fundamentals/inventory-states"
+      }
+    ],
+    "service": "agentes-ia.html",
+    "cta": "Revisemos de dónde salen tus precios, cómo se confirma la disponibilidad y qué puede preparar un agente sin asumir decisiones comerciales que corresponden a tu equipo.",
+    "datePublished": "2026-10-20",
+    "dateModified": "2026-10-20",
+    "dateLabel": "20 de octubre de 2026",
+    "sourceDateLabel": "20 de octubre de 2026",
+    "featureOnService": true
+  },
+  {
+    "slug": "formulario-cotizacion-archivos-adjuntos-validacion",
+    "title": "Cómo recibir archivos en un formulario de cotización sin perder el control",
+    "description": "Organiza adjuntos de cotizaciones con límites, validación, estados de recepción, acceso por solicitud y recuperación de cargas fallidas sin duplicados.",
+    "intro": "Un comprador envía un plano y una lista de referencias para cotizar. La pantalla confirma el envío, pero ventas recibe únicamente los datos de contacto. Para evitar esa ambigüedad, el formulario debe explicar qué llegó, qué sigue pendiente y cómo corregirlo. Esta guía propone un circuito de recepción para empresas B2B; sus decisiones operativas son recomendaciones de diseño, no garantías de seguridad ni resultados de clientes.",
+    "sections": [
+      {
+        "heading": "1. Define qué documentos necesitas para cotizar",
+        "html": "<p>Acuerda con ventas cuáles adjuntos son indispensables y cuáles ayudan, pero pueden llegar después. Una fotografía puede orientar una primera consulta; un plano actualizado quizá sea necesario para preparar una propuesta técnica. Explica esa diferencia antes del selector de archivos y permite continuar sin un documento opcional.</p><p>Publica formatos admitidos, cantidad máxima, tamaño por archivo y tamaño total. Elige los límites según documentos representativos y capacidad real del servicio, no copiando los de otra web. Comprueba que la interfaz, el servidor y el almacenamiento aplican valores compatibles. Para documentos fuera de límite, ofrece una ruta acordada con el equipo, vinculada a la misma solicitud.</p>"
+      },
+      {
+        "heading": "2. Valida antes de poner el archivo a disposición del equipo",
+        "html": "<p>Según <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/accept\">MDN</a>, el atributo accept orienta la selección, pero no valida el archivo: la comprobación debe realizarse en el servidor. Mostrar únicamente PDF en el selector no demuestra que el contenido recibido sea un PDF admisible.</p><p><a href=\"https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html\">OWASP</a> recomienda combinar formatos permitidos, comprobaciones de tipo y contenido, límites y nombres generados por la aplicación. El tipo declarado por el navegador no es una prueba fiable. Plantea análisis antimalware cuando esté disponible y almacenamiento separado del contenido público. Ningún control aislado basta.</p><p>En el circuito propuesto, un archivo pendiente de revisión queda apartado de la bandeja comercial. Si el análisis falla, conserva ese estado: no lo interpretes como aprobación ni lo distribuyas automáticamente.</p>"
+      },
+      {
+        "heading": "3. Separa el estado del archivo del estado de la solicitud",
+        "html": "<p>Evita un único indicador «enviado». Propón estados que el cliente y ventas puedan interpretar:</p><ul><li><strong>Seleccionado:</strong> todavía está en el dispositivo.</li><li><strong>Subiendo:</strong> la transferencia sigue en curso.</li><li><strong>Recibido, en revisión:</strong> el servidor lo guardó, pero aún no está disponible para el asesor.</li><li><strong>Disponible:</strong> superó los controles definidos.</li><li><strong>Requiere corrección:</strong> necesita sustitución o una acción concreta.</li></ul><p>El comprobante de la solicitud debe incluir su identificador y un resumen de adjuntos recibidos y pendientes. «Solicitud registrada» puede ser correcto aunque falte un documento; «lista para cotizar» exige cumplir el criterio comercial acordado. Guarda esa decisión junto con el registro, sin deducirla solo de la pantalla.</p>"
+      },
+      {
+        "heading": "4. Recupera fallos sin crear otra oportunidad comercial",
+        "html": "<p>Asocia los archivos a una solicitud estable. Si se interrumpe una carga, permite reintentar ese adjunto sin volver a enviar todo el formulario. Conserva los datos ya confirmados y distingue entre reemplazar una versión y añadir otro documento.</p><p>Un tiempo de espera agotado deja una duda: el servidor pudo guardar la información aunque el navegador no recibiera respuesta. Antes de repetir la operación, consulta el estado de la solicitud. Diseña los reintentos para reconocer la misma operación y evitar registros duplicados. Si el navegador necesita que la persona vuelva a seleccionar el archivo, dilo claramente. Añade una ruta de soporte con el identificador, sin pedir que repita por correo toda la documentación.</p>"
+      },
+      {
+        "heading": "5. Limita el acceso al expediente correcto",
+        "html": "<p>La guía de <a href=\"https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html\">autorización de OWASP</a> recomienda comprobar permisos en cada petición. Iniciar sesión no concede acceso a todos los archivos. Verifica quién puede consultar, descargar, sustituir o eliminar cada adjunto y evita que cambiar un identificador permita abrir documentos ajenos.</p><p>En esta propuesta, el asesor accede desde la solicitud asignada y las notificaciones contienen el enlace al expediente, no copias distribuidas indiscriminadamente. Define responsables, conservación y eliminación de documentos abandonados o reemplazados. Evita enviar nombres de archivos o su contenido a herramientas de analítica. Si existe un área privada, revisa también la <a href=\"portal-clientes-seguimiento-pedidos-privacidad.html\">separación de información entre clientes</a>.</p>"
+      },
+      {
+        "heading": "6. Explica el error y la siguiente acción",
+        "html": "<p>W3C indica que los <a href=\"https://www.w3.org/WAI/WCAG22/Understanding/error-identification.html\">errores detectados</a> deben identificar el elemento afectado y describirse en texto. También explica que los <a href=\"https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html\">mensajes de estado</a> deben poder comunicarse mediante tecnologías de asistencia sin recibir el foco. Aplica ambos criterios a cada adjunto, no únicamente al mensaje final del formulario.</p><p>«Plano.pdf supera el tamaño permitido; selecciona una versión de menor tamaño» orienta mejor que «error de carga». «Recibido, pendiente de revisión» evita confundir espera con fallo. Mantén visibles las instrucciones y prueba los anuncios con lector de pantalla, sin repetir cada pequeño cambio de progreso. Para etiquetas y campos, complementa con la guía de <a href=\"formularios-etiquetas-errores-autocompletado.html\">formularios y errores comprensibles</a>.</p>"
+      },
+      {
+        "heading": "7. Ejemplo hipotético: un plano llega después",
+        "html": "<p>Una empresa ficticia solicita fabricar una pieza. Adjunta una fotografía y un plano. La fotografía queda disponible, pero la conexión se interrumpe durante el plano. El comprobante muestra una solicitud registrada con un archivo pendiente, y ventas sabe que aún no puede preparar la propuesta técnica.</p><p>El comprador vuelve a la misma solicitud y selecciona el plano. Tras comprobar el estado anterior, el sistema completa la recepción sin abrir otra oportunidad. El documento pasa a revisión y después queda disponible. El asesor trabaja con esa versión identificada. Este ejemplo ilustra un flujo posible; no representa una implementación ni resultados de Nicho.</p>"
+      },
+      {
+        "heading": "8. Prueba el recorrido completo antes de publicarlo",
+        "html": "<p>Prepara una lista de aceptación con archivos válidos, formato no admitido, tamaño excesivo, interrupción de red, envío repetido y análisis no disponible. Prueba también dos clientes intentando consultar el mismo documento y una sustitución posterior al primer envío. Usa materiales de prueba, no expedientes reales.</p><p>En cada caso verifica tres resultados: lo que ve el comprador, lo que quedó guardado y lo que recibe ventas. Asigna quién resuelve solicitudes incompletas y cómo detecta las que llevan demasiado tiempo pendientes. El entregable útil es un circuito comprobable de recepción y recuperación, antes de añadir automatizaciones para leer o interpretar los documentos.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "OWASP: File Upload Cheat Sheet",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html"
+      },
+      {
+        "title": "MDN: atributo HTML accept",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/accept"
+      },
+      {
+        "title": "W3C: comprensión del criterio 4.1.3, mensajes de estado",
+        "url": "https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html"
+      },
+      {
+        "title": "W3C: comprensión del criterio 3.3.1, identificación de errores",
+        "url": "https://www.w3.org/WAI/WCAG22/Understanding/error-identification.html"
+      },
+      {
+        "title": "OWASP: Authorization Cheat Sheet",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html"
+      }
+    ],
+    "datePublished": "2026-10-20",
+    "dateModified": "2026-10-20",
+    "dateLabel": "20 de octubre de 2026",
+    "sourceDateLabel": "20 de octubre de 2026",
+    "category": "Desarrollo web",
+    "service": "desarrollo-web.html",
+    "cta": "Revisa con Nicho qué adjuntos necesita tu cotización y cómo conectar su recepción, validación y recuperación con el trabajo del equipo comercial.",
+    "featureOnService": true
+  },
+  {
     "slug": "piloto-agente-ia-ventas-modo-sombra",
     "title": "Cómo probar un agente de ventas en modo sombra antes de dejarlo responder",
     "description": "Diseña un piloto de IA que proponga respuestas sin enviarlas: compara decisiones, mide revisión humana y define cuándo ampliar su alcance.",

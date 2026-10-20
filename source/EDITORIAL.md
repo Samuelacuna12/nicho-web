@@ -20,6 +20,10 @@ idempotent. `source/build.py` invokes the editorial renderer at the end of a ful
 legacy rebuild so these additions are not dropped. Prefer the editorial-only
 command for article updates; a full rebuild affects the whole site.
 
+An article with `featureOnService: true` also receives a contextual card on its
+service page. The renderer updates only the marked guide block, preserving the
+service shell, and does not move the service sitemap date backwards.
+
 Keep `datePublished` immutable. Change `dateModified` only for a meaningful
 content update. Metadata, visible dates and structured data must agree.
 External requirements, pricing and platform behavior need source revalidation
