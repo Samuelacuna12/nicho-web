@@ -1,5 +1,125 @@
 [
   {
+    "slug": "cancelar-automatizaciones-pendientes-cambio-pedido",
+    "title": "Cómo cancelar automatizaciones pendientes cuando cambia un pedido",
+    "description": "Diseña una cancelación que detenga tareas y reintentos, detecte operaciones en curso y deje evidencia de lo que realmente ocurrió en cada sistema.",
+    "category": "Automatización de procesos",
+    "intro": "El equipo cancela un pedido en el CRM, pero una tarea programada sigue enviándolo a bodega. El cambio de estado quedó guardado; la automatización no lo consultó. Este problema exige revisar el recorrido completo de cada acción, desde que se programa hasta que el destino confirma su resultado. Aquí proponemos un método para detener trabajo que ya no corresponde, sin confundir una solicitud de cancelación con una operación efectivamente detenida.",
+    "sections": [
+      {
+        "heading": "1. Define qué se cancela y quién puede decidirlo",
+        "html": "<p>Empieza por el efecto de negocio: preparar un despacho, crear una tarea comercial o sincronizar una orden. Cancelar el pedido puede detener unas acciones y dejar otras necesarias para cerrar el caso. Documenta esa relación en vez de aplicar un interruptor indiscriminado a todo lo asociado al cliente.</p><p>Define quién puede solicitar la cancelación, quién debe aprobar excepciones y desde qué momento entra en vigor. Un comentario como «tal vez cambiemos la cantidad» requiere aclaración; no debería activar una cancelación completa. Las condiciones comerciales y las obligaciones aplicables necesitan revisión de la empresa. Esta guía trata el control operativo del software, no establece derechos de devolución ni autoriza compromisos.</p>"
+      },
+      {
+        "heading": "2. Conserva una decisión vigente y estados por acción",
+        "html": "<p>Registra la decisión en una fuente que consulten todos los ejecutores. Asocia identificador del pedido, versión, alcance, motivo, momento efectivo y responsable. Después identifica las tareas relacionadas. Si cada integración conserva su propia etiqueta sin una referencia común, una copia antigua puede seguir trabajando.</p><ul><li><strong>Pendiente:</strong> todavía no se inició; puede impedirse su ejecución.</li><li><strong>En ejecución:</strong> comenzó un paso y debe comprobarse hasta dónde llegó.</li><li><strong>Resultado incierto:</strong> hubo una solicitud al destino, pero falta conocer su efecto.</li><li><strong>Completada:</strong> existe evidencia del resultado; detener la cola no lo deshace.</li><li><strong>Omitida por cancelación:</strong> se verificó que esa acción no debía ejecutarse.</li></ul><p>Muestra por separado la cancelación solicitada y el cierre verificado del proceso. El equipo necesita saber qué quedó detenido y qué todavía exige revisión, no solo ver el pedido coloreado como cancelado.</p>"
+      },
+      {
+        "heading": "3. Comprueba el estado antes del efecto externo",
+        "html": "<p>Al ejecutar una tarea, consulta la versión vigente del pedido y sus condiciones de elegibilidad. No basta el estado que llevaba el mensaje cuando entró en la cola. Aplica esta comprobación a tareas programadas, reintentos y reprocesamientos manuales. Si no puedes consultar la decisión, deja la acción pendiente de revisión o espera, según la regla aprobada.</p><p>El equipo técnico debe coordinar la comprobación y la autorización de ejecución para que dos procesos no avancen con versiones incompatibles. Una comparación de versión y una reserva atómica pueden formar parte del diseño. Aun así, existe una frontera con el servicio externo: una cancelación recibida después de enviar la solicitud puede llegar demasiado tarde. Define ese punto y registra la secuencia; no prometas detener siempre una acción que ya salió.</p>"
+      },
+      {
+        "heading": "4. Retira pendientes y evita que los reintentos los revivan",
+        "html": "<p>Después de guardar la cancelación, retira o invalida las tareas pendientes bajo tu control. Conserva evidencia mínima para que una entrega tardía también sea descartada. Una limpieza de la cola sin esa decisión persistente puede dejar abierta otra ruta de entrada.</p><p>La <a href=\"https://docs.celeryq.dev/en/stable/userguide/workers.html#revoke-revoking-tasks\">documentación de Celery</a> distingue revocar una tarea de terminar una que ya se ejecuta. Su opción de terminación es un recurso administrativo de último recurso, no una solución que deba invocarse automáticamente. Es un ejemplo concreto de por qué conviene verificar la semántica de cancelación de cada herramienta.</p><p>Además, <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/standard-queues-at-least-once-delivery.html\">Amazon SQS documenta posibles entregas repetidas en sus colas estándar</a>. Tu control debe seguir reconociendo una operación cancelada cuando reaparezca. Si después se decide reabrir el pedido, crea una decisión explícita y una versión nueva; no reactives silenciosamente todas las tareas antiguas.</p>"
+      },
+      {
+        "heading": "5. Reconcilia lo que ya ocurrió antes de compensarlo",
+        "html": "<p>Si el destino pudo recibir la orden, consulta su referencia y estado antes de repetir, cancelar o marcarla como inexistente. Una respuesta perdida no demuestra que el pedido no se haya creado. La salida correcta puede ser vincular el registro existente y solicitar una revisión, sin generar otra orden.</p><p>El <a href=\"https://learn.microsoft.com/en-us/azure/architecture/patterns/compensating-transaction\">patrón de transacciones compensatorias de Microsoft</a> explica que corregir efectos ya completados depende de reglas de negocio y no equivale necesariamente a restaurar el estado inicial. Una compensación también puede fallar y necesitar intervención humana.</p><p>Define por acción qué puede corregirse, qué permiso requiere y quién verifica el resultado. No borres el historial para simular que nada ocurrió. Para efectos irreversibles o de impacto comercial, deja el caso en manos del responsable con la evidencia disponible. Complementa este recorrido con la guía sobre <a href=\"fallos-integraciones-cola-revision.html\">fallos de integración y cola de revisión</a>.</p>"
+      },
+      {
+        "heading": "6. Ejemplo hipotético: bodega aún no ha confirmado",
+        "html": "<p>Una distribuidora ficticia programa la preparación del pedido PED-204. Antes de que empiece, una persona autorizada cancela el pedido. El sistema guarda la nueva versión, invalida la tarea y registra que no se envió ninguna instrucción a bodega. Una copia tardía de la tarea consulta la misma decisión y queda omitida. Los identificadores y hechos de este ejemplo son inventados.</p><p>En una segunda prueba, la solicitud ya había salido hacia bodega cuando llegó la cancelación. El sistema muestra «cancelación pendiente de verificar», consulta la orden y descubre que sigue sin prepararse. El responsable utiliza el mecanismo autorizado del destino y comprueba el resultado. Si la orden ya hubiera avanzado, necesitaría otra decisión operativa; retirar la tarea local no permitiría afirmar que el despacho se detuvo.</p>"
+      },
+      {
+        "heading": "7. Prueba los cruces y mide cierres verificables",
+        "html": "<p>Ensaya cancelaciones antes de programar, mientras la tarea espera, justo al ejecutarse y después del efecto externo. Incluye una respuesta perdida, una copia repetida, un reinicio del ejecutor y una reapertura posterior. En cada escenario revisa la pantalla, el registro de decisiones y el sistema de destino.</p><p>Cuenta por separado acciones omitidas, cancelaciones todavía sin verificar y efectos completados que necesitaron revisión. Asigna un responsable a los pendientes antiguos. El objetivo comprobable es conocer el resultado de cada acción y evitar trabajo obsoleto dentro de las condiciones probadas. Para identificar reintentos de la misma operación, revisa también <a href=\"webhooks-idempotencia-pedidos-duplicados.html\">webhooks e idempotencia</a>; deduplicar y cancelar resuelven problemas distintos.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "Celery: revocación de tareas y límites de terminación",
+        "url": "https://docs.celeryq.dev/en/stable/userguide/workers.html#revoke-revoking-tasks"
+      },
+      {
+        "title": "Amazon SQS: entrega al menos una vez en colas estándar",
+        "url": "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/standard-queues-at-least-once-delivery.html"
+      },
+      {
+        "title": "Microsoft Azure Architecture Center: transacciones compensatorias",
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/compensating-transaction"
+      }
+    ],
+    "datePublished": "2026-10-21",
+    "dateModified": "2026-10-21",
+    "dateLabel": "21 de octubre de 2026",
+    "sourceDateLabel": "21 de octubre de 2026",
+    "service": "automatizaciones.html",
+    "featureOnService": true,
+    "cta": "Revisemos qué tareas siguen activas cuando cambia un pedido y cómo conectar la decisión comercial con cada integración, su responsable y la evidencia de cierre."
+  },
+  {
+    "slug": "importar-csv-crm-vista-previa-errores",
+    "title": "Cómo importar CSV al CRM sin sobrescribir datos por accidente",
+    "description": "Diseña importaciones recurrentes al CRM con vista previa, errores por fila, reglas para valores vacíos y recuperación sin perder cambios del equipo.",
+    "category": "CRM y operación comercial",
+    "intro": "Cada semana llega un CSV con novedades comerciales. El CRM ya tiene datos corregidos por asesores, responsables asignados y oportunidades en curso. Antes de cargarlo, necesitas saber qué cambiará y qué quedará intacto. Esta guía propone controles para importaciones recurrentes, no un proyecto de migración ni una limpieza de contactos duplicados.",
+    "sections": [
+      {
+        "heading": "1. Delimita qué puede actualizar cada archivo",
+        "html": "<p>Define si el lote puede crear registros, actualizar existentes o ambas cosas. Para una actualización semanal, considera empezar con “solo actualizar”: un identificador desconocido queda pendiente en vez de crear un contacto inesperado. La ausencia de una persona en el archivo tampoco debería eliminarla del CRM.</p><p>Usa un identificador estable del sistema de origen junto con la cuenta o fuente correspondiente. Conserva su equivalencia con el registro del CRM; no uses la posición de la fila. Si un identificador aparece dos veces con valores incompatibles, rechaza ese caso para revisión.</p><p>Acuerda qué campos controla la fuente. Un archivo de cobertura comercial puede actualizar la zona, pero no necesariamente el responsable, las notas o las preferencias de contacto.</p>"
+      },
+      {
+        "heading": "2. Separa conservar, reemplazar y borrar un valor",
+        "html": "<p>Documenta una política explícita por campo. Como punto de partida para actualizaciones:</p><ul><li><strong>Columna ausente:</strong> no modificar ese campo.</li><li><strong>Celda vacía:</strong> conservar el valor actual, salvo otra regla aprobada.</li><li><strong>Valor válido:</strong> reemplazar únicamente un campo permitido.</li><li><strong>Borrado solicitado:</strong> usar una operación explícita, revisable y limitada a campos que admitan quedar sin dato.</li></ul><p>Un texto vacío, un valor nulo y el texto literal “NULL” pueden representar cosas distintas. La <a href=\"https://www.postgresql.org/docs/18/sql-copy.html\">documentación de COPY de PostgreSQL</a> explica que CSV no tiene una convención estándar para distinguir nulo de cadena vacía y describe su propia interpretación mediante comillas. Esa regla no se puede trasladar automáticamente a cualquier CRM.</p><p>Prueba también espacios y ceros: un espacio no expresa necesariamente un borrado y cero puede ser un valor válido.</p>"
+      },
+      {
+        "heading": "3. Valida cada fila antes de proponer cambios",
+        "html": "<p>Lee el archivo en un área temporal, sin tocar las fichas comerciales. Comprueba encabezados, separador, codificación y cantidad de columnas. Si la estructura impide identificar filas confiablemente, detén el lote completo en vez de intentar rescatar valores desplazados.</p><p><a href=\"https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html\">OWASP recomienda validar sintaxis y significado</a>, además de ejecutar controles en el servidor. En este flujo, una fecha debe tener formato aceptado y una etapa debe pertenecer al embudo indicado.</p><p>Entrega errores con referencia de fila, identificador, campo, motivo y corrección esperada. Por ejemplo: “Fila 18, zona: código no reconocido; selecciona una zona activa”. Conserva la referencia original aunque el usuario ordene el reporte. Muestra únicamente los datos necesarios a personas autorizadas.</p>"
+      },
+      {
+        "heading": "4. Presenta una vista previa que permita decidir",
+        "html": "<p>Resume registros por crear, actualizar, conservar sin cambios, rechazar y revisar por conflicto. Para cada modificación, muestra campo, valor actual y valor propuesto. Destaca borrados y cambios de responsable; un contador global no permite evaluar su impacto.</p><p>La aprobación debe corresponder al archivo y las reglas revisadas. Guarda su huella, el mapeo de columnas y la versión de las reglas. Si cambia alguno, genera otra vista previa.</p><p>Al aplicar, comprueba dentro de la escritura que el registro sigue en la versión revisada. Si alguien lo modificó, detén esa fila para comparar, sin imponer el CSV antiguo. Este control complementa la prevención de <a href=\"ediciones-simultaneas-software-conflictos-version.html\">sobrescrituras por ediciones simultáneas</a>.</p>"
+      },
+      {
+        "heading": "5. Elige entre lote completo y aplicación parcial",
+        "html": "<p>Decide antes de confirmar qué ocurre si una fila falla. Si varias filas forman una operación inseparable, agrúpalas para que se apliquen juntas. Si son independientes, puedes permitir aplicar las válidas y dejar las demás pendientes, con un resultado inequívoco por fila.</p><p>PostgreSQL describe las <a href=\"https://www.postgresql.org/docs/18/tutorial-transactions.html\">transacciones como operaciones de todo o nada</a>. El equipo técnico debe definir si esa unidad será una fila, un grupo o el lote completo. No mantengas una transacción abierta mientras alguien revisa la pantalla.</p><p>Revisa también automatizaciones: actualizar una ficha podría disparar avisos o tareas. Define cuáles corresponden a una importación y cómo evitar repetirlos; no supongas que revertir datos deshace mensajes enviados.</p>"
+      },
+      {
+        "heading": "6. Ejemplo hipotético de una actualización semanal",
+        "html": "<p>Una distribuidora ficticia de Colombia recibe 120 filas para actualizar zonas y teléfonos. La vista previa clasifica 80 como actualizaciones, 30 sin cambios, ocho con códigos inválidos y dos con conflictos de versión. Son cifras inventadas, no resultados de un cliente de Nicho.</p><p>Dentro de las 80 actualizaciones, cinco filas traen teléfono vacío y una zona nueva. Según la política acordada, cambian de zona y conservan el teléfono. Los responsables comerciales permanecen intactos porque ese campo no está autorizado.</p><p>El equipo aprueba la aplicación parcial: confirma las 80 actualizaciones y conserva diez pendientes identificadas. Las correcciones posteriores generan otro lote vinculado al primero y pasan nuevamente por validación y vista previa.</p>"
+      },
+      {
+        "heading": "7. Reintenta lo pendiente sin repetir lo confirmado",
+        "html": "<p>Asigna un identificador al lote y conserva el resultado de cada operación. Si la pantalla pierde conexión, consulta ese identificador antes de reenviar el archivo. Un tiempo de espera agotado no demuestra que la escritura falló.</p><p>Diseña el reintento para reconocer operaciones ya confirmadas y continuar solo las pendientes. Guarda el resultado y la modificación de forma atómica cuando compartan base de datos. El nombre del archivo o su huella, por sí solos, no sustituyen ese control.</p><p>Un archivo corregido debe conservar el vínculo con los errores anteriores, pero requiere nueva revisión. Evita reproducir automáticamente todo el lote original: podría sobrescribir cambios hechos después por el equipo.</p>"
+      },
+      {
+        "heading": "8. Prepara una recuperación que respete el trabajo posterior",
+        "html": "<p>Guarda quién aprobó, qué campos cambiaron y sus valores anteriores y posteriores, con acceso restringido. Para deshacer un lote confirmado, prepara una propuesta inversa y verifica la versión actual de cada registro. Si hubo modificaciones posteriores, requiere revisión en lugar de restaurar silenciosamente el valor antiguo.</p><p>Antes de habilitar el proceso, ensaya celdas vacías, identificadores repetidos, cambios concurrentes y desconexión después de guardar. Comprueba también el reintento y la recuperación de un lote parcial. Si descargas errores para corregirlos en una hoja, aplica las precauciones de <a href=\"exportar-csv-seguro-formulas-datos.html\">exportación CSV segura</a>. Cierra el lote cuando sus resultados y excepciones tengan un destino comprobable, no solo cuando termine la barra de progreso.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "PostgreSQL 18: COPY y representación de valores nulos en CSV",
+        "url": "https://www.postgresql.org/docs/18/sql-copy.html"
+      },
+      {
+        "title": "OWASP: validación de entradas, sintaxis y significado",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html"
+      },
+      {
+        "title": "PostgreSQL 18: transacciones",
+        "url": "https://www.postgresql.org/docs/18/tutorial-transactions.html"
+      }
+    ],
+    "service": "crm-personalizado.html",
+    "cta": "Revisemos qué archivos alimentan tu CRM, qué campos pueden cambiar y cómo mostrar diferencias y errores antes de aplicar cada lote.",
+    "datePublished": "2026-10-21",
+    "dateModified": "2026-10-21",
+    "dateLabel": "21 de octubre de 2026",
+    "sourceDateLabel": "21 de octubre de 2026",
+    "featureOnService": true
+  },
+  {
     "slug": "cotizaciones-agente-ia-precio-inventario-vigencia",
     "title": "Cómo preparar cotizaciones con IA sin inventar precios ni prometer inventario",
     "description": "Conecta el agente comercial con precios y existencias vigentes, separa cotización de reserva y define qué revisar cuando el cliente acepta.",

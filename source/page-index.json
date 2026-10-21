@@ -443,5 +443,15 @@
     "title": "Cómo recibir archivos en un formulario de cotización sin perder el control | Nicho Agencia Digital",
     "description": "Organiza adjuntos de cotizaciones con límites, validación, estados de recepción, acceso por solicitud y recuperación de cargas fallidas sin duplicados.",
     "kind": "Article"
+  },
+  "recursos/cancelar-automatizaciones-pendientes-cambio-pedido.html": {
+    "title": "Cómo cancelar automatizaciones pendientes cuando cambia un pedido | Nicho Agencia Digital",
+    "description": "Diseña una cancelación que detenga tareas y reintentos, detecte operaciones en curso y deje evidencia de lo que realmente ocurrió en cada sistema.",
+    "kind": "Article"
+  },
+  "recursos/importar-csv-crm-vista-previa-errores.html": {
+    "title": "Cómo importar CSV al CRM sin sobrescribir datos por accidente | Nicho Agencia Digital",
+    "description": "Diseña importaciones recurrentes al CRM con vista previa, errores por fila, reglas para valores vacíos y recuperación sin perder cambios del equipo.",
+    "kind": "Article"
   }
 }
