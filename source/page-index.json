@@ -453,5 +453,15 @@
     "title": "Cómo importar CSV al CRM sin sobrescribir datos por accidente | Nicho Agencia Digital",
     "description": "Diseña importaciones recurrentes al CRM con vista previa, errores por fila, reglas para valores vacíos y recuperación sin perder cambios del equipo.",
     "kind": "Article"
+  },
+  "recursos/verificar-fuentes-citas-respuestas-agente-ia.html": {
+    "title": "Cómo comprobar las fuentes que cita un agente de IA | Nicho Agencia Digital",
+    "description": "Revisa las citas de un agente de IA por afirmación, vigencia y contexto. Decide qué puede responder, qué debe preguntar y cuándo necesita revisión.",
+    "kind": "Article"
+  },
+  "recursos/actualizar-software-dependencias-plan-ventas.html": {
+    "title": "Cómo planear actualizaciones de software para cuidar la operación comercial | Nicho Agencia Digital",
+    "description": "Organiza versiones, alertas, pruebas y reversión antes de actualizar tu software, y comprueba que pedidos y contactos sigan su recorrido después del cambio.",
+    "kind": "Article"
   }
 }

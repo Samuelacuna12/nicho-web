@@ -1,5 +1,125 @@
 [
   {
+    "slug": "verificar-fuentes-citas-respuestas-agente-ia",
+    "title": "Cómo comprobar las fuentes que cita un agente de IA",
+    "description": "Revisa las citas de un agente de IA por afirmación, vigencia y contexto. Decide qué puede responder, qué debe preguntar y cuándo necesita revisión.",
+    "category": "Agentes de IA",
+    "intro": "El agente responde con seguridad y añade un enlace al manual de la empresa. Al abrirlo, el documento existe, pero no confirma todo lo que el agente prometió. Para atención y ventas, mostrar una fuente es apenas el inicio de la comprobación. Esta guía propone revisar la relación entre cada afirmación y su evidencia, y preparar una salida útil cuando falta respaldo.",
+    "sections": [
+      {
+        "heading": "1. Divide la respuesta en afirmaciones comprobables",
+        "html": "<p>Empieza por separar lo que el cliente necesita saber. Una respuesta como «incluye instalación, puede usarse en exteriores y llega el viernes» contiene tres afirmaciones que pueden depender de fuentes diferentes. Un enlace general al catálogo no las valida juntas.</p><p>Para cada afirmación, registra el dato propuesto, la fuente necesaria y qué condición cambia su aplicación. La especificación del producto puede respaldar su uso; el alcance contratado, la instalación; el sistema logístico, una fecha confirmada. No uses un documento descriptivo para inventar el estado de una operación.</p><p>Prioriza las afirmaciones que pueden generar una decisión o compromiso comercial. Un saludo no necesita el mismo control que una condición de garantía, una compatibilidad técnica o una promesa de entrega.</p>"
+      },
+      {
+        "heading": "2. Exige una referencia localizable, no un enlace decorativo",
+        "html": "<p>Conserva un identificador de documento, versión y ubicación del fragmento utilizado. Un revisor debería poder encontrar el pasaje sin recorrer todo el manual. Si la respuesta combina dos documentos, registra qué aporta cada uno.</p><p>La <a href=\"https://platform.claude.com/docs/en/build-with-claude/citations\">documentación de citas de Anthropic</a> describe referencias a ubicaciones concretas, como páginas, caracteres o bloques, según el formato. Su mecanismo devuelve referencias válidas a los documentos proporcionados. Esa propiedad facilita localizar evidencia; no sustituye la decisión de si el documento es correcto, está vigente o aplica al cliente.</p><p>Diseña una salida equivalente para la herramienta elegida y comprueba sus límites. Si solo recibes una URL escrita por el modelo, verifica que corresponda a una fuente autorizada antes de presentarla como respaldo.</p>"
+      },
+      {
+        "heading": "3. Comprueba respaldo, vigencia y alcance por separado",
+        "html": "<p>Para revisar cada afirmación, responde tres preguntas:</p><ul><li><strong>Respaldo:</strong> ¿el fragmento dice o permite concluir exactamente lo que se afirma, sin ampliar sus condiciones?</li><li><strong>Vigencia:</strong> ¿esa versión sigue aprobada para el momento consultado?</li><li><strong>Alcance:</strong> ¿corresponde al producto, variante, país y tipo de cliente de la conversación?</li></ul><p>Una frase sobre un modelo anterior no prueba una característica de la versión nueva. Tampoco una condición general elimina una excepción aplicable. Si los documentos se contradicen, registra el conflicto y solicita su resolución al responsable; no elijas el fragmento que suene más conveniente.</p><p>Esta revisión complementa la <a href=\"base-conocimiento-ia-vigencia-excepciones.html\">organización de la base de conocimiento</a>: allí se prepara el contenido; aquí se comprueba cómo se usa en una respuesta concreta.</p>"
+      },
+      {
+        "heading": "4. Prepara respuestas parciales y abstenciones útiles",
+        "html": "<p>Define salidas distintas según la evidencia. Si falta un dato que el cliente puede aportar, pregunta solo por ese dato. Si una parte está respaldada y otra no, responde la primera y señala con claridad qué sigue pendiente. Si falta una fuente aprobada o existe un conflicto, deriva la revisión sin completar el vacío con una suposición.</p><p>Anthropic recomienda <a href=\"https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-hallucinations\">permitir que el modelo reconozca incertidumbre y verificar afirmaciones con citas</a>. Para una operación comercial, traduce esa orientación en reglas observables: retirar afirmaciones sin respaldo y ofrecer un siguiente paso disponible. No conviertas un porcentaje de confianza escrito por el propio modelo en autorización automática.</p><p>«No encontré una condición aprobada para esta variante» describe un límite de la consulta. «Esa condición no existe» afirma algo más amplio que quizá no puedes demostrar. Si ofreces una transferencia, distingue prepararla de haberla creado o asignado realmente.</p>"
+      },
+      {
+        "heading": "5. Ejemplo ficticio: una ficha no cubre todas las variantes",
+        "html": "<p>Una distribuidora ficticia de iluminación recibe una pregunta sobre si una luminaria admite instalación exterior y atenuación. La ficha aprobada respalda el uso exterior para la referencia consultada, pero la compatibilidad de atenuación aparece únicamente en una ficha de otra variante. Este caso y sus productos son inventados, no resultados de un cliente de Nicho.</p><p>El control acepta la primera afirmación con su referencia y rechaza la segunda. La respuesta explica el uso exterior dentro de las condiciones de la ficha y deja pendiente confirmar la compatibilidad de atenuación. El asesor recibe la referencia exacta y la discrepancia, sin que el agente asegure que ambas variantes son equivalentes.</p><p>Si el cliente cambia después la referencia, vuelve a comprobar las dos afirmaciones. No conserves la respuesta anterior como si su evidencia sirviera automáticamente para el producto nuevo.</p>"
+      },
+      {
+        "heading": "6. Muestra solo la evidencia que el destinatario puede ver",
+        "html": "<p>Separa la trazabilidad interna de las referencias para clientes. El equipo puede necesitar un identificador de versión o un fragmento aprobado para investigar; el cliente quizá solo deba recibir la ficha pública correspondiente. Tener acceso técnico a un documento no autoriza a revelar su contenido o su enlace.</p><p>Comprueba los permisos antes de recuperar y antes de mostrar información. Evita que una cita exponga notas de negociación, datos de otra cuenta o direcciones internas. Conserva únicamente la evidencia necesaria, con acceso y retención definidos por la empresa. La revisión no requiere guardar razonamientos privados del modelo ni conversaciones completas por defecto.</p>"
+      },
+      {
+        "heading": "7. Prueba las citas falsas y las respuestas incompletas",
+        "html": "<p>Incluye pruebas donde el enlace existe pero no respalda la afirmación, el fragmento omite una excepción, la fuente está retirada, falta una variante o solo puede responderse parte de la pregunta. Añade un caso con documento restringido y otro donde cambia el dato durante la conversación.</p><p>Microsoft distingue <a href=\"https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/rag/rag-llm-evaluation-phase\">fidelidad al contexto, exactitud y completitud</a> en la evaluación de respuestas. Medirlas por separado ayuda a detectar una respuesta vinculada al contexto que aun así interpreta mal una condición.</p><p>Registra afirmaciones revisadas, afirmaciones respaldadas, citas inválidas y abstenciones innecesarias. No confundas cantidad de enlaces con calidad. Contrasta las revisiones automáticas con evaluación humana y repite los casos al cambiar modelo, documentos o reglas. Puedes integrar estas comprobaciones a la <a href=\"evaluar-agente-ia-atencion-rubrica-pruebas.html\">rúbrica de pruebas del agente</a>, manteniendo visibles los fallos críticos en vez de esconderlos en un promedio.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "Anthropic: citas y referencias a documentos",
+        "url": "https://platform.claude.com/docs/en/build-with-claude/citations"
+      },
+      {
+        "title": "Anthropic: reducir alucinaciones y reconocer incertidumbre",
+        "url": "https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-hallucinations"
+      },
+      {
+        "title": "Microsoft Azure Architecture Center: evaluación de respuestas con contexto",
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/rag/rag-llm-evaluation-phase"
+      }
+    ],
+    "datePublished": "2026-10-22",
+    "dateModified": "2026-10-22",
+    "dateLabel": "22 de octubre de 2026",
+    "sourceDateLabel": "22 de octubre de 2026",
+    "service": "agentes-ia.html",
+    "featureOnService": true,
+    "cta": "Revisemos qué afirmaciones comerciales puede respaldar tu agente, qué fuentes necesita y cómo debe continuar cuando la evidencia no alcanza."
+  },
+  {
+    "slug": "actualizar-software-dependencias-plan-ventas",
+    "title": "Cómo planear actualizaciones de software para cuidar la operación comercial",
+    "description": "Organiza versiones, alertas, pruebas y reversión antes de actualizar tu software, y comprueba que pedidos y contactos sigan su recorrido después del cambio.",
+    "category": "Operación y software",
+    "intro": "Actualizar el sistema que recibe pedidos requiere algo más que instalar una versión reciente. El equipo necesita saber qué cambia, cómo probarlo y qué hará si una función comercial deja de responder. Esta guía propone un plan de mantenimiento para software y dependencias: componentes de terceros que la aplicación utiliza. Busca reducir interrupciones y decisiones improvisadas, sin prometer disponibilidad absoluta ni sustituir la evaluación técnica de cada cambio.",
+    "sections": [
+      {
+        "heading": "1. Levanta un inventario que permita decidir",
+        "html": "<p>Registra aplicación, lenguaje, framework, paquetes, extensiones y base de datos. Para cada componente, anota versión realmente desplegada, responsable, soporte vigente y procesos que dependen de él. Incluye servidores web, ejecutores de tareas y entornos separados: actualizar uno no demuestra que todos hayan cambiado.</p><p>Consulta el calendario oficial del proveedor. Por ejemplo, <a href=\"https://www.php.net/supported-versions.php\">PHP distingue soporte activo, correcciones de seguridad y fin de soporte</a>. Esa diferencia ayuda a planificar; no demuestra por sí sola que una instalación concreta sea vulnerable. Verifica las fechas al preparar cada actualización, sin mantener una tabla copiada que pronto quede desactualizada.</p>"
+      },
+      {
+        "heading": "2. Convierte cada aviso en una evaluación concreta",
+        "html": "<p>Ante un aviso oficial, compara producto, versiones afectadas, condiciones de uso y corrección disponible con el inventario. Asigna responsable y plazo según exposición e impacto comercial. Un cambio urgente necesita una ruta acelerada con comprobaciones mínimas definidas, no una espera indefinida hasta la siguiente ventana habitual.</p><p><a href=\"https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-dependabot-alerts/view-dependabot-alerts\">GitHub explica cómo revisar y priorizar alertas de Dependabot</a>, incluyendo el alcance de la dependencia y detalles para corregirla. La evaluación de tu sistema debe comprobar qué se ejecuta realmente. Una alerta no demuestra un incidente, y descartarla no instala una corrección. Documenta cualquier aplazamiento y cuándo se revisará.</p>"
+      },
+      {
+        "heading": "3. Acota el cambio y su ventana operativa",
+        "html": "<p>Separa mantenimiento de funcionalidades nuevas siempre que sea viable. Define versiones de origen y destino, dependencias que deben moverse juntas y configuración que cambia. Conserva el paquete exacto probado para desplegarlo, en lugar de resolver versiones diferentes al llegar a producción.</p><p>Acuerda con ventas cuándo hay menor actividad, qué pedidos pueden seguir entrando y quién atiende incidencias. Incluye cierres, campañas y tareas nocturnas; una tienda aparentemente tranquila puede tener integraciones trabajando. Si necesitas una pausa, comunica alcance y alternativa operativa. No anuncies una actualización “sin interrupciones” antes de conocer sus límites.</p>"
+      },
+      {
+        "heading": "4. Ensaya los recorridos que sostienen las ventas",
+        "html": "<p>Prepara un entorno previo a producción con configuración representativa y datos sintéticos. Comprueba que correos, mensajes y cobros de prueba no lleguen a destinatarios reales. Documenta las diferencias relevantes frente al entorno activo, especialmente capacidad, conexiones y tareas programadas.</p><ul><li>Crea un pedido, corrígelo y consulta su total y estado.</li><li>Envía un formulario de contacto y verifica su llegada al destino de prueba.</li><li>Comprueba inicio de sesión, permisos e integraciones utilizadas.</li><li>Ejecuta tareas pendientes y revisa fallos, demoras y duplicados.</li></ul><p>Compara resultados antes y después con los mismos casos. Usa la guía de <a href=\"pruebas-aceptacion-usuario-software-entrega.html\">pruebas de aceptación de usuario</a> para documentar criterios; aquí interesa comprobar el cambio de versión, no rediseñar todo el proceso.</p>"
+      },
+      {
+        "heading": "5. Comprueba hasta dónde puedes volver atrás",
+        "html": "<p>Pregunta qué ocurrirá con los datos escritos después de actualizar. La <a href=\"https://aws.amazon.com/builders-library/ensuring-rollback-safety-during-deployments/\">guía de Amazon sobre reversión de despliegues</a> explica que cambiar formatos puede impedir que la versión anterior lea información nueva. Por eso, conservar el código anterior no basta para asegurar una vuelta segura.</p><p>Identifica migraciones, campos eliminados y cambios incompatibles. Cuando corresponda, divide el cambio en etapas compatibles y ensaya avance y regreso. Define el punto a partir del cual será necesaria otra recuperación. La <a href=\"probar-restauracion-copias-seguridad-pyme.html\">prueba de restauración de copias</a> complementa este plan: restaurar una copia antigua exige reconciliar los pedidos posteriores, no borrarlos silenciosamente.</p>"
+      },
+      {
+        "heading": "6. Decide publicar, aplazar o revertir con reglas previas",
+        "html": "<p>Antes de empezar, reúne resultado de pruebas, fallos abiertos, compatibilidad y procedimiento de recuperación. Nombra quién autoriza la publicación y quién ejecuta cada paso. Si falta una condición imprescindible, aplaza con responsable y siguiente acción concretos.</p><p>Define señales observables para detener el avance: pedidos que no se guardan, contactos que no llegan, errores nuevos o demoras por encima del límite acordado. Establece también quién decide corregir en sitio o revertir según el estado de los datos. Ni una pantalla disponible ni una herramienta que diga “despliegue exitoso” bastan para aprobar la operación.</p>"
+      },
+      {
+        "heading": "7. Ejemplo hipotético: el pedido funciona, el contacto no",
+        "html": "<p>Una distribuidora ficticia actualiza una dependencia de su portal. En el ensayo, los pedidos conservan cantidades y totales, pero el formulario de cotización deja de crear oportunidades en el CRM de prueba. El equipo aplaza la publicación, identifica una incompatibilidad y repite ambos recorridos con el ajuste.</p><p>La empresa, el fallo y las decisiones son inventados; no describen un cliente de Nicho. El ejemplo muestra por qué una actualización aparentemente pequeña necesita comprobar destinos y procesos completos. Haber validado pedidos no permite dar por aprobado el canal de contacto.</p>"
+      },
+      {
+        "heading": "8. Cierra con evidencia posterior al despliegue",
+        "html": "<p>Comprueba qué versión quedó activa en cada componente y ejecuta verificaciones controladas, identificables y autorizadas. Sigue el pedido o contacto hasta su destino, sin generar cobros o mensajes reales inesperados. Revisa también las tareas que solo corren al cierre del día.</p><p>Conserva versión, hora, responsables, resultados y pendientes. Define observación según los ciclos de la operación y entrega esos pendientes a alguien concreto. Actualiza el inventario y programa la próxima revisión de soporte. El mantenimiento termina con un resultado comercial comprobable y límites documentados, no con la última línea del instalador.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "PHP: versiones soportadas y etapas de soporte",
+        "url": "https://www.php.net/supported-versions.php"
+      },
+      {
+        "title": "GitHub Docs: revisión y priorización de alertas de Dependabot",
+        "url": "https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-dependabot-alerts/view-dependabot-alerts"
+      },
+      {
+        "title": "Amazon Builders’ Library: compatibilidad y reversión de despliegues",
+        "url": "https://aws.amazon.com/builders-library/ensuring-rollback-safety-during-deployments/"
+      }
+    ],
+    "datePublished": "2026-10-22",
+    "dateModified": "2026-10-22",
+    "dateLabel": "22 de octubre de 2026",
+    "sourceDateLabel": "22 de octubre de 2026",
+    "service": "sistemas.html",
+    "featureOnService": true,
+    "cta": "Revisemos qué componentes sostienen tu operación y qué pruebas, responsables y opciones de recuperación necesita su próximo mantenimiento."
+  },
+  {
     "slug": "cancelar-automatizaciones-pendientes-cambio-pedido",
     "title": "Cómo cancelar automatizaciones pendientes cuando cambia un pedido",
     "description": "Diseña una cancelación que detenga tareas y reintentos, detecte operaciones en curso y deje evidencia de lo que realmente ocurrió en cada sistema.",
