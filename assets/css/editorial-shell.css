@@ -14,3 +14,6 @@ body.n-site .page-hero{padding-top:158px}body.n-site .page-hero.light{background
 .skip{position:fixed;top:-80px;left:12px;background:white;color:#111;padding:13px 18px;z-index:1000}.skip:focus{top:10px}
 .n-stage{height:auto;aspect-ratio:1.9}
 @media(max-width:600px){.n-stage{height:auto;aspect-ratio:1.30}}
+
+/* Consultation is the primary hero action; the portfolio remains a quiet secondary route. */
+.n-hero-actions{display:flex;flex-direction:column;align-items:flex-start;gap:8px;min-width:0}.n-hero-actions .n-consultation{font-weight:600;line-height:1.45;gap:16px}.n-hero-actions .n-consultation span{min-width:0}.n-hero-actions .n-consultation b,.n-contact-consultation b{flex-shrink:0}.n-hero-actions .n-projects-secondary{border-bottom:0;color:#b7b7bc;font-size:13px;padding:10px 0}.n-contact-consultation{margin-top:24px;font-weight:600;line-height:1.45;gap:16px;max-width:100%}.n-contact-consultation:focus-visible{outline:2px solid #007bff;outline-offset:5px}
