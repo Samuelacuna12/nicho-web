@@ -1,5 +1,121 @@
 [
   {
+    "slug": "agente-ia-analizar-fotos-clientes-productos",
+    "title": "Fotos de clientes en un agente IA: cómo analizarlas sin confundir productos",
+    "description": "Diseña un agente IA que use fotos de clientes para orientar consultas de productos, pida evidencia útil y derive los casos que no puede confirmar.",
+    "category": "Agentes de IA",
+    "intro": "Un cliente envía la foto de una pieza y pregunta: «¿Tienen esta?». Un agente IA con análisis de imágenes puede describir lo visible y orientar la conversación. El riesgo aparece cuando convierte un parecido en una identificación definitiva o interpreta una marca como prueba de una falla. Este método propone usar las fotos como evidencia parcial, comprobar lo necesario y dejar claro cuándo debe intervenir una persona.",
+    "sections": [
+      {
+        "heading": "1. Define qué puede resolver una foto",
+        "html": "<p>Empieza por una tarea acotada: reconocer la categoría aproximada del objeto, describir su forma, señalar diferencias visibles o pedir otra vista. Define también las conclusiones que requieren verificación independiente: modelo exacto, material, medidas, compatibilidad, autenticidad y causa de una avería.</p><p>Una imagen puede mostrar una esquina golpeada, pero no demuestra cuándo ocurrió el golpe ni quién fue responsable. Tampoco permite concluir que un componente funciona correctamente porque su exterior parece intacto. Separa tres niveles en la respuesta: <strong>lo observado, lo que falta comprobar y el siguiente paso</strong>.</p><p>Si el cliente aporta después una referencia verificable, continúa con el flujo de <a href=\"buscar-productos-ia-referencia-exacta-catalogo.html\">búsqueda de productos por referencia exacta</a>. La foto sirve para orientar; no reemplaza la comprobación comercial.</p>"
+      },
+      {
+        "heading": "2. Revisa la imagen antes de interpretarla",
+        "html": "<p>Comprueba que el objeto esté enfocado, tenga iluminación suficiente y no quede oculto por manos, empaques o reflejos. Pide una vista general y, únicamente si hace falta, un acercamiento de la zona relevante. Explica qué debe verse: «Necesito observar la forma del conector», en lugar de solicitar más fotos sin propósito.</p><p>La <a href=\"https://ai.google.dev/gemini-api/docs/image-understanding\">guía de imágenes de Gemini</a> recomienda imágenes claras y correctamente orientadas. <a href=\"https://platform.claude.com/docs/en/build-with-claude/vision\">Anthropic documenta limitaciones de visión</a> ante imágenes pequeñas, rotadas o de baja calidad, y advierte que los recuentos y la localización pueden ser imprecisos.</p><p>Revisa la imagen que realmente recibe el modelo, no solo el archivo original: la compresión o el redimensionamiento del canal pueden borrar detalles necesarios. Si falta evidencia, solicita una toma concreta o declara la limitación.</p>"
+      },
+      {
+        "heading": "3. Usa un flujo con salidas explícitas",
+        "html": "<p>Configura el proceso para que una descripción convincente no active automáticamente una recomendación de compra:</p><ol><li><strong>Entender la pregunta.</strong> Aclara si el cliente busca un repuesto, una alternativa estética o ayuda con un problema.</li><li><strong>Registrar observaciones.</strong> Describe rasgos visibles sin añadir marca, medidas ni funcionamiento que no estén comprobados.</li><li><strong>Generar candidatos.</strong> Si corresponde, consulta el catálogo disponible y presenta posibilidades como tales, nunca como una coincidencia garantizada.</li><li><strong>Buscar la diferencia decisiva.</strong> Pide solo el dato que permita separar opciones: una vista lateral, una medida tomada por el cliente o el modelo declarado del equipo.</li><li><strong>Resolver o derivar.</strong> Confirma únicamente lo respaldado por evidencia suficiente. Si las opciones siguen siendo indistinguibles, transfiere el caso.</li></ol><p>No conviertas la confianza verbal del modelo en un porcentaje de exactitud. La decisión debe depender de comprobaciones definidas para ese uso.</p>"
+      },
+      {
+        "heading": "4. Ejemplo ficticio: una rueda para silla",
+        "html": "<p><strong>Ejemplo ficticio, no caso de un cliente:</strong> una tienda recibe una foto de una rueda negra y la pregunta «¿Esta me sirve para mi silla?». El agente observa una rueda doble con un vástago metálico. El catálogo contiene piezas visualmente parecidas, pero con distintas dimensiones de montaje.</p><p>Una respuesta adecuada sería: «Veo una rueda doble con vástago, pero esta foto no permite confirmar la medida ni la compatibilidad. ¿Puedes indicar el modelo de la silla o compartir las medidas del montaje? Con eso podemos revisar las opciones».</p><p>El agente no inventa el diámetro a partir de la perspectiva ni recomienda retirar componentes si hacerlo resulta inseguro. Cuando recibe datos, los compara con la ficha del fabricante. Si siguen faltando especificaciones, deja preparados los candidatos para un asesor, sin afirmar que cualquiera encajará.</p>"
+      },
+      {
+        "heading": "5. Qué revisar antes de responder al cliente",
+        "html": "<p>Introduce una revisión separada de la interpretación inicial. Puede ser una regla del sistema, una comprobación contra fuentes o revisión humana, según el riesgo:</p><ul><li>¿Cada atributo afirmado aparece realmente en la imagen o procede de una fuente identificada?</li><li>¿Se distinguieron las observaciones del agente de los datos declarados por el cliente?</li><li>¿La iluminación puede alterar el color o esconder un detalle?</li><li>¿La perspectiva está haciendo pasar una proporción por una medida?</li><li>¿El catálogo respalda la compatibilidad, el precio y la disponibilidad que se van a comunicar?</li><li>¿La respuesta admite que no existe una coincidencia suficientemente respaldada?</li></ul><p>Microsoft recomienda evaluar el análisis visual con imágenes representativas y resultados revisados por personas en su <a href=\"https://learn.microsoft.com/en-us/azure/foundry/responsible-ai/computer-vision/image-analysis-transparency-note\">nota de transparencia de Image Analysis</a>. Prueba también casos sin respuesta válida, no solo fotos fáciles de identificar.</p>"
+      },
+      {
+        "heading": "6. Abstenerse también es una respuesta útil",
+        "html": "<p>Define motivos concretos para detener la conclusión: objeto parcialmente oculto, candidatos indistinguibles, imágenes contradictorias, ausencia de especificaciones o una decisión que afecte la seguridad. Evita pedir fotos indefinidamente cuando el dato que falta no puede obtenerse visualmente.</p><p>No prometas diagnósticos médicos ni certifiques fallas eléctricas, estructurales o mecánicas a partir de una foto. La <a href=\"https://learn.microsoft.com/en-us/azure/foundry/responsible-ai/computer-vision/image-analysis-transparency-note\">documentación de Microsoft</a> excluye el diagnóstico médico de los usos de Azure Vision. En una atención comercial, describir una señal visible no autoriza a diagnosticar su causa ni a declarar seguro un producto.</p><p>Al derivar, entrega la pregunta original, las observaciones, las verificaciones realizadas y el dato pendiente. Un <a href=\"traspaso-bot-asesor-con-contexto.html\">traspaso al asesor con contexto</a> evita que el cliente deba empezar de nuevo.</p>"
+      },
+      {
+        "heading": "7. Pide datos mínimos y valida antes de ampliar",
+        "html": "<p>Solicita fotografías del producto, no del entorno completo. Pide recortar rostros, direcciones, documentos y otros datos ajenos a la consulta. Explica para qué se usará la imagen y quién podrá revisarla. Define acceso, conservación y eliminación en el canal, almacenamiento y proveedor del modelo; no prometas borrado inmediato sin verificar todo el recorrido.</p><p>No reutilices automáticamente esas fotos para entrenar modelos, publicidad o demostraciones. Una imagen enviada para resolver una consulta no debe convertirse por defecto en material para otro propósito.</p><p>Antes de ampliar el flujo, prepara pruebas con productos parecidos, fondos confusos y fotos insuficientes. Evalúa identificación errónea, abstención correcta y calidad del siguiente paso con una <a href=\"evaluar-agente-ia-atencion-rubrica-pruebas.html\">rúbrica para agentes de atención</a>. Publica resultados solo cuando existan mediciones propias verificables.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "Anthropic: Vision",
+        "url": "https://platform.claude.com/docs/en/build-with-claude/vision"
+      },
+      {
+        "title": "Google: Image understanding, Gemini API",
+        "url": "https://ai.google.dev/gemini-api/docs/image-understanding"
+      },
+      {
+        "title": "Microsoft: Transparency note, Image Analysis",
+        "url": "https://learn.microsoft.com/en-us/azure/foundry/responsible-ai/computer-vision/image-analysis-transparency-note"
+      }
+    ],
+    "datePublished": "2026-10-23",
+    "dateModified": "2026-10-23",
+    "dateLabel": "23 de octubre de 2026",
+    "sourceDateLabel": "23 de octubre de 2026",
+    "service": "agentes-ia.html",
+    "featureOnService": true,
+    "cta": "Revisa qué consultas pueden apoyarse en fotos, qué evidencia necesita cada decisión y cuándo debe intervenir tu equipo."
+  },
+  {
+    "slug": "formularios-largos-guardar-borrador-recuperar",
+    "title": "Cómo guardar y recuperar un formulario largo sin confundirlo con un envío",
+    "description": "Diseña formularios por pasos con borradores, recuperación y revisión final. Evita perder datos y distingue un avance guardado de una solicitud recibida.",
+    "category": "Web y experiencia de usuario",
+    "intro": "Un cliente empieza una solicitud de cotización, busca una referencia y regresa a una pantalla vacía. Otra persona ve «guardado» y cree que el equipo ya recibió su pedido. Recuperar un formulario interrumpido no consiste solo en conservar campos: exige explicar qué se guardó, dónde puede retomarse y cuándo existe realmente una solicitud. Esta guía propone un recorrido para formularios empresariales que necesitan más de unos pocos datos.",
+    "sections": [
+      {
+        "heading": "1. Reduce el formulario antes de dividirlo",
+        "html": "<p>Haz un inventario de campos y pregunta qué decisión permite tomar cada uno. Si un dato solo hará falta después de una primera conversación, no lo conviertas en obligatorio para iniciar la solicitud. Guardar un borrador ayuda frente a una interrupción; no justifica pedir información innecesaria.</p><p>Agrupa lo que queda según la tarea del cliente: necesidad, referencias, condiciones de entrega y revisión, por ejemplo. La <a href=\"https://www.w3.org/WAI/tutorials/forms/multi-page/\">guía de formularios multipágina de W3C WAI</a> recomienda etapas lógicas, señales de progreso y una forma reconocible de omitir pasos opcionales. Explica desde el inicio el recorrido y muestra el paso actual también mediante texto, no únicamente con una barra de color.</p><p>Complementa este trabajo con la <a href=\"formularios-etiquetas-errores-autocompletado.html\">revisión de etiquetas y errores del formulario</a>. Aquí el objetivo adicional es poder interrumpir y retomar el proceso sin perder el contexto.</p>"
+      },
+      {
+        "heading": "2. Define qué significa «guardar» para este recorrido",
+        "html": "<p>Antes de elegir tecnología, decide qué interrupciones quieres cubrir. Recargar la misma pestaña es distinto de volver mañana desde otro computador. Escribe la promesa que la interfaz podrá cumplir y compárala con el mecanismo real:</p><ul><li><strong>Durante esta sesión:</strong> recuperación limitada al contexto del navegador, sin prometer acceso desde otro dispositivo.</li><li><strong>En este navegador:</strong> persistencia local más prolongada, sujeta a borrado, restricciones y uso compartido del equipo.</li><li><strong>En una cuenta:</strong> borrador alojado en el servidor, con identificación, permisos y un plazo de conservación definidos.</li></ul><p><a href=\"https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage\">MDN documenta que sessionStorage separa el almacenamiento por origen y pestaña</a>, sobrevive a recargas durante la sesión y puede fallar por decisiones del navegador. No lo presentes como una copia permanente ni como sincronización entre dispositivos. Si la persistencia no está disponible, avisa y permite continuar sin mostrar una confirmación falsa.</p>"
+      },
+      {
+        "heading": "3. Haz visible el estado sin interrumpir cada campo",
+        "html": "<p>Separa «cambios pendientes», «guardando», «borrador guardado» y «no se pudo guardar». Actualiza el estado cuando haya evidencia de que el mecanismo elegido terminó, no en cuanto la persona empieza a escribir. Si el guardado ocurre en un servidor, la solicitud de red iniciada todavía no demuestra que los datos quedaron registrados.</p><p>Usa una confirmación discreta y accesible. No robes el foco ni abras una ventana cada vez que cambie un campo. Ante un error, conserva lo escrito en pantalla, explica el límite y ofrece un intento controlado. Si se pierde la conexión, no conviertas automáticamente un estado pendiente en éxito.</p><p>Una leyenda como «Borrador guardado en este navegador. Aún no se ha enviado» es más precisa que «Todo listo». El plazo de conservación y las condiciones de recuperación deben corresponder al comportamiento implementado, no a una cifra elegida para tranquilizar al visitante.</p>"
+      },
+      {
+        "heading": "4. Recupera con permiso y revisa lo que pudo cambiar",
+        "html": "<p>Al encontrar un borrador, muestra su fecha y ofrece retomarlo o descartarlo. Evita restaurar silenciosamente datos de una persona anterior en un equipo compartido. Si el borrador pertenece a una cuenta, comprueba que la sesión tenga acceso a él antes de mostrar sus valores; conocer su identificador no debe bastar.</p><p>Una recuperación no valida nuevamente precios, disponibilidad, rutas de entrega o condiciones comerciales. Conserva las respuestas del usuario que siguen siendo útiles y vuelve a consultar los datos vigentes que dependan del negocio. Marca los cambios para que la persona los revise antes de enviar.</p><p>Si cambió la estructura del formulario, define qué campos siguen siendo compatibles y cuáles requieren una nueva respuesta. No coloques una selección antigua en una pregunta distinta solo porque ambas ocupan la misma posición. Para ediciones desde dos pestañas o dispositivos, aplica una política explícita de conflictos en vez de sobrescribir la versión más reciente sin avisar.</p>"
+      },
+      {
+        "heading": "5. Guarda menos información y permite descartarla",
+        "html": "<p>El borrador debe tener una finalidad acotada. Decide qué datos necesitas conservar, durante cuánto tiempo y quién puede leerlos. Excluye contraseñas, información de pago y documentos sensibles de un guardado local genérico. No copies el contenido del formulario a la URL, a herramientas de analítica o a mensajes de error.</p><p>La <a href=\"https://cheatsheetseries.owasp.org/cheatsheets/HTML5_Security_Cheat_Sheet.html\">guía de seguridad HTML5 de OWASP</a> advierte sobre almacenar información sensible en localStorage y sobre su exposición mediante JavaScript ante un fallo de inyección. Guardar en el dispositivo no convierte la información en privada por definición.</p><p>Incluye una acción clara para descartar el borrador y verifica que elimine la copia correspondiente, sin borrar otros trabajos ajenos. Si hay archivos, trata su conservación de manera separada y explícita: la guía para <a href=\"formulario-cotizacion-archivos-adjuntos-validacion.html\">recibir adjuntos en una cotización</a> desarrolla controles que un simple borrador de texto no cubre.</p>"
+      },
+      {
+        "heading": "6. Ejemplo ficticio: cotización de mobiliario interrumpida",
+        "html": "<p>Una empresa ficticia de mobiliario divide su solicitud en referencias, cantidades y entrega. La visitante guarda un borrador en su cuenta antes de terminar. Al día siguiente, retoma desde otro dispositivo después de identificarse. Una referencia ya no está disponible, así que el sistema conserva las cantidades de los demás productos y señala la línea que necesita revisión.</p><p>La visitante cambia esa referencia, revisa el resumen y pulsa «Enviar solicitud». Solo después de que el servidor acepta el envío aparece el identificador de recepción. El estado del borrador pasa a enviado y no vuelve a generar otra solicitud al recargar. La empresa, el recorrido y las decisiones del ejemplo son inventados; no describen una implementación o resultados de un cliente de Nicho.</p><p>Si la pantalla pierde conexión durante el envío, el sistema consulta el resultado de ese intento antes de ofrecer repetirlo. No debe afirmar «no se envió» ni generar otro registro únicamente porque no recibió a tiempo la respuesta.</p>"
+      },
+      {
+        "heading": "7. Prueba interrupciones y mide estados diferentes",
+        "html": "<p>Ensaya el recorrido completo con datos sintéticos: escribir, volver al paso anterior, recargar, cerrar y reabrir según la promesa de persistencia, bloquear almacenamiento, perder conexión, recuperar una versión antigua, descartar y enviar. Incluye navegación con teclado y comprueba que errores y cambios de paso mantengan una ubicación comprensible.</p><ul><li>Verifica qué datos sobreviven realmente a cada interrupción.</li><li>Confirma que ningún borrador de otra cuenta se muestre al cambiar de usuario.</li><li>Prueba que modificar un paso anterior actualice el resumen final.</li><li>Comprueba el destino de la solicitud después de enviarla, no solo el mensaje de la pantalla.</li></ul><p>Cuenta por separado inicios, borradores guardados, recuperaciones, intentos de envío y solicitudes aceptadas por el servidor. Una visita a contacto, un clic en WhatsApp o un mensaje preparado no equivalen a un contacto recibido. Tampoco un borrador autoriza una campaña de seguimiento. Usa los abandonos para investigar fricción, sin interpretar cada sesión interrumpida como una venta perdida.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "W3C WAI: formularios multipágina y señales de progreso",
+        "url": "https://www.w3.org/WAI/tutorials/forms/multi-page/"
+      },
+      {
+        "title": "MDN: alcance y excepciones de sessionStorage",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage"
+      },
+      {
+        "title": "OWASP: seguridad del almacenamiento en aplicaciones HTML5",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/HTML5_Security_Cheat_Sheet.html"
+      }
+    ],
+    "datePublished": "2026-10-23",
+    "dateModified": "2026-10-23",
+    "dateLabel": "23 de octubre de 2026",
+    "sourceDateLabel": "23 de octubre de 2026",
+    "service": "desarrollo-web.html",
+    "featureOnService": true,
+    "cta": "Revisemos qué necesita pedir tu formulario, qué interrupciones debe soportar y cómo comprobar que cada solicitud llega realmente al equipo."
+  },
+  {
     "slug": "verificar-fuentes-citas-respuestas-agente-ia",
     "title": "Cómo comprobar las fuentes que cita un agente de IA",
     "description": "Revisa las citas de un agente de IA por afirmación, vigencia y contexto. Decide qué puede responder, qué debe preguntar y cuándo necesita revisión.",

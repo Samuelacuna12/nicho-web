@@ -463,5 +463,15 @@
     "title": "Cómo planear actualizaciones de software para cuidar la operación comercial | Nicho Agencia Digital",
     "description": "Organiza versiones, alertas, pruebas y reversión antes de actualizar tu software, y comprueba que pedidos y contactos sigan su recorrido después del cambio.",
     "kind": "Article"
+  },
+  "recursos/agente-ia-analizar-fotos-clientes-productos.html": {
+    "title": "Fotos de clientes en un agente IA: cómo analizarlas sin confundir productos | Nicho Agencia Digital",
+    "description": "Diseña un agente IA que use fotos de clientes para orientar consultas de productos, pida evidencia útil y derive los casos que no puede confirmar.",
+    "kind": "Article"
+  },
+  "recursos/formularios-largos-guardar-borrador-recuperar.html": {
+    "title": "Cómo guardar y recuperar un formulario largo sin confundirlo con un envío | Nicho Agencia Digital",
+    "description": "Diseña formularios por pasos con borradores, recuperación y revisión final. Evita perder datos y distingue un avance guardado de una solicitud recibida.",
+    "kind": "Article"
   }
 }
