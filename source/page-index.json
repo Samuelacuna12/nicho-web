@@ -473,5 +473,15 @@
     "title": "Cómo guardar y recuperar un formulario largo sin confundirlo con un envío | Nicho Agencia Digital",
     "description": "Diseña formularios por pasos con borradores, recuperación y revisión final. Evita perder datos y distingue un avance guardado de una solicitud recibida.",
     "kind": "Article"
+  },
+  "recursos/contratar-agente-ia-ventas-comparar-propuestas.html": {
+    "title": "Contratar un agente IA de ventas: qué exigir al comparar propuestas | Nicho Agencia Digital",
+    "description": "Compara propuestas de agentes IA con entregables, límites, pruebas, costos y soporte claros antes de contratar una implementación para ventas.",
+    "kind": "Article"
+  },
+  "recursos/software-a-medida-o-saas-elegir-empresa.html": {
+    "title": "Software a medida o SaaS: cómo elegir para tu empresa | Nicho Agencia Digital",
+    "description": "Decide entre software a medida, SaaS o una solución híbrida comparando ajuste operativo, costos completos, integraciones y salida de datos.",
+    "kind": "Article"
   }
 }

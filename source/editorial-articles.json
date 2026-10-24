@@ -1,5 +1,111 @@
 [
   {
+    "datePublished": "2026-10-24",
+    "dateLabel": "24 de octubre de 2026",
+    "sourceDateLabel": "24 de octubre de 2026",
+    "featureOnService": true,
+    "slug": "contratar-agente-ia-ventas-comparar-propuestas",
+    "title": "Contratar un agente IA de ventas: qué exigir al comparar propuestas",
+    "description": "Compara propuestas de agentes IA con entregables, límites, pruebas, costos y soporte claros antes de contratar una implementación para ventas.",
+    "category": "Decisiones de compra",
+    "service": "agentes-ia.html",
+    "intro": "Dos proveedores ofrecen un agente de ventas con IA. Ambos muestran una conversación fluida, pero uno incluye conexión al catálogo y el otro solo respuestas preparadas. Comparar el precio sin aclarar esa diferencia puede llevarte a contratar algo que no resuelve tu operación. Esta guía propone una ficha de evaluación para comprar un alcance comprobable, no una promesa de ventas.",
+    "cta": "Si estás comparando proveedores, revisemos tu proceso y las tareas que sí conviene delegar. Podemos conversar sobre el alcance de un agente IA antes de decidir qué integrar.",
+    "sources": [
+      {
+        "title": "Anthropic: Building effective agents",
+        "url": "https://www.anthropic.com/research/building-effective-agents"
+      },
+      {
+        "title": "OpenAI: Evaluate agent workflows",
+        "url": "https://developers.openai.com/api/docs/guides/agent-evals"
+      },
+      {
+        "title": "OWASP: Authorization Cheat Sheet",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html"
+      }
+    ],
+    "sections": [
+      {
+        "heading": "1. Pide que describan el trabajo, no solo la tecnología",
+        "html": "<p>Escribe tres situaciones que hoy consumen tiempo al equipo: orientar sobre un producto, preparar una cotización o pasar una consulta compleja a un asesor. Para cada una define entrada, información necesaria, acción permitida y condición de cierre. «Atender ventas» resulta demasiado amplio para verificar una entrega.</p><p>En su explicación de <a href=\"https://www.anthropic.com/research/building-effective-agents\">flujos y agentes</a>, Anthropic distingue recorridos definidos por código de sistemas donde el modelo decide cómo usar herramientas. También recomienda empezar con la solución más simple que resuelva la tarea. Esa distinción ayuda a preguntar qué parte de la propuesta realmente necesita IA y cuál puede funcionar con reglas.</p><p>Pide una respuesta concreta: ¿el sistema responde, recomienda, prepara o ejecuta? Consultar una referencia no equivale a reservar existencias; preparar un pedido no equivale a confirmarlo. El proveedor debería explicar esas fronteras sin esconderlas detrás del nombre de una plataforma.</p>"
+      },
+      {
+        "heading": "2. Convierte la oferta en una ficha comparable",
+        "html": "<p>Envía la misma ficha a cada proveedor. Una respuesta pendiente debe permanecer como pendiente: no supongas que una función está incluida porque apareció en la demostración.</p><ul><li><strong>Canales y alcance:</strong> dónde responderá, idiomas previstos y solicitudes excluidas.</li><li><strong>Información:</strong> de dónde salen precios, disponibilidad y políticas; quién actualiza cada fuente.</li><li><strong>Integraciones:</strong> sistemas concretos, operaciones incluidas y dependencias de otras cuentas o planes.</li><li><strong>Intervención humana:</strong> cómo deriva, a quién y con qué resumen.</li><li><strong>Entrega:</strong> configuración, documentación, capacitación y accesos que recibirá la empresa.</li><li><strong>Continuidad:</strong> quién atiende errores, qué cubre el mantenimiento y cómo se revierte un cambio.</li></ul><p>Solicita también una lista explícita de exclusiones. Si el CRM no tiene una API utilizable, esa limitación debe conocerse antes de aprobar el alcance, no después de pagar una integración que todavía no ha sido evaluada.</p>"
+      },
+      {
+        "heading": "3. Compara con los mismos casos de prueba",
+        "html": "<p>Una demostración elegida por el vendedor sirve para entender la interfaz, pero no basta para aceptar el sistema. Prepara conversaciones ficticias representativas y entrégalas a todos: producto inexistente, precio cambiado, cliente que corrige un dato, consulta fuera de alcance y necesidad de hablar con una persona.</p><p>La <a href=\"https://developers.openai.com/api/docs/guides/agent-evals\">documentación de evaluaciones de OpenAI</a> contempla revisar selección de herramientas, transferencias y cumplimiento de instrucciones, y usar conjuntos de casos repetibles para comparar cambios. No necesitas comprar esa herramienta para adoptar el criterio: exigir evidencia revisable sobre las mismas situaciones.</p><p>Registra por caso la respuesta esperada, la observada y la decisión de aceptar, corregir o excluir. No uses una única nota de «calidad» que oculte un error grave. Un agente puede escribir bien y aun así confirmar un precio que nunca consultó. Puedes profundizar en nuestra <a href=\"evaluar-agente-ia-atencion-rubrica-pruebas.html\">guía para evaluar agentes de atención</a>.</p>"
+      },
+      {
+        "heading": "4. Separa costos iniciales, consumo y operación",
+        "html": "<p>Pide que la propuesta separe implementación, suscripciones, consumo de modelos, mensajería si aplica, integraciones y soporte. Pregunta quién factura cada concepto, en qué moneda y qué sucede si aumenta el uso. Una mensualidad pequeña puede excluir componentes necesarios; una alta puede incluir trabajo que tu empresa no requiere.</p><p>Para comparar, utiliza el mismo escenario de conversaciones y tareas, identificado como supuesto y no como pronóstico. Solicita los límites y el mecanismo de aviso antes de excederlos. En Colombia o en otro país de LATAM conviene aclarar moneda de cobro, conceptos variables y responsabilidades de cada parte, sin asumir que todos los servicios internacionales se pagan igual.</p><p>No aceptes un porcentaje de conversión prometido como sustituto del presupuesto. Define primero qué se medirá: respuestas correctas, derivaciones útiles, pedidos confirmados y ventas cobradas son resultados diferentes. Revisa también <a href=\"presupuesto-consumo-agente-ia.html\">cómo presupuestar consumo de un agente</a>.</p>"
+      },
+      {
+        "heading": "5. Revisa control, permisos y salida del proveedor",
+        "html": "<p>La <a href=\"https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html\">guía de autorización de OWASP</a> recomienda privilegios mínimos y validación de permisos en cada solicitud. En la compra de un agente, tradúcelo en preguntas prácticas: ¿puede leer todo el CRM?, ¿puede modificar precios?, ¿qué acciones exigen revisión y cómo se retira su acceso?</p><p>Aclara qué elementos son de la empresa, cuáles se entregan bajo licencia y cuáles pertenecen a un tercero. No asumas que pagar la implementación incluye el código fuente, el modelo o una licencia perpetua. Pide cómo exportar la configuración y los datos permitidos, y qué deja de funcionar al terminar el servicio.</p><p>La persona responsable de la operación debe poder detener respuestas automáticas y volver a atención humana. Comprueba ese recorrido en una prueba, además de recibir instrucciones escritas. La independencia operativa importa tanto como el primer día de funcionamiento.</p>"
+      },
+      {
+        "heading": "6. Ejemplo ficticio y decisión de contratación",
+        "html": "<p>Ejemplo ficticio: una distribuidora compara dos ofertas. La primera responde preguntas frecuentes, pero no consulta el catálogo actualizado. La segunda consulta referencias y prepara cotizaciones, aunque necesita revisión humana para enviarlas. Si la necesidad es orientar consultas básicas, la primera podría ser suficiente; si es preparar cotizaciones verificables, ambas ofertas no representan el mismo alcance.</p><p>La decisión puede quedar escrita en una página: problema elegido, tareas incluidas, exclusiones, fuentes de datos, pruebas de aceptación, costos y responsable de soporte. Los puntos sin comprobar se convierten en condiciones pendientes, no en beneficios asumidos.</p><p>Antes de ampliar a más procesos, acuerda una primera entrega acotada y una revisión con evidencia. Esta guía sirve para comparar propuestas; no acredita a un proveedor ni garantiza que una implementación genere una cantidad determinada de clientes.</p><p>Si quieres contrastar estas decisiones con tu proceso, puedes <a href=\"https://calendar.app.google/DAYcFPswU2gASF418\">agendar una asesoría gratuita de 30 minutos</a> o usar los canales de la <a href=\"../contacto.html\">página de contacto de Nicho</a>.</p>"
+      }
+    ]
+  },
+  {
+    "datePublished": "2026-10-24",
+    "dateLabel": "24 de octubre de 2026",
+    "sourceDateLabel": "24 de octubre de 2026",
+    "featureOnService": true,
+    "slug": "software-a-medida-o-saas-elegir-empresa",
+    "title": "Software a medida o SaaS: cómo elegir para tu empresa",
+    "description": "Decide entre software a medida, SaaS o una solución híbrida comparando ajuste operativo, costos completos, integraciones y salida de datos.",
+    "category": "Software empresarial",
+    "service": "sistemas.html",
+    "intro": "Tu equipo necesita ordenar pedidos, clientes o tareas, pero no sabes si pagar una herramienta existente o desarrollar un sistema propio. La decisión cambia según el proceso que debes resolver, las excepciones y lo que puedes mantener. Este método permite comparar alternativas con el mismo trabajo real, sin asumir que desarrollar siempre es mejor ni que una suscripción elimina todos los costos.",
+    "cta": "Trae el proceso que quieres resolver y las herramientas que ya utilizas. Revisemos si conviene configurar una solución existente, integrar sistemas o delimitar un desarrollo a medida.",
+    "sources": [
+      {
+        "title": "Microsoft: SaaS and multitenant solution architecture",
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/guide/saas-multitenant-solution-architecture/"
+      },
+      {
+        "title": "Microsoft: Cost Optimization design principles",
+        "url": "https://learn.microsoft.com/en-us/azure/well-architected/cost-optimization/principles"
+      },
+      {
+        "title": "OWASP: Authorization Cheat Sheet",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html"
+      }
+    ],
+    "sections": [
+      {
+        "heading": "1. Aclara qué estás comparando",
+        "html": "<p>Un SaaS es software ofrecido como servicio. <a href=\"https://learn.microsoft.com/en-us/azure/architecture/guide/saas-multitenant-solution-architecture/\">Microsoft explica</a> que el proveedor suele alojarlo y mantenerlo. «A medida», en cambio, describe una solución diseñada para necesidades particulares. Son dimensiones distintas: un desarrollo personalizado también puede contratarse como servicio y tener pagos recurrentes.</p><p>Para tomar una decisión útil, compara tres opciones concretas: configurar una herramienta comercial, construir un sistema personalizado o mantener una herramienta principal con una integración pequeña para lo que falta. No elijas por la etiqueta. Define quién opera cada componente y qué recibes realmente por el pago.</p><p>La propiedad del código, los datos exportables, el alojamiento y el soporte se aclaran en la propuesta. Ninguno de esos puntos debe darse por hecho solo porque alguien use la expresión «sistema propio».</p>"
+      },
+      {
+        "heading": "2. Prueba un proceso completo antes de listar funciones",
+        "html": "<p>Elige una operación que ocurra con frecuencia y recórrela desde el inicio hasta el cierre. Por ejemplo: recibir una solicitud, asignarla, preparar una propuesta, corregirla y registrar la decisión. Incluye al menos una excepción habitual. Una lista de pantallas no revela si el trabajo realmente termina.</p><p>Clasifica las necesidades como indispensables, adaptables o posteriores. Lo indispensable debe tener una razón operativa: sin ello, el pedido se cobra mal o una persona accede a datos que no le corresponden. Una preferencia de color no debería tener el mismo peso.</p><ul><li>Si la herramienta comercial completa el recorrido mediante configuración sostenible, evalúala antes de desarrollar.</li><li>Si requiere copiar información constantemente o rompe una regla central, documenta esa brecha.</li><li>Si solo falla un paso aislado, comprueba si una integración acotada lo resuelve sin reemplazar todo.</li></ul><p>Conserva una evidencia de cada prueba. «Tiene inventario» no demuestra que maneje tus unidades, reservas o ajustes de la forma que necesitas.</p>"
+      },
+      {
+        "heading": "3. Usa una matriz que permita descartar opciones",
+        "html": "<p>Como método editorial, crea una fila por requisito y columnas para cada alternativa. En cada celda escribe: disponible y probado, configurable, requiere desarrollo, no disponible o pendiente de verificar. Añade fuente, persona responsable y fecha. Evita puntajes demasiado precisos cuando todavía no tienes evidencia.</p><p>Define primero condiciones de descarte: una opción que no respeta un permiso crítico no se compensa con más reportes. Después compara facilidad de uso, tiempos de puesta en marcha, mantenimiento y capacidad de cambio. Prueba con quienes harán el trabajo diario, no solo con la persona que compra.</p><p>También pregunta qué cambia al crecer: más usuarios, sucursales, registros o integraciones. Verifica límites del plan ofrecido; una capacidad mostrada en una demo puede pertenecer a otro plan o requerir un complemento. No uses precios de un proveedor sin confirmar la oferta vigente.</p>"
+      },
+      {
+        "heading": "4. Compara el costo completo para el mismo periodo",
+        "html": "<p>Usa un horizonte de comparación elegido por tu empresa y aplica los mismos supuestos a todas las opciones. Separa configuración o desarrollo inicial, migración, suscripciones, alojamiento, integraciones, soporte, formación y tiempo interno. Incluye costos de salida cuando sean conocidos; si no, márcalos como pendientes.</p><p>Los <a href=\"https://learn.microsoft.com/en-us/azure/well-architected/cost-optimization/principles\">principios de optimización de costos de Microsoft</a> advierten que optimizar no siempre equivale a elegir el costo más bajo y que existen compromisos con seguridad, resiliencia y operación. La comparación debe mostrar qué trabajo se conserva, se elimina o se traslada al equipo.</p><p>Una fórmula de trabajo es: costo del periodo = puesta en marcha + costos recurrentes del periodo + operación interna estimada + cambios previstos. Mantén los supuestos al lado del cálculo, en la misma moneda y con el tratamiento tributario de las propuestas claramente identificado. No presentes tiempo liberado como ahorro de caja si el gasto seguirá existiendo.</p>"
+      },
+      {
+        "heading": "5. Comprueba integraciones, permisos y salida",
+        "html": "<p>Solicita una prueba de lectura y escritura de los datos que realmente necesitas intercambiar, con un entorno de prueba cuando esté disponible. Una API publicada no garantiza que permita todas las operaciones ni que estén incluidas en tu plan. Revisa qué ocurre si una conexión falla o llega un registro duplicado.</p><p>La <a href=\"https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html\">guía de autorización de OWASP</a> recomienda aplicar privilegios mínimos y comprobar permisos. Pide perfiles de prueba para verificar que cada persona solo vea y modifique lo que le corresponde. Esa revisión aplica tanto a software comercial como a desarrollo personalizado.</p><p>Ensaya una exportación de muestra: identifica campos, relaciones, archivos e historial que salen, y cuáles no. Un archivo descargable no demuestra que puedas reconstruir el proceso en otra herramienta. Si necesitas preparar el cambio, consulta la guía de <a href=\"migrar-hojas-calculo-sistema-trazabilidad.html\">migración con trazabilidad</a>.</p>"
+      },
+      {
+        "heading": "6. Ejemplo ficticio: cuándo una opción híbrida tiene sentido",
+        "html": "<p>Ejemplo ficticio: una empresa usa un CRM comercial que ya resuelve contactos y actividades. Su problema está en una aprobación de cotizaciones con varias condiciones internas. Antes de reemplazar el CRM, prueba si una configuración soportada resuelve la aprobación. Si no, evalúa un módulo pequeño conectado al sistema existente.</p><p>La solución híbrida solo tiene sentido si el intercambio de información, los responsables y el mantenimiento quedan claros. Añadir una integración frágil puede crear otra bandeja que nadie revisa. En cambio, si las reglas particulares atraviesan toda la operación y las herramientas disponibles no las cubren, un desarrollo a medida merece una evaluación más profunda.</p><p>Cierra la comparación con una decisión provisional, evidencia que la sostiene y condiciones que podrían cambiarla. Si eliges desarrollo, delimita la primera versión con <a href=\"definir-alcance-mvp-criterios-aceptacion.html\">alcance y criterios de aceptación</a>. Si eliges SaaS, acuerda cómo configurar, migrar y comprobar la puesta en marcha. El resultado útil es una operación mantenible, no tener más software.</p><p>Si quieres contrastar estas decisiones con tu proceso, puedes <a href=\"https://calendar.app.google/DAYcFPswU2gASF418\">agendar una asesoría gratuita de 30 minutos</a> o usar los canales de la <a href=\"../contacto.html\">página de contacto de Nicho</a>.</p>"
+      }
+    ]
+  },
+  {
     "slug": "agente-ia-analizar-fotos-clientes-productos",
     "title": "Fotos de clientes en un agente IA: cómo analizarlas sin confundir productos",
     "description": "Diseña un agente IA que use fotos de clientes para orientar consultas de productos, pida evidencia útil y derive los casos que no puede confirmar.",
