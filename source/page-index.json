@@ -483,5 +483,15 @@
     "title": "Software a medida o SaaS: cómo elegir para tu empresa | Nicho Agencia Digital",
     "description": "Decide entre software a medida, SaaS o una solución híbrida comparando ajuste operativo, costos completos, integraciones y salida de datos.",
     "kind": "Article"
+  },
+  "recursos/que-proceso-automatizar-primero-pyme-matriz.html": {
+    "title": "Qué proceso automatizar primero en una pyme: matriz de prioridad y riesgo | Nicho Agencia Digital",
+    "description": "Elige el primer proceso para automatizar en tu pyme con una matriz de prioridad, riesgos y condiciones de descarte antes de pedir una propuesta.",
+    "kind": "Article"
+  },
+  "recursos/cotizar-landing-page-brief-alcance-entrega.html": {
+    "title": "Qué entregar para cotizar una landing page: brief, alcance y criterios de entrega | Nicho Agencia Digital",
+    "description": "Prepara un brief para cotizar una landing page con contenidos, integraciones, exclusiones y pruebas de entrega que permitan comparar propuestas.",
+    "kind": "Article"
   }
 }
