@@ -493,5 +493,15 @@
     "title": "Qué entregar para cotizar una landing page: brief, alcance y criterios de entrega | Nicho Agencia Digital",
     "description": "Prepara un brief para cotizar una landing page con contenidos, integraciones, exclusiones y pruebas de entrega que permitan comparar propuestas.",
     "kind": "Article"
+  },
+  "recursos/agente-ia-calificar-leads-preguntas-criterios.html": {
+    "title": "Cómo calificar leads con un agente IA sin convertir el chat en un formulario | Nicho Agencia Digital",
+    "description": "Define preguntas, criterios y salidas para que un agente IA califique consultas comerciales sin inventar datos ni descartar oportunidades por falta de información.",
+    "kind": "Article"
+  },
+  "recursos/software-a-medida-entrega-accesos-documentacion.html": {
+    "title": "Entrega de software a medida: qué accesos y documentación debes recibir | Nicho Agencia Digital",
+    "description": "Revisa la entrega de tu software a medida con un inventario de cuentas, código, datos, documentación y responsabilidades que tu equipo pueda comprobar.",
+    "kind": "Article"
   }
 }
