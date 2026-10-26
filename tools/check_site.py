@@ -10,6 +10,13 @@ from urllib.parse import urlparse, unquote
 from xml.etree import ElementTree as ET
 
 DOMAIN = 'https://nichoagenciadigital.com'
+# Existing customer training URLs must survive website rebuilds and migrations.
+PRIVATE_PAGES = {'curso-basico-de-como-integrar-tu-api/index.html'}
+REQUIRED_LEGACY_FILES = PRIVATE_PAGES | {'wp-content/uploads/2026/09/GUIA-WHATSAPP-API-.pdf'}
+
+def page_url(path):
+    return DOMAIN + '/' + (path[:-10] if path.endswith('index.html') else path)
+
 class Page(HTMLParser):
     def __init__(self):
         super().__init__(convert_charrefs=True)
@@ -38,12 +45,15 @@ class Page(HTMLParser):
 
 def audit(root):
     root=root.resolve(); errors=[]; warnings=[]; parsed={}; rows=[]
+    for legacy_path in sorted(REQUIRED_LEGACY_FILES):
+        if not (root / legacy_path).is_file():
+            errors.append({'page':legacy_path, 'code':'missing_legacy_resource'})
     html_paths=sorted(p for p in root.rglob('*.html') if '.git' not in p.parts and 'qa' not in p.parts)
     for path in html_paths:
         parser=Page(); parser.feed(path.read_text(encoding='utf-8')); parsed[path]=parser
     def issue(path,code,detail): errors.append({'page':str(path.relative_to(root)), 'code':code, 'detail':detail})
     for path,p in parsed.items():
-        rel=path.relative_to(root).as_posix(); is404=rel=='404.html'
+        rel=path.relative_to(root).as_posix(); is404=rel=='404.html'; is_private=rel in PRIVATE_PAGES
         if p.h1!=1: issue(path,'h1_count',p.h1)
         if p.main!=1: issue(path,'main_count',p.main)
         if not p.title.strip(): issue(path,'missing_title','')
@@ -51,11 +61,12 @@ def audit(root):
         duplicate_ids=[k for k,n in collections.Counter(p.ids).items() if n>1]
         if duplicate_ids: issue(path,'duplicate_ids',duplicate_ids)
         canonical=[x.get('href') for x in p.links if x.get('rel')=='canonical']
-        expected=DOMAIN+('/' if rel=='index.html' else '/'+rel)
+        expected=page_url(rel)
         if not is404 and canonical!=[expected]: issue(path,'canonical',{'found':canonical,'expected':expected})
-        if not is404 and 'noindex' in p.meta.get('robots',''): issue(path,'production_noindex','')
+        if not is404 and not is_private and 'noindex' in p.meta.get('robots',''): issue(path,'production_noindex','')
+        if is_private and 'noindex' not in p.meta.get('robots',''): issue(path,'private_page_indexable','')
         if is404 and 'noindex' not in p.meta.get('robots',''): issue(path,'404_indexable','')
-        if not is404 and not p.json: issue(path,'missing_schema','')
+        if not is404 and not is_private and not p.json: issue(path,'missing_schema','')
         for blob in p.json:
             try:
                 schema=json.loads(blob)
@@ -94,7 +105,7 @@ def audit(root):
         if len(ps)>1: errors.append({'code':'duplicate_description','pages':ps})
     try:
         urls=[e.text for e in ET.parse(root/'sitemap.xml').getroot().findall('{*}url/{*}loc')]
-        expected={DOMAIN+('/' if r['page']=='index.html' else '/'+r['page']) for r in rows if r['page']!='404.html'}
+        expected={page_url(r['page']) for r in rows if r['page']!='404.html' and r['page'] not in PRIVATE_PAGES}
         if set(urls)!=expected: errors.append({'code':'sitemap_mismatch','missing':sorted(expected-set(urls)),'extra':sorted(set(urls)-expected)})
         if len(urls)!=len(set(urls)): errors.append({'code':'sitemap_duplicates'})
     except Exception as exc: errors.append({'code':'sitemap_invalid','detail':str(exc)});urls=[]
