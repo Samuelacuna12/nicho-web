@@ -503,5 +503,15 @@
     "title": "Entrega de software a medida: qué accesos y documentación debes recibir | Nicho Agencia Digital",
     "description": "Revisa la entrega de tu software a medida con un inventario de cuentas, código, datos, documentación y responsabilidades que tu equipo pueda comprobar.",
     "kind": "Article"
+  },
+  "recursos/presupuesto-whatsapp-api-costos-proveedor-mensajes.html": {
+    "title": "Cómo presupuestar WhatsApp API sin confundir mensajes, plataforma e implementación | Nicho Agencia Digital",
+    "description": "Separa los costos de Meta, proveedor, IA e implementación para comparar propuestas de WhatsApp API con los mismos supuestos y sin tarifas inventadas.",
+    "kind": "Article"
+  },
+  "recursos/mantenimiento-automatizaciones-alcance-responsables-revision.html": {
+    "title": "Mantenimiento de automatizaciones: qué debe incluir y quién responde cuando algo cambia | Nicho Agencia Digital",
+    "description": "Define alcance, responsables, revisiones y evidencias para mantener tus automatizaciones. Separa soporte, correcciones y mejoras antes de contratar.",
+    "kind": "Article"
   }
 }

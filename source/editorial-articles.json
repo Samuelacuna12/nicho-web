@@ -1,5 +1,103 @@
 [
   {
+    "datePublished": "2026-10-27",
+    "dateLabel": "27 de octubre de 2026",
+    "sourceDateLabel": "27 de octubre de 2026",
+    "featureOnService": true,
+    "slug": "presupuesto-whatsapp-api-costos-proveedor-mensajes",
+    "title": "Cómo presupuestar WhatsApp API sin confundir mensajes, plataforma e implementación",
+    "description": "Separa los costos de Meta, proveedor, IA e implementación para comparar propuestas de WhatsApp API con los mismos supuestos y sin tarifas inventadas.",
+    "category": "WhatsApp API para empresas",
+    "service": "whatsapp-api-empresas.html",
+    "intro": "Dos propuestas pueden decir «WhatsApp API» y cobrar cosas distintas: una incluye la bandeja de atención, otra solo la conexión y otra añade un agente de IA. Comparar el total sin revisar esos componentes puede llevarte a elegir una oferta que no cubre tu operación. Esta guía propone un presupuesto por capas y una ficha de preguntas para entender qué pagarías al iniciar, al operar y al cambiar de proveedor.",
+    "cta": "Si estás comparando propuestas, trae el alcance de cada una y una estimación de tus mensajes por uso. Podemos ayudarte a separar conexión, atención, automatización y operación antes de definir la implementación.",
+    "sources": [
+      {
+        "title": "WhatsApp Business: precios oficiales de la plataforma",
+        "url": "https://whatsappbusiness.com/products/platform-pricing/"
+      }
+    ],
+    "sections": [
+      {
+        "heading": "1. No empieces por una tarifa única por contacto",
+        "html": "<p>Según la <a href=\"https://whatsappbusiness.com/products/platform-pricing/\">página oficial de precios de WhatsApp Business Platform</a>, el cobro de Meta se basa en mensajes entregados y depende del mercado del destinatario y la categoría. La página distingue marketing, utilidad, autenticación y servicio, con condiciones de gratuidad y niveles de volumen. Eso no significa que todos los mensajes tengan el mismo costo ni que cada contacto genere un único cargo.</p><p>Consulta la tarifa vigente para la moneda, mercado, categoría y condiciones aplicables a tu cuenta cuando prepares el presupuesto. Guarda la fecha y fuente de la consulta. Aquí no publicamos una tarifa universal ni suponemos que un beneficio aplica a todos tus envíos: el objetivo es construir un modelo que puedas actualizar sin rehacer la comparación.</p><p>Si aún no tienes claro qué producto necesitas, empieza por <a href=\"whatsapp-business-app-platform-criterios.html\">comparar la aplicación con la plataforma API</a>. La licencia de una bandeja, una implementación y el cargo de Meta no son el mismo concepto.</p>"
+      },
+      {
+        "heading": "2. Divide la propuesta en cinco capas",
+        "html": "<ul><li><strong>Implementación inicial:</strong> diagnóstico, conexión, configuración, pruebas, capacitación y documentación. Pide entregables concretos y qué cambios quedan fuera.</li><li><strong>Mensajería de Meta:</strong> concepto facturado, moneda, tratamiento de descuentos o condiciones gratuitas y quién lo paga.</li><li><strong>Proveedor o bandeja:</strong> mensualidad, usuarios, números, almacenamiento, funciones y posibles recargos. No asumas que todo proveedor cobra igual.</li><li><strong>Automatización e IA:</strong> plataforma de flujos, modelo, procesamiento de audio o imágenes e integraciones, si forman parte del alcance.</li><li><strong>Operación:</strong> supervisión humana, mantenimiento, soporte y cambios posteriores.</li></ul><p>Para cada capa anota si es un cobro único, fijo mensual o variable. Añade el concepto de impuestos o conversión de moneda que figure en la propuesta, sin inventarlo. Solicita aclaración si una línea dice «consumo incluido» sin indicar qué mide, cuánto incluye y qué ocurre al superar el límite.</p>"
+      },
+      {
+        "heading": "3. Construye una ficha de volumen con supuestos visibles",
+        "html": "<p>No uses solamente el tamaño de tu base de datos. Separa contactos de mensajes y mensajes previstos de entregados. Una persona puede recibir una confirmación, una actualización y una respuesta; otra puede no recibir ninguno. El presupuesto debe seguir los usos que realmente planeas activar.</p><ol><li>Enumera los flujos: atención entrante, confirmación de pedido, actualización de envío o campaña autorizada.</li><li>Estima cuántos eventos disparan cada flujo y cuántos mensajes produce cada evento.</li><li>Separa destinatarios por mercado cuando corresponda y revisa la categoría aplicable con el proveedor.</li><li>Documenta los supuestos de entrega y las condiciones que podrían cambiar el cobro.</li><li>Prepara escenarios bajo, esperado y alto, variando los volúmenes, no inventando descuentos.</li></ol><p>Las categorías no se eligen para abaratar artificialmente un mensaje: deben corresponder a su contenido y reglas vigentes. Revisa también <a href=\"plantillas-whatsapp-ventana-24-horas-consentimiento.html\">plantillas, ventana de atención y consentimiento</a>; una previsión de gasto no autoriza a contactar a alguien.</p>"
+      },
+      {
+        "heading": "4. Ejemplo ficticio: comparar el mismo alcance",
+        "html": "<p><strong>Ejemplo hipotético, no una cotización de Nicho ni un caso real:</strong> una tienda estima 800 confirmaciones y 600 actualizaciones de envío al mes. Además, planea un mensaje de campaña para 300 destinatarios que cuentan con autorización aplicable. Son 1.700 mensajes previstos en esos tres flujos, no 1.700 clientes ni necesariamente 1.700 mensajes cobrables.</p><p>La tienda pide a ambos proveedores calcular sobre esos mismos volúmenes, dos asesores, un número y la misma integración de pedidos. Deja la atención entrante en una línea separada y exige que expliquen cómo se aplica su cobro. Si una propuesta incluye IA y otra no, solicita una versión comparable o marca la diferencia de alcance.</p><p>La fórmula editorial es: <strong>costo del primer mes = implementación + cargos fijos + consumos facturables + operación no incluida</strong>. Para los meses siguientes se retira el pago inicial, pero no los costos recurrentes. El consumo de Meta debe calcularse por cada combinación aplicable y sumar los resultados; no multiplicar todos los mensajes por una tarifa tomada al azar.</p>"
+      },
+      {
+        "heading": "5. Preguntas que deben quedar respondidas por escrito",
+        "html": "<ul><li>¿El precio incluye cargos de Meta o se facturan aparte? ¿Hay margen o recargo del proveedor sobre ese consumo?</li><li>¿Qué ocurre si se duplican los mensajes o se añade otro asesor? ¿Existe un límite de gasto y quién recibe el aviso?</li><li>¿Qué integraciones, pruebas y capacitación están incluidas? ¿Qué se considera un desarrollo adicional?</li><li>¿Quién administra la cuenta empresarial y qué acceso conserva tu empresa? No compartas contraseñas en una propuesta.</li><li>¿Qué datos puedes exportar al terminar y qué costos o condiciones tiene la salida?</li><li>¿El soporte tiene horario y tiempos de respuesta definidos? Responder un ticket no equivale a resolver el incidente.</li></ul><p>Una propuesta que deja estas preguntas abiertas puede ser incompleta, aunque su precio inicial sea menor. Pide una versión corregida antes de comparar totales. No deduzcas propiedad de activos, portabilidad o ausencia de permanencia solo porque la propuesta diga «API oficial».</p>"
+      },
+      {
+        "heading": "6. Revisa el presupuesto con el primer cierre real",
+        "html": "<p>Al terminar un periodo, concilia la factura de cada proveedor con sus reportes y el alcance contratado. Separa mensajes entregados, cargos aplicados, licencias y consumos adicionales. Investiga diferencias antes de atribuirlas a un fallo; pueden provenir del periodo de corte, moneda, categoría o un supuesto incorrecto.</p><p>Define un responsable de revisar el consumo y un umbral que active una conversación interna antes de ampliar campañas. Si el sistema ofrece límites, comprueba qué detienen realmente y qué no. Un aviso por correo no es un freno automático del gasto.</p><p>Finalmente, mide resultados comerciales por separado. El costo por mensaje no indica ventas, y un estado de entrega no demuestra lectura, respuesta ni compra. Para distinguir esas etapas, usa la guía de <a href=\"medir-embudo-whatsapp-clic-conversacion-venta.html\">medición del embudo de WhatsApp</a>. El presupuesto sirve para controlar el alcance, no para prometer retorno.</p>"
+      }
+    ]
+  },
+  {
+    "datePublished": "2026-10-27",
+    "dateLabel": "27 de octubre de 2026",
+    "sourceDateLabel": "27 de octubre de 2026",
+    "featureOnService": true,
+    "slug": "mantenimiento-automatizaciones-alcance-responsables-revision",
+    "title": "Mantenimiento de automatizaciones: qué debe incluir y quién responde cuando algo cambia",
+    "description": "Define alcance, responsables, revisiones y evidencias para mantener tus automatizaciones. Separa soporte, correcciones y mejoras antes de contratar.",
+    "category": "Automatización empresarial",
+    "service": "automatizaciones.html",
+    "intro": "Una automatización puede funcionar el día de la entrega y dejar de cumplir su objetivo cuando cambia una columna, una regla comercial o el acceso de una cuenta. El mantenimiento no debería reducirse a «avísame si falla». Antes de contratarlo, conviene acordar qué se revisa, quién recibe los avisos y cómo se demuestra que el proceso volvió a funcionar. Esta guía ayuda a convertir esa conversación en un alcance verificable.",
+    "cta": "Trae la lista de flujos que usa tu equipo y qué pasaría si alguno se detiene. Podemos revisar responsables, controles y alcance de mantenimiento sin asumir que todos requieren el mismo nivel de atención.",
+    "sources": [
+      {
+        "title": "Make: historial de escenarios",
+        "url": "https://help.make.com/scenario-history"
+      },
+      {
+        "title": "Make: ejecuciones incompletas",
+        "url": "https://help.make.com/incomplete-executions"
+      }
+    ],
+    "sections": [
+      {
+        "heading": "1. Contrata un resultado operativo, no solo un escenario activo",
+        "html": "<p>Empieza por escribir qué debe ocurrir fuera de la herramienta: una solicitud queda asignada, un pedido llega al destino correcto o una cotización pendiente se muestra al asesor. «El flujo está encendido» solo describe una configuración. Incluso una ejecución sin error puede terminar con un registro incompleto o en una carpeta equivocada.</p><p>Por cada automatización, registra origen, destino, responsable de negocio y evidencia final. Usa identificadores de prueba y datos ficticios para comprobar el recorrido cuando sea posible. No publiques credenciales ni información de clientes en el documento de mantenimiento.</p><p>La <a href=\"https://help.make.com/scenario-history\">documentación de Make</a> permite revisar estados, duración, consumo e información de ejecuciones y cambios; la retención depende del plan. Es una fuente de diagnóstico, no una prueba automática de que tu objetivo comercial se cumplió. El control debe incluir la revisión del resultado en el destino.</p>"
+      },
+      {
+        "heading": "2. Separa cuatro tipos de trabajo",
+        "html": "<ul><li><strong>Supervisión:</strong> revisar señales de funcionamiento y excepciones con una frecuencia acordada.</li><li><strong>Corrección:</strong> recuperar el comportamiento ya contratado cuando una parte deja de funcionar.</li><li><strong>Adaptación:</strong> ajustar el flujo a cambios externos, como campos o versiones, con alcance definido.</li><li><strong>Mejora:</strong> añadir una condición, canal, integración o resultado que no existía en la entrega inicial.</li></ul><p>Pregunta qué incluye la mensualidad y qué se cotiza aparte. Un límite de horas puede ser útil si queda claro cómo se registra el tiempo, quién aprueba excedentes y qué ocurre cuando se agota. No asumas cobertura permanente porque la automatización se ejecuta todos los días.</p><p>Define también qué no cubre el servicio: incidencias del proveedor externo, errores en datos de origen o cambios hechos por terceros no deben ocultarse en una frase ambigua. Pueden necesitar diagnóstico y coordinación aunque la solución no dependa de quien mantiene el flujo.</p>"
+      },
+      {
+        "heading": "3. Asigna dueño, suplente y canal de escalamiento",
+        "html": "<p>Cada aviso necesita una persona que decida y otra que pueda actuar si no está disponible. El responsable técnico identifica el fallo; el responsable del proceso determina si hay que suspender una salida, atender manualmente o priorizar una excepción. No siempre son la misma persona.</p><p>La ficha mínima contiene: nombre del flujo, consecuencia de una interrupción, horario de atención, canal del aviso, primer responsable, suplente y evidencia necesaria para cerrar. Evita enviar indiscriminadamente cada detalle técnico a todo el equipo: un aviso accionable indica qué proceso está afectado, desde cuándo se sabe y cuál es el siguiente paso.</p><p>Acuerda por separado tiempo de primera respuesta, tiempo de diagnóstico y objetivo de recuperación. Ninguno debe presentarse como garantía universal. Si el proveedor aún no conoce la causa, el estado correcto es «en investigación», acompañado de una próxima actualización, no «solucionado».</p>"
+      },
+      {
+        "heading": "4. Diseña una rutina según el riesgo del proceso",
+        "html": "<p>Una exportación semanal de consulta no exige el mismo control que una actualización de pedidos que utiliza todo el equipo. Clasifica el impacto y el tiempo que puede transcurrir antes de que una persona detecte la ausencia del resultado. Luego acuerda controles proporcionados, no una frecuencia idéntica para todos.</p><ol><li>Comprueba que llegó la entrada esperada, sin tratar un día legítimamente vacío como incidente.</li><li>Revisa excepciones acumuladas y su antigüedad, no solo el total de ejecuciones correctas.</li><li>Verifica una muestra del resultado final y, si el proceso lo requiere, concilia cantidades e identificadores.</li><li>Revisa cambios de campos, reglas, responsables y accesos antes de que entren en producción.</li><li>Documenta qué se comprobó, cuándo y con qué límite; una casilla marcada sin evidencia no permite revisar el servicio.</li></ol><p>En Make, <a href=\"https://help.make.com/incomplete-executions\">guardar ejecuciones incompletas</a> requiere habilitar esa función y está sujeto a límites. No presupongas que existe una cola recuperable en cualquier instalación. Si está disponible, acuerda quién la revisa y cuándo; habilitarla por sí sola no resuelve las excepciones.</p>"
+      },
+      {
+        "heading": "5. Ejemplo ficticio: un campo cambia de nombre",
+        "html": "<p><strong>Ejemplo hipotético, no un caso de cliente:</strong> una empresa usa un formulario para crear solicitudes en su CRM. Alguien cambia «Ciudad de entrega» por «Municipio». El flujo sigue ejecutándose, pero el destino queda sin ubicación. El panel técnico no necesariamente refleja el problema comercial.</p><p>El alcance de mantenimiento acordado exige comprobar una muestra de solicitudes y avisar al responsable cuando falta un dato obligatorio. El técnico identifica el cambio, conserva un registro acotado de solicitudes afectadas y prepara la corrección. El responsable valida la equivalencia del campo antes de actualizar registros; no se adivinan ciudades ni se fusionan personas por nombres parecidos.</p><p>El cierre requiere una nueva prueba, verificación del destino y decisión sobre los registros anteriores. Corregir el mapeo para solicitudes futuras no demuestra que las ya afectadas quedaron reparadas. La comunicación distingue esas dos tareas y no declara recuperación total mientras una siga pendiente.</p>"
+      },
+      {
+        "heading": "6. Acordar recuperación y cambios evita improvisar",
+        "html": "<p>Antes de repetir una ejecución, comprueba si ya produjo una acción parcial. Volver a procesar todo sin revisar puede crear duplicados, mensajes repetidos o modificaciones inesperadas. La guía de <a href=\"webhooks-idempotencia-pedidos-duplicados.html\">idempotencia</a> explica cómo identificar eventos ya tratados; la de <a href=\"fallos-integraciones-cola-revision.html\">reintentos y cola de revisión</a> aborda la respuesta técnica al fallo.</p><p>En el contrato operativo, define quién autoriza reejecuciones, cambios de reglas y recuperación de registros. Mantén una versión anterior identificable y un procedimiento de reversión probado para los cambios que lo permitan. Algunas acciones externas no se pueden deshacer simplemente restaurando el flujo.</p><p>Usa una revisión previa para cambios importantes: propósito, procesos afectados, prueba, responsable y señal de éxito. Los cambios pequeños también necesitan trazabilidad si pueden alterar datos o comunicaciones. No concedas acceso permanente más amplio solo para facilitar una reparación puntual.</p>"
+      },
+      {
+        "heading": "7. Pide un informe breve que permita decidir",
+        "html": "<p>Un cierre mensual útil puede resumir controles realizados, excepciones abiertas, cambios aplicados, consumos observados y decisiones pendientes. Incluye enlaces a evidencia accesible para las personas autorizadas; evita capturas con datos personales si no son necesarias.</p><p>No midas el mantenimiento solo por cantidad de incidentes cerrados. Revisa edad de los pendientes, repetición de la misma causa y cuánto tiempo permanece un proceso sin resultado verificado. Si hay un bloqueo de acceso, el informe debe decir qué no se pudo comprobar y qué acción falta, no rellenar un porcentaje de disponibilidad.</p><p>Antes de contratar, solicita una muestra ficticia de ese informe y recorre un incidente de principio a fin. Así puedes evaluar si el servicio incluye detección, comunicación, corrección y verificación, o solamente una bolsa de horas. Si aún no sabes qué flujos priorizar, comienza con la <a href=\"que-proceso-automatizar-primero-pyme-matriz.html\">matriz de prioridad y riesgo</a>.</p>"
+      }
+    ]
+  },
+  {
     "datePublished": "2026-10-26",
     "dateLabel": "26 de octubre de 2026",
     "sourceDateLabel": "26 de octubre de 2026",
