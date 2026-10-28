@@ -18,6 +18,8 @@ jobs:
       - name: Verificar paginas, recursos y SEO
         run: |
           python3 tools/check_site.py . --json qa/static-report.json
+          python3 tools/check_editorial.py .
+          python3 -m unittest discover -s tools -p "test_*.py"
           node --check assets/js/app.js
           node --check assets/js/wordmark.js
           node --check assets/js/wordmark-data.js

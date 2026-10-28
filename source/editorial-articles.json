@@ -1,5 +1,99 @@
 [
   {
+    "datePublished": "2026-10-28",
+    "dateLabel": "28 de octubre de 2026",
+    "sourceDateLabel": "28 de octubre de 2026",
+    "featureOnService": true,
+    "slug": "agente-ia-fuera-horario-alcance-pendientes",
+    "title": "Agente de IA fuera de horario: qué puede atender y qué debe dejar pendiente",
+    "description": "Define horarios, límites, respuestas y responsables para atender consultas con IA cuando tu equipo está desconectado, sin prometer lo que no puedes cumplir.",
+    "category": "Agentes de IA para empresas",
+    "service": "agentes-ia.html",
+    "intro": "Que un agente de IA pueda responder de noche no significa que tu empresa pueda aprobar un descuento, resolver una reclamación o despachar un pedido a esa hora. Esta guía ayuda a definir la cobertura fuera de horario antes de implementarla: qué se responde, qué se registra y quién retoma lo pendiente. Está dirigida a empresas que quieren recibir consultas sin crear expectativas que su operación no puede sostener.",
+    "cta": "Si quieres atender consultas fuera de horario, trae tus horarios reales, las preguntas habituales y las decisiones que requieren aprobación. Podemos revisar contigo un alcance de atención y continuidad humana antes de implementar el agente.",
+    "sources": [
+      {
+        "title": "NIST: AI RMF Core — funciones y responsabilidades de gestión de riesgos",
+        "url": "https://airc.nist.gov/airmf-resources/airmf/5-sec-core/"
+      }
+    ],
+    "sections": [
+      {
+        "heading": "1. Define qué significa atender cuando el equipo está desconectado",
+        "html": "<p>Una respuesta automática, una solicitud registrada y un problema resuelto son tres resultados distintos. Antes de contratar, escribe qué puede hacer el agente sin un asesor: explicar información vigente, recoger una necesidad o consultar un dato mediante una integración autorizada. No describas como atención completa lo que solo es recepción de mensajes.</p><p>El <a href=\"https://airc.nist.gov/airmf-resources/airmf/5-sec-core/\">marco AI RMF del NIST</a> propone definir responsabilidades de supervisión y gestionar riesgos durante el ciclo de vida de un sistema. No es una certificación de tu bot ni una receta comercial. La ficha siguiente es una propuesta editorial para aplicar esa separación de responsabilidades a la atención fuera de horario.</p>"
+      },
+      {
+        "heading": "2. Completa una ficha de cobertura antes de hablar de disponibilidad",
+        "html": "<ul><li><strong>Horario humano:</strong> días, zona horaria y excepciones. No supongas que un festivo se atiende como un día normal.</li><li><strong>Información autorizada:</strong> catálogo, condiciones y fuente que el agente puede consultar; responsable de actualizarla.</li><li><strong>Acciones permitidas:</strong> por ejemplo, registrar una solicitud. Consultar disponibilidad no equivale a reservar.</li><li><strong>Acciones prohibidas:</strong> aprobar descuentos, confirmar pagos o prometer una entrega sin autorización y verificación.</li><li><strong>Dependencias:</strong> qué ocurre si el inventario, el CRM o la agenda no responden.</li><li><strong>Continuidad humana:</strong> quién revisa pendientes y cómo se reconoce que realmente tomó el caso.</li></ul><p>Usa esta ficha al comparar propuestas de <a href=\"../agentes-ia.html\">agentes de IA para atención y ventas</a>. Si un proveedor promete disponibilidad permanente, pide que diferencie disponibilidad del software, del canal, de las integraciones y del personal. Una frase comercial no sustituye esas condiciones.</p>"
+      },
+      {
+        "heading": "3. Diseña tres respuestas según lo que el sistema sí sabe",
+        "html": "<p><strong>Respuesta verificable:</strong> el cliente pregunta por un dato vigente y la fuente está disponible. El agente puede responder dentro de su alcance, sin convertir información general en una promesa particular.</p><p><strong>Solicitud pendiente:</strong> hace falta una decisión humana. Explica que el equipo está fuera de horario, recoge solo los datos necesarios y ofrece el siguiente paso real. No digas «ya te contactará un asesor» si no existe un proceso que asigne y revise esa solicitud.</p><p><strong>Dependencia no disponible:</strong> no se pudo consultar la fuente. El agente debe reconocer que no puede confirmar el dato, no usar un resultado antiguo como si fuera actual. Si se permite registrar el caso, confirma el registro únicamente cuando el sistema devuelva una respuesta válida.</p><p>Un mensaje redactado no prueba que el CRM haya guardado nada. La <a href=\"traspaso-bot-asesor-con-contexto.html\">guía de traspaso a un asesor</a> explica el paquete de contexto; aquí la decisión previa es qué servicio puedes ofrecer cuando ese asesor todavía no está disponible.</p>"
+      },
+      {
+        "heading": "4. Ejemplo ficticio: una consulta el domingo por la noche",
+        "html": "<p><strong>Ejemplo hipotético, no un cliente ni un resultado real:</strong> una distribuidora atiende con personas de lunes a viernes, de 8:00 a 17:00, hora de Colombia. El domingo alguien pide 40 unidades para el lunes temprano. La herramienta muestra existencias, pero no confirma capacidad de despacho ni permite reservar.</p><p>Una respuesta prudente sería: «Puedo mostrarte la información disponible y dejar tu solicitud para revisión. No puedo confirmar el despacho para mañana ni reservar estas unidades. El equipo revisa solicitudes durante su horario de atención». El texto final debe usar el horario y las condiciones reales de esa empresa.</p><p>El agente recoge la referencia y cantidad solicitadas, registra que el plazo es una preferencia del cliente y no una promesa de la empresa, y crea el pendiente si tiene permiso. Si falla el registro, lo comunica. Al abrir, el responsable valida inventario y operación antes de responder. No se presenta la conversación como venta cerrada.</p>"
+      },
+      {
+        "heading": "5. Prueba la frontera entre turno cerrado y turno abierto",
+        "html": "<p>No pruebes solamente una conversación a mediodía. Prepara casos ficticios y anota el comportamiento esperado antes de ejecutar la prueba:</p><ol><li>Consulta justo antes del cierre: una conversación iniciada no garantiza disponibilidad humana indefinida.</li><li>Consulta después del cierre y en un día excepcional: el mensaje debe reflejar el calendario configurado.</li><li>Asesor marcado como disponible que no acepta el caso: el cliente no debe quedar con una transferencia confirmada falsamente.</li><li>CRM desconectado: no debe aparecer una confirmación de registro inexistente.</li><li>Cliente que vuelve a escribir: comprueba si el pendiente se actualiza o se duplica, según la regla acordada.</li><li>Apertura del siguiente turno: el responsable debe encontrar el contexto y distinguir urgencia solicitada de compromiso aceptado.</li></ol><p>Documenta los fallos, corrige y repite las pruebas afectadas. Puedes empezar con un <a href=\"piloto-agente-ia-ventas-modo-sombra.html\">piloto en modo sombra</a> antes de permitir respuestas autónomas. Que una prueba pase no garantiza que todas las conversaciones reales se comporten igual.</p>"
+      },
+      {
+        "heading": "6. Mide cobertura sin confundir mensajes con resultados",
+        "html": "<p>Durante la revisión, separa consultas recibidas fuera de horario, respuestas informativas verificadas, solicitudes efectivamente registradas y casos aceptados por un humano. Define qué significa cada estado y revisa una muestra de conversaciones con acceso restringido y datos minimizados.</p><p>Calcula la demora humana desde la apertura del turno que corresponde, además de la espera total del cliente: responden preguntas distintas. Si no tienes un registro fiable de aceptación, no inventes ese tiempo. Tampoco conviertas una respuesta del bot o un clic en WhatsApp en un contacto comercial recibido o en una venta.</p><p>Antes de ampliar la cobertura, revisa pendientes sin responsable, promesas incorrectas y fallos de integración. La decisión puede ser reducir el alcance nocturno, mejorar la información o asignar una revisión al abrir. Automatizar más no siempre es la respuesta: el objetivo es ofrecer un servicio que la operación pueda cumplir.</p>"
+      }
+    ]
+  },
+  {
+    "datePublished": "2026-10-28",
+    "dateLabel": "28 de octubre de 2026",
+    "sourceDateLabel": "28 de octubre de 2026",
+    "featureOnService": true,
+    "slug": "landing-por-servicio-o-pagina-varios-servicios",
+    "title": "¿Una landing por servicio o una página con varios? Cómo decidir el alcance",
+    "description": "Compara audiencia, preguntas, oferta y mantenimiento para decidir si necesitas una landing por servicio o una página conjunta, sin duplicar contenido.",
+    "category": "Desarrollo web y landing pages",
+    "service": "desarrollo-web.html",
+    "intro": "Tener cinco servicios no significa necesitar cinco landing pages. Tampoco significa que deban competir por atención en una sola pantalla. La decisión depende de lo que la persona necesita entender antes de contactar y de cuánta información realmente cambia entre ofertas. Esta guía propone una matriz práctica para decidir qué separar, qué reunir y qué dejar para después, antes de pagar por nuevas páginas.",
+    "cta": "Trae tu lista de servicios, las preguntas que recibes y las páginas que ya tienes. Podemos revisar qué conviene agrupar y qué necesita una explicación propia antes de definir el alcance de tu web.",
+    "sources": [
+      {
+        "title": "Google Search Central: crear contenido útil y centrado en las personas",
+        "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content"
+      },
+      {
+        "title": "Google Search Central: políticas de spam y páginas puerta",
+        "url": "https://developers.google.com/search/docs/essentials/spam-policies"
+      }
+    ],
+    "sections": [
+      {
+        "heading": "1. Define la decisión, no solo el nombre del servicio",
+        "html": "<p>Escribe una frase por oferta: «Esta página ayuda a [persona] a decidir si [servicio] resuelve [problema] y a dar [siguiente paso]». Dos nombres comerciales distintos pueden describir la misma decisión; un único nombre puede esconder necesidades incompatibles. Separar por organigrama interno no siempre ayuda al visitante.</p><p>Reúne preguntas de conversaciones que puedas usar legítimamente, sin publicar datos personales. Si no tienes evidencia, anota tus supuestos como tales. No conviertas una intuición en una afirmación sobre demanda. La orientación de <a href=\"https://developers.google.com/search/docs/fundamentals/creating-helpful-content\">Google sobre contenido útil</a> invita a evaluar si la página aporta información original y suficiente para que una persona alcance su objetivo; no establece una cuota de páginas por servicio.</p>"
+      },
+      {
+        "heading": "2. Completa una matriz con cuatro filas",
+        "html": "<p>Compara dos servicios a la vez. En cada fila escribe «igual», «parcialmente distinto» o «distinto» y añade una evidencia concreta:</p><ul><li><strong>Comprador y problema:</strong> ¿quién necesita decidir y qué situación lo trae? No basta con cambiar el nombre de un sector.</li><li><strong>Preguntas antes de contratar:</strong> ¿cambian requisitos, límites, tiempos de trabajo o condiciones de implementación?</li><li><strong>Contenido necesario:</strong> ¿hay un proceso, demostración identificada o explicación específica que no encaje bien en la otra oferta?</li><li><strong>Siguiente paso:</strong> ¿se solicita la misma información o se necesita un diagnóstico diferente?</li></ul><p>No sumes casillas como si fueran una fórmula científica. La matriz organiza el criterio: varias diferencias importantes justifican estudiar páginas separadas; respuestas casi iguales sugieren empezar juntas. Si faltan datos, la decisión puede quedar provisional en lugar de rellenar páginas con texto genérico.</p>"
+      },
+      {
+        "heading": "3. Elige entre tres estructuras posibles",
+        "html": "<ul><li><strong>Una página conjunta:</strong> adecuada cuando las opciones forman parte de una misma decisión. Explica lo común y compara diferencias en secciones con títulos claros; evita repetir una introducción completa para cada variante.</li><li><strong>Una página general y páginas de detalle:</strong> útil cuando primero hay que elegir una familia de soluciones y luego evaluar un servicio. La general orienta; las páginas de detalle resuelven preguntas concretas y enlazan de vuelta sin obligar a repetir el recorrido.</li><li><strong>Una landing dedicada:</strong> puede servir cuando una oferta tiene público, explicación y acción definidos. No necesita ocultar la identidad de la empresa ni impedir consultar información de confianza.</li></ul><p>Que dos páginas terminen en el mismo contacto no las vuelve inútiles por sí solo. La pregunta es si cada una permite tomar una decisión que la otra no resuelve. Para el recorrido en pantalla pequeña, revisa también <a href=\"landing-b2b-movil-contacto.html\">cómo facilitar el contacto desde una landing B2B móvil</a>.</p>"
+      },
+      {
+        "heading": "4. Ejemplo ficticio: instalación y mantenimiento",
+        "html": "<p><strong>Ejemplo hipotético, no un cliente ni un resultado de Nicho:</strong> una empresa ofrece instalación inicial de un sistema de pedidos y mantenimiento de sistemas existentes. En la primera oferta debe explicar preparación de datos, capacitación y puesta en marcha. En la segunda necesita aclarar compatibilidad, diagnóstico previo, responsabilidades y límites del soporte.</p><p>La matriz muestra preguntas de contratación distintas, aunque ambas ofertas terminen en una reunión. La empresa decide crear una página general que explique las dos rutas y una página de detalle para cada una. En cambio, no crea otra landing por cada tamaño de negocio: todavía no tiene diferencias documentadas que lo justifiquen.</p><p>Si solo ofreciera dos paquetes del mismo servicio que cambian por cantidad de usuarios, podría comenzar con una página y una comparación transparente. Ninguna de estas decisiones garantiza más contactos; son alternativas de organización que deben comprobarse con usuarios y medición.</p>"
+      },
+      {
+        "heading": "5. Evita convertir variantes en páginas vacías",
+        "html": "<p>Antes de abrir una URL, escribe qué información exclusiva contendrá y quién la mantendrá. Cambiar únicamente el título, una ciudad o unas palabras del mismo texto no construye una oferta nueva. Las <a href=\"https://developers.google.com/search/docs/essentials/spam-policies\">políticas de spam de Google</a> describen como páginas puerta las creadas para consultas similares que conducen a intermediarios menos útiles que el destino final. No significa que toda página especializada sea una infracción.</p><p>Comprueba además que las páginas puedan encontrarse dentro de una estructura navegable y que no contradigan precios, condiciones o alcance. Si propones consolidar URLs existentes, no las borres sin revisar enlaces y accesos: prepara un <a href=\"migracion-web-mapa-url-redirecciones-canonical.html\">mapa de URLs y redirecciones</a> antes de cambiar la estructura.</p>"
+      },
+      {
+        "heading": "6. Valida antes de ampliar el número de páginas",
+        "html": "<p>Pide a alguien del público previsto que encuentre qué opción le sirve, identifique una exclusión y explique qué ocurrirá al contactar. Registra confusiones concretas, no solo si «le gustó» el diseño. Corrige primero la explicación; añadir otra página no arregla automáticamente una oferta poco clara.</p><p>Después, si hay medición disponible y autorizada, revisa entradas a cada página, pasos hacia contacto y solicitudes realmente recibidas. Un clic no equivale a una conversación. Si no hay datos suficientes, no declares ganadora una estructura por unas pocas visitas. Lleva la matriz y las pruebas al <a href=\"cotizar-landing-page-brief-alcance-entrega.html\">brief para cotizar la landing</a>: así el alcance describe decisiones y contenido, no solo un número de pantallas.</p>"
+      }
+    ]
+  },
+  {
     "datePublished": "2026-10-27",
     "dateLabel": "27 de octubre de 2026",
     "sourceDateLabel": "27 de octubre de 2026",

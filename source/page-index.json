@@ -513,5 +513,15 @@
     "title": "Mantenimiento de automatizaciones: qué debe incluir y quién responde cuando algo cambia | Nicho Agencia Digital",
     "description": "Define alcance, responsables, revisiones y evidencias para mantener tus automatizaciones. Separa soporte, correcciones y mejoras antes de contratar.",
     "kind": "Article"
+  },
+  "recursos/agente-ia-fuera-horario-alcance-pendientes.html": {
+    "title": "Agente de IA fuera de horario: qué puede atender y qué debe dejar pendiente | Nicho Agencia Digital",
+    "description": "Define horarios, límites, respuestas y responsables para atender consultas con IA cuando tu equipo está desconectado, sin prometer lo que no puedes cumplir.",
+    "kind": "Article"
+  },
+  "recursos/landing-por-servicio-o-pagina-varios-servicios.html": {
+    "title": "¿Una landing por servicio o una página con varios? Cómo decidir el alcance | Nicho Agencia Digital",
+    "description": "Compara audiencia, preguntas, oferta y mantenimiento para decidir si necesitas una landing por servicio o una página conjunta, sin duplicar contenido.",
+    "kind": "Article"
   }
 }
