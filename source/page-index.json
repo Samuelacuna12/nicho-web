@@ -523,5 +523,15 @@
     "title": "¿Una landing por servicio o una página con varios? Cómo decidir el alcance | Nicho Agencia Digital",
     "description": "Compara audiencia, preguntas, oferta y mantenimiento para decidir si necesitas una landing por servicio o una página conjunta, sin duplicar contenido.",
     "kind": "Article"
+  },
+  "recursos/automatizar-reportes-datos-desactualizados-incompletos.html": {
+    "title": "Cómo automatizar reportes sin presentar datos viejos como resultados actuales | Nicho Agencia Digital",
+    "description": "Define fecha de corte, cobertura y controles para automatizar reportes empresariales sin confundir una ejecución exitosa con información completa y vigente.",
+    "kind": "Article"
+  },
+  "recursos/preguntas-frecuentes-pagina-servicios-decisiones.html": {
+    "title": "Qué preguntas frecuentes incluir en una página de servicios | Nicho Agencia Digital",
+    "description": "Selecciona preguntas que aclaren alcance, requisitos y siguiente paso en tu web de servicios, sin inventar objeciones ni prometer resultados de SEO.",
+    "kind": "Article"
   }
 }
