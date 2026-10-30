@@ -1,5 +1,107 @@
 [
   {
+    "datePublished": "2026-10-30",
+    "dateLabel": "30 de octubre de 2026",
+    "sourceDateLabel": "30 de octubre de 2026",
+    "featureOnService": true,
+    "slug": "agente-ia-o-automatizacion-reglas-elegir",
+    "title": "¿Agente de IA o automatización por reglas? Cómo elegir para tu proceso",
+    "description": "Decide cuándo usar reglas, IA o un flujo combinado: compara entradas, excepciones, riesgo y costo de revisión antes de automatizar un proceso empresarial.",
+    "category": "Agentes de IA",
+    "service": "agentes-ia.html",
+    "intro": "No todo proceso repetitivo necesita un agente de IA. Si una empresa ya conoce los datos de entrada y la condición que determina cada paso, puede bastar una automatización por reglas. Cuando hay que interpretar mensajes variados, puede convenir añadir IA sin entregarle todas las decisiones. Esta guía ayuda a comparar esas opciones antes de pedir una propuesta, con criterios operativos y un ejercicio ficticio. No depende de una plataforma particular ni presupone que más autonomía produzca mejores resultados.",
+    "cta": "Trae un proceso concreto, ejemplos anonimizados de entradas y las decisiones que hoy toma tu equipo. Podemos revisar qué partes conviene resolver con reglas, cuáles requieren interpretación y dónde debe conservarse la aprobación humana.",
+    "sources": [
+      {
+        "title": "Anthropic: diferencia entre workflows y agentes",
+        "url": "https://www.anthropic.com/research/building-effective-agents"
+      },
+      {
+        "title": "n8n: condiciones del nodo If",
+        "url": "https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.if"
+      },
+      {
+        "title": "n8n: rutas y salida alternativa del nodo Switch",
+        "url": "https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.switch"
+      }
+    ],
+    "sections": [
+      {
+        "heading": "1. Describe la decisión que quieres resolver",
+        "html": "<p>Reemplaza «quiero un bot inteligente» por una frase comprobable: «cuando entre una solicitud, identificar su motivo, consultar el estado autorizado y dejarla con un responsable». Separa recibir información, interpretarla, decidir y ejecutar. Un mismo proceso puede necesitar soluciones distintas en cada etapa.</p><p>Para una muestra representativa, anota entrada, resultado correcto, fuente necesaria, excepción y consecuencia de equivocarse. Incluye casos incompletos, mensajes contradictorios y cambios posteriores, no solo las solicitudes fáciles. Usa datos ficticios o debidamente anonimizados para la evaluación inicial.</p><p>Si el equipo no coincide sobre el resultado correcto, primero aclara el procedimiento. Ni una regla ni un modelo resuelven por sí solos una política comercial indefinida. La <a href=\"que-proceso-automatizar-primero-pyme-matriz.html\">matriz para priorizar procesos</a> ayuda a elegir un alcance inicial manejable.</p>"
+      },
+      {
+        "heading": "2. Usa reglas cuando la condición pueda escribirse y comprobarse",
+        "html": "<p>Una regla resulta adecuada cuando los campos son confiables y la respuesta está definida: asignar una solicitud según sede, validar que existe un identificador o detectar una fecha vencida. Documenta también qué ocurre cuando falta el dato. «No informado» no debe convertirse automáticamente en «no cumple».</p><p>Como ejemplo técnico, el <a href=\"https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.if\">nodo If de n8n</a> permite comparar valores y combinar condiciones. Su <a href=\"https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.switch\">nodo Switch</a> permite varias rutas y configurar una salida para casos sin coincidencia. Estas funciones no garantizan que las reglas del negocio estén bien definidas.</p><p>Antes de programarlas, comprueba prioridades y solapamientos: ¿qué ocurre si dos condiciones se cumplen?, ¿se ejecuta una acción o varias?, ¿quién revisa la salida alternativa? Una automatización determinista también puede producir errores si recibe información vieja o una regla equivocada.</p>"
+      },
+      {
+        "heading": "3. Añade IA cuando el problema sea interpretar, no inventar la política",
+        "html": "<p>Un mensaje como «lo necesito para el viernes, pero aún no sé cuál referencia sirve» no llega necesariamente en campos ordenados. La IA puede ayudar a identificar intención, resumir contexto o proponer preguntas. Eso no la autoriza a decidir una fecha de entrega que la operación no confirmó.</p><p><a href=\"https://www.anthropic.com/research/building-effective-agents\">Anthropic distingue</a> los flujos con caminos predefinidos de los agentes que eligen dinámicamente pasos y herramientas. La distinción sirve para conversar sobre arquitectura; no es una certificación de calidad ni obliga a usar un proveedor concreto.</p><p>Pregunta al implementador qué decisiones toma realmente el modelo. Si únicamente clasifica un mensaje antes de una secuencia fija, puede ser más claro describirlo como un flujo con una etapa de IA. Para un agente con mayor libertad, exige límites de acciones, fuentes consultables y condiciones de detención. El nombre comercial no sustituye ese mapa.</p>"
+      },
+      {
+        "heading": "4. Ejemplo ficticio: solicitudes de una distribuidora",
+        "html": "<p><strong>Ejemplo hipotético, no un cliente ni un resultado de NICHO:</strong> una distribuidora recibe tres tipos de solicitudes. Los formularios con número de pedido pueden consultar su estado mediante una regla. Los mensajes libres necesitan interpretación para distinguir una consulta de producto de una petición de cambio. Las excepciones comerciales requieren un asesor.</p><ul><li><strong>Ruta por reglas:</strong> identificador válido, consulta autorizada y respuesta basada en el estado registrado.</li><li><strong>Ruta combinada:</strong> la IA propone el motivo del mensaje; una validación comprueba los campos antes de crear una tarea.</li><li><strong>Ruta humana:</strong> falta información, hay contradicciones o la solicitud implica una excepción no autorizada.</li></ul><p>Si alguien pide «cámbiame todo», el sistema no modifica un pedido interpretando libremente qué significa «todo». Pide precisión o deriva el caso. En cambio, una pregunta abierta sobre requisitos puede beneficiarse de una conversación guiada. El criterio cambia según la tarea, incluso dentro del mismo chat.</p>"
+      },
+      {
+        "heading": "5. Compara opciones con la misma prueba y el mismo alcance",
+        "html": "<p>Prepara un conjunto de ejemplos y el resultado esperado antes de ver demostraciones. Prueba reglas, una solución combinada y, solo si hace falta, un agente con más autonomía. Usa las mismas entradas y registra no solo aciertos: cuenta correcciones, casos detenidos, acciones indebidas y minutos de supervisión.</p><p>Compara costo por tarea útil completada, no únicamente por mensaje respondido. Incluye consumo, revisión, mantenimiento y atención de excepciones. Una opción que responde rápido pero obliga a rehacer cada registro puede ser menos conveniente que otra con más pasos explícitos.</p><p>Define por separado fallos tolerables y fallos que bloquean el piloto. Una clasificación dudosa y una modificación no autorizada no tienen la misma consecuencia. La <a href=\"evaluar-agente-ia-atencion-rubrica-pruebas.html\">rúbrica de evaluación de agentes</a> permite detallar el control; las metas deben acordarse según tu operación, no copiarse de una cifra universal.</p>"
+      },
+      {
+        "heading": "6. Deja por escrito la elección y cuándo revisarla",
+        "html": "<p>La decisión de contratación debería caber en una ficha: problema, etapas por reglas, etapas con IA, fuentes, acciones permitidas, responsable de excepciones y evidencia para aprobar el piloto. Añade qué sucede si una integración falla o la información deja de estar disponible.</p><p>Empieza con un alcance reversible, observa los resultados y conserva una ruta manual. Para propuestas que permiten cambios en sistemas, revisa los <a href=\"permisos-agentes-ia-modificar-crm.html\">permisos de un agente conectado al CRM</a>. Cambiar la redacción de una respuesta y confirmar un pedido deben tratarse como capacidades diferentes.</p><p>Revisa la elección cuando cambien las entradas, políticas o herramientas, no solo porque aparezca un modelo nuevo. Si la necesidad se resuelve con condiciones claras, consulta <a href=\"../automatizaciones.html\">automatización empresarial</a>; si exige interpretación y uso controlado de información, evalúa el servicio de <a href=\"../agentes-ia.html\">agentes de IA</a>. El objetivo es una operación verificable, no añadir IA a cada paso.</p>"
+      }
+    ]
+  },
+  {
+    "datePublished": "2026-10-30",
+    "dateLabel": "30 de octubre de 2026",
+    "sourceDateLabel": "30 de octubre de 2026",
+    "featureOnService": true,
+    "slug": "calcular-costo-total-software-a-medida-12-meses",
+    "title": "Cómo calcular el costo total de un software a medida antes de contratar",
+    "description": "Calcula el presupuesto de un software a medida a 12 meses: desarrollo, operación, consumos, cambios y salida. Compara propuestas con un ejemplo ficticio en COP.",
+    "category": "Software empresarial",
+    "service": "sistemas.html",
+    "intro": "Una propuesta de desarrollo puede parecer económica y dejar fuera gastos necesarios para operar. Antes de contratar un software a medida, calcula cuánto necesitará tu empresa durante un horizonte definido, no solo cuánto cuesta construirlo. Esta guía permite ordenar un presupuesto de 12 meses y comparar propuestas con los mismos supuestos, sin convertir estimaciones en precios garantizados.",
+    "cta": "¿Tienes una propuesta o un presupuesto por definir? Trae el proceso que quieres resolver, los volúmenes previstos y las partidas cotizadas. En Nicho podemos revisar el alcance y ayudarte a identificar qué falta aclarar antes de decidir.",
+    "sources": [
+      {
+        "title": "AWS: qué incluye AWS Pricing Calculator",
+        "url": "https://docs.aws.amazon.com/pricing-calculator/latest/userguide/what-is-pricing-calculator.html"
+      },
+      {
+        "title": "FinOps Foundation: Forecasting",
+        "url": "https://www.finops.org/framework/capabilities/forecasting/"
+      }
+    ],
+    "sections": [
+      {
+        "heading": "1. Define qué abarcan tus 12 meses",
+        "html": "<p>Especifica si cuentas desde la firma o desde la puesta en producción. Tres meses de construcción y nueve de operación no equivalen a doce meses operando. Para cada partida registra concepto, proveedor, moneda, cantidad, fecha de inicio, periodicidad y responsable de confirmar el dato.</p><p>Separa valores cotizados, estimaciones y pendientes. Un campo sin respuesta no vale cero. Anota usuarios, sedes, registros, almacenamiento e integraciones previstos; utiliza la misma base para todos los oferentes. Si todavía no está delimitado el producto, revisa la <a href=\"definir-alcance-mvp-criterios-aceptacion.html\">guía para definir el alcance de un MVP</a>. Aquí el objetivo es presupuestar ese alcance, no ampliarlo.</p><p>Incluye el tiempo interno de preparación de datos, pruebas y capacitación, aunque no aparezca en la factura del desarrollador.</p>"
+      },
+      {
+        "heading": "2. Organiza el presupuesto en cinco grupos",
+        "html": "<ul><li><strong>Inversión inicial:</strong> análisis, diseño, desarrollo, pruebas, migración, despliegue y formación, según lo cotizado.</li><li><strong>Recurrentes:</strong> alojamiento contratado, licencias, soporte y tareas periódicas con importe definido.</li><li><strong>Consumos:</strong> solicitudes de API, mensajes, procesamiento, almacenamiento adicional o transferencias facturadas por uso.</li><li><strong>Cambios:</strong> funcionalidades nuevas y modificaciones posteriores al alcance aprobado.</li><li><strong>Salida:</strong> exportación, transición, cierre y eventual operación paralela al cambiar de proveedor.</li></ul><p>Evita contar dos veces un recurso incluido en una mensualidad. Distingue garantía por defectos, soporte y evolución: sus condiciones deben quedar en la propuesta. Si existen flujos conectados, la <a href=\"mantenimiento-automatizaciones-alcance-responsables-revision.html\">guía de mantenimiento de automatizaciones</a> ayuda a formular preguntas, pero no determina qué incluye tu contrato de software.</p>"
+      },
+      {
+        "heading": "3. Convierte el uso esperado en escenarios",
+        "html": "<p>Pide una estimación base y otra de mayor demanda. Para cada consumo documenta unidad facturable, volumen, precio aplicable, límites incluidos y regla de excedentes. No multipliques únicamente el número de usuarios: una carga masiva, archivos grandes o reintentos pueden aumentar el uso.</p><p>La documentación de <a href=\"https://docs.aws.amazon.com/pricing-calculator/latest/userguide/what-is-pricing-calculator.html\">AWS Pricing Calculator</a> explica que permite estimar costos iniciales, mensuales y anuales a partir de la configuración introducida. También aclara que su estimación no incluye impuestos. Una calculadora de infraestructura no representa por sí sola el costo completo del proyecto.</p><p>Si un proveedor cobra en dólares, deja visible el tipo de cambio usado y prueba otro escenario. Pide vigencia, moneda de facturación y condiciones de ajuste. Los impuestos y demás condiciones comerciales deben confirmarse en la cotización, sin aplicar porcentajes supuestos.</p>"
+      },
+      {
+        "heading": "4. Ejemplo ficticio en pesos colombianos",
+        "html": "<p><strong>Ejercicio ilustrativo, no tarifas de Nicho ni precios de mercado.</strong> Supongamos doce meses desde la firma: dos de construcción y diez de operación. Los costos de infraestructura de desarrollo están incluidos en la inversión inicial. Todas las cifras son COP; no hay conversión monetaria en este ejemplo.</p><ul><li>Desarrollo e implementación: $18.000.000.</li><li>Preparación y pruebas internas valoradas: $2.000.000.</li><li>Operación fija: $400.000 × 10 meses = $4.000.000.</li><li>Consumos estimados: $150.000 × 10 meses = $1.500.000.</li></ul><p>La base estimada suma <strong>$25.500.000</strong>. Añadimos una reserva interna ficticia de $2.500.000 para cambios y otra de $1.000.000 para una eventual salida dentro del periodo: presupuesto con reservas, <strong>$29.000.000</strong>. Las reservas no son pagos comprometidos ni servicios incluidos.</p><p>Si el consumo mensual fuera $300.000, su total sería $3.000.000 y el presupuesto con las mismas reservas subiría a <strong>$30.500.000</strong>. Ambos escenarios excluyen impuestos pendientes de cotización: no son totales finales de factura. El tiempo interno tampoco equivale necesariamente a un desembolso adicional.</p>"
+      },
+      {
+        "heading": "5. Compara propuestas sobre una misma base",
+        "html": "<p>Crea una fila por partida y una columna por proveedor. Exige que cada celda indique incluido, excluido, estimado o pendiente, junto con su valor cuando exista. Revisa especialmente migración, ambientes de prueba, copias de seguridad, licencias, soporte y exportación final.</p><p>Compara el mismo horizonte y volumen. Una mensualidad menor con permanencia más larga o menos atención no es una oferta equivalente. Pide también el calendario de pagos: un total anual viable puede exigir un anticipo que no encaje en caja.</p><p>Para presupuestar la transición, consulta qué <a href=\"software-a-medida-entrega-accesos-documentacion.html\">accesos y documentación deben entregarse</a>, sin asumir que trasladar todo será gratuito. Si una propuesta cambia la solución hacia una suscripción, usa la <a href=\"software-a-medida-o-saas-elegir-empresa.html\">comparación entre software a medida y SaaS</a> antes de confrontar sus importes.</p>"
+      },
+      {
+        "heading": "6. Deja reglas para revisar el presupuesto",
+        "html": "<p>Antes de firmar, identifica quién aprueba cambios y consumos adicionales, cómo se avisa de una desviación y qué alternativas se evaluarán. Una alerta de gasto no es necesariamente un límite que detiene cargos. Solicita que expliquen el comportamiento real del servicio.</p><p>La <a href=\"https://www.finops.org/framework/capabilities/forecasting/\">FinOps Foundation</a> plantea documentar supuestos temporales y de precios, comparar previsiones con costos observados y actualizar el pronóstico. Aplicado a este presupuesto, conserva la versión inicial y revisa mensualmente gasto real, compromisos pendientes y estimación hasta el mes doce.</p><p>La decisión queda mejor sustentada cuando sabes qué cubre cada cifra, qué sigue sin confirmar y quién debe resolverlo. No justifiques una diferencia con ahorros o retornos prometidos: exige primero un costo comparable y condiciones explícitas.</p>"
+      }
+    ]
+  },
+  {
     "datePublished": "2026-10-29",
     "dateLabel": "29 de octubre de 2026",
     "sourceDateLabel": "29 de octubre de 2026",

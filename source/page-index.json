@@ -533,5 +533,15 @@
     "title": "Qué preguntas frecuentes incluir en una página de servicios | Nicho Agencia Digital",
     "description": "Selecciona preguntas que aclaren alcance, requisitos y siguiente paso en tu web de servicios, sin inventar objeciones ni prometer resultados de SEO.",
     "kind": "Article"
+  },
+  "recursos/agente-ia-o-automatizacion-reglas-elegir.html": {
+    "title": "¿Agente de IA o automatización por reglas? Cómo elegir para tu proceso | Nicho Agencia Digital",
+    "description": "Decide cuándo usar reglas, IA o un flujo combinado: compara entradas, excepciones, riesgo y costo de revisión antes de automatizar un proceso empresarial.",
+    "kind": "Article"
+  },
+  "recursos/calcular-costo-total-software-a-medida-12-meses.html": {
+    "title": "Cómo calcular el costo total de un software a medida antes de contratar | Nicho Agencia Digital",
+    "description": "Calcula el presupuesto de un software a medida a 12 meses: desarrollo, operación, consumos, cambios y salida. Compara propuestas con un ejemplo ficticio en COP.",
+    "kind": "Article"
   }
 }
