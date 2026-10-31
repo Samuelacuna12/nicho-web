@@ -1,5 +1,99 @@
 [
   {
+    "datePublished": "2026-10-31",
+    "dateLabel": "31 de octubre de 2026",
+    "sourceDateLabel": "31 de octubre de 2026",
+    "featureOnService": true,
+    "slug": "preparar-catalogo-productos-agente-ia-datos",
+    "title": "Cómo preparar tu catálogo de productos antes de conectarlo a un agente IA",
+    "description": "Organiza referencias, variantes, precios y disponibilidad para un agente IA: ficha mínima, responsables, pruebas y límites antes de conectarlo a ventas.",
+    "category": "Agentes de IA",
+    "service": "agentes-ia.html",
+    "intro": "Conectar un catálogo desordenado a un agente no corrige sus contradicciones. Si la ficha comercial dice una cosa y la tienda otra, el sistema necesita una regla para saber qué consultar y cuándo pedir ayuda. Esta guía propone preparar los datos antes de implementar el agente: qué registrar, quién lo mantiene y cómo comprobar que una actualización no convierte una descripción vieja en una promesa nueva.",
+    "cta": "Lleva una muestra anonimizada del catálogo y tres preguntas que hoy obliguen a tu equipo a consultar varias fuentes. Podemos revisar qué información necesita el agente, qué debe consultar en tiempo real y dónde conviene conservar la revisión humana.",
+    "sources": [
+      {
+        "title": "Shopify: productos y variantes",
+        "url": "https://help.shopify.com/en/manual/products/variants"
+      },
+      {
+        "title": "Shopify Storefront API: datos y disponibilidad de ProductVariant",
+        "url": "https://shopify.dev/docs/api/storefront/latest/objects/ProductVariant"
+      }
+    ],
+    "sections": [
+      {
+        "heading": "1. Separa información estable de datos que cambian",
+        "html": "<p>La descripción, las medidas y las instrucciones de uso suelen cambiar con menos frecuencia que el precio o la disponibilidad. No conviene tratarlos como si tuvieran la misma vigencia. Nuestra propuesta editorial es dividir la ficha en información descriptiva aprobada, condiciones comerciales y datos operativos consultables.</p><p>Para cada campo, registra fuente, responsable y momento de actualización. Si dos sistemas difieren, define cuál prevalece para esa pregunta. Un archivo de presentación puede servir para explicar un producto; no debería confirmar por sí solo las unidades disponibles hoy. Esta separación complementa una <a href=\"base-conocimiento-ia-vigencia-excepciones.html\">base de conocimiento con vigencia y excepciones</a>.</p>"
+      },
+      {
+        "heading": "2. Prepara una ficha mínima por variante vendible",
+        "html": "<p>Una familia de productos no siempre identifica lo que el cliente puede comprar. Shopify, por ejemplo, documenta las variantes como combinaciones de opciones, como tamaño y color. Su API distingue precio, opciones seleccionadas y disponibilidad de la variante. El esquema concreto depende de tu plataforma; no debes copiar campos sin comprobar cómo se usan en tu negocio.</p><ul><li><strong>Identidad:</strong> identificador estable, referencia comercial y relación con el producto principal.</li><li><strong>Selección:</strong> opciones válidas, unidad de venta y contenido del paquete.</li><li><strong>Descripción:</strong> atributos aprobados y enlace a la ficha o imagen correspondiente.</li><li><strong>Condiciones:</strong> moneda, precio aplicable, alcance del precio y fuente de promociones.</li><li><strong>Control:</strong> estado de publicación, responsable y última revisión.</li></ul><p>Un campo vacío significa dato pendiente, no una autorización para completarlo con una suposición. No deduzcas materiales de una fotografía ni conviertas un nombre parecido en una equivalencia técnica.</p>"
+      },
+      {
+        "heading": "3. Define qué hacer con paquetes, excepciones y nombres parecidos",
+        "html": "<p>Documenta los paquetes como ofertas con composición explícita. «Caja» puede significar una unidad comercial o un empaque; el agente debe saber cuál. Si el cliente puede mezclar variantes, describe la regla aprobada y sus límites. Si no existe esa política, la implementación debe dejar la decisión pendiente.</p><p>Conserva los nombres que utiliza el cliente como alias de búsqueda, sin reemplazar la referencia oficial. Una coincidencia aproximada puede proponer candidatos, pero no confirmar una sustitución. La guía de <a href=\"buscar-productos-ia-referencia-exacta-catalogo.html\">búsqueda por referencia exacta</a> aborda ese paso posterior; aquí la prioridad es entregar un catálogo limpio para que la búsqueda tenga una fuente confiable.</p>"
+      },
+      {
+        "heading": "4. Ejemplo ficticio: una lámpara con dos acabados",
+        "html": "<p><strong>Ejemplo hipotético, sin relación con un cliente real:</strong> una tienda vende la lámpara Modelo A en negro y dorado. Ambas comparten medidas, pero tienen referencias distintas. La ficha de la familia muestra una foto dorada; la variante negra tiene su propia imagen. Una promoción aplica únicamente al acabado negro.</p><p>La ficha preparada relaciona cada referencia con su acabado y su oferta. Ante «quiero la dorada al precio de la negra», el agente explica la diferencia y consulta la condición vigente. No extiende el descuento por similitud. Si la imagen de una variante falta, informa esa limitación en lugar de presentar otra como si fuera idéntica.</p><p>La prueba no termina al mostrar el precio correcto: también debe comprobar que el enlace enviado corresponde a la variante seleccionada y que el pedido conserva esa identidad.</p>"
+      },
+      {
+        "heading": "5. Prueba la actualización y la ausencia de datos",
+        "html": "<p>Antes del piloto, prepara preguntas sobre una variante activa, una retirada, una referencia ambigua, un paquete y un dato incompleto. Añade un cambio controlado de precio y verifica qué respuesta se produce antes y después de la actualización. Define con el responsable cuánto tiempo puede tolerarse una copia antigua según el riesgo de ese campo.</p><p>Comprueba además qué ocurre cuando la consulta falla. El agente puede ofrecer revisar la disponibilidad con una persona; no debería reutilizar silenciosamente una cifra vieja. Distingue «disponible para comprar» de una promesa de entrega inmediata: la documentación de Shopify contempla productos sin existencias que aún aceptan compra. La fecha de entrega requiere su propia regla operativa.</p>"
+      },
+      {
+        "heading": "6. Entrega el catálogo con responsables y criterio de aceptación",
+        "html": "<p>La entrega al implementador debe incluir una muestra revisada, diccionario de campos, prioridades entre fuentes, casos de prueba y responsable de mantenimiento. Registra quién puede aprobar descripciones o promociones. El acceso a leer un catálogo no concede permiso para cambiar precios, publicar referencias o confirmar pedidos.</p><p>Aprueba el piloto solo cuando las respuestas puedan rastrearse a la variante y a la fuente utilizada. Mide correcciones y preguntas derivadas, no solo respuestas generadas. Si la necesidad encaja con <a href=\"../agentes-ia.html\">agentes IA para atención y ventas</a>, empieza con un alcance acotado. Un catálogo preparado reduce ambigüedad; no elimina la necesidad de evaluación ni garantiza ventas.</p>"
+      }
+    ]
+  },
+  {
+    "datePublished": "2026-10-31",
+    "dateLabel": "31 de octubre de 2026",
+    "sourceDateLabel": "31 de octubre de 2026",
+    "featureOnService": true,
+    "slug": "definir-etapas-crm-criterios-avance-ventas",
+    "title": "Cómo definir etapas de CRM que reflejen avances reales de una venta",
+    "description": "Diseña etapas de CRM con evidencia de entrada y salida, responsables y próximos pasos. Evita confundir actividad comercial, oportunidades y ventas cobradas.",
+    "category": "CRM y operación comercial",
+    "service": "crm-personalizado.html",
+    "intro": "Un tablero lleno de oportunidades puede parecer saludable aunque nadie sepa qué falta para cerrar cada negocio. El problema no siempre es el CRM: a veces las etapas mezclan acciones del vendedor con decisiones del comprador. Esta guía propone diseñar un recorrido sencillo, probarlo con casos ficticios y separar avance comercial, cobro y entrega antes de automatizar movimientos.",
+    "cta": "Trae las etapas actuales y ejemplos anonimizados de oportunidades que tu equipo clasifica de forma distinta. Podemos revisar criterios, campos y responsables antes de configurar el CRM o conectar automatizaciones.",
+    "sources": [
+      {
+        "title": "HubSpot: configurar y gestionar pipelines y etapas",
+        "url": "https://knowledge.hubspot.com/object-settings/set-up-and-customize-pipelines"
+      }
+    ],
+    "sections": [
+      {
+        "heading": "1. Escribe qué evidencia representa cada etapa",
+        "html": "<p>En vez de empezar por los nombres de las columnas, escribe qué hecho permite afirmar que una oportunidad avanzó. «Contactado» puede significar un intento de llamada, una conversación real o una respuesta por correo. Si cada asesor entiende algo distinto, el tablero deja de ser comparable.</p><p>Para cada etapa, define evidencia de entrada, dato necesario, responsable y condición de salida. «Propuesta enviada» exige una propuesta identificable y su fecha; «propuesta revisada» requiere evidencia adicional del cliente. Son definiciones propuestas para adaptar, no un embudo universal. Una tarea realizada no demuestra por sí sola intención de compra.</p>"
+      },
+      {
+        "heading": "2. Separa etapas, tareas y motivos de espera",
+        "html": "<p>Llamar, enviar un mensaje y programar una visita son actividades. Precio pendiente, falta de documentos y ausencia del decisor son motivos de bloqueo. Convertir cada actividad y cada obstáculo en una columna suele producir un tablero difícil de mantener.</p><p>Una alternativa es conservar pocas etapas y añadir campos para próxima acción, fecha prevista y motivo de espera. Usa «fecha prevista» como una estimación acordada, no como promesa del cliente. Cuando una oportunidad se detenga, registra quién debe actuar y qué información falta. El <a href=\"dashboard-crm-demoras-cohortes-antiguedad.html\">análisis de demoras del CRM</a> será más útil si esas definiciones son consistentes.</p>"
+      },
+      {
+        "heading": "3. Ejemplo ficticio de un proceso de servicios",
+        "html": "<p><strong>Ejemplo hipotético, no resultados de NICHO:</strong> una empresa de servicios utiliza cinco estados operativos. Cada uno necesita un criterio verificable:</p><ol><li><strong>Solicitud recibida:</strong> existe una necesidad expresada y un canal válido para atenderla.</li><li><strong>Alcance por confirmar:</strong> se documentaron requisitos y faltan decisiones concretas.</li><li><strong>Propuesta enviada:</strong> hay versión, fecha y destinatario de la propuesta.</li><li><strong>Decisión pendiente:</strong> se conoce qué decisión falta y el próximo paso permitido.</li><li><strong>Cerrada:</strong> se registra ganada o perdida con la evidencia y el motivo correspondiente.</li></ol><p>La empresa define qué documento acredita una venta ganada según su proceso. El estado de pago y la entrega se mantienen separados: una aceptación comercial no demuestra que el dinero haya sido recibido ni que el servicio esté completado. No uses este ejemplo para interpretar obligaciones contractuales particulares.</p>"
+      },
+      {
+        "heading": "4. Decide cuándo necesitas otro pipeline",
+        "html": "<p>HubSpot describe los pipelines como representaciones de procesos mediante etapas y recomienda separarlos cuando los recorridos realmente tienen etapas diferentes. También permite personalizar etapas y probabilidades, con funciones sujetas al plan y los permisos. Esta referencia ilustra capacidades de una plataforma; no obliga a contratarla.</p><p>Antes de crear varios tableros, compara recorridos. Dos equipos que venden el mismo servicio pueden compartir etapas y filtrar por responsable. Una venta simple y un proyecto con validación técnica podrían requerir procesos distintos. Evita multiplicar tableros únicamente para ocultar problemas de asignación o reportes.</p><p>Si asignas probabilidades, documenta de dónde salen y revísalas con historial comparable. Un porcentaje predeterminado no es evidencia de que esa oportunidad cerrará ni equivale a dinero disponible.</p>"
+      },
+      {
+        "heading": "5. Prueba acuerdos, retrocesos y reaperturas",
+        "html": "<p>Entrega los mismos casos ficticios a dos personas del equipo y pide que asignen etapa y próximo paso. Las diferencias revelan definiciones ambiguas antes de automatizar. Incluye propuesta enviada sin respuesta, alcance cambiado, rechazo explícito, aceptación pendiente de formalización y negocio reabierto.</p><p>Permite retrocesos justificados sin borrar el historial. Si cambió el alcance, conserva la versión anterior y registra por qué vuelve a revisión. Reabrir una oportunidad perdida no debe crear silenciosamente una venta adicional. Define también cuándo una nueva solicitud del mismo cliente constituye una oportunidad diferente.</p><p>Antes de automatizar mensajes al cambiar de etapa, revisa los <a href=\"seguimiento-cotizaciones-estados-limites.html\">límites de seguimiento de cotizaciones</a>. Mover una tarjeta no sustituye el consentimiento o la autorización necesaria para contactar.</p>"
+      },
+      {
+        "heading": "6. Migra sin reescribir el pasado y revisa el uso real",
+        "html": "<p>Prepara una correspondencia entre etapas antiguas y nuevas. Cuando una equivalencia sea ambigua, envía el registro a revisión en lugar de inventar evidencia. Conserva fechas e historial; cambiar los nombres no significa que todos los negocios hayan avanzado hoy.</p><p>Durante la revisión inicial, observa registros sin próxima acción, movimientos sin evidencia y oportunidades estancadas. Ajusta las definiciones que el equipo no puede aplicar de forma consistente. No prometas una mejora porcentual por rediseñar el tablero: primero establece una línea base y comprueba adopción.</p><p>Un <a href=\"../crm-personalizado.html\">CRM adaptado al proceso comercial</a> debe ayudarte a distinguir qué pasó, qué falta y quién responde. La automatización viene después de acordar esas reglas, no como reemplazo de ellas.</p>"
+      }
+    ]
+  },
+  {
     "datePublished": "2026-10-30",
     "dateLabel": "30 de octubre de 2026",
     "sourceDateLabel": "30 de octubre de 2026",

@@ -543,5 +543,15 @@
     "title": "Cómo calcular el costo total de un software a medida antes de contratar | Nicho Agencia Digital",
     "description": "Calcula el presupuesto de un software a medida a 12 meses: desarrollo, operación, consumos, cambios y salida. Compara propuestas con un ejemplo ficticio en COP.",
     "kind": "Article"
+  },
+  "recursos/preparar-catalogo-productos-agente-ia-datos.html": {
+    "title": "Cómo preparar tu catálogo de productos antes de conectarlo a un agente IA | Nicho Agencia Digital",
+    "description": "Organiza referencias, variantes, precios y disponibilidad para un agente IA: ficha mínima, responsables, pruebas y límites antes de conectarlo a ventas.",
+    "kind": "Article"
+  },
+  "recursos/definir-etapas-crm-criterios-avance-ventas.html": {
+    "title": "Cómo definir etapas de CRM que reflejen avances reales de una venta | Nicho Agencia Digital",
+    "description": "Diseña etapas de CRM con evidencia de entrada y salida, responsables y próximos pasos. Evita confundir actividad comercial, oportunidades y ventas cobradas.",
+    "kind": "Article"
   }
 }
