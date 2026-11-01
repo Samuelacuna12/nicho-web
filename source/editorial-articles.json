@@ -1,5 +1,99 @@
 [
   {
+    "datePublished": "2026-11-01",
+    "dateLabel": "1 de noviembre de 2026",
+    "sourceDateLabel": "1 de noviembre de 2026",
+    "featureOnService": true,
+    "slug": "conciliar-pedidos-pagos-confirmacion-proveedor",
+    "title": "Cómo conciliar pedidos y pagos sin marcar una compra como pagada por una captura",
+    "description": "Diseña una conciliación de pedidos y pagos con referencias verificables, estados separados y revisión de diferencias antes de liberar una entrega.",
+    "category": "Automatización empresarial",
+    "service": "automatizaciones.html",
+    "intro": "Un cliente envía un comprobante, el equipo encuentra un pedido por el mismo valor y alguien lo marca como pagado. Ese atajo puede fallar si hay referencias repetidas, un pago pendiente o un archivo que no corresponde. Esta guía propone un control operativo para conectar pedidos y confirmaciones del proveedor de pagos sin convertir una coincidencia parcial en autorización de despacho. No sustituye la conciliación contable ni las reglas financieras de tu empresa.",
+    "cta": "Lleva un ejemplo anonimizado de los estados de tu tienda y tu proveedor de pagos. Podemos revisar referencias, excepciones y criterios de confirmación antes de automatizar la actualización de pedidos.",
+    "sources": [
+      {
+        "title": "Stripe: recepción y verificación de eventos",
+        "url": "https://docs.stripe.com/events/set-up-events"
+      },
+      {
+        "title": "Stripe: webhooks y eventos asíncronos",
+        "url": "https://docs.stripe.com/webhooks"
+      }
+    ],
+    "sections": [
+      {
+        "heading": "1. Separa el pedido, la transacción y la entrega",
+        "html": "<p>Un pedido describe lo solicitado. Una transacción registra un intento o movimiento de pago. Una entrega indica el estado logístico. Mantenerlos separados permite entender qué ocurrió sin forzar todo dentro de una sola etiqueta «completado».</p><p>Define qué fuente controla cada dato y quién puede corregirlo. El sistema de pedidos conserva productos y condiciones; el proveedor de pagos confirma el estado de su transacción; el proceso logístico decide si puede despachar. El comprobante aportado por el cliente sirve para investigar, pero no debe reemplazar la comprobación contra la fuente autorizada.</p>"
+      },
+      {
+        "heading": "2. Usa referencias, no solamente nombres e importes",
+        "html": "<p>Relaciona cada intento de pago con un identificador de pedido y guarda el identificador que devuelve el proveedor. Compara moneda, importe esperado, comercio receptor y estado. El mismo nombre o valor puede aparecer en varias compras legítimas; no basta para unir registros automáticamente.</p><p>Diseña una tabla de correspondencias con pedido, intento, transacción y fecha de verificación. Un pedido puede tener varios intentos fallidos antes del exitoso. También puede haber pagos parciales si el negocio los admite: documenta esa regla expresamente y evita tratar el primer abono como liquidación total. No almacenes datos de tarjeta ni secretos en esta tabla.</p>"
+      },
+      {
+        "heading": "3. Recibe eventos, verifica su origen y consulta el estado",
+        "html": "<p>Stripe documenta la recepción de eventos, la validación de su firma y la consulta del recurso relacionado. Sus eventos permiten responder a cambios asíncronos; un evento recibido no debe confundirse con una pantalla que el comprador vio. La implementación concreta depende del proveedor y de su API vigente.</p><p>Propón a tu equipo técnico una regla clara: solo una confirmación válida del proveedor, asociada a la compra correcta, puede avanzar el estado de pago. Si el evento está desactualizado o incompleto, consulta la transacción antes de una acción crítica. Una firma correcta acredita el origen técnico del evento, pero no sustituye la comparación de referencia, importe y moneda.</p><p>Complementa este control con <a href=\"webhooks-idempotencia-pedidos-duplicados.html\">procesamiento idempotente de webhooks</a>: recibir dos veces la misma confirmación no debe generar dos pedidos ni dos despachos.</p>"
+      },
+      {
+        "heading": "4. Envía las diferencias a una revisión identificable",
+        "html": "<p><strong>Ejemplo ficticio, no caso de NICHO:</strong> una tienda recibe dos pedidos de COP 150.000 y una captura por ese valor. En vez de elegir el más reciente, el sistema mantiene ambos pendientes y solicita la referencia de transacción. Al encontrarla, comprueba a qué pedido pertenece y consulta su estado.</p><p>La cola de revisión debe indicar el motivo concreto: referencia ausente, moneda diferente, importe no coincidente, transacción no localizada o estado pendiente. Asigna responsable y próxima revisión. «No conciliado» significa que falta evidencia; no demuestra fraude, impago definitivo ni un error del cliente.</p>"
+      },
+      {
+        "heading": "5. Prueba los casos que cambian después",
+        "html": "<p>Antes de activar actualizaciones automáticas, prueba pagos pendientes que luego se confirman, intentos rechazados, eventos repetidos, mensajes fuera de orden y devoluciones. Incluye dos pedidos del mismo comprador y una transacción cuya referencia está mal digitada. Usa datos de prueba, nunca tarjetas reales para simular errores.</p><p>Decide qué ocurre si un pedido ya cancelado recibe una confirmación tardía. La solución no es reactivarlo ni despacharlo a ciegas: registra el conflicto para que la persona autorizada aplique el procedimiento. Reembolsos y controversias necesitan estados propios y controles acordados, no borrar la confirmación anterior.</p>"
+      },
+      {
+        "heading": "6. Mide diferencias resueltas, no solo mensajes recibidos",
+        "html": "<p>Registra cuántas transacciones pudieron asociarse, cuántas necesitan revisión y cuánto tardan en resolverse. Mantén una fecha de corte para que operaciones sepa qué datos están actualizados. Un webhook recibido o un pedido creado no equivale a dinero conciliado.</p><p>Empieza con una revisión en paralelo al proceso habitual y contrasta los resultados antes de permitir cambios operativos. Una <a href=\"../automatizaciones.html\">automatización de conciliación</a> debe reducir tareas repetitivas con evidencia trazable, sin convertir la falta de datos en una decisión financiera automática.</p>"
+      }
+    ]
+  },
+  {
+    "datePublished": "2026-11-01",
+    "dateLabel": "1 de noviembre de 2026",
+    "sourceDateLabel": "1 de noviembre de 2026",
+    "featureOnService": true,
+    "slug": "gestionar-cambios-alcance-software-a-medida",
+    "title": "Cómo gestionar cambios de alcance en un proyecto de software a medida",
+    "description": "Evalúa cambios de software con una ficha de impacto, alternativas y criterios de aceptación. Separa solicitud, aprobación y entrega sin perder trazabilidad.",
+    "category": "Software a medida",
+    "service": "sistemas.html",
+    "intro": "Durante una demostración aparece una idea: añadir otra sede, un permiso nuevo o una integración. Puede ser útil, pero aceptarla sin revisar dependencias cambia lo que el equipo debe entregar. Gestionar el alcance no significa rechazar mejoras; significa decidir qué entra, qué se aplaza y qué se sustituye, dejando claras las consecuencias antes de desarrollar. Este método es una guía de trabajo, no una interpretación de contratos particulares.",
+    "cta": "Comparte el alcance actual y una solicitud de cambio anonimizada. Podemos revisar dependencias, alternativas y pruebas necesarias para decidir una siguiente entrega de software con límites claros.",
+    "sources": [
+      {
+        "title": "GOV.UK Service Manual: historias de usuario y criterios de aceptación",
+        "url": "https://www.gov.uk/service-manual/agile-delivery/writing-user-stories"
+      }
+    ],
+    "sections": [
+      {
+        "heading": "1. Conserva una versión del alcance acordado",
+        "html": "<p>Antes de discutir una nueva función, identifica qué versión sirve como referencia: usuarios, procesos, integraciones, datos y criterios de aceptación. Una lista de pantallas no siempre explica qué comportamientos debe soportar el sistema. Guarda también exclusiones y supuestos, porque allí suelen aparecer los malentendidos.</p><p>No reescribas silenciosamente esa referencia cada vez que llegue una petición. Conserva la versión anterior y añade un registro de decisiones. Si todavía estás definiendo el producto, revisa primero <a href=\"definir-alcance-mvp-criterios-aceptacion.html\">cómo delimitar un MVP</a>. Cuando el alcance inicial es ambiguo, etiquetar todo como «extra» tampoco resuelve el desacuerdo.</p>"
+      },
+      {
+        "heading": "2. Describe el problema antes de pedir una solución",
+        "html": "<p>Recoge quién necesita el cambio, qué intenta hacer, qué ocurre hoy y qué resultado espera. «Agregar un botón» describe una solución; «el supervisor necesita aprobar una devolución sin pedir ayuda técnica» describe una necesidad que puede tener distintas respuestas.</p><p>El Service Manual de GOV.UK propone expresar usuario, necesidad y objetivo, y acompañarlos con criterios de aceptación. Puedes usar ese enfoque para aclarar solicitudes empresariales sin copiar un proceso completo. Adjunta un ejemplo ficticio o anonimizado y explica qué debe suceder cuando falte un dato o el usuario no tenga permisos. Eso permite estimar algo más concreto que una idea en un chat.</p>"
+      },
+      {
+        "heading": "3. Clasifica antes de estimar",
+        "html": "<p>Una solicitud puede corregir un incumplimiento de lo acordado, aclarar una regla ambigua o ampliar el producto. La clasificación debe apoyarse en la versión de referencia y la evidencia de la prueba, no solamente en quién la solicita. Un defecto y una mejora no tienen necesariamente el mismo tratamiento.</p><p>Si hay desacuerdo, registra el punto pendiente y separa la discusión del resto del trabajo. No borres reportes para que el tablero parezca limpio. Tampoco presentes una estimación preliminar como compromiso de fecha o precio: indica supuestos, dependencias y qué información falta para confirmarla.</p>"
+      },
+      {
+        "heading": "4. Usa una ficha de impacto pequeña pero completa",
+        "html": "<p>Para cada cambio prepara una ficha que permita decidir:</p><ul><li><strong>Resultado:</strong> necesidad y criterio observable de aceptación.</li><li><strong>Alcance:</strong> usuarios, pantallas, reglas y datos afectados.</li><li><strong>Dependencias:</strong> integraciones, accesos y decisiones de otras personas.</li><li><strong>Impacto:</strong> trabajo, pruebas, soporte y posible efecto en el calendario.</li><li><strong>Alternativas:</strong> incluir ahora, sustituir otra función, reducir o aplazar.</li><li><strong>Decisión:</strong> responsable autorizado, versión y fecha de aprobación.</li></ul><p>Incluye migración de datos y mantenimiento cuando correspondan. El <a href=\"calcular-costo-total-software-a-medida-12-meses.html\">costo total del software</a> no termina al programar una pantalla. No inventes importes para completar la ficha: los campos pendientes deben permanecer identificados.</p>"
+      },
+      {
+        "heading": "5. Ejemplo ficticio: añadir una segunda sede",
+        "html": "<p><strong>Ejemplo hipotético, no proyecto real de NICHO:</strong> un portal pensado para una sede recibe la petición de operar dos. Duplicar el selector visual parece sencillo, pero pueden cambiar permisos, inventario, responsables y reportes. El equipo identifica primero si cada sede tiene datos propios o comparte existencias.</p><p>Se proponen dos alternativas: incluir ambas sedes en la siguiente entrega con las pruebas adicionales necesarias, o mantener una sede inicialmente y preparar la separación para una etapa posterior. El decisor elige después de revisar el impacto. Una conversación exploratoria no se registra como aprobación y una aprobación del cambio no significa que ya esté entregado.</p>"
+      },
+      {
+        "heading": "6. Cierra el cambio con evidencia y una nueva referencia",
+        "html": "<p>Después de implementar, prueba el comportamiento nuevo y las funciones afectadas. Verifica permisos, errores, datos existentes y recorridos anteriores; mostrar únicamente la pantalla nueva puede ocultar regresiones. Conserva el resultado de las pruebas y las excepciones que siguen abiertas.</p><p>Actualiza documentación, instrucciones y versión del alcance cuando se acepte la entrega. Distingue solicitado, evaluado, aprobado, desarrollado y aceptado. Si algo vuelve a cambiar, abre una nueva decisión vinculada a la anterior. Un <a href=\"../sistemas.html\">proyecto de software a medida</a> necesita ese historial para evolucionar sin perder de vista qué se prometió y qué se comprobó.</p>"
+      }
+    ]
+  },
+  {
     "datePublished": "2026-10-31",
     "dateLabel": "31 de octubre de 2026",
     "sourceDateLabel": "31 de octubre de 2026",

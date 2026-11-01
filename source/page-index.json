@@ -553,5 +553,15 @@
     "title": "Cómo definir etapas de CRM que reflejen avances reales de una venta | Nicho Agencia Digital",
     "description": "Diseña etapas de CRM con evidencia de entrada y salida, responsables y próximos pasos. Evita confundir actividad comercial, oportunidades y ventas cobradas.",
     "kind": "Article"
+  },
+  "recursos/conciliar-pedidos-pagos-confirmacion-proveedor.html": {
+    "title": "Cómo conciliar pedidos y pagos sin marcar una compra como pagada por una captura | Nicho Agencia Digital",
+    "description": "Diseña una conciliación de pedidos y pagos con referencias verificables, estados separados y revisión de diferencias antes de liberar una entrega.",
+    "kind": "Article"
+  },
+  "recursos/gestionar-cambios-alcance-software-a-medida.html": {
+    "title": "Cómo gestionar cambios de alcance en un proyecto de software a medida | Nicho Agencia Digital",
+    "description": "Evalúa cambios de software con una ficha de impacto, alternativas y criterios de aceptación. Separa solicitud, aprobación y entrega sin perder trazabilidad.",
+    "kind": "Article"
   }
 }
