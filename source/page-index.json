@@ -563,5 +563,15 @@
     "title": "Cómo gestionar cambios de alcance en un proyecto de software a medida | Nicho Agencia Digital",
     "description": "Evalúa cambios de software con una ficha de impacto, alternativas y criterios de aceptación. Separa solicitud, aprobación y entrega sin perder trazabilidad.",
     "kind": "Article"
+  },
+  "recursos/preguntas-no-resueltas-agente-ia-mejora.html": {
+    "title": "Cómo convertir las preguntas no resueltas de un agente IA en mejoras verificables | Nicho Agencia Digital",
+    "description": "Organiza preguntas no resueltas de tu agente IA con responsables, causas y pruebas. Mejora respuestas sin publicar correcciones automáticas ni guardar datos de más.",
+    "kind": "Article"
+  },
+  "recursos/formularios-antispam-sin-perder-leads.html": {
+    "title": "Cómo proteger un formulario del spam sin descartar contactos legítimos | Nicho Agencia Digital",
+    "description": "Combina validación, controles antiautomatización y revisión de falsos positivos en formularios. Distingue un envío bloqueado de un lead recibido por tu equipo.",
+    "kind": "Article"
   }
 }

@@ -1,5 +1,95 @@
 [
   {
+    "datePublished": "2026-11-02",
+    "dateLabel": "2 de noviembre de 2026",
+    "sourceDateLabel": "2 de noviembre de 2026",
+    "featureOnService": true,
+    "slug": "preguntas-no-resueltas-agente-ia-mejora",
+    "title": "Cómo convertir las preguntas no resueltas de un agente IA en mejoras verificables",
+    "description": "Organiza preguntas no resueltas de tu agente IA con responsables, causas y pruebas. Mejora respuestas sin publicar correcciones automáticas ni guardar datos de más.",
+    "category": "Agentes IA",
+    "service": "agentes-ia.html",
+    "intro": "Un agente responde muchas conversaciones, pero eso no significa que esté resolviendo las dudas que importan. Si repite una evasiva o deriva todo al equipo, necesitas saber qué información falta y quién puede corregirla. Una cola de preguntas no resueltas convierte esas señales en trabajo revisable. Esta guía propone un método operativo para negocios que ya atienden con IA; no presenta resultados de clientes ni promete que toda consulta pueda automatizarse.",
+    "cta": "Comparte ejemplos anonimizados de preguntas que tu agente no logra resolver. Podemos revisar causas, responsables y pruebas antes de cambiar su conocimiento o ampliar sus permisos.",
+    "sources": [
+      {
+        "title": "NIST: marco voluntario para gestionar riesgos de IA",
+        "url": "https://www.nist.gov/itl/ai-risk-management-framework"
+      }
+    ],
+    "sections": [
+      {
+        "heading": "1. Define qué cuenta como una pregunta no resuelta",
+        "html": "<p>No uses una única etiqueta «el bot falló». Separa información inexistente, información contradictoria, datos vencidos, problema de búsqueda y solicitud fuera del alcance. Añade un estado distinto para consultas que requieren una decisión humana aunque la respuesta técnica sea conocida.</p><p>Una pregunta sobre una excepción comercial no se resuelve inventando una regla. Si el agente explicó correctamente que necesita autorización y transfirió el caso, puede haber cumplido su función. Registra el motivo del traspaso, no lo cuentes automáticamente como fallo. Para diseñar ese paso, revisa el <a href=\"traspaso-bot-asesor-con-contexto.html\">traspaso a un asesor con contexto</a>.</p>"
+      },
+      {
+        "heading": "2. Guarda evidencia mínima y una versión de referencia",
+        "html": "<p>La ficha de revisión puede contener una pregunta anonimizada, categoría, respuesta que dio el agente, fuente consultada, versión de conocimiento y fecha. Si la pregunta depende de un producto, utiliza su referencia interna y evita copiar la conversación completa cuando no haga falta.</p><p>Define quién puede ver estas fichas y durante cuánto tiempo se conservan según las reglas de tu empresa. Excluye contraseñas, documentos personales y datos de pago. Para reproducir un error no necesitas publicar información del comprador ni utilizar un caso privado como material comercial. Si faltan datos para entenderlo, marca la evidencia como incompleta.</p>"
+      },
+      {
+        "heading": "3. Prioriza por consecuencia, no solo por frecuencia",
+        "html": "<p>Una duda repetida sobre horarios y una respuesta incorrecta sobre disponibilidad no tienen necesariamente el mismo impacto. Valora frecuencia observada, riesgo de una respuesta equivocada, esfuerzo de corrección y cantidad de conversaciones afectadas. Estos criterios son una propuesta de trabajo, no una escala universal.</p><p>Asigna un responsable que pueda verificar la respuesta. Ventas puede aclarar una condición comercial; operaciones, una restricción de entrega; producto, una ficha técnica. El equipo que mantiene el agente no debería convertirse en la autoridad de todos los temas. El marco voluntario AI RMF de NIST aporta un enfoque general de gestión de riesgos; la cola descrita aquí es una implementación editorial propuesta, no un requisito de certificación.</p>"
+      },
+      {
+        "heading": "4. Corrige la causa y prepara una respuesta aprobada",
+        "html": "<p><strong>Ejemplo ficticio, no caso de NICHO:</strong> una empresa recibe preguntas sobre instalación en dos ciudades. El agente conoce el servicio, pero no qué zonas cubre cada equipo. La corrección consiste en documentar cobertura y excepciones con su responsable, no en añadir una frase que prometa instalación en cualquier lugar.</p><p>La ficha debe registrar la decisión: actualizar una fuente, corregir búsqueda, aclarar una respuesta o mantener el traspaso humano. Si dos documentos se contradicen, no publiques ambos esperando que el modelo elija. Resuelve primero qué versión está vigente y deja trazabilidad del cambio. Puedes apoyarte en una <a href=\"base-conocimiento-ia-vigencia-excepciones.html\">base de conocimiento con vigencia y excepciones</a>.</p>"
+      },
+      {
+        "heading": "5. Prueba la corrección y sus casos vecinos",
+        "html": "<p>Repite la pregunta original con datos de prueba y añade variantes: otra ciudad, referencia parecida, condición no cubierta y consulta ambigua. Comprueba tanto la respuesta correcta como el comportamiento cuando la información no existe. La corrección no debe ampliar permisos ni convertir una excepción en una promesa general.</p><p>Conserva la versión anterior para comparar y revertir si aparece un problema. Una persona con autoridad sobre el contenido aprueba la respuesta; el equipo técnico verifica que el agente la encuentra y respeta sus límites. Una edición guardada no acredita que todos los canales estén usando esa versión.</p>"
+      },
+      {
+        "heading": "6. Cierra con evidencia y observa si vuelve a aparecer",
+        "html": "<p>Un caso se cierra cuando existe una decisión documentada y una prueba satisfactoria, no simplemente cuando alguien editó un archivo. Registra fecha, versión y resultado. Si vuelve a ocurrir, reabre la ficha o vincula una nueva incidencia; no borres el antecedente.</p><p>Compara preguntas pendientes por causa, tiempo de resolución y recurrencia después de una corrección. «Menos traspasos» no demuestra mejor atención si el agente ahora responde sin evidencia. El objetivo de una <a href=\"../agentes-ia.html\">implementación de agentes IA</a> es mejorar respuestas útiles y límites claros, conservando revisión humana donde corresponda.</p>"
+      }
+    ]
+  },
+  {
+    "datePublished": "2026-11-02",
+    "dateLabel": "2 de noviembre de 2026",
+    "sourceDateLabel": "2 de noviembre de 2026",
+    "featureOnService": true,
+    "slug": "formularios-antispam-sin-perder-leads",
+    "title": "Cómo proteger un formulario del spam sin descartar contactos legítimos",
+    "description": "Combina validación, controles antiautomatización y revisión de falsos positivos en formularios. Distingue un envío bloqueado de un lead recibido por tu equipo.",
+    "category": "Desarrollo web",
+    "service": "desarrollo-web.html",
+    "intro": "Un formulario lleno de mensajes basura puede llevar al equipo a ignorar solicitudes reales. La reacción rápida suele ser añadir obstáculos, pero bloquear más envíos no demuestra que el problema esté resuelto. Conviene diseñar una protección por capas, con evidencia de recepción y una salida clara cuando un control falla. Este método sirve para planear el trabajo con tu equipo web, sin prometer eliminar todo el spam ni recomendar una configuración idéntica para cada negocio.",
+    "cta": "Muéstranos el recorrido de tu formulario y ejemplos anonimizados de envíos problemáticos. Podemos revisar validación, recepción y recuperación antes de añadir barreras a tus prospectos.",
+    "sources": [
+      {
+        "title": "Cloudflare Turnstile: validación del token en el servidor",
+        "url": "https://developers.cloudflare.com/turnstile/get-started/server-side-validation/"
+      }
+    ],
+    "sections": [
+      {
+        "heading": "1. Diferencia ruido, error de entrada y ataque",
+        "html": "<p>Clasifica una muestra de mensajes antes de cambiar el formulario. Un campo vacío puede ser un error de validación; diez envíos idénticos pueden venir de un doble clic o de automatización; una consulta extraña puede ser una compra legítima. No bloquees automáticamente por una palabra, un apellido o un país sin entender la situación.</p><p>Registra cuántos intentos recibe el sistema y en qué etapa fallan. Conserva solo la información necesaria para investigar y limita su acceso. El objetivo inicial es identificar patrones operativos, no construir perfiles personales ni guardar el contenido completo de todos los visitantes.</p>"
+      },
+      {
+        "heading": "2. Valida donde se recibe el envío",
+        "html": "<p>Los mensajes de ayuda en el navegador facilitan completar el formulario, pero la validación importante debe existir también en el punto que recibe los datos. Comprueba campos requeridos, longitudes, formatos y tamaño de archivos. Mantén reglas compatibles con teléfonos y nombres reales de tu mercado; un formato excesivamente rígido puede excluir a quien sí quiere comprar.</p><p>Devuelve errores concretos junto al campo y conserva lo ya escrito cuando sea seguro hacerlo. No presentes «mensaje enviado» si la validación rechazó el envío. Revisa las <a href=\"formularios-etiquetas-errores-autocompletado.html\">etiquetas, errores y autocompletado</a> antes de añadir controles difíciles de resolver.</p>"
+      },
+      {
+        "heading": "3. Trata el control antiautomatización como una capa",
+        "html": "<p>Si usas Turnstile, Cloudflare indica que el widget del navegador no basta: el servidor debe validar el token mediante Siteverify. La clave secreta pertenece al servidor, no al código público. Un resultado técnico válido tampoco acredita intención comercial ni sustituye la validación de los datos recibidos.</p><p>Documenta qué debe ocurrir si el control expira, no carga o el proveedor no responde. No desactives silenciosamente la protección ni borres el texto del usuario. Presenta una opción para volver a intentar y un canal alternativo verificado cuando corresponda. La elección del proveedor y sus condiciones necesita una revisión independiente antes de implementarlo.</p>"
+      },
+      {
+        "heading": "4. Limita ráfagas sin castigar una red compartida",
+        "html": "<p>Una regla de frecuencia puede frenar envíos repetidos, pero necesita contexto. Varias personas de una empresa pueden compartir conexión y un visitante puede reintentar porque no recibió confirmación. Combina señales y registra el motivo de la decisión en vez de asumir que cualquier repetición es maliciosa.</p><p><strong>Ejemplo ficticio, no caso de NICHO:</strong> una empresa recibe solicitudes desde una feria. Un límite demasiado estricto por conexión bloquea a varios interesados. El equipo detecta el patrón en una cola de revisión, ajusta el criterio y prueba de nuevo sin abrir el formulario a envíos ilimitados. No se propone un umbral numérico universal.</p>"
+      },
+      {
+        "heading": "5. Separa recepción, revisión y contacto comercial",
+        "html": "<p>Un formulario aceptado debe tener un identificador de recepción. La entrega al CRM o a la bandeja del asesor es otra etapa que también puede fallar. Si un envío queda en revisión antispam, no lo presentes internamente como un lead atendido; conserva un estado que permita investigarlo.</p><p>Define quién revisa posibles falsos positivos y qué evidencia necesita para recuperarlos. No elimines automáticamente la única copia antes de esa revisión si tu política permite conservarla. Tampoco conviertas cada envío recuperado en autorización para campañas: atender una solicitud y añadir a una lista comercial son decisiones distintas.</p>"
+      },
+      {
+        "heading": "6. Prueba accesibilidad y recuperación antes de activar",
+        "html": "<p>Comprueba el recorrido en móvil y con teclado, errores de red, doble clic, token rechazado y proveedor no disponible. Verifica qué ve la persona y qué registro recibe el equipo en cada escenario. Prueba también entradas legítimas con acentos, números internacionales y mensajes largos dentro de los límites acordados.</p><p>Mide spam confirmado, envíos recuperados, fallos técnicos y contactos realmente recibidos. Un descenso de formularios puede significar menos ruido o una barrera nueva. Una <a href=\"../desarrollo-web.html\">web orientada a captar solicitudes</a> debe permitir distinguir ambas cosas; complementa la revisión con una <a href=\"ga4-formularios-leads-confirmados-sin-pii.html\">medición que no confunda clics con leads</a>.</p>"
+      }
+    ]
+  },
+  {
     "datePublished": "2026-11-01",
     "dateLabel": "1 de noviembre de 2026",
     "sourceDateLabel": "1 de noviembre de 2026",
