@@ -573,5 +573,15 @@
     "title": "Cómo proteger un formulario del spam sin descartar contactos legítimos | Nicho Agencia Digital",
     "description": "Combina validación, controles antiautomatización y revisión de falsos positivos en formularios. Distingue un envío bloqueado de un lead recibido por tu equipo.",
     "kind": "Article"
+  },
+  "recursos/limites-api-429-cola-reintentos-controlados.html": {
+    "title": "Cómo manejar límites de una API sin perder tareas ni saturar la integración | Nicho Agencia Digital",
+    "description": "Diseña una cola para respuestas 429: espera indicada por el proveedor, reintentos limitados, prioridades y revisión de tareas vencidas sin duplicar operaciones.",
+    "kind": "Article"
+  },
+  "recursos/comparar-servicios-tablas-accesibles-movil.html": {
+    "title": "Cómo comparar servicios en una web sin perder claridad en el móvil | Nicho Agencia Digital",
+    "description": "Organiza una comparación de servicios con criterios verificables, encabezados accesibles y lectura móvil. Evita casillas ambiguas y promesas difíciles de comprobar.",
+    "kind": "Article"
   }
 }

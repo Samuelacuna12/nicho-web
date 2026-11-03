@@ -1,5 +1,103 @@
 [
   {
+    "datePublished": "2026-11-03",
+    "dateLabel": "3 de noviembre de 2026",
+    "sourceDateLabel": "3 de noviembre de 2026",
+    "featureOnService": true,
+    "slug": "limites-api-429-cola-reintentos-controlados",
+    "title": "Cómo manejar límites de una API sin perder tareas ni saturar la integración",
+    "description": "Diseña una cola para respuestas 429: espera indicada por el proveedor, reintentos limitados, prioridades y revisión de tareas vencidas sin duplicar operaciones.",
+    "category": "Automatizaciones",
+    "service": "automatizaciones.html",
+    "intro": "Una sincronización puede funcionar con diez registros y atascarse al recibir cientos. Aumentar reintentos sin control suele añadir carga justo cuando el proveedor pide esperar. Para una empresa que conecta ventas, inventario o atención, el problema práctico es conservar cada tarea, respetar los límites y saber qué quedó pendiente. Esta guía propone un diseño operativo; no ofrece una cuota universal ni garantiza disponibilidad de servicios externos.",
+    "cta": "Comparte qué sistemas conectas, qué operaciones son urgentes y cuánto puede esperar cada tarea. Podemos definir una cola con límites y revisión antes de ampliar la automatización.",
+    "sources": [
+      {
+        "title": "MDN: significado de HTTP 429",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/429"
+      },
+      {
+        "title": "Microsoft: diagnosticar y probar límites de API",
+        "url": "https://learn.microsoft.com/en-us/microsoft-cloud/dev/dev-proxy/concepts/http-429-too-many-requests"
+      }
+    ],
+    "sections": [
+      {
+        "heading": "1. Distingue un límite temporal de otros errores",
+        "html": "<p>HTTP 429 indica que se han enviado demasiadas solicitudes en un periodo determinado. La respuesta puede incluir Retry-After para señalar cuánto esperar. No conviertas cualquier fallo en «intentar otra vez»: un permiso insuficiente, una credencial inválida o un dato rechazado necesitan otra decisión.</p><p>Consulta la documentación del proveedor y el cuerpo del error antes de programar la recuperación. Registra el tipo de operación, hora, código y un identificador de seguimiento. No copies tokens ni datos personales al registro. Un aviso de cuota de gasto agotada puede requerir intervención y no se corrige esperando unos segundos.</p>"
+      },
+      {
+        "heading": "2. Guarda la tarea antes de enviarla",
+        "html": "<p>Separa la solicitud del negocio del intento técnico. La tarea conserva su identificador, estado, fecha de creación, próximo intento permitido y vencimiento comercial. Cada envío es un intento asociado. Así puedes distinguir «pendiente», «en proceso», «confirmada», «resultado incierto» y «requiere revisión».</p><p>Para operaciones que cambian pedidos o crean registros, define cómo evitar duplicados. No inventes una clave de idempotencia si el proveedor no la admite: revisa su mecanismo documentado y la posibilidad de consultar el resultado antes de repetir. La guía de <a href=\"webhooks-idempotencia-pedidos-duplicados.html\">idempotencia y pedidos duplicados</a> desarrolla ese problema complementario.</p>"
+      },
+      {
+        "heading": "3. Respeta la espera y limita el presupuesto de reintentos",
+        "html": "<p>Si el proveedor indica una espera válida, no programes el siguiente envío antes de ese momento. Si no la indica, utiliza una política conservadora acordada con sus límites: esperas progresivas, variación entre tareas para evitar que todas despierten juntas y un máximo de intentos o tiempo total. Son decisiones de diseño, no una autorización para superar la cuota.</p><p>Coordina los trabajadores que usan la misma cuenta. Limitar cada proceso por separado no sirve si diez procesos consumen simultáneamente el mismo cupo. Cuando un SDK ya reintenta automáticamente, revisa su configuración para no multiplicar sin querer los intentos mediante otra capa.</p>"
+      },
+      {
+        "heading": "4. Decide prioridades y vencimientos comerciales",
+        "html": "<p><strong>Ejemplo ficticio, no caso de NICHO:</strong> una distribuidora sincroniza precios y confirma reservas mediante un mismo proveedor. Propone revisar reservas pendientes antes que una exportación histórica, pero mantiene una capacidad mínima para que esa exportación no quede detenida indefinidamente. La prioridad debe definirse antes del incidente, no depender de quién reclame primero.</p><p>Una reserva vencida no debe ejecutarse horas después como si siguiera vigente. Antes de reenviar, comprueba cancelaciones, versión del pedido y vigencia de la operación. Puedes enlazar esta revisión con <a href=\"cancelar-automatizaciones-pendientes-cambio-pedido.html\">la cancelación de tareas cuando cambia el pedido</a>. La cola conserva evidencia del descarte y el motivo.</p>"
+      },
+      {
+        "heading": "5. Prueba recuperación sin saturar el servicio real",
+        "html": "<p>Simula respuestas 429 en un entorno de prueba, incluyendo una espera indicada, ausencia de esa indicación y varios trabajadores concurrentes. Verifica que la tarea siga guardada, que no haya envíos anticipados y que el límite de intentos termine en revisión en lugar de un bucle infinito. Microsoft recomienda probar estos caminos con respuestas simuladas y revisar el comportamiento real del SDK.</p><p>Añade casos vecinos: reinicio del trabajador mientras esperaba, cancelación del pedido, respuesta tardía y conexión interrumpida después del envío. Ese último caso puede dejar un resultado incierto; consulta el estado cuando sea posible antes de repetir una escritura. No hagas pruebas de saturación sobre una API ajena sin permiso.</p>"
+      },
+      {
+        "heading": "6. Mide la cola, no solo la cantidad de errores",
+        "html": "<p>Observa tareas pendientes por antigüedad, tiempo hasta confirmación, vencimientos, intentos por tarea y cantidad que llega a revisión. Muestra por separado una operación confirmada y una solicitud simplemente enviada. El número de respuestas 429 por sí solo no permite saber cuántos pedidos se completaron.</p><p>Asigna una persona responsable de revisar pendientes y un procedimiento para reanudar con control. Reducir la frecuencia, agrupar lecturas permitidas o evitar consultas innecesarias puede ser más útil que contratar una cuota mayor. Una <a href=\"../automatizaciones.html\">automatización empresarial</a> debe hacer visible el trabajo que no pudo completar, sin prometer continuidad absoluta.</p>"
+      }
+    ]
+  },
+  {
+    "datePublished": "2026-11-03",
+    "dateLabel": "3 de noviembre de 2026",
+    "sourceDateLabel": "3 de noviembre de 2026",
+    "featureOnService": true,
+    "slug": "comparar-servicios-tablas-accesibles-movil",
+    "title": "Cómo comparar servicios en una web sin perder claridad en el móvil",
+    "description": "Organiza una comparación de servicios con criterios verificables, encabezados accesibles y lectura móvil. Evita casillas ambiguas y promesas difíciles de comprobar.",
+    "category": "Desarrollo web",
+    "service": "desarrollo-web.html",
+    "intro": "Una tabla puede ayudar a elegir un servicio o convertir una decisión sencilla en una pared de casillas. En una web comercial, el visitante necesita entender qué incluye cada opción, qué queda fuera y qué debe confirmar antes de contratar. Esta guía explica cómo preparar una comparación útil y comprobar su lectura en pantallas pequeñas, sin inventar precios ni afirmar que un diseño aumentará las ventas.",
+    "cta": "Cuéntanos qué servicios necesitas comparar y qué dudas aparecen antes de una cotización. Podemos revisar contenido y navegación móvil con opciones y condiciones verificables.",
+    "sources": [
+      {
+        "title": "W3C WAI: tablas de datos accesibles",
+        "url": "https://www.w3.org/WAI/tutorials/tables/"
+      },
+      {
+        "title": "W3C WAI: recomendaciones para tablas adaptables",
+        "url": "https://www.w3.org/WAI/tutorials/tables/tips/"
+      }
+    ],
+    "sections": [
+      {
+        "heading": "1. Elige una decisión que realmente necesite comparación",
+        "html": "<p>Empieza por una pregunta concreta: ¿qué opción incluye integración con el sistema actual?, ¿quién entrega los textos?, ¿qué soporte está incluido? Si los servicios resuelven problemas diferentes, una tabla común puede sugerir equivalencias que no existen. En ese caso convienen descripciones independientes y un enlace para orientar la elección.</p><p>Reúne dudas observadas por el equipo, pero no las presentes como estadísticas si no hay un registro. Elige pocos criterios que cambien la decisión. Evita filas decorativas como «calidad» o «innovación» si no puedes explicar cómo se comprueban. Para decidir la arquitectura general, consulta <a href=\"landing-por-servicio-o-pagina-varios-servicios.html\">cuándo separar páginas por servicio</a>.</p>"
+      },
+      {
+        "heading": "2. Redacta condiciones comparables, no una lista de promesas",
+        "html": "<p>Usa la misma unidad y alcance en cada columna. «Soporte incluido» es insuficiente si una opción cubre errores y otra también permite cambios. Explica periodo, canal y alcance cuando estén confirmados. Si algo requiere diagnóstico, escribe «se confirma al revisar la integración», no una marca de verificación que sugiera inclusión automática.</p><p>No publiques precios orientativos como tarifas definitivas ni omitas condiciones que alteran el total. Cuando una cifra depende de alcance, datos o proveedor, puedes mostrar qué variables se necesitan para cotizar. La ausencia de un precio no justifica una promesa de ahorro. Las condiciones comerciales deben tener un responsable que las revise cuando cambien.</p>"
+      },
+      {
+        "heading": "3. Conserva relaciones claras entre datos y encabezados",
+        "html": "<p>Si presentas datos tabulares, utiliza una tabla HTML real con encabezados asociados a las celdas y un título que explique qué se compara. W3C WAI describe el uso de caption y encabezados; las estructuras complejas requieren asociaciones más explícitas. Evita construir la comparación únicamente como una imagen.</p><p>Una casilla debe poder entenderse sin depender del color. «Incluido», «no incluido» y «requiere definición» transmiten información diferente. Mantén las condiciones cerca del dato al que afectan. Si necesitas muchos encabezados anidados o notas extensas, simplifica la comparación antes de añadir soluciones técnicas.</p>"
+      },
+      {
+        "heading": "4. Elige cómo se lee en una pantalla pequeña",
+        "html": "<p>No reduzcas todo el texto hasta que quepa. Puedes dividir la información en tablas pequeñas o mantener una zona de desplazamiento horizontal claramente identificable, sin provocar desplazamiento de toda la página. Si conviertes columnas en tarjetas, conserva en cada dato el nombre del criterio y comprueba que el orden de lectura siga teniendo sentido.</p><p>W3C advierte que las tablas adaptables pueden cambiar de formato en pantallas pequeñas o con texto ampliado. La revisión debe comprobar que esas transformaciones no eliminan relaciones importantes. La estrategia depende del contenido; una captura de escritorio no demuestra que la comparación sea utilizable desde un teléfono.</p>"
+      },
+      {
+        "heading": "5. Ensaya la decisión con un ejemplo identificable",
+        "html": "<p><strong>Ejemplo ficticio, no oferta ni caso de NICHO:</strong> una empresa compara una web informativa y un portal de clientes. Los criterios son acceso privado, actualización de datos y conexión con pedidos. La primera opción publica información; la segunda necesita definir usuarios y fuentes de datos. Una fila «pedidos: sí» sería insuficiente sin explicar si muestra estados, permite cambios o solo enlaza a otro sistema.</p><p>Pide a una persona que encuentre qué opción responde a una necesidad y qué falta confirmar. Observa si puede explicar la diferencia sin ayuda. No conviertas esa prueba cualitativa en un porcentaje de conversión. El propósito es localizar confusión antes de publicar, no demostrar resultados comerciales con una muestra inventada.</p>"
+      },
+      {
+        "heading": "6. Valida contenido, navegación y siguiente paso",
+        "html": "<p>Revisa con teclado, lector de pantalla cuando esté disponible, ampliación de texto y anchos móviles. Comprueba encabezados, lectura de condiciones, foco visible y acceso a los enlaces. No ocultes exclusiones en un contenido que solo aparece al pasar el ratón. Verifica también que la información principal esté en el HTML y no dependa de una descarga.</p><p>Cierra con una acción coherente: consultar alcance o enviar los datos necesarios para una propuesta. Usa el nombre de la opción en el contexto, pero no marques un formulario preparado como contacto recibido. Una <a href=\"../desarrollo-web.html\">web de servicios</a> debe facilitar una elección informada. Las <a href=\"preguntas-frecuentes-pagina-servicios-decisiones.html\">preguntas frecuentes orientadas a decisiones</a> pueden resolver excepciones que no caben en la tabla.</p>"
+      }
+    ]
+  },
+  {
     "datePublished": "2026-11-02",
     "dateLabel": "2 de noviembre de 2026",
     "sourceDateLabel": "2 de noviembre de 2026",
