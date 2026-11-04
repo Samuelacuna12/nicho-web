@@ -583,5 +583,15 @@
     "title": "Cómo comparar servicios en una web sin perder claridad en el móvil | Nicho Agencia Digital",
     "description": "Organiza una comparación de servicios con criterios verificables, encabezados accesibles y lectura móvil. Evita casillas ambiguas y promesas difíciles de comprobar.",
     "kind": "Article"
+  },
+  "recursos/agente-ia-descuentos-limites-aprobacion.html": {
+    "title": "Cómo limitar los descuentos que ofrece un agente de IA de ventas | Nicho Agencia Digital",
+    "description": "Define qué descuentos puede consultar un agente de IA, cuándo necesita aprobación y cómo evitar promesas que el negocio no autorizó.",
+    "kind": "Article"
+  },
+  "recursos/software-varias-sedes-permisos-sucursales.html": {
+    "title": "Software para varias sedes: cómo definir permisos por sucursal | Nicho Agencia Digital",
+    "description": "Organiza acceso por sede, funciones y excepciones temporales, con pruebas que eviten mezclar pedidos, inventarios y reportes de distintas sucursales.",
+    "kind": "Article"
   }
 }

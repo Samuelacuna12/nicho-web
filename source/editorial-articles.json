@@ -1,5 +1,95 @@
 [
   {
+    "slug": "agente-ia-descuentos-limites-aprobacion",
+    "title": "Cómo limitar los descuentos que ofrece un agente de IA de ventas",
+    "description": "Define qué descuentos puede consultar un agente de IA, cuándo necesita aprobación y cómo evitar promesas que el negocio no autorizó.",
+    "category": "IA y reglas comerciales",
+    "intro": "Un cliente puede pedir un descuento de muchas formas: por volumen, por una oferta anterior o porque otro vendedor le prometió un precio. El agente necesita entender la petición, pero entenderla no le concede autoridad para negociar. Esta guía propone separar conversación, cálculo y aprobación antes de conectar una IA al proceso comercial.",
+    "sections": [
+      {
+        "heading": "Empieza por una política que el equipo pueda aplicar",
+        "html": "<p>Antes de redactar instrucciones para el agente, reúne las reglas que ya utiliza el negocio. Para cada promoción registra productos incluidos, canal, segmento elegible, cantidad mínima, moneda, vigencia y posibilidad de combinarla con otras ofertas. Si dos personas interpretan la misma regla de forma diferente, primero resuelve esa ambigüedad con el responsable comercial.</p><p>Define también qué significa el precio mostrado: total del pedido, valor por unidad o importe antes de cargos aplicables. Una política incompleta no se vuelve precisa por pasarla a una IA. Los porcentajes y límites deben venir de la empresa; el proveedor técnico no debería inventarlos para que la conversación resulte más convincente.</p><ul><li>Oferta publicada vigente: el agente puede consultarla y explicarla.</li><li>Descuento condicionado: el sistema debe comprobar sus condiciones.</li><li>Excepción comercial: se prepara una solicitud para una persona autorizada.</li><li>Regla ausente o contradictoria: no se promete un importe final.</li></ul>"
+      },
+      {
+        "heading": "Separa consultar, calcular y aplicar",
+        "html": "<p>Diseña tres operaciones distintas. Consultar devuelve las ofertas vigentes; calcular produce una propuesta sin modificar el pedido; aplicar requiere comprobar de nuevo identidad, alcance y autorización. La <a href=\"https://developers.openai.com/api/docs/guides/function-calling\">documentación de llamadas a funciones de OpenAI</a> describe cómo una aplicación recibe solicitudes del modelo y ejecuta las funciones. Un formato válido no demuestra que el descuento esté comercialmente autorizado.</p><p>Como propuesta de implementación, el servidor debe recuperar el precio base y la política desde sus fuentes, en vez de aceptar como verdad los números escritos por el cliente o generados por el modelo. Si el sistema comercial no responde, el agente puede explicar que la cotización está pendiente de verificación. No debería completar el precio con un dato recordado de otra conversación.</p>"
+      },
+      {
+        "heading": "Vincula la aprobación a una propuesta concreta",
+        "html": "<p>Una aprobación debería identificar pedido o cotización, productos, cantidades, moneda, importe final, condiciones y vencimiento. “Hazle un descuento” deja demasiado margen si después cambia el carrito. La autorización debe invalidarse o revisarse cuando cambian los datos materiales que la persona evaluó.</p><p>La guía de <a href=\"https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html\">autorización de OWASP</a> recomienda privilegios mínimos y comprobación de permisos en cada solicitud. Para este flujo, la revisión debe ocurrir donde se aplica la modificación, no solo en el chat. Ocultar un botón o añadir una frase al prompt no sustituye ese control.</p><p>Registra quién aprobó, qué versión de la propuesta vio y el resultado de aplicación. Conserva lo necesario para auditar la decisión sin copiar conversaciones completas ni datos personales innecesarios. Si la operación falla, distingue aprobación existente de descuento realmente aplicado.</p>"
+      },
+      {
+        "heading": "Ejemplo ficticio: cambiar la cantidad cambia la decisión",
+        "html": "<p>Una distribuidora ficticia permite una oferta por volumen solo en referencias seleccionadas. Un comprador solicita doce unidades y después sustituye cuatro por otra referencia. El agente recalcula con la política vigente; no conserva automáticamente la condición anterior. Si la nueva combinación requiere una excepción, prepara la propuesta para revisión.</p><p>La respuesta puede ser: “La combinación cambió y necesito validar el precio final. Te mostraré el total confirmado antes de continuar”. No debe decir “descuento aprobado” mientras solo existe una solicitud. Este ejemplo ilustra estados de trabajo, no resultados comerciales ni una política recomendada de precios.</p>"
+      },
+      {
+        "heading": "Prueba objeciones y cambios antes de habilitarlo",
+        "html": "<p>Prepara casos con promoción vencida, moneda distinta, cantidad justo por debajo del mínimo, cupón ya utilizado, cambio de productos y dos descuentos incompatibles. Incluye un cliente que afirme tener autorización verbal y una respuesta de herramienta que llegue después de modificar la cotización. En cada caso escribe el resultado esperado y quién debe resolver una excepción.</p><p>Para el piloto, mide cuántas propuestas requieren revisión, cuántas se corrigen y cuántas operaciones quedan con resultado incierto. No llames venta al descuento ofrecido ni al mensaje enviado. Consulta también la guía de <a href=\"cotizaciones-agente-ia-precio-inventario-vigencia.html\">cotizaciones con precio, inventario y vigencia</a> para separar la política comercial de la disponibilidad del producto.</p><p>El alcance inicial puede limitarse a consultar ofertas y preparar propuestas. Añadir aplicación automática después requiere validar reglas, permisos y pruebas de negocio; no basta con que el agente responda de forma natural.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "OpenAI: llamadas a funciones",
+        "url": "https://developers.openai.com/api/docs/guides/function-calling"
+      },
+      {
+        "title": "OWASP: autorización",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html"
+      }
+    ],
+    "service": "agentes-ia.html",
+    "cta": "Revisemos tus promociones, excepciones y responsables para definir qué puede resolver el agente y qué debe quedar en aprobación humana.",
+    "datePublished": "2026-11-04",
+    "dateLabel": "4 de noviembre de 2026",
+    "sourceDateLabel": "4 de noviembre de 2026",
+    "featureOnService": true
+  },
+  {
+    "slug": "software-varias-sedes-permisos-sucursales",
+    "title": "Software para varias sedes: cómo definir permisos por sucursal",
+    "description": "Organiza acceso por sede, funciones y excepciones temporales, con pruebas que eviten mezclar pedidos, inventarios y reportes de distintas sucursales.",
+    "category": "Software y operación",
+    "intro": "Abrir una segunda sede no significa que todas las personas deban ver o modificar todos los datos. Un sistema compartido necesita distinguir la empresa, la sucursal y la función de cada usuario. La decisión empieza en la operación: qué se comparte, qué se limita y quién puede autorizar una excepción.",
+    "sections": [
+      {
+        "heading": "Distingue pertenencia de permiso",
+        "html": "<p>Un pedido puede pertenecer a una sede aunque otra participe en su despacho. Un asesor puede trabajar temporalmente en dos sucursales sin tener acceso general a las demás. Si el sistema guarda una sola etiqueta de sede para resolver ambas situaciones, termina confundiendo el lugar de la operación con la autoridad de la persona.</p><p>Como ejercicio de alcance, lista las entidades principales: clientes, pedidos, inventario, cajas, documentos y reportes. Define cuáles son globales, cuáles pertenecen a una sucursal y cuáles pueden compartirse bajo una condición. No presupongas que dos sedes necesitan copias aisladas de todos los datos ni que compartir base de datos obliga a compartir acceso.</p><p>Una sucursal de la misma empresa tampoco equivale necesariamente a un cliente independiente de una plataforma. Si el software atiende varias empresas, el límite entre organizaciones requiere una decisión de aislamiento adicional; no debe reducirse al filtro visual que usa una tienda para escoger sede.</p>"
+      },
+      {
+        "heading": "Construye una matriz con acciones concretas",
+        "html": "<p>Evita perfiles como “operador” con permisos indefinidos. Para cada función escribe si puede consultar, crear, modificar, aprobar, exportar o reasignar cada tipo de registro. Añade el alcance: sede propia, sedes asignadas o consolidado de la empresa. Especifica también qué sucede cuando alguien cambia de función.</p><ul><li>Asesor: consultar y actualizar los casos que le correspondan.</li><li>Responsable de sede: revisar operación local dentro del alcance acordado.</li><li>Coordinación: consultar un consolidado sin asumir permiso para editar cada registro.</li><li>Soporte temporal: acceso con motivo, alcance y fecha de finalización.</li></ul><p>Estos perfiles son ejemplos de diseño, no una configuración universal. Un negocio pequeño puede necesitar menos roles. El objetivo es describir responsabilidades comprobables, no multiplicar casillas de configuración que nadie pueda mantener.</p>"
+      },
+      {
+        "heading": "Aplica el alcance fuera de la pantalla",
+        "html": "<p>La <a href=\"https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html\">guía de autorización de OWASP</a> recomienda validar permisos en cada solicitud. El selector de sucursal ayuda al usuario, pero el servidor debe comprobar que tiene derecho a operar en la sede elegida. Cambiar un identificador en una URL o una petición no debería abrir un registro ajeno.</p><p>La <a href=\"https://cheatsheetseries.owasp.org/cheatsheets/Multi_Tenant_Security_Cheat_Sheet.html\">guía de seguridad multicliente de OWASP</a> desarrolla el aislamiento entre organizaciones. Sus controles son relevantes cuando la solución aloja empresas distintas; no convierten por sí solos un diseño multisede en seguro. La arquitectura concreta exige revisión técnica de datos, sesiones y componentes compartidos.</p><p>Incluye en el alcance exportaciones, búsquedas, archivos descargables, reportes y tareas programadas. Una pantalla bien filtrada no compensa un archivo exportado con registros de todas las sedes. Define qué contexto usa una tarea cuando ya no hay una persona frente a la aplicación.</p>"
+      },
+      {
+        "heading": "Ejemplo hipotético: apoyo entre dos sucursales",
+        "html": "<p>En una empresa ficticia, una asesora de la sede Norte cubre dos días de trabajo en la sede Centro. La responsable asigna acceso temporal a los pedidos necesarios de Centro, con fecha de cierre. El sistema registra esa asignación; no cambia silenciosamente la propiedad de todos los pedidos de la asesora.</p><p>Al terminar la cobertura, se retira el acceso temporal. Los casos pendientes se reasignan mediante el procedimiento acordado y conservan su historial. Si un pedido necesita despacho desde Norte, se registra esa participación sin copiar todo el expediente a una segunda cuenta. El ejemplo no describe una empresa real ni garantiza cumplimiento de requisitos específicos.</p>"
+      },
+      {
+        "heading": "Pide pruebas que crucen los límites",
+        "html": "<p>Antes de aceptar el desarrollo, prepara cuentas de prueba de dos sedes y, si corresponde, dos empresas. Intenta consultar un registro por enlace directo, modificarlo, exportarlo y abrir sus documentos desde una cuenta sin permiso. Repite las pruebas después de retirar un acceso temporal y al ejecutar un reporte consolidado.</p><p>Comprueba tanto lo permitido como lo denegado: que una persona no pueda ver otra sede no sirve si tampoco puede completar su trabajo autorizado. Documenta el resultado esperado y real, con datos ficticios. Para organizar esta revisión utiliza una <a href=\"pruebas-aceptacion-usuario-software-entrega.html\">prueba de aceptación con criterios observables</a>.</p><p>Una entrega útil incluye la matriz vigente, responsables de aprobar cambios y un procedimiento para altas, traslados y retiros. El beneficio esperado es reducir ambigüedad operativa y facilitar la comprobación de accesos. No sustituye una evaluación de seguridad ni demuestra por sí mismo una reducción de incidentes.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "OWASP: autorización",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html"
+      },
+      {
+        "title": "OWASP: seguridad multicliente",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/Multi_Tenant_Security_Cheat_Sheet.html"
+      }
+    ],
+    "service": "sistemas.html",
+    "cta": "Podemos delimitar entidades compartidas, permisos por sede y pruebas de aceptación antes de cotizar un sistema para tu operación.",
+    "datePublished": "2026-11-04",
+    "dateLabel": "4 de noviembre de 2026",
+    "sourceDateLabel": "4 de noviembre de 2026",
+    "featureOnService": true
+  },
+  {
     "datePublished": "2026-11-03",
     "dateLabel": "3 de noviembre de 2026",
     "sourceDateLabel": "3 de noviembre de 2026",
