@@ -42,6 +42,34 @@ def check(path):
         return {'path': public_path, 'error': str(exc), 'https_verified': False}
 
 
+def check_missing_page(public_path):
+    """Reject soft 404s, redirects, or stale custom error pages on missing URLs."""
+    url = DOMAIN + public_path
+    request = urllib.request.Request(url, headers={
+        'User-Agent': 'NICHO-Deployment-Verification/1.0',
+        'Accept-Encoding': 'identity',
+        'Cache-Control': 'no-cache',
+    })
+    try:
+        try:
+            response = urllib.request.urlopen(request, timeout=25)
+        except urllib.error.HTTPError as error:
+            response = error
+        with response:
+            data = response.read(6000000)
+            if response.geturl() != url:
+                raise RuntimeError('Redireccion inesperada en ruta inexistente: ' + response.geturl())
+            if response.status != 404:
+                raise RuntimeError('Ruta inexistente debe devolver HTTP 404, recibido: ' + str(response.status))
+            expected = (ROOT / '404.html').read_bytes()
+            if data != expected:
+                raise RuntimeError('Pagina 404 publicada distinta de la entrega')
+            return {'path': public_path, 'status': 404, 'bytes': len(data),
+                    'sha256_match': True, 'https_verified': True, 'missing_page_verified': True}
+    except Exception as exc:
+        return {'path': public_path, 'error': str(exc), 'https_verified': False}
+
+
 def main():
     # Wait for GitHub Pages/CDN to publish this revision, without disabling TLS checks.
     deadline = time.monotonic() + 240
@@ -68,9 +96,16 @@ def main():
               'assets/media/og-nicho.jpg', 'assets/media/architecture.webp',
               'assets/media/workspace.webp', 'assets/vendor/gsap.min.js',
               'assets/vendor/ScrollTrigger.min.js', 'favicon.ico', 'favicon.svg',
-              'apple-touch-icon.png', 'icon-512.png', 'site.webmanifest', 'sitemap.xml', 'robots.txt']
+              'apple-touch-icon.png', 'icon-512.png', 'site.webmanifest', 'sitemap.xml', 'robots.txt', '404.html']
     with concurrent.futures.ThreadPoolExecutor(max_workers=6) as executor:
         results = list(executor.map(check, sorted(set(paths))))
+    # Fixed reserved probes cover both root and nested URL resolution.
+    for missing_path in ['/__nicho_missing_page_probe__.html',
+                         '/recursos/__nicho_missing_page_probe__.html']:
+        if (ROOT / missing_path.lstrip('/')).exists():
+            results.append({'path': missing_path, 'error': 'La ruta de prueba ya existe'})
+        else:
+            results.append(check_missing_page(missing_path))
     errors = [result for result in results if 'error' in result]
     report = {'revision': REVISION, 'domain': DOMAIN, 'checks': len(results),
               'errors': len(errors), 'results': results}

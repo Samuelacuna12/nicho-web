@@ -33,12 +33,15 @@ class DeploymentGateTests(unittest.TestCase):
                 '<urlset><url><loc>https://nichoagenciadigital.com/recursos/new.html</loc></url></urlset>'
             )
             with patch.object(live, 'ROOT', root), patch.object(live, 'check', side_effect=fake_check), \
+                 patch.object(live, 'check_missing_page', return_value={'status': 404}) as missing, \
                  patch.object(live.time, 'sleep') as sleep, contextlib.redirect_stdout(io.StringIO()):
                 live.main()
             self.assertEqual(calls[:4], ['index.html', 'sitemap.xml', 'index.html', 'sitemap.xml'])
             sleep.assert_called_once_with(12)
             self.assertIn('recursos/new.html', calls[4:])
             self.assertTrue((root / 'qa/live-report.json').exists())
+            self.assertIn('404.html', calls)
+            self.assertEqual(missing.call_count, 2)
 
     def test_pending_release_times_out_without_passing(self):
         def fake_check(path):
