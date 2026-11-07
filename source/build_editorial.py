@@ -111,6 +111,18 @@ def render(article, template):
     return path, title, output
 
 
+def update_resources_lastmod(sitemap, articles):
+    """Reflect dated editorial updates in the hub without inventing a build date."""
+    if not articles:
+        return sitemap
+    editorial_date = max(a.get('dateModified', a['datePublished']) for a in articles)
+    pattern = (r'(<url>\s*<loc>' + re.escape(DOMAIN + '/recursos.html')
+               + r'</loc>\s*<lastmod>)([^<]+)(</lastmod>)')
+    updated, count = re.subn(pattern, lambda m: m[1] + max(m[2], editorial_date) + m[3], sitemap)
+    assert count == 1, 'Resources sitemap entry changed: review before rebuilding'
+    return updated
+
+
 def apply(site=ROOT):
     site = Path(site)
     articles = json.loads((ROOT / 'source/editorial-articles.json').read_text())
@@ -170,6 +182,7 @@ def apply(site=ROOT):
         service_date = max(a.get('dateModified', a['datePublished']) for a in featured)
         service_pattern = r'(<url>\s*<loc>' + re.escape(DOMAIN + '/' + service) + r'</loc>\s*<lastmod>)([^<]+)(</lastmod>)'
         sitemap = re.sub(service_pattern, lambda m: m[1] + max(m[2], service_date) + m[3], sitemap)
+    sitemap = update_resources_lastmod(sitemap, articles)
     sitemap_path.write_text(sitemap, encoding='utf-8')
     page_index_path.write_text(json.dumps(page_index, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     print(f'Rendered {len(articles)} editorial pages; retained existing resources and sitemap entries.')
