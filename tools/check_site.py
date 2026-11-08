@@ -17,18 +17,28 @@ REQUIRED_LEGACY_FILES = PRIVATE_PAGES | {'wp-content/uploads/2026/09/GUIA-WHATSA
 def page_url(path):
     return DOMAIN + '/' + (path[:-10] if path.endswith('index.html') else path)
 
+def has_noindex(directives):
+    """Google combines restrictive robots/Googlebot directives, case-insensitively."""
+    return any({'noindex', 'none'} & set(re.split(r'[\s,]+', value.lower()))
+               for value in directives)
+
+
 class Page(HTMLParser):
     def __init__(self):
         super().__init__(convert_charrefs=True)
         self.h1=0; self.title=''; self.in_title=False; self.main=0; self.ids=[]
-        self.meta={}; self.links=[]; self.refs=[]; self.images=[]; self.json=[]; self.in_ld=False; self.ld=''
+        self.meta={}; self.search_robots=[]; self.links=[]; self.refs=[]; self.images=[]; self.json=[]; self.in_ld=False; self.ld=''
     def handle_starttag(self, tag, attributes):
         a=dict(attributes)
         if a.get('id'): self.ids.append(a['id'])
         if tag=='h1': self.h1+=1
         if tag=='main': self.main+=1
         if tag=='title': self.in_title=True
-        if tag=='meta': self.meta[a.get('name') or a.get('property')]=a.get('content','')
+        if tag=='meta':
+            name = a.get('name') or a.get('property') or ''
+            self.meta[name]=a.get('content','')
+            if name.lower() in ('robots', 'googlebot'):
+                self.search_robots.append(a.get('content',''))
         if tag=='link': self.links.append(a)
         if tag=='img': self.images.append(a)
         if tag=='script' and a.get('type')=='application/ld+json': self.in_ld=True; self.ld=''
@@ -63,7 +73,7 @@ def audit(root):
         canonical=[x.get('href') for x in p.links if x.get('rel')=='canonical']
         expected=page_url(rel)
         if not is404 and canonical!=[expected]: issue(path,'canonical',{'found':canonical,'expected':expected})
-        if not is404 and not is_private and 'noindex' in p.meta.get('robots',''): issue(path,'production_noindex','')
+        if not is404 and not is_private and has_noindex(p.search_robots): issue(path,'production_noindex','')
         if is_private and 'noindex' not in p.meta.get('robots',''): issue(path,'private_page_indexable','')
         if is404 and 'noindex' not in p.meta.get('robots',''): issue(path,'404_indexable','')
         if not is404 and not is_private and not p.json: issue(path,'missing_schema','')
