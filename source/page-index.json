@@ -593,5 +593,15 @@
     "title": "Software para varias sedes: cómo definir permisos por sucursal | Nicho Agencia Digital",
     "description": "Organiza acceso por sede, funciones y excepciones temporales, con pruebas que eviten mezclar pedidos, inventarios y reportes de distintas sucursales.",
     "kind": "Article"
+  },
+  "recursos/alertas-automatizaciones-prioridad-responsables-ruido.html": {
+    "title": "Cómo diseñar alertas de automatización que el equipo sí pueda atender | Nicho Agencia Digital",
+    "description": "Define qué fallos requieren aviso, quién responde y cuándo escalar. Agrupa incidencias sin ocultar pedidos pendientes ni saturar al equipo con notificaciones.",
+    "kind": "Article"
+  },
+  "recursos/cambiar-crm-exportacion-datos-prueba-salida.html": {
+    "title": "Cómo comprobar que puedes salir de tu CRM sin perder información útil | Nicho Agencia Digital",
+    "description": "Prepara una prueba de salida del CRM: inventario de datos, relaciones, archivos, formatos y conciliación antes de cancelar el sistema de origen.",
+    "kind": "Article"
   }
 }

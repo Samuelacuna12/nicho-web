@@ -1,5 +1,95 @@
 [
   {
+    "slug": "alertas-automatizaciones-prioridad-responsables-ruido",
+    "title": "Cómo diseñar alertas de automatización que el equipo sí pueda atender",
+    "description": "Define qué fallos requieren aviso, quién responde y cuándo escalar. Agrupa incidencias sin ocultar pedidos pendientes ni saturar al equipo con notificaciones.",
+    "category": "Automatización y operación",
+    "intro": "Una integración puede fallar de forma silenciosa o enviar tantos avisos que nadie los lea. Ambas situaciones dejan trabajo sin resolver. Esta guía propone diseñar las alertas desde la decisión que debe tomar el equipo: qué está afectado, cuánto puede esperar y quién tiene capacidad real de intervenir.",
+    "sections": [
+      {
+        "heading": "Empieza por el trabajo que se está quedando pendiente",
+        "html": "<p>Haz un inventario de los resultados que la automatización debe producir: registrar un pedido, actualizar una oportunidad o entregar un reporte. Para cada resultado define cómo comprobarlo y qué consecuencia tendría una demora. Un proceso que termina sin error técnico puede haber omitido registros; por eso conviene revisar también el resultado de negocio.</p><p>La guía de <a href=\"https://sre.google/sre-book/monitoring-distributed-systems/\">monitorización de Google SRE</a> distingue síntomas de causas y advierte que el exceso de avisos puede ocultar incidentes importantes. En una pyme, esto puede traducirse en una regla sencilla: avisar de pedidos pendientes de sincronizar, no enviar un mensaje por cada intento técnico fallido.</p><p>Define la condición con datos que realmente existan. Si no conoces la hora de entrada del pedido, no prometas detectar su retraso exacto. Marca esa falta de información como una limitación del control.</p>"
+      },
+      {
+        "heading": "Separa registro, tarea y aviso urgente",
+        "html": "<p>Propón tres niveles con el responsable de operación. El registro conserva evidencia para revisión; la tarea exige una acción dentro de un plazo; el aviso urgente interrumpe porque esperar tiene una consecuencia concreta. Los umbrales deben salir de los horarios y compromisos del negocio, no de un valor elegido para que el tablero se vea activo.</p><ul><li>Registro: fallo transitorio recuperado y resultado final comprobado.</li><li>Tarea: dato incompleto que una persona debe corregir antes de continuar.</li><li>Aviso urgente: proceso detenido con un compromiso próximo que puede incumplirse.</li></ul><p>Incluye un responsable principal y un reemplazo. No basta con poner a todos en copia: debe quedar claro quién revisa, quién puede corregir y quién decide si se aplica una solución temporal. La escalación debe respetar el horario acordado y la gravedad real.</p>"
+      },
+      {
+        "heading": "Agrupa sin perder los casos afectados",
+        "html": "<p>Usa una identificación de incidente que permita reunir fallos del mismo proceso y causa comprobada. El aviso puede mostrar una cantidad y enlazar a una lista con acceso restringido. Cada pedido o tarea debe conservar su propio estado, aunque varias incidencias se comuniquen juntas.</p><p>No agrupar por una descripción demasiado general como “error de integración”: podría mezclar problemas distintos. Tampoco cerrar todos los casos porque una prueba aislada funcionó. Confirma cuáles se procesaron, cuáles siguen pendientes y cuáles tienen resultado incierto antes de anunciar recuperación.</p><p>Una notificación repetida debería aportar un cambio útil, como más casos afectados, un plazo próximo o falta de respuesta del responsable. Suprimir duplicados no significa borrar evidencia. Para diseñar la recuperación, consulta la guía sobre <a href=\"fallos-integraciones-cola-revision.html\">reintentos y cola de revisión</a>.</p>"
+      },
+      {
+        "heading": "Escribe un aviso que permita actuar",
+        "html": "<p>Incluye proceso afectado, primera detección, última comprobación, alcance conocido, estado actual, responsable y siguiente acción. Distingue “aviso enviado”, “recibido por el canal”, “asignado” y “resuelto”. Ninguno de esos estados demuestra por sí solo que un cliente recibió su pedido o que se cobró una venta.</p><p>La guía de <a href=\"https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html\">registro de eventos de OWASP</a> recomienda excluir o proteger secretos y datos sensibles. Aplica esa precaución también al mensaje: utiliza identificadores internos y enlaces restringidos en lugar de copiar conversaciones, contraseñas o datos completos de clientes.</p><p>El enlace al incidente debe exigir los permisos correspondientes. Que una persona reciba una alerta no debería concederle automáticamente acceso a todos los registros ni autoridad para reintentar operaciones con consecuencias.</p>"
+      },
+      {
+        "heading": "Ejemplo ficticio y prueba de aceptación",
+        "html": "<p>Una distribuidora ficticia sincroniza pedidos durante su horario de atención. El equipo acuerda crear una tarea cuando un pedido supera la demora tolerada y escalar si se aproxima su corte de despacho. Si veinte pedidos comparten una caída comprobada, recibe un aviso agrupado con veinte casos pendientes, no veinte mensajes idénticos.</p><p>Al recuperarse la conexión, dieciocho quedan confirmados y dos requieren revisión. El incidente pasa a recuperación parcial; no se declara resuelto. Los números ilustran el flujo y no representan resultados de clientes ni umbrales recomendados para otras empresas.</p><p>Antes de activarlo, prueba un fallo recuperado, una incidencia repetida, un responsable ausente, un canal de avisos caído y una recuperación incompleta. Registra qué mensaje debe aparecer y quién lo recibe. Después revisa avisos sin acción, tiempos de asignación y casos pendientes; no confundas una reducción de mensajes con una mejora si se dejaron de detectar problemas.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "Google SRE: monitorización de sistemas distribuidos",
+        "url": "https://sre.google/sre-book/monitoring-distributed-systems/"
+      },
+      {
+        "title": "OWASP: registro de eventos y datos que deben excluirse",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html"
+      }
+    ],
+    "service": "automatizaciones.html",
+    "cta": "Podemos revisar un proceso concreto y definir sus señales, responsables y pruebas de alerta antes de automatizar avisos al equipo.",
+    "datePublished": "2026-11-14",
+    "dateLabel": "14 de noviembre de 2026",
+    "sourceDateLabel": "14 de noviembre de 2026",
+    "featureOnService": true
+  },
+  {
+    "slug": "cambiar-crm-exportacion-datos-prueba-salida",
+    "title": "Cómo comprobar que puedes salir de tu CRM sin perder información útil",
+    "description": "Prepara una prueba de salida del CRM: inventario de datos, relaciones, archivos, formatos y conciliación antes de cancelar el sistema de origen.",
+    "category": "CRM y continuidad del negocio",
+    "intro": "Tener un botón de exportación no garantiza que puedas continuar trabajando en otra herramienta. Un archivo puede contener contactos y omitir actividades, relaciones o adjuntos. La prueba de salida consiste en demostrar qué información recuperas, cómo se interpreta y qué trabajo podrás retomar fuera del CRM actual.",
+    "sections": [
+      {
+        "heading": "Define qué necesitas conservar para seguir operando",
+        "html": "<p>Empieza por las tareas que el equipo debe poder continuar: identificar oportunidades abiertas, saber quién es responsable, consultar la última actividad y reconocer compromisos pendientes. Conviértelas en una lista de datos necesarios. Exportar todo sin criterio puede aumentar la exposición de información sin resolver la continuidad.</p><p>Separa contactos, empresas, oportunidades, actividades, campos personalizados y archivos. Para cada grupo anota volumen conocido, filtro aplicado, formato disponible y responsable de validación. Revisa las condiciones reales de tu proveedor: algunos elementos pueden requerir una exportación distinta o no estar incluidos en el plan contratado. No presupongas que todas las plataformas entregan lo mismo.</p><p>Una lista de nombres no sustituye el historial comercial. Tampoco una captura de pantalla constituye una exportación reutilizable. La comprobación debe hacerse con archivos o datos que la herramienta receptora pueda interpretar.</p>"
+      },
+      {
+        "heading": "Conserva relaciones y significado, no solo columnas",
+        "html": "<p>Incluye identificadores estables para enlazar cada oportunidad con su empresa, contacto y actividades. Documenta qué significa cada estado y cómo se representan los valores vacíos. Una celda sin contenido puede significar desconocido, no aplicable o un campo que nunca se exportó; esas situaciones no deben fusionarse automáticamente.</p><p>Prepara un diccionario breve de campos: nombre, significado, tipo, formato de fecha, zona horaria y unidad cuando corresponda. Conserva teléfonos e identificadores como texto si deben mantener ceros iniciales. Si hay importes, incluye la moneda y distingue valor estimado de ingreso realmente cobrado.</p><p>Comprueba también los adjuntos. Una URL puede depender de la sesión o dejar de funcionar al cancelar la cuenta. Define un procedimiento autorizado para conservar los archivos necesarios y asociarlos con su registro, sin ampliar permisos ni crear enlaces públicos por comodidad.</p>"
+      },
+      {
+        "heading": "Elige un formato y prueba sus límites",
+        "html": "<p>CSV puede ser útil para datos tabulares. El <a href=\"https://www.rfc-editor.org/info/rfc4180/\">RFC 4180</a> documenta convenciones del formato, como encabezados y tratamiento de comas, comillas y saltos de línea; no garantiza que dos aplicaciones interpreten igual todos los datos. Prueba el archivo en el destino elegido y documenta separador, codificación y reglas de importación.</p><p>La advertencia de <a href=\"https://community.owasp.org/attacks/CSV_Injection\">OWASP sobre inyección de fórmulas en CSV</a> importa si el equipo abre archivos con texto aportado por terceros en una hoja de cálculo. La revisión debe tratar esos valores como datos y aplicar medidas compatibles con el programa utilizado. No habilites contenido activo para completar una comprobación.</p><p>Conserva una copia original controlada y realiza transformaciones sobre una copia de trabajo. Revisa la guía de <a href=\"exportar-csv-seguro-formulas-datos.html\">exportación CSV e identificadores</a> para profundizar en ese riesgo técnico; aquí el objetivo es validar la salida completa del CRM.</p>"
+      },
+      {
+        "heading": "Haz una conciliación que detecte pérdidas",
+        "html": "<p>Compara cantidades por entidad y estado, no solo el total de filas. Revisa oportunidades sin contacto, actividades sin oportunidad y adjuntos sin registro asociado. Selecciona ejemplos normales y casos difíciles: nombres con tildes, varios contactos por empresa, fechas cercanas a medianoche y campos con saltos de línea.</p><p>Una muestra ayuda a detectar errores de interpretación, pero no demuestra por sí sola que toda la exportación esté completa. Combínala con conteos y controles de relaciones sobre el conjunto. Registra filtros, fecha de corte, archivos obtenidos, exclusiones y diferencias pendientes.</p><p>Si el equipo sigue trabajando durante la prueba, define cómo recoger los cambios posteriores. No mezcles un archivo de ayer con cifras de hoy y concluyas que faltan datos. Antes del traslado definitivo, acuerda un corte y un método para conciliar lo que cambió entre exportaciones.</p>"
+      },
+      {
+        "heading": "Ejemplo ficticio: decidir antes de cancelar",
+        "html": "<p>Una empresa ficticia exporta contactos y oportunidades, pero descubre que las tareas futuras no aparecen. Aunque los totales principales coincidan, la prueba de salida no está completa: los asesores no podrían retomar sus seguimientos. El equipo documenta la exclusión y busca una extracción permitida o un registro alternativo verificado antes de decidir el cambio.</p><p>La aceptación puede exigir que cada oportunidad abierta tenga responsable, relación válida y próximo paso recuperable. Estos criterios son ilustrativos y deben adaptarse al proceso; no representan un cliente ni una promesa de migración sin pérdidas.</p><p>No canceles ni borres el origen hasta que el responsable apruebe las diferencias y la continuidad esté comprobada. Define acceso temporal, conservación y eliminación posterior según los acuerdos y obligaciones aplicables. Para el paso de carga al nuevo sistema, utiliza una <a href=\"importar-csv-crm-vista-previa-errores.html\">importación con vista previa y errores por fila</a>, separada de esta prueba de salida.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "RFC Editor: formato y tipo MIME de CSV, RFC 4180",
+        "url": "https://www.rfc-editor.org/info/rfc4180/"
+      },
+      {
+        "title": "OWASP: inyección de fórmulas en CSV",
+        "url": "https://community.owasp.org/attacks/CSV_Injection"
+      }
+    ],
+    "service": "crm-personalizado.html",
+    "cta": "Revisemos qué información necesita conservar tu equipo y preparemos una prueba de salida antes de definir una migración o un CRM a medida.",
+    "datePublished": "2026-11-14",
+    "dateLabel": "14 de noviembre de 2026",
+    "sourceDateLabel": "14 de noviembre de 2026",
+    "featureOnService": true
+  },
+  {
     "slug": "agente-ia-descuentos-limites-aprobacion",
     "title": "Cómo limitar los descuentos que ofrece un agente de IA de ventas",
     "description": "Define qué descuentos puede consultar un agente de IA, cuándo necesita aprobación y cómo evitar promesas que el negocio no autorizó.",
