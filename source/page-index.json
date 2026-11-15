@@ -603,5 +603,15 @@
     "title": "Cómo comprobar que puedes salir de tu CRM sin perder información útil | Nicho Agencia Digital",
     "description": "Prepara una prueba de salida del CRM: inventario de datos, relaciones, archivos, formatos y conciliación antes de cancelar el sistema de origen.",
     "kind": "Article"
+  },
+  "recursos/software-sin-conexion-pendientes-sincronizacion.html": {
+    "title": "Cómo definir qué puede hacer tu software cuando se pierde la conexión | Nicho Agencia Digital",
+    "description": "Diseña una operación sin conexión con datos vigentes, pendientes visibles y confirmación del servidor. Prueba reconexiones sin duplicar pedidos ni ocultar conflictos.",
+    "kind": "Article"
+  },
+  "recursos/landing-campana-terminada-oferta-vencida.html": {
+    "title": "Qué hacer con una landing cuando termina la campaña | Nicho Agencia Digital",
+    "description": "Planifica el cierre de una landing: retira ofertas vencidas, decide si conservar o redirigir la página y comprueba formularios, enlaces y mensajes de contacto.",
+    "kind": "Article"
   }
 }

@@ -1,5 +1,87 @@
 [
   {
+    "slug": "software-sin-conexion-pendientes-sincronizacion",
+    "title": "Cómo definir qué puede hacer tu software cuando se pierde la conexión",
+    "description": "Diseña una operación sin conexión con datos vigentes, pendientes visibles y confirmación del servidor. Prueba reconexiones sin duplicar pedidos ni ocultar conflictos.",
+    "intro": "Un vendedor en ruta puede seguir tomando información aunque pierda señal. Eso no significa que el pedido ya exista en el sistema central ni que el inventario esté reservado. Antes de contratar un modo sin conexión, define qué trabajo puede continuar y qué decisiones deben esperar una confirmación.",
+    "category": "Software y continuidad operativa",
+    "service": "sistemas.html",
+    "cta": "Podemos revisar una tarea de campo y definir el alcance sin conexión, sus riesgos y las pruebas necesarias antes de desarrollar el sistema.",
+    "sections": [
+      {
+        "heading": "1. Separa consultar, preparar y confirmar",
+        "html": "<p>Haz una lista de acciones y clasifícalas. Consultar un catálogo descargado puede ser útil si muestra cuándo se actualizó. Preparar una solicitud puede permitirse sin red. Confirmar existencias, aceptar un pago o comprometer una fecha de entrega necesita una regla adicional: no debería presentarse como hecho solo porque el formulario se guardó en el equipo.</p><p>Para cada acción, registra el dato necesario, su antigüedad tolerable, quién puede ejecutarla y qué respuesta verá la persona. Define también una alternativa cuando el dato esté vencido: capturar interés, dejar pendiente o contactar al responsable por un canal disponible. No prometas que toda la aplicación funcionará desconectada.</p>"
+      },
+      {
+        "heading": "2. Diseña estados que no confundan guardado con recibido",
+        "html": "<p>Propón estados visibles: borrador local, pendiente de envío, enviado sin confirmación, confirmado y requiere revisión. Un identificador local permite reconocer la operación, pero no equivale al número definitivo del pedido. Muestra ambos cuando corresponda y conserva la relación entre ellos.</p><p><a href=\"https://developer.mozilla.org/en-US/docs/Web/API/Navigator/onLine\">MDN advierte que navigator.onLine no demuestra acceso efectivo a Internet</a>: un dispositivo puede estar conectado a una red local sin alcanzar el servicio. Úsalo como orientación, no como comprobante de entrega. La confirmación debe depender de la respuesta verificable del sistema que recibe la operación.</p><p>Si desaparece la conexión después de enviar, el resultado puede ser incierto. Antes de reenviar, consulta el estado de esa misma operación cuando sea posible; no la conviertas automáticamente en una solicitud nueva.</p>"
+      },
+      {
+        "heading": "3. Acuerda cómo resolver los cambios al reconectar",
+        "html": "<p>El catálogo pudo cambiar mientras el vendedor estaba fuera de línea. Compara la versión utilizada con las reglas actuales y muestra diferencias relevantes: precio, disponibilidad, responsable o condición comercial. No reemplaces silenciosamente lo que el cliente vio ni aceptes sin revisión una condición vencida.</p><p>Para una solicitud nueva, el servidor puede aceptarla o devolver motivos concretos para corregirla. Para una edición, evita borrar cambios hechos por otra persona: aplica controles de <a href=\"ediciones-simultaneas-software-conflictos-version.html\">versión y resolución de conflictos</a>. Define quién decide y cuánto tiempo puede permanecer un caso en revisión.</p><p>También necesitas un identificador estable para que un reintento no cree otra operación. El principio de <a href=\"webhooks-idempotencia-pedidos-duplicados.html\">idempotencia</a> complementa la sincronización, pero no resuelve por sí solo una diferencia de precios.</p>"
+      },
+      {
+        "heading": "4. Limita los datos que quedan en el dispositivo",
+        "html": "<p>Define qué información se guarda, durante cuánto tiempo y qué ocurre al cerrar sesión, cambiar de usuario o perder el equipo. No descargues toda la cartera comercial para una tarea que solo necesita referencias de producto. El almacenamiento local no debe presentarse como una copia de seguridad garantizada.</p><p>La implementación debe contemplar equipos compartidos y borrado de datos del navegador. Si hay pendientes, comunica el riesgo antes de una acción que pueda eliminarlos y ofrece una recuperación aprobada. No recomiendes exportar información privada a archivos personales como solución improvisada.</p>"
+      },
+      {
+        "heading": "5. Ejemplo ficticio y prueba de aceptación",
+        "html": "<p>Una distribuidora ficticia prepara tres solicitudes durante una visita sin señal. Al reconectar, dos quedan confirmadas y una requiere revisión porque cambió el precio. Son cantidades inventadas para explicar el flujo, no resultados de un cliente de Nicho. El resumen muestra dos confirmaciones y un pendiente, nunca “tres pedidos completados”.</p><ul><li>Corta la conexión antes del envío y después de que el servidor reciba la solicitud.</li><li>Reconecta dos veces y comprueba que no aparezcan duplicados.</li><li>Cambia un precio mientras el equipo está desconectado.</li><li>Cierra y vuelve a abrir la aplicación con pendientes.</li><li>Prueba con otro usuario y verifica que no vea información ajena.</li><li>Revisa que cada pendiente tenga motivo, responsable y siguiente acción.</li></ul><p>Entrega este recorrido como parte de las <a href=\"pruebas-aceptacion-usuario-software-entrega.html\">pruebas de aceptación del software</a>. La meta es conservar trabajo y comunicar sus límites, no esconder la falta de conexión detrás de un indicador verde.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "MDN: Navigator.onLine y sus límites",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/API/Navigator/onLine"
+      }
+    ],
+    "datePublished": "2026-11-15",
+    "dateLabel": "15 de noviembre de 2026",
+    "sourceDateLabel": "15 de noviembre de 2026",
+    "featureOnService": true
+  },
+  {
+    "slug": "landing-campana-terminada-oferta-vencida",
+    "title": "Qué hacer con una landing cuando termina la campaña",
+    "description": "Planifica el cierre de una landing: retira ofertas vencidas, decide si conservar o redirigir la página y comprueba formularios, enlaces y mensajes de contacto.",
+    "intro": "Una campaña puede terminar mientras sus enlaces siguen circulando en correos, buscadores o conversaciones. Borrar el anuncio no actualiza la landing. Conviene preparar un cierre que explique qué terminó y permita continuar sin presentar una oferta vencida como disponible.",
+    "category": "Web y operación comercial",
+    "service": "desarrollo-web.html",
+    "cta": "Podemos revisar el recorrido de una campaña y preparar su cierre: contenido vigente, destino útil y pruebas de contacto antes y después de la fecha final.",
+    "sections": [
+      {
+        "heading": "1. Define el cierre antes de activar la campaña",
+        "html": "<p>Registra la fecha, hora y zona horaria de finalización, quién confirma el cierre y qué debe pasar con las solicitudes recibidas antes del límite. Distingue la fecha de la promoción de la disponibilidad del servicio: que termine una condición especial no significa que desaparezca toda la oferta comercial.</p><p>Haz un inventario breve: anuncio, landing, formulario, mensaje preparado de WhatsApp, correo automático, página de agradecimiento y enlaces internos. Asigna un responsable a cada superficie. No dependas de recordar manualmente todos los lugares donde aparece el precio o el beneficio.</p><p>Si hay una extensión aprobada, actualiza de forma coherente los puntos afectados. Evita temporizadores que se reinician para cada visitante cuando la campaña tiene un cierre real.</p>"
+      },
+      {
+        "heading": "2. Elige entre conservar, sustituir o retirar",
+        "html": "<p>Conserva la página si todavía resuelve una necesidad: puede explicar que la campaña terminó, aclarar las condiciones que ya no están disponibles y enlazar al servicio vigente. Revisa título, descripción y encabezado, no solo un aviso pequeño al pie.</p><p>Si existe un reemplazo realmente equivalente, estudia una redirección. <a href=\"https://developers.google.com/search/docs/crawling-indexing/301-redirects\">Google distingue redirecciones permanentes y temporales</a>; las permanentes señalan que el destino debería ser la URL canónica. La decisión debe corresponder a la duración real del cambio, no a la idea de que cualquier redirección mejorará el posicionamiento.</p><p>Si la página ya no tiene contenido útil ni sustituto, evalúa retirarla y ofrecer una <a href=\"pagina-404-util-estado-http.html\">respuesta de página no encontrada útil</a>. No envíes todas las campañas antiguas a una portada genérica por comodidad. Primero decide qué espera encontrar quien llega desde cada enlace.</p>"
+      },
+      {
+        "heading": "3. Revisa la acción comercial, no solo el texto",
+        "html": "<p>Un encabezado actualizado puede convivir con un botón que todavía prepara “quiero reclamar el descuento”. Revisa el destino y el mensaje completo de cada llamada a la acción. Si ahora conduce a una cotización normal, dilo antes de que la persona pulse.</p><p>Comprueba qué recibe el equipo: origen de la consulta, fecha y oferta mostrada. Si el formulario tiene un campo oculto con la campaña anterior, decide cómo conservar esa referencia histórica sin etiquetar el contacto como beneficiario confirmado. Una consulta recibida no demuestra elegibilidad ni aceptación de condiciones.</p><p>Incluye estados de error y confirmación. Una persona que envió antes del cierre y recarga después debe recibir información comprensible, no una pantalla que asegure que nunca existió la campaña.</p>"
+      },
+      {
+        "heading": "4. Ejemplo hipotético de un cierre sin confusión",
+        "html": "<p>Una empresa ficticia ofrece una sesión de diagnóstico con cupos limitados hasta el viernes. Al finalizar, mantiene la landing porque los correos enviados seguirán enlazándola. Cambia el encabezado a “Esta convocatoria terminó” y ofrece consultar el servicio habitual, sin prometer la condición anterior.</p><p>El formulario deja de aceptar nuevas solicitudes de esa convocatoria. Las solicitudes anteriores conservan su fecha y pasan a revisión del equipo conforme a las condiciones comunicadas. Este ejemplo no describe una campaña real de Nicho ni establece condiciones legales: muestra cómo separar contenido vigente de registros históricos.</p><p>Si meses después la empresa publica una nueva convocatoria, no cambia silenciosamente el significado de los comprobantes antiguos. Revisa si necesita una URL distinta y conserva el contexto necesario para atender consultas sobre la anterior.</p>"
+      },
+      {
+        "heading": "5. Prueba la transición completa",
+        "html": "<ul><li>Abre la URL directa antes y después del cierre, también en móvil.</li><li>Comprueba el título, descripción, encabezado, fechas y botones.</li><li>Verifica el mensaje que prepara WhatsApp sin enviarlo a terceros.</li><li>Ensaya el formulario con datos ficticios en un entorno de prueba.</li><li>Si hay redirección, comprueba el código HTTP, el destino final y que no haya bucles.</li><li>Revisa enlaces internos, sitemap y canonical según la decisión tomada.</li></ul><p>Conserva un registro del cambio y una captura del estado final para que ventas pueda entender qué veía el visitante. Cuando exista medición accesible, separa visitas a la campaña cerrada de solicitudes efectivamente recibidas. No interpretes un clic en el botón como un contacto confirmado.</p><p>Este cierre es una tarea de mantenimiento comercial. Puede reducir confusión, pero su efecto en contactos o posicionamiento solo se podrá evaluar con datos. Si vas a reorganizar varias URLs, prepara primero un <a href=\"migracion-web-mapa-url-redirecciones-canonical.html\">mapa de destinos y redirecciones</a>.</p>"
+      }
+    ],
+    "sources": [
+      {
+        "title": "Google Search Central: redirecciones y Búsqueda de Google",
+        "url": "https://developers.google.com/search/docs/crawling-indexing/301-redirects"
+      }
+    ],
+    "datePublished": "2026-11-15",
+    "dateLabel": "15 de noviembre de 2026",
+    "sourceDateLabel": "15 de noviembre de 2026",
+    "featureOnService": true
+  },
+  {
     "slug": "alertas-automatizaciones-prioridad-responsables-ruido",
     "title": "Cómo diseñar alertas de automatización que el equipo sí pueda atender",
     "description": "Define qué fallos requieren aviso, quién responde y cuándo escalar. Agrupa incidencias sin ocultar pedidos pendientes ni saturar al equipo con notificaciones.",
