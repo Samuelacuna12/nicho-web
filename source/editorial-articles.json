@@ -1,5 +1,91 @@
 [
   {
+    "datePublished": "2026-11-17",
+    "dateLabel": "17 de noviembre de 2026",
+    "sourceDateLabel": "17 de noviembre de 2026",
+    "featureOnService": true,
+    "slug": "crm-motivos-perdida-evidencia-no-respuesta",
+    "title": "Cómo registrar por qué se pierde una venta sin inventar el motivo",
+    "description": "Define motivos de pérdida en el CRM con evidencia, causas desconocidas y revisión por cohortes. Evita interpretar el silencio como rechazo por precio.",
+    "category": "CRM y aprendizaje comercial",
+    "service": "crm-personalizado.html",
+    "intro": "Cuando una oportunidad no termina en venta, escribir “muy caro” puede parecer una explicación suficiente. Pero si el cliente nunca lo dijo, el reporte está convirtiendo una suposición en un dato. Un CRM útil separa el cierre comercial de lo que realmente se sabe sobre su causa.",
+    "cta": "Revisemos cómo cierras hoy las oportunidades y qué información necesitas para aprender de ellas sin añadir trabajo innecesario al equipo.",
+    "sources": [
+      {
+        "title": "HubSpot: propiedades predeterminadas de los negocios",
+        "url": "https://knowledge.hubspot.com/properties/hubspots-default-deal-properties"
+      }
+    ],
+    "sections": [
+      {
+        "heading": "1. Separa estado, motivo y evidencia",
+        "html": "<p>El estado responde si la oportunidad sigue en curso. El motivo explica por qué se cerró. La evidencia indica de dónde sale esa explicación. Son datos relacionados, pero no intercambiables. La documentación de HubSpot, por ejemplo, distingue las propiedades de etapa, motivo de pérdida y última actividad; el diseño concreto debe ajustarse al CRM que uses.</p><p>Propón una ficha mínima: identificador de oportunidad, fecha de cierre, motivo principal, origen de la evidencia y nota breve. Diferencia una afirmación del cliente de una hipótesis del equipo. No hace falta copiar conversaciones completas ni datos personales ajenos a la decisión.</p><p>Si todavía no has definido qué significa cerrar una oportunidad, empieza por los <a href=\"definir-etapas-crm-criterios-avance-ventas.html\">criterios de avance de las etapas del CRM</a>. Una oportunidad aplazada con una fecha acordada no tiene por qué convertirse en pérdida definitiva.</p>"
+      },
+      {
+        "heading": "2. Crea pocas categorías y una salida honesta",
+        "html": "<p>Empieza con un catálogo pequeño que el equipo pueda aplicar de forma consistente. Este es un ejemplo de diseño, no una clasificación universal:</p><ul><li>Presupuesto incompatible: existe una declaración o límite confirmado.</li><li>Alcance no cubierto: se necesita una función o servicio que no ofreces.</li><li>Plazo incompatible: las fechas necesarias no coinciden.</li><li>Eligió otra solución: hay confirmación de una alternativa.</li><li>Proyecto detenido: la necesidad se suspendió según el interlocutor.</li><li>Sin respuesta: terminó el seguimiento previsto, pero se desconoce el motivo.</li><li>Otro motivo confirmado: requiere una nota que permita revisarlo.</li></ul><p>“No respondió” describe un resultado observable, no una objeción. Conserva también “desconocido” cuando no haya información suficiente. Obligar a elegir una causa inventada mejora el llenado del formulario, no la calidad del análisis.</p>"
+      },
+      {
+        "heading": "3. Define cuándo y quién puede cerrar",
+        "html": "<p>Acuerda una regla de cierre con el responsable comercial: señales válidas, seguimiento máximo aprobado y tratamiento de oportunidades aplazadas. No cierres por antigüedad solamente si existe una próxima conversación acordada. Un bot puede sugerir una clasificación, pero debe mostrar el fragmento pertinente y dejar la duda visible.</p><p>Prueba qué pasa con recordatorios y campañas al cerrar. Marcar una pérdida no autoriza nuevos mensajes. Una baja de contacto debe respetarse independientemente del motivo, y una reapertura no debe reactivar automáticamente todas las tareas anteriores. Conserva el historial para saber qué cambió y cuándo.</p>"
+      },
+      {
+        "heading": "4. Compara grupos equivalentes, no solo porcentajes",
+        "html": "<p>Para revisar un mes, fija primero qué oportunidades entran: por ejemplo, las cerradas durante ese periodo. Cuenta cada identificador una sola vez y muestra la cantidad total, las pérdidas con motivo confirmado y las de causa desconocida. Si una oportunidad se reabre, establece cómo se representa en cada corte y conserva la fecha del reporte.</p><p>No mezcles oportunidades creadas este mes con cierres de meses anteriores sin explicarlo. Separa servicio, rango de importe o canal solo cuando exista suficiente información. Las diferencias entre asesores pueden reflejar carteras distintas; no demuestran por sí solas mejor o peor trabajo.</p><p>El importe de una propuesta perdida tampoco equivale a dinero que ya habías cobrado ni a ingresos recuperables con certeza. Úsalo como contexto comercial, con moneda y etapa claras.</p>"
+      },
+      {
+        "heading": "5. Ejemplo ficticio y primera revisión",
+        "html": "<p>Un equipo ficticio revisa 20 oportunidades cerradas sin venta: ocho no respondieron, cinco confirmaron falta de presupuesto, cuatro necesitaron un alcance distinto y tres detuvieron el proyecto. Decir que el 65 % se perdió por precio sumaría indebidamente silencio y presupuesto. Lo defendible son cinco casos con ese motivo confirmado y ocho de causa desconocida.</p><p>La siguiente acción podría ser revisar las propuestas de los cinco casos, no reducir todos los precios. Para las ocho sin respuesta, revisa si el canal y los pasos de seguimiento funcionaron, sin asumir una causa ni insistir indefinidamente.</p><p>Antes de automatizar, pide a dos personas que clasifiquen la misma muestra ficticia. Si discrepan, ajusta las definiciones. Después revisa unos pocos casos cada semana y corrige categorías ambiguas con trazabilidad. El objetivo del <a href=\"../crm-personalizado.html\">CRM personalizado</a> es mejorar decisiones con información fiable, no producir una gráfica que siempre parezca completa.</p>"
+      }
+    ]
+  },
+  {
+    "datePublished": "2026-11-17",
+    "dateLabel": "17 de noviembre de 2026",
+    "sourceDateLabel": "17 de noviembre de 2026",
+    "featureOnService": true,
+    "slug": "cambios-masivos-software-vista-previa-recuperacion",
+    "title": "Cómo diseñar cambios masivos en software sin perder el control",
+    "description": "Planifica ediciones masivas con selección explícita, vista previa, permisos, resultados por registro y recuperación que respete los cambios posteriores.",
+    "category": "Software y control operativo",
+    "service": "sistemas.html",
+    "intro": "Cambiar un responsable en cientos de registros puede ahorrar trabajo o multiplicar un error. Antes de añadir “seleccionar todos” a tu sistema, define exactamente qué se va a modificar, qué debe permanecer intacto y cómo sabrás qué ocurrió si la operación se interrumpe.",
+    "cta": "Podemos revisar una operación repetitiva y definir una edición masiva con alcance, permisos y pruebas de recuperación antes de implementarla.",
+    "sources": [
+      {
+        "title": "PostgreSQL: transacciones",
+        "url": "https://www.postgresql.org/docs/current/tutorial-transactions.html"
+      },
+      {
+        "title": "OWASP: autorización",
+        "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html"
+      }
+    ],
+    "sections": [
+      {
+        "heading": "1. Aclara qué significa seleccionar todos",
+        "html": "<p>Una tabla puede mostrar 25 filas aunque el filtro encuentre 800. La interfaz debe distinguir “esta página”, “todos los resultados del filtro” y una selección manual. Muestra el total afectado y los filtros antes de pedir confirmación. No dependas de que la persona recuerde una búsqueda aplicada minutos antes.</p><p>Guarda la lista o el criterio de selección junto con la operación. Si aparecen nuevos registros después de la vista previa, decide expresamente si quedan fuera o si se requiere otra revisión. Para cambios delicados, una selección cerrada y verificable facilita comparar lo aprobado con lo ejecutado.</p>"
+      },
+      {
+        "heading": "2. Presenta el antes y después sin ocultar excepciones",
+        "html": "<p>La vista previa debe indicar campo, valor anterior, valor propuesto y número de registros elegibles. Distingue “no cambiar”, “vaciar” y “asignar este valor”; una casilla sin contenido no debería interpretarse de forma ambigua. Incluye ejemplos representativos y una forma de inspeccionar la lista completa con los permisos correspondientes.</p><p>Separa registros que no cumplen la regla: cerrados, bloqueados, incompletos o de otra sucursal. La autorización se comprueba también en el servidor para cada operación; ocultar una opción visual no basta. Esta separación sigue el principio de privilegio mínimo y las comprobaciones de permisos descritas por OWASP.</p><p>Una confirmación útil dice qué cambia y cuántos registros están incluidos. Una advertencia genérica de “¿estás seguro?” no permite detectar que el filtro está mal.</p>"
+      },
+      {
+        "heading": "3. Decide si el lote es indivisible o admite resultados parciales",
+        "html": "<p>Cuando todos los cambios pertenecen a una misma transacción de base de datos, puede diseñarse una operación que se confirme completa o no aplique ningún cambio. La documentación de PostgreSQL explica esta propiedad y la posibilidad de cancelar una transacción antes de confirmarla.</p><p>No extiendas esa garantía a servicios externos: actualizar tu base no deshace un correo enviado ni un cambio aceptado por otra plataforma. Si el proceso cruza sistemas o trabaja por bloques, define resultados por registro y pasos de compensación posibles. Algunos efectos no se pueden revertir.</p><p>Para un lote parcial, la pantalla final debe separar aplicados, omitidos, fallidos y pendientes. “Solicitud recibida” no significa “todos actualizados”. Un reintento debería dirigirse a pendientes o fallidos y evitar repetir efectos ya confirmados.</p>"
+      },
+      {
+        "heading": "4. Protege las ediciones que ocurren mientras tanto",
+        "html": "<p>Entre la vista previa y la ejecución, otra persona puede modificar una fila. Compara la versión o los campos relevantes antes de escribir. Si cambiaron, presenta un conflicto o excluye ese registro según la regla acordada, en lugar de sobrescribirlo silenciosamente. La guía sobre <a href=\"ediciones-simultaneas-software-conflictos-version.html\">ediciones simultáneas</a> desarrolla ese caso.</p><p>Asigna un identificador al trabajo masivo y conserva estado, responsable, momento y resultados. Si se cierra el navegador, al regresar debe poder verse el mismo trabajo. Un botón desactivado reduce dobles clics, pero el servidor también necesita reconocer reintentos.</p><p>Un botón de cancelar debe explicar su alcance: puede detener lo que todavía no comenzó, sin revertir lo ya confirmado. Comprueba esta diferencia durante las pruebas, no después de un incidente.</p>"
+      },
+      {
+        "heading": "5. Prueba una recuperación que no borre trabajo nuevo",
+        "html": "<p>Ejemplo ficticio: se reasignan 120 oportunidades de una sede. La vista previa excluye cinco cerradas; durante la ejecución otras tres cambian de versión. El resultado debe explicar las 112 aplicadas, las cinco exclusiones y los tres conflictos, sin anunciar 120 cambios exitosos.</p><p>Si se solicita deshacer, compara el estado actual con el resultado que dejó el lote. Un registro que alguien volvió a reasignar después necesita revisión; restaurar ciegamente el valor anterior eliminaría trabajo legítimo. Guarda solo los valores necesarios y durante el plazo definido por la operación, con acceso restringido.</p><p>Las pruebas mínimas incluyen cero resultados, selección entre páginas, permiso insuficiente, interrupción de red, doble clic, conflicto de versión, fallo a mitad del lote y recuperación posterior. Empieza con datos ficticios y un alcance pequeño. Al cotizar <a href=\"../sistemas.html\">software a medida</a>, incluye estas condiciones de aceptación: la velocidad del botón importa menos que poder explicar y recuperar cada resultado.</p>"
+      }
+    ]
+  },
+  {
     "slug": "software-sin-conexion-pendientes-sincronizacion",
     "title": "Cómo definir qué puede hacer tu software cuando se pierde la conexión",
     "description": "Diseña una operación sin conexión con datos vigentes, pendientes visibles y confirmación del servidor. Prueba reconexiones sin duplicar pedidos ni ocultar conflictos.",

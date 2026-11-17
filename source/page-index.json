@@ -613,5 +613,15 @@
     "title": "Qué hacer con una landing cuando termina la campaña | Nicho Agencia Digital",
     "description": "Planifica el cierre de una landing: retira ofertas vencidas, decide si conservar o redirigir la página y comprueba formularios, enlaces y mensajes de contacto.",
     "kind": "Article"
+  },
+  "recursos/crm-motivos-perdida-evidencia-no-respuesta.html": {
+    "title": "Cómo registrar por qué se pierde una venta sin inventar el motivo | Nicho Agencia Digital",
+    "description": "Define motivos de pérdida en el CRM con evidencia, causas desconocidas y revisión por cohortes. Evita interpretar el silencio como rechazo por precio.",
+    "kind": "Article"
+  },
+  "recursos/cambios-masivos-software-vista-previa-recuperacion.html": {
+    "title": "Cómo diseñar cambios masivos en software sin perder el control | Nicho Agencia Digital",
+    "description": "Planifica ediciones masivas con selección explícita, vista previa, permisos, resultados por registro y recuperación que respete los cambios posteriores.",
+    "kind": "Article"
   }
 }
